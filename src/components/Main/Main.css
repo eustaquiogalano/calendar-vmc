@@ -1,11 +1,57 @@
 main {
   width: 100%;
   padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 section {
+  width: 100%;
   background-color: var(--pure-white);
   border: 1px solid var(--dark-azure);
   border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem 0.5rem;
+  color: var(--dark-azure);
+}
+
+h1 {
+  text-align: center;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#login-form div {
+  display: flex;
+  flex-direction: column;
+}
+
+#login-form input {
   padding: 0.5rem;
+}
+
+#login-register-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+#login-register-container button {
+  background-color: var(--dark-azure);
+  color: var(--pure-white);
+  border-radius: 3px;
+  font-size: 1rem;
+  border: none;
+  padding: 0.5rem;
+}
+
+#login-register-container p {
+  text-align: center;
 }
