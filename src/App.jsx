@@ -1,5 +1,13 @@
+import { Header } from "./components/Header/Header";
+import { Main } from "./components/Main/Main";
+
 function App() {
-  return <h1>React Template</h1>;
+  return (
+    <>
+      <Header />
+      <Main />
+    </>
+  );
 }
 
 export default App;
