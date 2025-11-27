@@ -1,0 +1,11 @@
+main {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+section {
+  background-color: var(--pure-white);
+  border: 1px solid var(--dark-azure);
+  border-radius: 6px;
+  padding: 0.5rem;
+}
