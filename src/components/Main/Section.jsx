@@ -14,25 +14,27 @@ function InputAndLabel({
   );
 }
 
-function Section() {
+function LoginRegisterForm() {
   return (
-    <section>
-      <h1>Login</h1>
-      <form action="" id="login-form">
-        <InputAndLabel htmlFor="name" text="Name: " name="name" id="name" />
-        <InputAndLabel
-          htmlFor="id-number"
-          text="ID Number: "
-          name="id-number"
-          id="id-number"
-        />
-        <div id="login-register-container">
-          <button>Login</button>
-          <p>or</p>
-          <button>Register</button>
-        </div>
-      </form>
-    </section>
+    <div>
+      <div id="login-register-container">
+        <section id="login-section">
+          <h2>Login</h2>
+          <form action="" id="login-form">
+            <InputAndLabel htmlFor="name" text="Name: " name="name" id="name" />
+            <InputAndLabel
+              htmlFor="id-number"
+              text="ID Number: "
+              name="id-number"
+              id="id-number"
+            />
+            <div id="login-register-button-container">
+              <button>Login</button>
+              <p>or</p>
+              <button>Register</button>
+            </div>
+          </form>
+        </section>
         <section id="register-section">
           <h2>Register</h2>
           <form action="" id="register-form">
@@ -65,4 +67,4 @@ function Section() {
   );
 }
 
-export { Section };
+export { LoginRegisterForm };
