@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function InputAndLabel({
   htmlFor,
   text,
@@ -15,9 +17,23 @@ function InputAndLabel({
 }
 
 function LoginRegisterForm() {
+  const [isVisible, setVisibility] = useState(false);
+
+  function showRegisterForm(e) {
+    e.preventDefault();
+    if (isVisible) {
+      setVisibility(false);
+    } else {
+      setVisibility(true);
+    }
+  }
+
   return (
     <div>
-      <div id="login-register-container">
+      <div
+        id="login-register-container"
+        className={isVisible ? "showRegisterForm" : ""}
+      >
         <section id="login-section">
           <h2>Login</h2>
           <form action="" id="login-form">
@@ -31,7 +47,7 @@ function LoginRegisterForm() {
             <div id="login-register-button-container">
               <button>Login</button>
               <p>or</p>
-              <button>Register</button>
+              <button onClick={showRegisterForm}>Register</button>
             </div>
           </form>
         </section>
@@ -58,7 +74,7 @@ function LoginRegisterForm() {
               id="last-year-attended"
             />
             <div id="register-button-container">
-              <button>Register</button>
+              <button onClick={showRegisterForm}>Register</button>
             </div>
           </form>
         </section>
