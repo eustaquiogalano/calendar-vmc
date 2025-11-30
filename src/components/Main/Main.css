@@ -1,49 +1,88 @@
 main {
+  grid-area: main;
   width: 100%;
+  height: 100%;
   padding: 0.5rem;
+  background: linear-gradient(0deg, rgb(35, 205, 243) 0%, rgb(1, 79, 143) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+main > div {
+  width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 6px;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+#login-register-container:hover {
+  animation: move-left 0.25s ease-out forwards;
+}
+
+@keyframes move-left {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(-100%);
+  }
+}
+
+#login-register-container {
+  width: 100%;
+  display: flex;
 }
 
 section {
   width: 100%;
   background-color: var(--pure-white);
-  border: 1px solid var(--dark-azure);
-  border-radius: 6px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 1.5rem 0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
   color: var(--dark-azure);
+  flex-shrink: 0;
 }
 
-h1 {
+h2 {
   text-align: center;
 }
 
-#login-form {
+#login-form,
+#register-form {
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-#login-form div {
+#login-form div,
+#register-form div {
   display: flex;
   flex-direction: column;
 }
 
-#login-form input {
+#login-form input,
+#register-form input {
   padding: 0.5rem;
 }
 
-#login-register-container {
+#login-register-button-container {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-#login-register-container button {
+#login-form button,
+#register-form button {
   background-color: var(--dark-azure);
   color: var(--pure-white);
   border-radius: 3px;
