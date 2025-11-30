@@ -4,5 +4,5 @@ import react from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "https://github.com/eustaquiogalano/calendar-vmc", // replace with repo name
+  base: "/calendar-vmc/", // replace with repo name
 });
