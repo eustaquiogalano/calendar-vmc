@@ -22,4 +22,5 @@ header h1 {
   width: 100%;
   text-align: center;
   color: var(--pure-white);
+  padding: 0.5rem 0;
 }
