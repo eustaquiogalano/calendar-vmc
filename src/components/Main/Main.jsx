@@ -1,10 +1,10 @@
 import "./Main.css";
-import { Section } from "./Section";
+import { LoginRegisterForm } from "./Section";
 
 function Main() {
   return (
     <main>
-      <Section />
+      <LoginRegisterForm />
     </main>
   );
 }
