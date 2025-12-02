@@ -1,7 +1,7 @@
 import vmcIcon from "../../assets/vmc-icon.png";
 import "./Header.css";
 
-function Header() {
+function PageHeader() {
   return (
     <header>
       <img src={vmcIcon} alt="" />
@@ -10,4 +10,4 @@ function Header() {
   );
 }
 
-export { Header };
+export { PageHeader };
