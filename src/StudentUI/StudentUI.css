@@ -1,0 +1,75 @@
+#student-interface-container {
+  background-color: #d9d9d9;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 12px;
+}
+
+#student-interface-container > aside {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--pure-white);
+  height: 100%;
+  width: 250px;
+  padding: 1rem;
+  transition: transform 0.2s ease-out;
+  transform: translateX(-100%);
+  /* transform: translateX(0%); */
+}
+
+.showAside {
+  transform: translateX(0);
+}
+
+#student-interface-container nav {
+  display: flex;
+  flex-direction: column;
+}
+
+#student-interface-container > div {
+  width: 100%;
+  border-radius: 4px;
+}
+
+#greeting-container {
+  padding: 1rem;
+}
+
+#dashboard-container {
+  padding: 0rem;
+}
+
+#dashboard-container > section {
+  padding: 0;
+  background-color: transparent;
+}
+
+.calendar-container {
+  background-color: var(--pure-white);
+  width: 100%;
+  height: 500px;
+  padding: 1rem 0.5rem;
+  border-radius: 4px;
+}
+
+#calendar-container > div {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  width: 100%;
+  /* background-color: red; */
+  overflow: hidden;
+}
+
+#calendar-container #dates-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: auto;
+  grid-auto-flow: row;
+}
