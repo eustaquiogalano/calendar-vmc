@@ -1,0 +1,46 @@
+/* Calendar container */
+.fc {
+  font-family: "Inter", sans-serif;
+  height: 100%;
+}
+
+/* Month and Year h2 */
+.fc .fc-toolbar-title {
+  font-size: 1.5rem;
+}
+
+/* Today's date */
+.fc-day-today {
+  background: #fff7d6 !important;
+  border: 1px solid #facc15;
+}
+
+/* Buttons */
+.fc .fc-button {
+  /* background: #2563eb; */
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+.fc .fc-button:hover {
+  /* background: lightgray; */
+}
+
+/* Today button */
+.fc-today-button.fc-button {
+  display: none;
+}
+
+/* Days */
+.fc .fc-daygrid-day-frame {
+  /* background-color: var(--); */
+}
+
+/* Event items */
+.fc-daygrid-event {
+  background: #10b981;
+  border-radius: 4px;
+  color: white;
+  padding: 2px 4px;
+}
