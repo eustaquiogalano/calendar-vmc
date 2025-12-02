@@ -1,7 +1,7 @@
 import "./Main.css";
 import { LoginRegisterForm } from "./Section";
 
-function Main() {
+function PageMain() {
   return (
     <main>
       <LoginRegisterForm />
@@ -9,4 +9,4 @@ function Main() {
   );
 }
 
-export { Main };
+export { PageMain };
