@@ -7,16 +7,6 @@
   padding: 0.5rem;
   flex-direction: column;
   border-radius: 12px;
-  overflow-y: scroll;
-}
-
-.hide-scroll {
-  overflow-y: auto; /* enable scrolling */
-  -ms-overflow-style: none; /* hide scrollbar (IE/Edge) */
-  scrollbar-width: none; /* hide scrollbar (Firefox) */
-}
-.hide-scroll::-webkit-scrollbar {
-  display: none; /* hide scrollbar (Chrome/Safari) */
 }
 
 .side-nav-container {
