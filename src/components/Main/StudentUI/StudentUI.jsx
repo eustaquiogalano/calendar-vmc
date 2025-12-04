@@ -34,7 +34,7 @@ function StudentInterface() {
           <a href="">Pending Request</a>
         </nav>
       </aside>
-      <div id="student-interface-container" className="hide-scroll">
+      <div id="student-interface-container">
         <div id="greeting-container">
           <h2 className="shadow-effect">Hello Student</h2>
         </div>
