@@ -89,3 +89,15 @@ h2 {
 #login-register-container p {
   text-align: center;
 }
+
+@media (min-width: 600px) {
+  main {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 900px) {
+  main {
+    padding: 0;
+  }
+}
