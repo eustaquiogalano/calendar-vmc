@@ -1,4 +1,4 @@
-import { StudentInterface } from "../../StudentUI/StudentUI";
+import { StudentInterface } from "./StudentUI/StudentUI";
 import "./Main.css";
 import { LoginRegisterForm } from "./Section";
 
