@@ -4,7 +4,7 @@ import { LoginRegisterForm } from "./Section";
 
 function PageMain() {
   return (
-    <main>
+    <main className="hide-scroll">
       {/* <LoginRegisterForm /> */}
       <StudentInterface />
     </main>
