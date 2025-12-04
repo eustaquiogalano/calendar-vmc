@@ -6,8 +6,7 @@ main {
   padding: 0.5rem;
   background: linear-gradient(0deg, rgb(35, 205, 243) 0%, rgb(1, 79, 143) 100%);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
   position: relative;
 }
