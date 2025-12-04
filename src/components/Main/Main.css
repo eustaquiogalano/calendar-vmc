@@ -1,4 +1,5 @@
 main {
+  max-width: 1920px;
   grid-area: main;
   width: 100%;
   height: 100%;
