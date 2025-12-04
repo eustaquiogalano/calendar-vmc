@@ -11,6 +11,15 @@ main {
   position: relative;
 }
 
+.hide-scroll {
+  overflow-y: auto; /* enable scrolling */
+  -ms-overflow-style: none; /* hide scrollbar (IE/Edge) */
+  scrollbar-width: none; /* hide scrollbar (Firefox) */
+}
+.hide-scroll::-webkit-scrollbar {
+  display: none; /* hide scrollbar (Chrome/Safari) */
+}
+
 #login-register-container {
   width: 100%;
   display: flex;
