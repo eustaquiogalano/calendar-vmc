@@ -1,0 +1,17 @@
+.hour-card {
+  padding: 0.5rem;
+  height: auto;
+}
+
+.hour-card__event-list ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.hour-card__event {
+  list-style: none;
+  background-color: lightgray;
+  padding: 0.5rem;
+  border-radius: 4px;
+}

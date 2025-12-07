@@ -1,15 +1,4 @@
-#student-interface-container {
-  background-color: #d9d9d9;
-  width: 100%;
-  height: auto;
-  display: flex;
-  gap: 1rem;
-  padding: 0.5rem;
-  flex-direction: column;
-  border-radius: 12px;
-}
-
-.side-nav-container {
+.studentUI__aside {
   position: absolute;
   top: 0;
   left: 0;
@@ -21,38 +10,45 @@
   transform: translateX(-100%);
 }
 
-.showAside {
+.studentUI__aside--show {
   transform: translateX(0);
 }
 
-.side-nav-container nav {
+.studentUI__nav {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
 }
 
-.side-nav-container a {
+.studentUI__nav a {
   padding: 1rem;
   text-decoration: none;
   color: var(--dark-azure);
   border-radius: 4px;
 }
 
-.side-nav-container a:hover {
+.studentUI__nav a:hover {
   background-color: lightgray;
 }
 
-#student-interface-container > div {
+.studentUI {
+  background-color: #d9d9d9;
+  width: 100%;
+  height: auto;
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  flex-direction: column;
+  border-radius: 12px;
+}
+
+.studentUI__greeting {
   width: 100%;
   border-radius: 4px;
 }
 
-#greeting-container {
-  width: 100%;
-}
-
-#greeting-container > h2 {
+.studentUI__h2 {
   text-align: start;
   color: var(--dark-azure);
   background-color: var(--pure-white);
@@ -62,23 +58,23 @@
   width: 100%;
 }
 
-#dashboard-container {
+.studentUI__dashboard {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-#dashboard-container > section {
+.studentUI__section {
   padding: 0;
   background-color: transparent;
 }
 
-#dashboard-container h2 {
+.studentUI__section h2 {
   text-align: start;
 }
 
-.calendar-container,
-.events-container {
+.studentUI__calendar,
+.studentUI__events {
   width: 100%;
   height: 500px;
   padding: 1rem 0.5rem;
@@ -88,33 +84,12 @@
   background-color: var(--pure-white);
 }
 
-.events-list-container {
-}
-
-.events-list-container ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.events-list-container li {
-  list-style: none;
-  background-color: lightgray;
-  padding: 0.5rem;
-  border-radius: 4px;
-}
-
-.hour-container {
-  padding: 0.5rem;
-  height: auto;
-}
-
 @media (min-width: 600px) {
-  #student-interface-container {
+  .studentUI {
     padding: 1rem;
   }
 
-  #dashboard-container {
+  .studentUI__dashboard {
     display: grid;
     grid-template-columns: 60% 1fr;
     gap: 1rem;
@@ -122,40 +97,41 @@
 }
 
 @media (min-width: 900px) {
-  .shadow-effect {
+  .studentUI__calendar--shadow,
+  .studentUI__events--shadow {
     box-shadow: 3px 3px 8px rgb(65, 65, 65), -3px -3px 8px lightgray;
   }
 
-  .side-nav-container {
+  .studentUI__aside {
     width: 200px;
     position: static;
     transform: translate(0);
   }
 
-  #student-interface-container {
+  .studentUI {
     flex: 1;
     height: 100%;
     border-radius: 0;
   }
 
-  .calendar-container,
-  .events-container {
+  .studentUI__calendar,
+  .studentUI__events {
     border-radius: 15px;
     padding: 1rem;
   }
 
-  #greeting-container {
+  .studentUI__greeting {
     padding: 0 1rem;
   }
 }
 
 @media (min-width: 1200px) {
-  #greeting-container > h2 {
+  .studentUI__h2 {
     border-radius: 15px;
     padding: 1rem;
   }
 
-  #dashboard-container {
+  .studentUI__dashboard {
     padding: 1rem;
     gap: 2rem;
   }
