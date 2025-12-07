@@ -1,5 +1,5 @@
-import { PageHeader } from "./components/Header/Header";
-import { PageMain } from "./components/Main/Main";
+import { PageHeader } from "./components/PageHeader/PageHeader";
+import { PageMain } from "./components/PageMain/PageMain";
 
 function App() {
   return (
