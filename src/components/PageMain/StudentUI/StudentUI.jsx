@@ -1,5 +1,6 @@
 import style from "./StudentUI.module.css";
 import CalendarTab from "./CalendarTab/CalendarTab";
+import DocumentRequestTab from "./DocumentRequestTab/DocumentRequestTab";
 
 function StudentUI() {
   return (
@@ -22,7 +23,8 @@ function StudentUI() {
           </h2>
         </div>
         <div className={style["studentUI__dashboard"]}>
-          <CalendarTab />
+          {/* <CalendarTab /> */}
+          <DocumentRequestTab />
         </div>
       </div>
     </>
