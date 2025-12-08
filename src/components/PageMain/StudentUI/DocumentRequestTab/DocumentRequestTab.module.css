@@ -1,0 +1,31 @@
+.document-request-tab__section {
+  width: 100%;
+  height: auto;
+  padding: 1rem 0.5rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--pure-white);
+}
+
+.document-request-tab__request-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.document-request-tab__div {
+  padding: 0.25rem 0;
+}
+
+.document-request-tab__div label,
+.document-request-tab__div select,
+.document-request-tab__div input {
+  width: 100%;
+  font-size: 1rem;
+}
+
+.document-request-tab__div select,
+.document-request-tab__div input {
+  padding: 0.25rem;
+}
