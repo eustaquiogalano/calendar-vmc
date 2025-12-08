@@ -1,6 +1,5 @@
 import style from "./StudentUI.module.css";
-import HourCard from "./HourCard/HourCard";
-import Calendar from "./FullCalender/FullCalendar";
+import CalendarTab from "./CalendarTab/CalendarTab";
 
 function StudentUI() {
   return (
@@ -23,30 +22,7 @@ function StudentUI() {
           </h2>
         </div>
         <div className={style["studentUI__dashboard"]}>
-          <section className={style["studentUI__section"]}>
-            <h2>Calendar</h2>
-            <div
-              className={`${style["studentUI__calendar"]} ${style["studentUI__calendar--shadow"]}`}
-            >
-              <Calendar />
-            </div>
-          </section>
-
-          <section className={style["studentUI__section"]}>
-            <h2>Events</h2>
-            <div
-              className={`${style["studentUI__events"]} ${style["studentUI__events--shadow"]}`}
-            >
-              <HourCard
-                time="8:00 AM"
-                eventList={["Seminar sa CR", "Pizza Party"]}
-              />
-              <HourCard
-                time="10:00 AM"
-                eventList={["Oath Taking", "Disco Time"]}
-              />
-            </div>
-          </section>
+          <CalendarTab />
         </div>
       </div>
     </>
