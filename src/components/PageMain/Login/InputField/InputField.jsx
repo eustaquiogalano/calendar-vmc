@@ -7,6 +7,8 @@ function InputField({
   name,
   id,
   placeholder = "",
+  onValueChange,
+  value,
 }) {
   return (
     <div className={style["input-field"]}>
@@ -18,7 +20,9 @@ function InputField({
         type={type}
         name={name}
         id={id}
+        value={value}
         placeholder={placeholder}
+        onChange={onValueChange}
       />
     </div>
   );
