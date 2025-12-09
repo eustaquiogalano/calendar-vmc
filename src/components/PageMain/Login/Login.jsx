@@ -50,6 +50,7 @@ function Login() {
             <div className={style["login__button-container"]}>
               <button
                 className={`${style["login__button"]} ${style["login__login-button"]}`}
+                onClick={handleAuth}
               >
                 Login
               </button>
