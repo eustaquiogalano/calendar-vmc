@@ -36,10 +36,7 @@ function StudentUI() {
             Hello Student
           </h2>
         </div>
-        <div className={style["studentUI__dashboard"]}>
-          {/* <CalendarTab /> */}
-          <DocumentRequestTab />
-        </div>
+        <div className={style["studentUI__dashboard"]}>{currentTab()}</div>
       </div>
     </>
   );
