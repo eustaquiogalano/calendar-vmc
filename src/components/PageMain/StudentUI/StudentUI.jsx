@@ -17,7 +17,6 @@ function StudentUI({ student }) {
     }
   }
 
-function StudentUI() {
   return (
     <>
       <aside
@@ -33,7 +32,7 @@ function StudentUI() {
           <h2
             className={`${style["studentUI__h2--shadow"]} ${style["studentUI__h2"]}`}
           >
-            Hello Student
+            Hello {student.name}
           </h2>
         </div>
         <div className={style["studentUI__dashboard"]}>{currentTab()}</div>
