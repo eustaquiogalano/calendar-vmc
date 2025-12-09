@@ -1,6 +1,21 @@
 import style from "./StudentUI.module.css";
 import CalendarTab from "./CalendarTab/CalendarTab";
 import DocumentRequestTab from "./DocumentRequestTab/DocumentRequestTab";
+import { useState } from "react";
+
+function StudentUI({ student }) {
+  const [tabSelected, setTabSelected] = useState(0);
+
+  function currentTab() {
+    switch (tabSelected) {
+      case 0:
+        return <CalendarTab />;
+      case 1:
+        return <DocumentRequestTab />;
+      default:
+        return <CalendarTab />;
+    }
+  }
 
 function StudentUI() {
   return (
