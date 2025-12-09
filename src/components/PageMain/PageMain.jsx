@@ -14,8 +14,11 @@ function PageMain() {
     <main
       className={`${style["page-main"]} ${style["page-main--hide-scroll"]}`}
     >
-      {/* <Login /> */}
-      <StudentUI />
+      {student ? (
+        <StudentUI student={student} />
+      ) : (
+        <Login onLogin={handleLogin} />
+      )}
     </main>
   );
 }
