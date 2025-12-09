@@ -31,12 +31,21 @@ function Login() {
             action=""
             className={`${style["login__login-form"]} ${style["login__form"]}`}
           >
-            <InputField htmlFor="name" text="Name: " name="name" id="name" />
             <InputField
-              htmlFor="id-number"
-              text="ID Number: "
-              name="id-number"
-              id="id-number"
+              htmlFor="name"
+              text="Name: "
+              name="name"
+              id="name"
+              value={userName}
+              onValueChange={handleUsername}
+            />
+            <InputField
+              htmlFor="Password"
+              text="Password: "
+              name="password"
+              id="password"
+              value={password}
+              onValueChange={handlePassword}
             />
             <div className={style["login__button-container"]}>
               <button
