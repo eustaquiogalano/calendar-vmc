@@ -1,9 +1,28 @@
 import { useState } from "react";
 import style from "./Login.module.css";
 import InputField from "./InputField/InputField";
+import userAuth from "./../../../services/mockAuth.js";
 
-function Login() {
+function Login({ onLogin }) {
   const [isVisible, setVisibility] = useState(false);
+  const [userName, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleAuth(event) {
+    event.preventDefault();
+
+    setTimeout(() => {
+      onLogin(userAuth(userName, password));
+    }, 1500);
+  }
+
+  function handleUsername(event) {
+    setUsername(event.target.value);
+  }
+
+  function handlePassword(event) {
+    setPassword(event.target.value);
+  }
 
   function showRegisterForm(e) {
     e.preventDefault();
