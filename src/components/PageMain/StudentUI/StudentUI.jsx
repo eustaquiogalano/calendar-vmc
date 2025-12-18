@@ -2,6 +2,7 @@ import style from "./StudentUI.module.css";
 import CalendarTab from "./CalendarTab/CalendarTab";
 import DocumentRequestTab from "./DocumentRequestTab/DocumentRequestTab";
 import { useState } from "react";
+import Icon from "./../../../assets/icons/menu.svg?react";
 
 function StudentUI({ student }) {
   const [tabSelected, setTabSelected] = useState(0);
@@ -19,6 +20,11 @@ function StudentUI({ student }) {
 
   return (
     <>
+      <button
+        className={`${style["studentUI__menu"]} ${style["studentUI__button"]}`}
+      >
+        <Icon className={style["studentUI__menu-icon"]} />
+      </button>
       <aside
         className={`${style["studentUI__aside"]} ${style["studentUI__aside--shadow"]}`}
       >
