@@ -4,7 +4,7 @@ import Icon from "./../../assets/icons/menu.svg?react";
 import { useMenu } from "../../context/MenuContext";
 
 function PageHeader() {
-  const { menuButtonVisibility } = useMenu();
+  const { menuButtonVisibility, toggleMenuBody } = useMenu();
   console.log(menuButtonVisibility);
 
   return (
@@ -12,6 +12,7 @@ function PageHeader() {
       <img className={style["page-header__img"]} src={vmcIcon} alt="" />
       <h1 className={style["page-header__h1"]}>Calendar</h1>
       <button
+        onClick={toggleMenuBody}
         className={`${style["studentUI__menu"]} ${style["studentUI__button"]} ${
           menuButtonVisibility ? "" : style["studentUI__menu--hide"]
         }`}
