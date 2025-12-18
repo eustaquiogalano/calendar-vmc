@@ -1,11 +1,23 @@
 import vmcIcon from "../../assets/images/vmc-icon.png";
 import style from "./PageHeader.module.css";
+import Icon from "./../../assets/icons/menu.svg?react";
+import { useMenu } from "../../context/MenuContext";
 
 function PageHeader() {
+  const { menuButtonVisibility } = useMenu();
+  console.log(menuButtonVisibility);
+
   return (
     <header className={style["page-header"]}>
       <img className={style["page-header__img"]} src={vmcIcon} alt="" />
       <h1 className={style["page-header__h1"]}>Calendar</h1>
+      <button
+        className={`${style["studentUI__menu"]} ${style["studentUI__button"]} ${
+          menuButtonVisibility ? "" : style["studentUI__menu--hide"]
+        }`}
+      >
+        <Icon className={style["studentUI__menu-icon"]} />
+      </button>
     </header>
   );
 }
