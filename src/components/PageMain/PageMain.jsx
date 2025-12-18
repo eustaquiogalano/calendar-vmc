@@ -2,12 +2,18 @@ import { StudentUI } from "./StudentUI/StudentUI";
 import style from "./PageMain.module.css";
 import Login from "./Login/Login";
 import { useState } from "react";
+import { useMenu } from "../../context/MenuContext";
 
 function PageMain() {
   const [student, setStudent] = useState(undefined);
+  const { menuButtonVisibility, toggleMenuButton } = useMenu();
 
   function handleLogin(user) {
     setStudent(user);
+    if (user) {
+      toggleMenuButton();
+    }
+    console.log(menuButtonVisibility);
   }
 
   return (
