@@ -2,9 +2,11 @@ import style from "./StudentUI.module.css";
 import CalendarTab from "./CalendarTab/CalendarTab";
 import DocumentRequestTab from "./DocumentRequestTab/DocumentRequestTab";
 import { useState } from "react";
+import { useMenu } from "../../../context/MenuContext";
 
 function StudentUI({ student }) {
   const [tabSelected, setTabSelected] = useState(0);
+  const { menuBodyVisibility } = useMenu();
 
   function currentTab() {
     switch (tabSelected) {
@@ -20,7 +22,9 @@ function StudentUI({ student }) {
   return (
     <>
       <aside
-        className={`${style["studentUI__aside"]} ${style["studentUI__aside--shadow"]}`}
+        className={`${style["studentUI__aside"]} ${
+          style["studentUI__aside--shadow"]
+        } ${menuBodyVisibility ? style["studentUI__aside--show"] : ""}`}
       >
         <nav className={`${style["studentUI__nav"]}`}>
           <button
