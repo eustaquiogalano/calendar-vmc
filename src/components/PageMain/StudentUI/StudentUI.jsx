@@ -29,8 +29,18 @@ function StudentUI({ student }) {
         className={`${style["studentUI__aside"]} ${style["studentUI__aside--shadow"]}`}
       >
         <nav className={`${style["studentUI__nav"]}`}>
-          <button onClick={() => setTabSelected(0)}>Calendar</button>
-          <button onClick={() => setTabSelected(1)}>Document Request</button>
+          <button
+            className={style["studentUI__button"]}
+            onClick={() => setTabSelected(0)}
+          >
+            Calendar
+          </button>
+          <button
+            className={style["studentUI__button"]}
+            onClick={() => setTabSelected(1)}
+          >
+            Document Request
+          </button>
         </nav>
       </aside>
       <div className={style["studentUI"]}>
