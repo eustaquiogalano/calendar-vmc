@@ -4,13 +4,25 @@ const MenuContext = createContext(null);
 
 export function MenuProvider({ children }) {
   const [menuButtonVisibility, setMenuButtonVisibility] = useState(false);
+  const [menuBodyVisibility, setMenuBodyVisibility] = useState(false);
 
   function toggleMenuButton() {
     setMenuButtonVisibility((prev) => !prev);
   }
 
+  function toggleMenuBody() {
+    setMenuBodyVisibility((prev) => !prev);
+  }
+
   return (
-    <MenuContext.Provider value={{ menuButtonVisibility, toggleMenuButton }}>
+    <MenuContext.Provider
+      value={{
+        menuButtonVisibility,
+        toggleMenuButton,
+        menuBodyVisibility,
+        toggleMenuBody,
+      }}
+    >
       {children}
     </MenuContext.Provider>
   );
