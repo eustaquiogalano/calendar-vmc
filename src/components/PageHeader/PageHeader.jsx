@@ -1,4 +1,4 @@
-import vmcIcon from "../../assets/vmc-icon.png";
+import vmcIcon from "../../assets/images/vmc-icon.png";
 import style from "./PageHeader.module.css";
 
 function PageHeader() {
