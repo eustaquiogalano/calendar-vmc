@@ -8,16 +8,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* fix later */
   align-items: flex-start;
-
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 }
 
 .page-main--hide-scroll {
-  overflow-y: auto; /* enable scrolling */
   -ms-overflow-style: none; /* hide scrollbar (IE/Edge) */
   scrollbar-width: none; /* hide scrollbar (Firefox) */
 }
