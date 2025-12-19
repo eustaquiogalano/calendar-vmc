@@ -3,6 +3,7 @@ import CalendarTab from "./CalendarTab/CalendarTab";
 import DocumentRequestTab from "./DocumentRequestTab/DocumentRequestTab";
 import { useState } from "react";
 import { useMenu } from "../../../context/MenuContext";
+import EnrollmentFormTab from "./EnrollmentFormTab/EnrollmentFormTab";
 
 function StudentUI({ student }) {
   const [tabSelected, setTabSelected] = useState(0);
@@ -14,6 +15,8 @@ function StudentUI({ student }) {
         return <CalendarTab />;
       case 1:
         return <DocumentRequestTab />;
+      case 2:
+        return <EnrollmentFormTab />;
       default:
         return <CalendarTab />;
     }
@@ -38,6 +41,12 @@ function StudentUI({ student }) {
             onClick={() => setTabSelected(1)}
           >
             Document Request
+          </button>
+          <button
+            className={style["studentUI__button"]}
+            onClick={() => setTabSelected(2)}
+          >
+            Enrollment Form
           </button>
         </nav>
       </aside>
