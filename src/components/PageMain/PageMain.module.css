@@ -3,7 +3,7 @@
   grid-area: main;
   width: 100%;
   height: 100%;
-  padding: 0.5rem;
+  padding: 0rem;
   background: linear-gradient(0deg, rgb(35, 205, 243) 0%, rgb(1, 79, 143) 100%);
   display: flex;
   justify-content: center;
