@@ -1,6 +1,11 @@
 :root {
   --dark-azure: #003153;
   --pure-white: #fff;
+  --vmc-gradient: linear-gradient(
+    0deg,
+    rgb(35, 205, 243) 0%,
+    rgb(1, 79, 143) 100%
+  );
 }
 
 * {
