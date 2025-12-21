@@ -27,6 +27,7 @@ body {
   width: 100vw;
   font-family: system-ui, sans-serif;
   display: grid;
+  place-items: center;
   grid-template-columns: 100%;
   grid-template-rows: auto 1fr;
   grid-template-areas:
