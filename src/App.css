@@ -22,6 +22,7 @@ body {
 }
 
 #root {
+  background: var(--vmc-gradient);
   height: 100vh;
   width: 100vw;
   font-family: system-ui, sans-serif;
