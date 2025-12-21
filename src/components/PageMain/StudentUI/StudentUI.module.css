@@ -82,11 +82,6 @@
 }
 
 @media (min-width: 900px) {
-  .studentUI__h2--shadow,
-  .studentUI__aside--shadow {
-    box-shadow: 3px 3px 8px rgb(65, 65, 65), -3px -3px 8px lightgray;
-  }
-
   .studentUI__aside {
     width: 200px;
     position: static;
