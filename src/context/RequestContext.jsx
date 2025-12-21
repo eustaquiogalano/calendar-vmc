@@ -3,13 +3,13 @@ import { createContext, useContext, useState } from "react";
 const RequestContext = createContext(null);
 
 export function RequestProvider({ children }) {
-  const [request, setRequest] = useState({});
+  const [requestList, setRequestList] = useState([]);
 
   return (
     <RequestContext.Provider
       value={{
-        request,
-        setRequest,
+        requestList,
+        setRequestList,
       }}
     >
       {children}
