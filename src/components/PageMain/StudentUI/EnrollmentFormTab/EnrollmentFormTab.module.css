@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  border-radius: 8px;
+  border-radius: 15px;
   background-color: var(--pure-white);
 }
 
@@ -161,6 +161,7 @@ label {
   .enrollment-form {
     width: 100%;
     grid-column: span 2;
+    padding: 1rem;
   }
 
   .enrollment-form__section-body {
