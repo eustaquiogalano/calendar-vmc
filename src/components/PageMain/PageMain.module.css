@@ -7,9 +7,8 @@
   background: linear-gradient(0deg, rgb(35, 205, 243) 0%, rgb(1, 79, 143) 100%);
   display: flex;
   justify-content: center;
-  align-items: center;
   align-items: flex-start;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
 }
 
