@@ -28,7 +28,7 @@ function EnrollmentFormTab() {
               name="first-name"
               id="first-name"
               required
-              minlength="2"
+              minLength="2"
             />
             <p></p>
           </div>
@@ -39,7 +39,7 @@ function EnrollmentFormTab() {
               type="text"
               name="middle-name"
               id="middle-name"
-              minlength="2"
+              minLength="2"
             />
           </div>
           <div className={`${style["enrollment-form__form-field"]} `}>
@@ -50,7 +50,7 @@ function EnrollmentFormTab() {
               name="last-name"
               id="last-name"
               required
-              minlength="2"
+              minLength="2"
             />
           </div>
           <div
