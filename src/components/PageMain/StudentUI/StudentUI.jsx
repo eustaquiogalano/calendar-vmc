@@ -7,7 +7,7 @@ import EnrollmentFormTab from "./EnrollmentFormTab/EnrollmentFormTab";
 
 function StudentUI({ student }) {
   const [tabSelected, setTabSelected] = useState(0);
-  const { menuBodyVisibility } = useMenu();
+  const { menuBodyVisibility, toggleMenuBody } = useMenu();
 
   function currentTab() {
     switch (tabSelected) {
@@ -22,6 +22,12 @@ function StudentUI({ student }) {
     }
   }
 
+  function handleClick(tab) {
+    setTabSelected(tab);
+    currentTab();
+    toggleMenuBody();
+  }
+
   return (
     <>
       <aside
@@ -32,19 +38,19 @@ function StudentUI({ student }) {
         <nav className={`${style["studentUI__nav"]}`}>
           <button
             className={style["studentUI__button"]}
-            onClick={() => setTabSelected(0)}
+            onClick={() => handleClick(0)}
           >
             Calendar
           </button>
           <button
             className={style["studentUI__button"]}
-            onClick={() => setTabSelected(1)}
+            onClick={() => handleClick(1)}
           >
             Document Request
           </button>
           <button
             className={style["studentUI__button"]}
-            onClick={() => setTabSelected(2)}
+            onClick={() => handleClick(2)}
           >
             Enrollment Form
           </button>
