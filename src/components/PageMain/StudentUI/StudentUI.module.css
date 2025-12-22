@@ -53,8 +53,8 @@
   text-align: start;
   color: var(--dark-azure);
   background-color: var(--pure-white);
-  padding: 0.5rem;
-  border-radius: 4px;
+  padding: 1rem;
+  border-radius: 15px;
   height: 100%;
   width: 100%;
 }
@@ -68,7 +68,7 @@
 
 @media (min-width: 600px) {
   .studentUI {
-    padding: 1rem;
+    padding: 0rem;
   }
 
   .studentUI__menu.studentUI__button {
@@ -97,6 +97,7 @@
     flex: 1;
     height: 100%;
     border-radius: 0;
+    padding: 1rem;
   }
 
   .studentUI__h2 {
