@@ -26,8 +26,8 @@ function StudentUI({ student }) {
     <>
       <aside
         className={`${style["studentUI__aside"]} ${
-          style["studentUI__aside--shadow"]
-        } ${menuBodyVisibility ? style["studentUI__aside--show"] : ""}`}
+          menuBodyVisibility ? style["studentUI__aside--show"] : ""
+        }`}
       >
         <nav className={`${style["studentUI__nav"]}`}>
           <button
