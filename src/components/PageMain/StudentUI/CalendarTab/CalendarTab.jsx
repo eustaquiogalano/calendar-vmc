@@ -16,9 +16,7 @@ function CalendarTab() {
 
       <section className={style["calendar-tab__section"]}>
         <h2>Events</h2>
-        <div
-          className={`${style["calendar-tab__events"]} ${style["calendar-tab__events--shadow"]}`}
-        >
+        <div className={`${style["calendar-tab__events"]} `}>
           <HourCard
             time="8:00 AM"
             eventList={["Seminar sa CR", "Pizza Party"]}
