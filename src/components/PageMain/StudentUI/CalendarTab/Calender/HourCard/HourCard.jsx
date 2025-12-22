@@ -6,8 +6,12 @@ function HourCard({ time, eventList }) {
       <h3>{time}</h3>
       <div className={style["hour-card__event-list"]}>
         <ul>
-          {eventList.map((event) => {
-            return <li className={style["hour-card__event"]}>{event}</li>;
+          {eventList.map((event, index) => {
+            return (
+              <li key={index} className={style["hour-card__event"]}>
+                {event}
+              </li>
+            );
           })}
         </ul>
       </div>
