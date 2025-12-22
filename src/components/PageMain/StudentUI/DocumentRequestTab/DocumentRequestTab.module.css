@@ -5,8 +5,8 @@
 .document-request-tab__section {
   width: 100%;
   height: auto;
-  padding: 1rem 0.5rem;
-  border-radius: 4px;
+  padding: 1rem;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   background-color: var(--pure-white);
