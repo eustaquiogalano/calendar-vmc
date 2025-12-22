@@ -7,9 +7,7 @@ function CalendarTab() {
     <>
       <section className={style["calendar-tab__section"]}>
         <h2>Calendar</h2>
-        <div
-          className={`${style["calendar-tab__calendar"]} ${style["calendar-tab__calendar--shadow"]}`}
-        >
+        <div className={`${style["calendar-tab__calendar"]} `}>
           <Calendar />
         </div>
       </section>
