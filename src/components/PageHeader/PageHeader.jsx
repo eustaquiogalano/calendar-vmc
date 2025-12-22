@@ -5,7 +5,6 @@ import { useMenu } from "../../context/MenuContext";
 
 function PageHeader() {
   const { menuButtonVisibility, toggleMenuBody } = useMenu();
-  console.log(menuButtonVisibility);
 
   return (
     <header className={style["page-header"]}>
