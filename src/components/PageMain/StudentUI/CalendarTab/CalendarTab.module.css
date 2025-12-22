@@ -18,15 +18,8 @@
   text-align: start;
 }
 
-@media (min-width: 900px) {
-  .calendar-tab__calendar--shadow,
-  .calendar-tab__events--shadow {
-    box-shadow: 3px 3px 8px rgb(65, 65, 65), -3px -3px 8px lightgray;
-  }
-
-  .calendar-tab__calendar,
-  .calendar-tab__events {
-    border-radius: 15px;
+@media (min-width: 600px) {
+  .calendar-tab__section {
     padding: 1rem;
   }
 }
