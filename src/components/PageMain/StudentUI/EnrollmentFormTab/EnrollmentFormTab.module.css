@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  border-radius: 8px;
   background-color: var(--pure-white);
 }
 
@@ -182,6 +183,12 @@ label {
 /* small laptops */
 @media (min-width: 900px) {
   .enrollment-form {
-    max-width: 800px;
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1200px) {
+  .enrollment-form {
+    padding: 3rem;
   }
 }
