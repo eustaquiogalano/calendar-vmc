@@ -4,13 +4,17 @@
 
 .document-request-tab__section {
   width: 100%;
-  height: auto;
   padding: 1rem;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   background-color: var(--pure-white);
   gap: 1rem;
+}
+
+.document-request-tab__pending-request {
+  height: 100%;
+  overflow: hidden;
 }
 
 .document-request-tab__request-form {
@@ -34,11 +38,21 @@
   border: 1px solid var(--dark-azure);
 }
 
-.document-request-tab__div--pending {
+.document-request-tab__pending-list {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 0.5rem;
+  height: 100%;
+  overflow: auto;
+}
+
+.document-request-tab__div--pending {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--dark-azure);
+  border-radius: 10px;
 }
 
 .document-request-tab__div label,
