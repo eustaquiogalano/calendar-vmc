@@ -37,9 +37,9 @@ function DocumentRequestTab() {
         <h2>Create Request</h2>
         <form
           onSubmit={submitRequest}
-          className={style["document-request-tab__request-form-container"]}
+          className={style["document-request-tab__request-form"]}
         >
-          <div className={style["document-request-tab__div"]}>
+          <div className={style["document-request-tab__form-field"]}>
             <label htmlFor="document">Document Requested:</label>
             <select
               required
@@ -59,7 +59,7 @@ function DocumentRequestTab() {
             </select>
           </div>
 
-          <div className={style["document-request-tab__div"]}>
+          <div className={style["document-request-tab__form-field"]}>
             <label htmlFor="purpose"> Documents's Purpose:</label>
             <input
               required
@@ -73,7 +73,7 @@ function DocumentRequestTab() {
             />
           </div>
 
-          <div className={`${style["document-request-tab__div"]} `}>
+          <div className={`${style["document-request-tab__form-field"]} `}>
             <label htmlFor="claim-date">Preferred Ready Date:</label>
             <input
               required
