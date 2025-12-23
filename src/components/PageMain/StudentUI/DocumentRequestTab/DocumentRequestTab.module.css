@@ -13,14 +13,25 @@
   gap: 1rem;
 }
 
-.document-request-tab__request-form-container {
+.document-request-tab__request-form {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.5rem;
 }
 
-.document-request-tab__div {
-  padding: 0.25rem 0;
+.document-request-tab__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.document-request-tab__form-field input,
+.document-request-tab__form-field select {
+  width: 100%;
+  font-size: 16px;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--dark-azure);
 }
 
 .document-request-tab__div--pending {
@@ -58,4 +69,10 @@
   font-size: 1.25rem;
   background-color: var(--dark-azure);
   color: var(--pure-white);
+}
+
+@media (min-width: 1200px) {
+  .document-request-tab__section {
+    padding: 2rem;
+  }
 }
