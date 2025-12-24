@@ -5,11 +5,20 @@ const RequestContext = createContext(null);
 export function RequestProvider({ children }) {
   const [requestList, setRequestList] = useState([]);
 
+  function getAllDates() {
+    let dateList = requestList.map((request) => {
+      return request.date;
+    });
+
+    return dateList;
+  }
+
   return (
     <RequestContext.Provider
       value={{
         requestList,
         setRequestList,
+        getAllDates,
       }}
     >
       {children}
