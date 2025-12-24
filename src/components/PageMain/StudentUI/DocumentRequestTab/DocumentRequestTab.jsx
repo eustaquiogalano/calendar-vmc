@@ -12,7 +12,6 @@ function DocumentRequestTab() {
 
   function submitRequest(e) {
     e.preventDefault();
-    console.log(e.target);
 
     if (!e.target.checkValidity()) {
       e.target.reportValidity();
