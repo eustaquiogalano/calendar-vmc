@@ -1,6 +1,6 @@
 .calendar-tab__section {
   border-radius: 15px;
-  padding: 1rem 0.5rem;
+  padding: 1rem;
   background-color: var(--pure-white);
   width: 100%;
 }
