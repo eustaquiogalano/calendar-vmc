@@ -2,6 +2,7 @@
   border-radius: 15px;
   padding: 1rem 0.5rem;
   background-color: var(--pure-white);
+  width: 100%;
 }
 
 .calendar-tab__calendar,
