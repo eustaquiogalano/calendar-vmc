@@ -1,14 +1,17 @@
 import style from "./CalendarTab.module.css";
 import HourCard from "./Calender/HourCard/HourCard";
 import Calendar from "./Calender/Calendar";
+import { useRequest } from "../../../../context/RequestContext";
 
 function CalendarTab() {
+  const { getAllDates } = useRequest();
+
   return (
     <>
       <section className={style["calendar-tab__section"]}>
         <h2>Calendar</h2>
         <div className={`${style["calendar-tab__calendar"]} `}>
-          <Calendar />
+          <Calendar requestedDate={getAllDates()} />
         </div>
       </section>
 
