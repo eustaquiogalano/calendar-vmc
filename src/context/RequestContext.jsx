@@ -4,6 +4,7 @@ const RequestContext = createContext(null);
 
 export function RequestProvider({ children }) {
   const [requestList, setRequestList] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
 
   function getAllDates() {
     let dateList = requestList.map((request) => {
@@ -18,6 +19,8 @@ export function RequestProvider({ children }) {
       value={{
         requestList,
         setRequestList,
+        selectedDate,
+        setSelectedDate,
         getAllDates,
       }}
     >
