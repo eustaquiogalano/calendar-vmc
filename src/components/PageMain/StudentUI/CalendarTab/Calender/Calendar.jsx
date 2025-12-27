@@ -7,13 +7,14 @@ import { useRequest } from "../../../../../context/RequestContext";
 function Calendar({ requestList }) {
   const { setSelectedDate } = useRequest();
 
-function Calendar({ requestedDate }) {
-  const events = requestedDate.map((date) => {
+  const events = requestList.map((request) => {
     return {
-      start: date,
+      title: request.document,
+      start: request.date,
       allDay: true,
-      display: "background",
-      backgroundColor: "gray",
+      extendedProps: {
+        request,
+      },
     };
   });
 
