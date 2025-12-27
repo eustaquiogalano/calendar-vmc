@@ -18,11 +18,16 @@ function Calendar({ requestList }) {
     };
   });
 
+  function handleDateClick(info) {
+    setSelectedDate(info.dateStr);
+  }
+
   return (
     <FullCalendar
       events={events}
       plugins={[dayGridPlugin, interactionPlugin]}
       initialView="dayGridMonth"
+      dateClick={handleDateClick}
     />
   );
 }
