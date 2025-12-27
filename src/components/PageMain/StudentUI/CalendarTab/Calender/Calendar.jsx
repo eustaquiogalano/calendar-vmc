@@ -1,22 +1,40 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
 import "./Calendar.css";
+import { useRequest } from "../../../../../context/RequestContext";
 
-function Calendar({ requestedDate }) {
-  const events = requestedDate.map((date) => {
+function Calendar({ requestList }) {
+  const { setSelectedDate } = useRequest();
+
+  const events = requestList.map((request) => {
     return {
-      start: date,
+      title: request.document,
+      start: request.date,
       allDay: true,
-      display: "background",
-      backgroundColor: "gray",
+      extendedProps: {
+        request,
+      },
     };
   });
+
+  function handleEventClick(info) {
+    console.log(info.event._def.extendedProps);
+  }
+
+  function handleDateClick(info) {
+    console.log(info);
+
+    setSelectedDate(info.dateStr);
+  }
 
   return (
     <FullCalendar
       events={events}
-      plugins={[dayGridPlugin]}
+      plugins={[dayGridPlugin, interactionPlugin]}
       initialView="dayGridMonth"
+      dateClick={handleDateClick}
+      eventClick={handleEventClick}
     />
   );
 }
