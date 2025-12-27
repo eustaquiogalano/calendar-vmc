@@ -1,5 +1,6 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
 import "./Calendar.css";
 import { useRequest } from "../../../../../context/RequestContext";
 
@@ -19,7 +20,7 @@ function Calendar({ requestedDate }) {
   return (
     <FullCalendar
       events={events}
-      plugins={[dayGridPlugin]}
+      plugins={[dayGridPlugin, interactionPlugin]}
       initialView="dayGridMonth"
     />
   );
