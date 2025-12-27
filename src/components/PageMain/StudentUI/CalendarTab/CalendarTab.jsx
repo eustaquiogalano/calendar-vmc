@@ -11,7 +11,7 @@ function CalendarTab() {
       <section className={style["calendar-tab__section"]}>
         <h2>Calendar</h2>
         <div className={`${style["calendar-tab__calendar"]} `}>
-          <Calendar requestedDate={getAllDates()} />
+          <Calendar requestList={requestList} />
         </div>
       </section>
 
