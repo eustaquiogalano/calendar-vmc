@@ -4,7 +4,7 @@ import Calendar from "./Calender/Calendar";
 import { useRequest } from "../../../../context/RequestContext";
 
 function CalendarTab() {
-  const { getAllDates } = useRequest();
+  const { requestList, selectedDate } = useRequest();
 
   return (
     <>
