@@ -23,6 +23,25 @@ function CalendarTab() {
             eventList={["Seminar sa CR", "Pizza Party"]}
           />
           <HourCard time="10:00 AM" eventList={["Oath Taking", "Disco Time"]} />
+          <div>
+            {requestList.map((request) => {
+              if (request.date === selectedDate) {
+                return (
+                  <div>
+                    <p>
+                      Document: <span>{request.document}</span>
+                    </p>
+                    <p>
+                      Purpose: <span>{request.purpose}</span>
+                    </p>
+                    <p>
+                      Date: <span>{request.date}</span>
+                    </p>
+                  </div>
+                );
+              }
+            })}
+          </div>
         </div>
       </section>
     </>
