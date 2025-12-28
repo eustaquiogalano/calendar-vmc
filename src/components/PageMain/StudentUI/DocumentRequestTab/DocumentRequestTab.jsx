@@ -18,7 +18,10 @@ function DocumentRequestTab() {
       return;
     }
 
-    setRequestList([...requestList, { document, purpose, date }]);
+    setRequestList([
+      ...requestList,
+      { id: crypto.randomUUID(), document, purpose, date },
+    ]);
     resetStates();
   }
 
