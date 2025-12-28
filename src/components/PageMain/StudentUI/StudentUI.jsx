@@ -54,6 +54,11 @@ function StudentUI({ student }) {
           >
             Enrollment Form
           </button>
+          <button
+            className={`${style["studentUI__button"]} ${style["studentUI__button--logout"]} `}
+          >
+            Logout
+          </button>
         </nav>
       </aside>
       <div className={style["studentUI"]}>
