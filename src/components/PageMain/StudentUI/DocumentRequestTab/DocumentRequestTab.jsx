@@ -123,6 +123,13 @@ function DocumentRequestTab() {
                 <p>
                   Date: <span>{request.date}</span>
                 </p>
+                <button
+                  className={
+                    style["document-request-tab__button--delete-request"]
+                  }
+                >
+                  Delete
+                </button>
               </div>
             );
           })}
