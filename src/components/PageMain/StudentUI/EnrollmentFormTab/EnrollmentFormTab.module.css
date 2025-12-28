@@ -15,8 +15,8 @@ textarea {
   border: 1px solid var(--dark-azure);
 }
 
-small,
-p {
+.enrollment-form small,
+.enrollment-form p {
   line-height: 0.5rem;
   height: 0.5rem;
   font-size: 1rem;
