@@ -19,6 +19,7 @@
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
+  height: 100%;
 }
 
 .studentUI__button {
@@ -27,6 +28,10 @@
   color: var(--dark-azure);
   border-radius: 4px;
   border: none;
+}
+
+.studentUI__button--logout {
+  margin-top: auto;
 }
 
 .studentUI__button:hover {
