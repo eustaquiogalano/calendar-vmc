@@ -20,6 +20,26 @@
   text-align: start;
 }
 
+.calendar-tab__request-list {
+  height: 100%;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.calendar-tab__request-card {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: lightgray;
+  border-radius: 4px;
+}
+
+.calendar-tab__request-card p {
+}
+
 @media (min-width: 600px) {
   .calendar-tab__section {
     padding: 1rem;
