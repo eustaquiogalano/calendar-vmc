@@ -23,11 +23,14 @@ function CalendarTab() {
             eventList={["Seminar sa CR", "Pizza Party"]}
           />
           <HourCard time="10:00 AM" eventList={["Oath Taking", "Disco Time"]} />
-          <div>
+          <div className={style["calendar-tab__request-list"]}>
             {requestList.map((request) => {
               if (request.date === selectedDate) {
                 return (
-                  <div key={request.id}>
+                  <div
+                    key={request.id}
+                    className={style["calendar-tab__request-card"]}
+                  >
                     <p>
                       Document: <span>{request.document}</span>
                     </p>
