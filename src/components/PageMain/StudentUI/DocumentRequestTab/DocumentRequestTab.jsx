@@ -20,7 +20,7 @@ function DocumentRequestTab() {
 
     setRequestList([
       ...requestList,
-      { id: crypto.randomUUID(), document, purpose, date },
+      { status: "PENDING", id: crypto.randomUUID(), document, purpose, date },
     ]);
     resetStates();
   }
