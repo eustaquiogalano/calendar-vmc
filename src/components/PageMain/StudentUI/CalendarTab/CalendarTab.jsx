@@ -27,7 +27,7 @@ function CalendarTab() {
             {requestList.map((request) => {
               if (request.date === selectedDate) {
                 return (
-                  <div>
+                  <div key={request.id}>
                     <p>
                       Document: <span>{request.document}</span>
                     </p>
