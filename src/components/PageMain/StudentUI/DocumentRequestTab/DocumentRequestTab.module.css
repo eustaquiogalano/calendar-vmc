@@ -58,6 +58,7 @@
   justify-content: center;
 }
 
+.document-request-tab__button--delete-request,
 .document-request-tab__button--submit {
   height: 100%;
   border-radius: 4px;
@@ -69,6 +70,7 @@
   transition: all 0.5s;
 }
 
+.document-request-tab__button--delete-request:hover,
 .document-request-tab__button--submit:hover {
   background-color: var(--pure-white);
   color: var(--dark-azure);
