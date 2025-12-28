@@ -110,7 +110,10 @@ function DocumentRequestTab() {
         <div className={style["document-request-tab__pending-list"]}>
           {requestList.map((request) => {
             return (
-              <div className={style["document-request-tab__div--pending"]}>
+              <div
+                key={request.id}
+                className={style["document-request-tab__div--pending"]}
+              >
                 <p>
                   Document: <span>{request.document}</span>
                 </p>
