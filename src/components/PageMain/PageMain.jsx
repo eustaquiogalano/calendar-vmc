@@ -6,14 +6,13 @@ import { useMenu } from "../../context/MenuContext";
 
 function PageMain() {
   const [student, setStudent] = useState(undefined);
-  const { menuButtonVisibility, toggleMenuButton } = useMenu();
+  const { toggleMenuButton } = useMenu();
 
   function handleLogin(user) {
     setStudent(user);
     if (user) {
       toggleMenuButton();
     }
-    console.log(menuButtonVisibility);
   }
 
   return (
