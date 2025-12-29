@@ -30,6 +30,21 @@ function DocumentRequestTab() {
     setDate("");
   }
 
+  function deleteRequest() {
+    setRequestList(
+      requestList.filter((request) => {
+        return request.id !== deletionID;
+      })
+    );
+
+    console.log(`${deletionID} deleted`);
+
+    // after using the deletionID for deletion
+    // reset the state right after
+    // to be ready fr next use
+    setDeletionID("");
+  }
+
   return (
     <>
       <section
