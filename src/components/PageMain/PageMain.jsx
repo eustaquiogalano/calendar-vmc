@@ -20,7 +20,7 @@ function PageMain() {
       className={`${style["page-main"]} ${style["page-main--hide-scroll"]}`}
     >
       {student ? (
-        <StudentUI student={student} />
+        <StudentUI student={student} setStudent={setStudent} />
       ) : (
         <Login onLogin={handleLogin} />
       )}

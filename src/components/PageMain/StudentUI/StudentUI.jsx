@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useMenu } from "../../../context/MenuContext";
 import EnrollmentFormTab from "./EnrollmentFormTab/EnrollmentFormTab";
 
-function StudentUI({ student }) {
+function StudentUI({ student, setStudent }) {
   const [tabSelected, setTabSelected] = useState(0);
   const { menuBodyVisibility, toggleMenuBody } = useMenu();
 
