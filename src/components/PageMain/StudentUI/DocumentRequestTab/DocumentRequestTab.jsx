@@ -143,6 +143,10 @@ function DocumentRequestTab() {
                   className={
                     style["document-request-tab__button--delete-request"]
                   }
+                  onClick={() => {
+                    setDeletionID(request.id);
+                    dialogRef.current.showModal();
+                  }}
                 >
                   Delete
                 </button>
