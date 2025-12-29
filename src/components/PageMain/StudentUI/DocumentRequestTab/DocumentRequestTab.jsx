@@ -4,7 +4,8 @@ import style from "./DocumentRequestTab.module.css";
 import ConfirmationDialog from "./ConfirmationDialog/ConfirmationDialog";
 
 function DocumentRequestTab() {
-  const { requestList, setRequestList } = useRequest();
+  const { requestList, setRequestList, deletionID, setDeletionID } =
+    useRequest();
   const [document, setDocument] = useState("");
   const [purpose, setPurpose] = useState("");
   const [date, setDate] = useState("");
