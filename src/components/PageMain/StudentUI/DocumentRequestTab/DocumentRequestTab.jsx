@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useRequest } from "../../../../context/RequestContext";
 import style from "./DocumentRequestTab.module.css";
+import ConfirmationDialog from "./ConfirmationDialog/ConfirmationDialog";
 
 function DocumentRequestTab() {
   const { requestList, setRequestList } = useRequest();
@@ -148,6 +149,8 @@ function DocumentRequestTab() {
             );
           })}
         </div>
+
+        <ConfirmationDialog ref={dialogRef} onConfirm={deleteRequest} />
       </section>
     </>
   );
