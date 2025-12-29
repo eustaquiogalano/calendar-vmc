@@ -7,7 +7,7 @@ import EnrollmentFormTab from "./EnrollmentFormTab/EnrollmentFormTab";
 
 function StudentUI({ student, setStudent }) {
   const [tabSelected, setTabSelected] = useState(0);
-  const { menuBodyVisibility, toggleMenuBody } = useMenu();
+  const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
 
   function currentTab() {
     switch (tabSelected) {
@@ -26,6 +26,11 @@ function StudentUI({ student, setStudent }) {
     setTabSelected(tab);
     currentTab();
     toggleMenuBody();
+  }
+
+  function handleLogoutClick() {
+    setStudent(undefined);
+    toggleMenuButton();
   }
 
   return (
@@ -56,6 +61,7 @@ function StudentUI({ student, setStudent }) {
           </button>
           <button
             className={`${style["studentUI__button"]} ${style["studentUI__button--logout"]} `}
+            onClick={handleLogoutClick}
           >
             Logout
           </button>
