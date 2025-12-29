@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRequest } from "../../../../context/RequestContext";
 import style from "./DocumentRequestTab.module.css";
 
@@ -7,8 +7,7 @@ function DocumentRequestTab() {
   const [document, setDocument] = useState("");
   const [purpose, setPurpose] = useState("");
   const [date, setDate] = useState("");
-
-  console.log(requestList);
+  const dialogRef = useRef();
 
   function submitRequest(e) {
     e.preventDefault();
