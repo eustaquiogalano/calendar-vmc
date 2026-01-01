@@ -38,7 +38,7 @@
   background-color: lightgray;
 }
 
-.studentUI {
+.studentUI__dashboard {
   width: 100%;
   height: 100%;
   display: flex;
@@ -64,7 +64,7 @@
   width: 100%;
 }
 
-.studentUI__dashboard {
+.studentUI__panel {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -74,7 +74,7 @@
 }
 
 @media (min-width: 600px) {
-  .studentUI {
+  .studentUI__dashboard {
     padding: 0rem;
   }
 
@@ -82,7 +82,7 @@
     top: -7.3%;
   }
 
-  .studentUI__dashboard {
+  .studentUI__panel {
     display: grid;
     grid-template-columns: 60% 1fr;
     gap: 1rem;
@@ -100,7 +100,7 @@
     top: -7.3%;
   }
 
-  .studentUI {
+  .studentUI__dashboard {
     flex: 1;
     height: 100%;
     border-radius: 0;
@@ -127,7 +127,7 @@
     padding: 1rem;
   }
 
-  .studentUI__dashboard {
+  .studentUI__panel {
     padding: 1rem;
     gap: 2rem;
   }

@@ -67,7 +67,7 @@ function StudentUI({ student, setStudent }) {
           </button>
         </nav>
       </aside>
-      <div className={style["studentUI"]}>
+      <div className={style["studentUI__dashboard"]}>
         <div className={style["studentUI__greeting"]}>
           <h2
             className={`${style["studentUI__h2--shadow"]} ${style["studentUI__h2"]}`}
@@ -75,7 +75,7 @@ function StudentUI({ student, setStudent }) {
             Hello {student.name}
           </h2>
         </div>
-        <div className={style["studentUI__dashboard"]}>{currentTab()}</div>
+        <div className={style["studentUI__panel"]}>{currentTab()}</div>
       </div>
     </>
   );
