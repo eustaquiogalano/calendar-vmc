@@ -1,5 +1,6 @@
 const mockStudentDatabase = [
   {
+    type: "student",
     name: "Jor",
     username: "joris.arancon@example.com",
     password: "jorispogi",
@@ -8,6 +9,7 @@ const mockStudentDatabase = [
     requestedDocs: [],
   },
   {
+    type: "student",
     name: "Dec",
     username: "dexter.lab@example.com",
     password: "dexterlab",
