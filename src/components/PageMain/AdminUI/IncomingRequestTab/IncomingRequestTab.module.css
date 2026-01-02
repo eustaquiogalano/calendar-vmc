@@ -1,0 +1,17 @@
+.incoming-request__section {
+  background-color: var(--pure-white);
+  width: 100%;
+  padding: 1rem;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 1rem;
+}
+
+.incoming-request__request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+}
