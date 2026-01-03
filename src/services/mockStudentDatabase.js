@@ -1,22 +1,23 @@
 const mockStudentDatabase = [
   {
-    type: "student",
-    name: "Jor",
-    level: "3",
-    username: "joris.arancon@example.com",
+    userType: "student",
+    username: "joris.arancon",
     password: "jorispogi",
-    idNumber: "1234",
+    email: "joris.arancon@gmail.com",
+    name: "Joris",
+    idNumber: "1X0COL-XXXXXX",
+    yearLevel: 3,
     isLoggedIn: false,
-    requestedDocs: [
+    requestedDocuments: [
       {
-        id: 1,
+        id: crypto.randomUUID(),
         document: "Diploma",
         purpose: "Job Application",
         date: "01/01/2026",
         status: "PENDING",
       },
       {
-        id: 1,
+        id: crypto.randomUUID(),
         document: "TOR",
         purpose: "Scholarship",
         date: "01/01/2026",
@@ -25,29 +26,31 @@ const mockStudentDatabase = [
     ],
   },
   {
-    type: "student",
-    name: "Dec",
-    username: "dexter.lab@example.com",
-    password: "dexterlab",
-    idNumber: "123",
+    userType: "student",
+    username: "dexter.aras",
+    password: "pagdextersweetlover",
+    email: "dexter.aras@gmail.com",
+    name: "Dexter",
+    idNumber: "2X0COL-XXXXXX",
+    yearLevel: 3,
     isLoggedIn: false,
-    requestedDocs: [
+    requestedDocuments: [
       {
-        id: 1,
+        id: crypto.randomUUID(),
         document: "CTC",
         purpose: "Scholarship",
         date: "01/01/2026",
         status: "PENDING",
       },
       {
-        id: 1,
+        id: crypto.randomUUID(),
         document: "Form 138",
         purpose: "Scholarship",
         date: "01/01/2026",
         status: "PENDING",
       },
       {
-        id: 1,
+        id: crypto.randomUUID(),
         document: "TOR",
         purpose: "Scholarship",
         date: "01/01/2026",
