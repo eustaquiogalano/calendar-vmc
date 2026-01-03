@@ -1,20 +1,17 @@
 import style from "./IncomingCard.module.css";
 
-function IncomingCard() {
+function IncomingCard({ request }) {
   return (
     <div className={style["incoming-card"]}>
       <div className={style["incoming-card__details"]}>
         <p>
-          Student: <span></span>
+          Document: <span>{request.document}</span>{" "}
         </p>
         <p>
-          Document: <span></span>
+          Purpose: <span>{request.purpose}</span>
         </p>
         <p>
-          Purpose: <span></span>
-        </p>
-        <p>
-          Date: <span></span>
+          Date: <span>{request.date}</span>
         </p>
       </div>
       <div className={style["incoming-card__div--buttons"]}>
