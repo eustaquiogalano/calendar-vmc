@@ -1,4 +1,4 @@
-import students from "./mockDatabase";
+import students from "./mockStudentDatabase";
 
 function userAuth(username, password) {
   // let user = students.find((student) => {
