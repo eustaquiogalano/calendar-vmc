@@ -1,6 +1,9 @@
+import { useStudentList } from "../../../../../context/StudentListContext";
 import style from "./IncomingCard.module.css";
 
-function IncomingCard({ request }) {
+function IncomingCard({ request, studentID }) {
+  const { updateRequestStatus } = useStudentList();
+
   return (
     <div className={style["incoming-card"]}>
       <div className={style["incoming-card__details"]}>
