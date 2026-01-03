@@ -15,8 +15,16 @@ function IncomingCard({ request }) {
         </p>
       </div>
       <div className={style["incoming-card__div--buttons"]}>
-        <button>Accept</button>
-        <button>Reject</button>
+        <button
+          onClick={() => updateRequestStatus(studentID, request.id, "ACCEPTED")}
+        >
+          Accept
+        </button>
+        <button
+          onClick={() => updateRequestStatus(studentID, request.id, "REJECTED")}
+        >
+          Reject
+        </button>
       </div>
     </div>
   );
