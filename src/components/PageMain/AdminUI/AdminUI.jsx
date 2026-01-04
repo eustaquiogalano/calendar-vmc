@@ -50,7 +50,7 @@ function AdminUI() {
         <div className={style["adminUI__greeting"]}>
           <h2 className={`${style["adminUI__h2"]}`}>Hello Admin</h2>
         </div>
-        <div className={style["adminUI__panel"]}></div>
+        <div className={style["adminUI__panel"]}>{currentTab()}</div>
       </div>
     </>
   );
