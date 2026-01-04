@@ -1,7 +1,7 @@
 import { useStudentList } from "../../../../../context/StudentListContext";
 import style from "./IncomingCard.module.css";
 
-function IncomingCard({ request, studentID }) {
+function IncomingCard({ request, student }) {
   const { updateRequestStatus } = useStudentList();
 
   return (
@@ -19,12 +19,16 @@ function IncomingCard({ request, studentID }) {
       </div>
       <div className={style["incoming-card__div--buttons"]}>
         <button
-          onClick={() => updateRequestStatus(studentID, request.id, "ACCEPTED")}
+          onClick={() =>
+            updateRequestStatus(student.idNumber, request.id, "ACCEPTED")
+          }
         >
           Accept
         </button>
         <button
-          onClick={() => updateRequestStatus(studentID, request.id, "REJECTED")}
+          onClick={() =>
+            updateRequestStatus(student.idNumber, request.id, "REJECTED")
+          }
         >
           Reject
         </button>
