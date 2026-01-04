@@ -1,5 +1,7 @@
 import { useMenu } from "../../../context/MenuContext";
 import style from "./AdminUI.module.css";
+import IncomingRequestTab from "./IncomingRequestTab/IncomingRequestTab";
+import ManageRequestTab from "./ManageRequestTab/ManageRequestTab";
 
 function AdminUI() {
   const { menuBodyVisibility } = useMenu();
