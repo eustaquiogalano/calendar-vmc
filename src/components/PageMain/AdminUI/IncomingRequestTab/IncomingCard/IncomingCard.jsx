@@ -8,6 +8,9 @@ function IncomingCard({ request, student }) {
     <div className={style["incoming-card"]}>
       <div className={style["incoming-card__details"]}>
         <p>
+          Student: <span>{student.name}</span>
+        </p>
+        <p>
           Document: <span>{request.document}</span>{" "}
         </p>
         <p>
