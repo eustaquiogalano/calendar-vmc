@@ -3,6 +3,18 @@ import style from "./AdminUI.module.css";
 
 function AdminUI() {
   const { menuBodyVisibility } = useMenu();
+  const [tabSelected, setTabSelected] = useState(0);
+
+  function currentTab() {
+    switch (tabSelected) {
+      case 0:
+        return <IncomingRequestTab />;
+      case 1:
+        return <ManageRequestTab />;
+      default:
+        return <IncomingRequestTab />;
+    }
+  }
 
   return (
     <>
