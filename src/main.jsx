@@ -5,15 +5,18 @@ import "./App.css";
 import { MenuProvider } from "./context/MenuContext.jsx";
 import { RequestProvider } from "./context/RequestContext.jsx";
 import { StudentListProvider } from "./context/StudentListContext.jsx";
+import { EventsProvider } from "./context/EventsContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <StudentListProvider>
-      <RequestProvider>
-        <MenuProvider>
-          <App />
-        </MenuProvider>
-      </RequestProvider>
-    </StudentListProvider>
+    <EventsProvider>
+      <StudentListProvider>
+        <RequestProvider>
+          <MenuProvider>
+            <App />
+          </MenuProvider>
+        </RequestProvider>
+      </StudentListProvider>
+    </EventsProvider>
   </StrictMode>
 );

@@ -3,10 +3,11 @@ import { useMenu } from "../../../context/MenuContext";
 import style from "./AdminUI.module.css";
 import IncomingRequestTab from "./IncomingRequestTab/IncomingRequestTab";
 import ManageRequestTab from "./ManageRequestTab/ManageRequestTab";
+import CreateEvent from "./CreateEventTab/CreateEventTab";
 
-function AdminUI() {
-  const { menuBodyVisibility } = useMenu();
+function AdminUI({ admin, setAdmin }) {
   const [tabSelected, setTabSelected] = useState(0);
+  const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
 
   function currentTab() {
     switch (tabSelected) {
@@ -14,9 +15,22 @@ function AdminUI() {
         return <IncomingRequestTab />;
       case 1:
         return <ManageRequestTab />;
+      case 2:
+        return <CreateEvent />;
       default:
         return <IncomingRequestTab />;
     }
+  }
+
+  function handleClick(tab) {
+    setTabSelected(tab);
+    currentTab();
+    toggleMenuBody();
+  }
+
+  function handleLogoutClick() {
+    setAdmin(undefined); // update later to setAdmin()
+    toggleMenuButton();
   }
 
   return (
@@ -28,18 +42,25 @@ function AdminUI() {
       >
         <nav className={style["adminUI__nav"]}>
           <button
-            onClick={() => setTabSelected(0)}
+            onClick={() => handleClick(0)}
             className={style["adminUI__button"]}
           >
             Incoming Request
           </button>
           <button
             className={style["adminUI__button"]}
-            onClick={() => setTabSelected(1)}
+            onClick={() => handleClick(1)}
           >
             Manage Requests
           </button>
           <button
+            className={style["adminUI__button"]}
+            onClick={() => handleClick(2)}
+          >
+            Create Event
+          </button>
+          <button
+            onClick={handleLogoutClick}
             className={`${style["adminUI__button"]} ${style["adminUI__button--logout"]} `}
           >
             Logout
@@ -48,7 +69,7 @@ function AdminUI() {
       </aside>
       <div className={style["adminUI__dashboard"]}>
         <div className={style["adminUI__greeting"]}>
-          <h2 className={`${style["adminUI__h2"]}`}>Hello Admin</h2>
+          <h2 className={`${style["adminUI__h2"]}`}>Hello {admin.name}</h2>
         </div>
         <div className={style["adminUI__panel"]}>{currentTab()}</div>
       </div>

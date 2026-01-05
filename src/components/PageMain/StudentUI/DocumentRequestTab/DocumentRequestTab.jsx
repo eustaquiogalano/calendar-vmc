@@ -1,15 +1,21 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRequest } from "../../../../context/RequestContext";
 import style from "./DocumentRequestTab.module.css";
 import ConfirmationDialog from "./ConfirmationDialog/ConfirmationDialog";
+import { useStudentList } from "../../../../context/StudentListContext";
 
-function DocumentRequestTab() {
+function DocumentRequestTab({ student }) {
+  const { updateRequestList } = useStudentList();
   const { requestList, setRequestList, deletionID, setDeletionID } =
     useRequest();
   const [document, setDocument] = useState("");
   const [purpose, setPurpose] = useState("");
   const [date, setDate] = useState("");
   const dialogRef = useRef();
+
+  // useEffect(() => {
+  //   updateRequestList(student.idNumber, requestList);
+  // }, [requestList]);
 
   function submitRequest(e) {
     e.preventDefault();
@@ -23,6 +29,7 @@ function DocumentRequestTab() {
       ...requestList,
       { status: "PENDING", id: crypto.randomUUID(), document, purpose, date },
     ]);
+
     resetStates();
   }
 

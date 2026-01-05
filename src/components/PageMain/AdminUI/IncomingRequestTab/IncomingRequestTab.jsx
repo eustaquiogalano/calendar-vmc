@@ -5,6 +5,8 @@ import style from "./IncomingRequestTab.module.css";
 function IncomingRequestTab() {
   const { studentList } = useStudentList();
 
+  console.log(studentList);
+
   return (
     <section className={style["incoming-request__section"]}>
       <h2>Incoming Requests</h2>
