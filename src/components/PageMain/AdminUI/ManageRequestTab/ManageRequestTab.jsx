@@ -75,7 +75,10 @@ function ManageRequestTab() {
           {studentList.map((student) => {
             return student.requestedDocuments
               .filter((request) => {
-                if (request.status === "ACCEPTED") {
+                if (
+                  request.status === "ACCEPTED" ||
+                  request.status === "DOCUMENT READY"
+                ) {
                   return request;
                 }
               })
