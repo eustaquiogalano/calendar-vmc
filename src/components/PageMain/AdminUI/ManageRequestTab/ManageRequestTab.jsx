@@ -13,9 +13,12 @@ function ManageRequestTab() {
           <p>Select a request to view here</p>
         </div>
       </section>
-      <section className={style["manage-request__section"]}>
+
+      <section
+        className={`${style["manage-request__section"]} ${style["manage-request__section--request-list"]}`}
+      >
         <h2>Request List</h2>
-        <div className="manage-request__container--request-list">
+        <div className={style["manage-request__container--request-list"]}>
           {studentList.map((student) => {
             return student.requestedDocuments
               .filter((request) => {
