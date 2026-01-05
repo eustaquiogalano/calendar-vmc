@@ -1,6 +1,6 @@
 import style from "./AcceptedRequestCard.module.css";
 
-function AcceptedRequestCard({ student, request }) {
+function AcceptedRequestCard({ student, request, setSelectedRequest }) {
   return (
     <div className={style["accepted-request"]}>
       <div className={style["accepted-request__request-details"]}>
@@ -16,8 +16,16 @@ function AcceptedRequestCard({ student, request }) {
         <p>
           Date: <span>{request.date}</span>
         </p>
+        <p>
+          Status: <span>{request.status}</span>
+        </p>
       </div>
-      <button>View</button>
+      <button
+        className={style["accepted-request__button--view"]}
+        onClick={() => setSelectedRequest({ student, request })}
+      >
+        View Full Details
+      </button>
     </div>
   );
 }
