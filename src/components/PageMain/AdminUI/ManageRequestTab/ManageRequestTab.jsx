@@ -7,7 +7,9 @@ function ManageRequestTab() {
 
   return (
     <>
-      <section className={style["manage-request__section"]}>
+      <section
+        className={`${style["manage-request__section"]} ${style["manage-request__section--full-view"]}`}
+      >
         <h2>Request View</h2>
         <div className={style["manage-request__display-box"]}>
           {selectedRequest ? (
