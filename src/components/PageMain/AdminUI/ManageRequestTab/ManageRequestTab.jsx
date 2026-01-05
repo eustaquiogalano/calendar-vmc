@@ -3,7 +3,9 @@ import AcceptedRequestCard from "./AcceptedRequestCard/AcceptedRequestCard";
 import style from "./ManageRequestTab.module.css";
 
 function ManageRequestTab() {
-  const { studentList } = useStudentList();
+  const { studentList, updateRequestStatus } = useStudentList();
+  const [selectedRequest, setSelectedRequest] = useState(undefined);
+  const { student, request } = selectedRequest || {};
 
   return (
     <>
@@ -85,6 +87,7 @@ function ManageRequestTab() {
                     key={request.id}
                     request={request}
                     student={student}
+                    setSelectedRequest={setSelectedRequest}
                   />
                 );
               });
