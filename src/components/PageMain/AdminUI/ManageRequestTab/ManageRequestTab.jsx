@@ -10,6 +10,55 @@ function ManageRequestTab() {
       <section className={style["manage-request__section"]}>
         <h2>Request View</h2>
         <div className={style["manage-request__display-box"]}>
+          {selectedRequest ? (
+            <div className={style["manage-request__selected-container"]}>
+              <div className={style["manage-request__selected--student"]}>
+                <h4>Student: </h4>
+                <p>
+                  Name: <span>{student.name}</span>
+                </p>
+                <p>
+                  ID#: <span>{student.idNumber}</span>
+                </p>
+                <p>
+                  Year Level: <span>{student.yearLevel}</span>
+                </p>
+                <p>
+                  e-mail: <span>{student.email}</span>
+                </p>
+              </div>
+
+              <div className={style["manage-request__selected--request"]}>
+                <h4>Requesting for:</h4>
+                <p>
+                  Document: <span>{request.document}</span>
+                </p>
+                <p>
+                  Purpose: <span>{request.purpose}</span>
+                </p>
+                <p>
+                  Claim Date: <span>{request.date}</span>
+                </p>
+                <p>
+                  Status: <span>{request.status}</span>
+                </p>
+              </div>
+              <div className={style["manage-request__container-button"]}>
+                <button
+                  onClick={() => {
+                    updateRequestStatus(
+                      student.idNumber,
+                      request.id,
+                      "DOCUMENT READY"
+                    );
+                  }}
+                  className={style["manage-request__button--document-ready"]}
+                >
+                  Document Ready
+                </button>
+              </div>
+            </div>
+          ) : (
           <p>Select a request to view here</p>
         </div>
       </section>
