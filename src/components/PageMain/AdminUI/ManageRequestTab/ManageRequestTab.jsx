@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useStudentList } from "../../../../context/StudentListContext";
 import AcceptedRequestCard from "./AcceptedRequestCard/AcceptedRequestCard";
 import style from "./ManageRequestTab.module.css";
@@ -63,7 +64,8 @@ function ManageRequestTab() {
               </div>
             </div>
           ) : (
-          <p>Select a request to view here</p>
+            <p>Select a request to view here</p>
+          )}
         </div>
       </section>
 
