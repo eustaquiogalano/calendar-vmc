@@ -8,20 +8,24 @@ function IncomingRequestTab() {
   return (
     <section className={style["incoming-request__section"]}>
       <h2>Incoming Requests</h2>
+
       <div className={style["incoming-request__request-list"]}>
         {studentList.map((student) => {
-          return (
-            <div key={student.idNumber}>
-              <p>
-                Name: <span>{student.name}</span>
-              </p>
-              <div>
-                {student.requestedDocuments.map((request) => {
-                  return <IncomingCard key={request.id} request={request} />;
-                })}
-              </div>
-            </div>
-          );
+          return student.requestedDocuments
+            .filter((request) => {
+              if (request.status === "PENDING") {
+                return request;
+              }
+            })
+            .map((request) => {
+              return (
+                <IncomingCard
+                  key={request.id}
+                  student={student}
+                  request={request}
+                />
+              );
+            });
         })}
       </div>
     </section>
