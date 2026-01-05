@@ -1,0 +1,42 @@
+.accepted-request {
+  background-color: lightgray;
+  padding: 1rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.accepted-request__request-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.accepted-request__request-details p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.accepted-request__button--view {
+  border-radius: 4px;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+  background-color: var(--dark-azure);
+  color: var(--pure-white);
+  border: 1px solid transparent;
+  transition: all 0.5s;
+}
+
+.accepted-request__button--view:hover {
+  background-color: var(--pure-white);
+  color: var(--dark-azure);
+  border: 1px solid var(--dark-azure);
+}
+
+@media (min-width: 600px) {
+  .accepted-request {
+    padding: 1.5rem;
+  }
+}
