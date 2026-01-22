@@ -14,15 +14,7 @@ function userAuth(username, password) {
 
   // inform the user and return the matched user
   alert("You are logged in");
-
-  return {
-    name: "Sample Student",
-    username: "sample.student@example.com",
-    password: "sampstudent",
-    idNumber: "1234",
-    isLoggedIn: true,
-    requestedDocs: [],
-  };
+  return { ...verifiedUser, isLoggedIn: true };
 }
 
 export default userAuth;
