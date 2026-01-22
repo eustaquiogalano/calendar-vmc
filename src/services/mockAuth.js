@@ -5,10 +5,11 @@ function userAuth(username, password) {
     return user.username === username && user.password === password;
   });
 
-  // if (!user) {
-  //   alert("Username or Password does not match");
-  //   return undefined;
-  // }
+  // user cannot find match
+  if (!verifiedUser) {
+    alert("Username or Password does not match");
+    return undefined;
+  }
 
   // alert("You are logged in");
   // return { ...user, isLoggedIn: true };
