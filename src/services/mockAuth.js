@@ -1,9 +1,9 @@
 import { users } from "../mocks/users.mock";
 
 function userAuth(username, password) {
-  // let user = students.find((student) => {
-  //   return student.username === username && student.password === password;
-  // });
+  let verifiedUser = users.find((user) => {
+    return user.username === username && user.password === password;
+  });
 
   // if (!user) {
   //   alert("Username or Password does not match");
