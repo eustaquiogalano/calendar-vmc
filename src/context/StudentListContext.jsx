@@ -23,6 +23,25 @@ export function StudentListProvider({ children }) {
     setStudentList(newList);
   }
 
+  function updateRequestList(studentID, requestList) {
+    const newList = studentList.map((student) => {
+      if (student.idNumber === studentID) {
+        console.log("rd", `${student.requestedDocuments}`);
+
+        student.requestedDocuments = [
+          ...student.requestedDocuments,
+          ...requestList,
+        ];
+        return student;
+      }
+      return student;
+    });
+
+    console.log("rq", requestList);
+
+    setStudentList(newList);
+  }
+
   return (
     <StudentListContext.Provider value={{ studentList, updateRequestStatus }}>
       {children}
