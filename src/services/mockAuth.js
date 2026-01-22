@@ -5,7 +5,8 @@ function userAuth(username, password) {
     return user.username === username && user.password === password;
   });
 
-  // user cannot find match
+  // if no user matched the given username and password
+  // inform user and do nothing
   if (!verifiedUser) {
     alert("Username or Password does not match");
     return undefined;
