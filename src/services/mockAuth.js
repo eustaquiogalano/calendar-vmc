@@ -12,9 +12,7 @@ function userAuth(username, password) {
     return undefined;
   }
 
-  // alert("You are logged in");
-  // return { ...user, isLoggedIn: true };
-
+  // inform the user and return the matched user
   alert("You are logged in");
 
   return {
