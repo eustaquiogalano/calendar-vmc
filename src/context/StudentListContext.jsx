@@ -43,7 +43,9 @@ export function StudentListProvider({ children }) {
   }
 
   return (
-    <StudentListContext.Provider value={{ studentList, updateRequestStatus }}>
+    <StudentListContext.Provider
+      value={{ studentList, updateRequestStatus, updateRequestList }}
+    >
       {children}
     </StudentListContext.Provider>
   );
