@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRequest } from "../../../../context/RequestContext";
 import style from "./DocumentRequestTab.module.css";
 import ConfirmationDialog from "./ConfirmationDialog/ConfirmationDialog";
+import { useStudentList } from "../../../../context/StudentListContext";
 
 function DocumentRequestTab() {
   const { requestList, setRequestList, deletionID, setDeletionID } =
