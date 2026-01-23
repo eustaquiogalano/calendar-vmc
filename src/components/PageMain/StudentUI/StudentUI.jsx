@@ -14,7 +14,7 @@ function StudentUI({ student, setStudent }) {
       case 0:
         return <CalendarTab />;
       case 1:
-        return <DocumentRequestTab />;
+        return <DocumentRequestTab student={student} />;
       case 2:
         return <EnrollmentFormTab />;
       default:
