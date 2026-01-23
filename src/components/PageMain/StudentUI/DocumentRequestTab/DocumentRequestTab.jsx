@@ -4,7 +4,8 @@ import style from "./DocumentRequestTab.module.css";
 import ConfirmationDialog from "./ConfirmationDialog/ConfirmationDialog";
 import { useStudentList } from "../../../../context/StudentListContext";
 
-function DocumentRequestTab() {
+function DocumentRequestTab({ student }) {
+  const { updateRequestList } = useStudentList();
   const { requestList, setRequestList, deletionID, setDeletionID } =
     useRequest();
   const [document, setDocument] = useState("");
