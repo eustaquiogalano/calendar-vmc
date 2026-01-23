@@ -11,6 +11,10 @@ function DocumentRequestTab() {
   const [date, setDate] = useState("");
   const dialogRef = useRef();
 
+  // useEffect(() => {
+  //   updateRequestList(student.idNumber, requestList);
+  // }, [requestList]);
+
   function submitRequest(e) {
     e.preventDefault();
 
@@ -23,6 +27,7 @@ function DocumentRequestTab() {
       ...requestList,
       { status: "PENDING", id: crypto.randomUUID(), document, purpose, date },
     ]);
+
     resetStates();
   }
 
