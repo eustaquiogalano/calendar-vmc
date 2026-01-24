@@ -4,9 +4,12 @@ import style from "./AdminUI.module.css";
 import IncomingRequestTab from "./IncomingRequestTab/IncomingRequestTab";
 import ManageRequestTab from "./ManageRequestTab/ManageRequestTab";
 import CreateEvent from "./CreateEventTab/CreateEventTab";
+import CreateEvent from "./CreateEventTab/CreateEventTab";
 
 function AdminUI({ admin, setAdmin }) {
+function AdminUI({ admin, setAdmin }) {
   const [tabSelected, setTabSelected] = useState(0);
+  const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
   const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
 
   function currentTab() {
@@ -15,6 +18,8 @@ function AdminUI({ admin, setAdmin }) {
         return <IncomingRequestTab />;
       case 1:
         return <ManageRequestTab />;
+      case 2:
+        return <CreateEvent />;
       case 2:
         return <CreateEvent />;
       default:
@@ -69,6 +74,7 @@ function AdminUI({ admin, setAdmin }) {
       </aside>
       <div className={style["adminUI__dashboard"]}>
         <div className={style["adminUI__greeting"]}>
+          <h2 className={`${style["adminUI__h2"]}`}>Hello {admin.name}</h2>
           <h2 className={`${style["adminUI__h2"]}`}>Hello {admin.name}</h2>
         </div>
         <div className={style["adminUI__panel"]}>{currentTab()}</div>
