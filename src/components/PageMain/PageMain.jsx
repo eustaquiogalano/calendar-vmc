@@ -11,7 +11,12 @@ function PageMain() {
   const { toggleMenuButton } = useMenu();
 
   function handleLogin(user) {
+    if (user.userType === "admin") {
+      setAdmin(user);
+    } else if (user.userType === "student") {
     setStudent(user);
+    }
+
     if (user) {
       toggleMenuButton();
     }
