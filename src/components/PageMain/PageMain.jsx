@@ -7,6 +7,7 @@ import AdminUI from "./AdminUI/AdminUI";
 
 function PageMain() {
   const [student, setStudent] = useState(undefined);
+  const [admin, setAdmin] = useState(undefined);
   const { toggleMenuButton } = useMenu();
 
   function handleLogin(user) {
