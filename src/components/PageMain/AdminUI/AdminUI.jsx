@@ -22,6 +22,17 @@ function AdminUI() {
     }
   }
 
+  function handleClick(tab) {
+    setTabSelected(tab);
+    currentTab();
+    toggleMenuBody();
+  }
+
+  function handleLogoutClick() {
+    setAdmin(undefined);
+    toggleMenuButton();
+  }
+
   return (
     <>
       <aside
