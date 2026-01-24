@@ -14,7 +14,7 @@ function PageMain() {
     if (user.userType === "admin") {
       setAdmin(user);
     } else if (user.userType === "student") {
-    setStudent(user);
+      setStudent(user);
     }
 
     if (user) {
@@ -22,15 +22,21 @@ function PageMain() {
     }
   }
 
+  function handleMainDisplay() {
+    if (student) {
+      return <StudentUI student={student} setStudent={setStudent} />;
+    } else if (admin) {
+      return <AdminUI admin={admin} setAdmin={setAdmin} />;
+    } else {
+      return <Login onLogin={handleLogin} />;
+    }
+  }
+
   return (
     <main
       className={`${style["page-main"]} ${style["page-main--hide-scroll"]}`}
     >
-      {student ? (
-        <StudentUI student={student} setStudent={setStudent} />
-      ) : (
-        <Login onLogin={handleLogin} />
-      )}
+      {handleMainDisplay()}
     </main>
   );
 }
