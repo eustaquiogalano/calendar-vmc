@@ -7,6 +7,7 @@ import CreateEvent from "./CreateEventTab/CreateEventTab";
 
 function AdminUI({ admin, setAdmin }) {
   const [tabSelected, setTabSelected] = useState(0);
+  const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
 
   function currentTab() {
     switch (tabSelected) {
