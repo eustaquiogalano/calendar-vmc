@@ -3,6 +3,7 @@ import { useMenu } from "../../../context/MenuContext";
 import style from "./AdminUI.module.css";
 import IncomingRequestTab from "./IncomingRequestTab/IncomingRequestTab";
 import ManageRequestTab from "./ManageRequestTab/ManageRequestTab";
+import CreateEvent from "./CreateEventTab/CreateEventTab";
 
 function AdminUI() {
   const { menuBodyVisibility } = useMenu();
@@ -14,6 +15,8 @@ function AdminUI() {
         return <IncomingRequestTab />;
       case 1:
         return <ManageRequestTab />;
+      case 2:
+        return <CreateEvent />;
       default:
         return <IncomingRequestTab />;
     }
