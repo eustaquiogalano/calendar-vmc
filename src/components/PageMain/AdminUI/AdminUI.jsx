@@ -41,18 +41,25 @@ function AdminUI({ admin, setAdmin }) {
       >
         <nav className={style["adminUI__nav"]}>
           <button
-            onClick={() => setTabSelected(0)}
+            onClick={() => handleNavigationClick(0)}
             className={style["adminUI__button"]}
           >
             Incoming Request
           </button>
           <button
             className={style["adminUI__button"]}
-            onClick={() => setTabSelected(1)}
+            onClick={() => handleNavigationClick(1)}
           >
             Manage Requests
           </button>
           <button
+            className={style["adminUI__button"]}
+            onClick={() => handleNavigationClick(2)}
+          >
+            Create Event
+          </button>
+          <button
+            onClick={handleLogoutClick}
             className={`${style["adminUI__button"]} ${style["adminUI__button--logout"]} `}
           >
             Logout
