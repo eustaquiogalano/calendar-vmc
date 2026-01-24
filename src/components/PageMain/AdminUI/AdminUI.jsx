@@ -21,7 +21,7 @@ function AdminUI({ admin, setAdmin }) {
     }
   }
 
-  function handleClick(tab) {
+  function handleNavigationClick(tab) {
     setTabSelected(tab);
     currentTab();
     toggleMenuBody();
