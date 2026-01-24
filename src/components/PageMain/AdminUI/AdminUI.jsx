@@ -5,8 +5,7 @@ import IncomingRequestTab from "./IncomingRequestTab/IncomingRequestTab";
 import ManageRequestTab from "./ManageRequestTab/ManageRequestTab";
 import CreateEvent from "./CreateEventTab/CreateEventTab";
 
-function AdminUI() {
-  const { menuBodyVisibility } = useMenu();
+function AdminUI({ admin, setAdmin }) {
   const [tabSelected, setTabSelected] = useState(0);
 
   function currentTab() {
