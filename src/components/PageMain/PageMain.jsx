@@ -3,6 +3,7 @@ import style from "./PageMain.module.css";
 import Login from "./Login/Login";
 import { useState } from "react";
 import { useMenu } from "../../context/MenuContext";
+import AdminUI from "./AdminUI/AdminUI";
 
 function PageMain() {
   const [student, setStudent] = useState(undefined);
