@@ -4,12 +4,9 @@ import style from "./AdminUI.module.css";
 import IncomingRequestTab from "./IncomingRequestTab/IncomingRequestTab";
 import ManageRequestTab from "./ManageRequestTab/ManageRequestTab";
 import CreateEvent from "./CreateEventTab/CreateEventTab";
-import CreateEvent from "./CreateEventTab/CreateEventTab";
 
 function AdminUI({ admin, setAdmin }) {
-function AdminUI({ admin, setAdmin }) {
   const [tabSelected, setTabSelected] = useState(0);
-  const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
   const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
 
   function currentTab() {
@@ -18,8 +15,6 @@ function AdminUI({ admin, setAdmin }) {
         return <IncomingRequestTab />;
       case 1:
         return <ManageRequestTab />;
-      case 2:
-        return <CreateEvent />;
       case 2:
         return <CreateEvent />;
       default:
