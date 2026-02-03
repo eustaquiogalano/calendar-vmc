@@ -44,3 +44,37 @@
 .studentUI__menu--hide {
   transform: translateX(-100%);
 }
+
+.page-main {
+  max-width: 1920px;
+  grid-area: main;
+  width: 100%;
+  height: 100%;
+  padding: 0rem;
+  background: linear-gradient(0deg, rgb(35, 205, 243) 0%, rgb(1, 79, 143) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  position: relative;
+}
+
+.page-main--hide-scroll {
+  -ms-overflow-style: none; /* hide scrollbar (IE/Edge) */
+  scrollbar-width: none; /* hide scrollbar (Firefox) */
+}
+.page-main--hide-scroll::-webkit-scrollbar {
+  display: none; /* hide scrollbar (Chrome/Safari) */
+}
+
+@media (min-width: 600px) {
+  .page-main {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .page-main {
+    padding: 0;
+  }
+}
