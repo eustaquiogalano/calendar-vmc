@@ -1,19 +1,23 @@
 import { useState } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
+
 import style from "./Login.module.css";
+
 import InputField from "./InputField/InputField";
 import userAuth from "./../../../services/mockAuth.js";
 
-function Login({ onLogin }) {
+function Login() {
+  const navigate = useNavigate();
+  const { handleLogin } = useOutletContext();
+
   const [isVisible, setVisibility] = useState(false);
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleAuth(event) {
+  async function handleAuth(event) {
     event.preventDefault();
-
-    setTimeout(() => {
-      onLogin(userAuth(userName, password));
-    }, 1500);
+    const user = handleLogin(userAuth(userName, password));
+    user.userType === "student" ? navigate("/student") : navigate("/admin");
   }
 
   function handleUsername(event) {
@@ -121,6 +125,10 @@ function Login({ onLogin }) {
             </div>
           </form>
         </section>
+      </div>
+      <div>
+        <p>dean.office deanmalakas</p>
+        <p>joris.arancon jorispogi</p>
       </div>
     </div>
   );

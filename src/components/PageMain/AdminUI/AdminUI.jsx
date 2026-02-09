@@ -1,36 +1,18 @@
-import { useState } from "react";
+import { Link, Outlet, useNavigate, useOutletContext } from "react-router-dom";
+
 import { useMenu } from "../../../context/MenuContext";
+
 import style from "./AdminUI.module.css";
-import IncomingRequestTab from "./IncomingRequestTab/IncomingRequestTab";
-import ManageRequestTab from "./ManageRequestTab/ManageRequestTab";
-import CreateEvent from "./CreateEventTab/CreateEventTab";
 
-function AdminUI({ admin, setAdmin }) {
-  const [tabSelected, setTabSelected] = useState(0);
+function AdminUI() {
   const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
-
-  function currentTab() {
-    switch (tabSelected) {
-      case 0:
-        return <IncomingRequestTab />;
-      case 1:
-        return <ManageRequestTab />;
-      case 2:
-        return <CreateEvent />;
-      default:
-        return <IncomingRequestTab />;
-    }
-  }
-
-  function handleNavigationClick(tab) {
-    setTabSelected(tab);
-    currentTab();
-    toggleMenuBody();
-  }
+  const { admin, setAdmin } = useOutletContext();
+  const navigate = useNavigate();
 
   function handleLogoutClick() {
     setAdmin(undefined);
     toggleMenuButton();
+    navigate("/");
   }
 
   return (
@@ -41,23 +23,14 @@ function AdminUI({ admin, setAdmin }) {
         }`}
       >
         <nav className={style["adminUI__nav"]}>
-          <button
-            onClick={() => handleNavigationClick(0)}
-            className={style["adminUI__button"]}
-          >
-            Incoming Request
+          <button onClick={toggleMenuBody} className={style["adminUI__button"]}>
+            <Link to={`incoming-request`}>Incoming Request</Link>
           </button>
-          <button
-            className={style["adminUI__button"]}
-            onClick={() => handleNavigationClick(1)}
-          >
-            Manage Requests
+          <button onClick={toggleMenuBody} className={style["adminUI__button"]}>
+            <Link to={`manage-request`}>Manage Requests</Link>
           </button>
-          <button
-            className={style["adminUI__button"]}
-            onClick={() => handleNavigationClick(2)}
-          >
-            Create Event
+          <button onClick={toggleMenuBody} className={style["adminUI__button"]}>
+            <Link to={`create-event`}> Create Event</Link>
           </button>
           <button
             onClick={handleLogoutClick}
@@ -70,9 +43,10 @@ function AdminUI({ admin, setAdmin }) {
       <div className={style["adminUI__dashboard"]}>
         <div className={style["adminUI__greeting"]}>
           <h2 className={`${style["adminUI__h2"]}`}>Hello {admin.name}</h2>
-          <h2 className={`${style["adminUI__h2"]}`}>Hello {admin.name}</h2>
         </div>
-        <div className={style["adminUI__panel"]}>{currentTab()}</div>
+        <div className={style["adminUI__panel"]}>
+          <Outlet />
+        </div>
       </div>
     </>
   );

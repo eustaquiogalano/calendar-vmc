@@ -1,36 +1,18 @@
-import style from "./StudentUI.module.css";
-import CalendarTab from "./CalendarTab/CalendarTab";
-import DocumentRequestTab from "./DocumentRequestTab/DocumentRequestTab";
-import { useState } from "react";
+import { Link, Outlet, useNavigate, useOutletContext } from "react-router-dom";
+
 import { useMenu } from "../../../context/MenuContext";
-import EnrollmentFormTab from "./EnrollmentFormTab/EnrollmentFormTab";
 
-function StudentUI({ student, setStudent }) {
-  const [tabSelected, setTabSelected] = useState(0);
+import style from "./StudentUI.module.css";
+
+function StudentUI() {
   const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
-
-  function currentTab() {
-    switch (tabSelected) {
-      case 0:
-        return <CalendarTab />;
-      case 1:
-        return <DocumentRequestTab student={student} />;
-      case 2:
-        return <EnrollmentFormTab />;
-      default:
-        return <CalendarTab />;
-    }
-  }
-
-  function handleClick(tab) {
-    setTabSelected(tab);
-    currentTab();
-    toggleMenuBody();
-  }
+  const { student, setStudent } = useOutletContext();
+  const navigate = useNavigate();
 
   function handleLogoutClick() {
     setStudent(undefined);
     toggleMenuButton();
+    navigate("/");
   }
 
   return (
@@ -42,22 +24,16 @@ function StudentUI({ student, setStudent }) {
       >
         <nav className={`${style["studentUI__nav"]}`}>
           <button
+            onClick={toggleMenuBody}
             className={style["studentUI__button"]}
-            onClick={() => handleClick(0)}
           >
-            Calendar
+            <Link to={`calendar`}>Calendar</Link>
           </button>
           <button
+            onClick={toggleMenuBody}
             className={style["studentUI__button"]}
-            onClick={() => handleClick(1)}
           >
-            Document Request
-          </button>
-          <button
-            className={style["studentUI__button"]}
-            onClick={() => handleClick(2)}
-          >
-            Enrollment Form
+            <Link to={`document-request`}>Document Request</Link>
           </button>
           <button
             className={`${style["studentUI__button"]} ${style["studentUI__button--logout"]} `}
@@ -75,7 +51,9 @@ function StudentUI({ student, setStudent }) {
             Hello {student.name}
           </h2>
         </div>
-        <div className={style["studentUI__panel"]}>{currentTab()}</div>
+        <div className={style["studentUI__panel"]}>
+          <Outlet />
+        </div>
       </div>
     </>
   );
