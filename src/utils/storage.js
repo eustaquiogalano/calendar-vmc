@@ -15,6 +15,7 @@ async function getStudentUsers() {
   await fakeNetwork();
 
   let users = await localforage.getItem("users");
+  if (!users) return (users = []);
 
   let students = users.filter((user) => {
     if (user.userType === "student") return user;
@@ -30,6 +31,7 @@ async function getAdminUsers() {
   await fakeNetwork();
 
   let users = await localforage.getItem("users");
+  if (!users) return (users = []);
 
   let admins = users.filter((user) => {
     if (user.userType === "admin") return user;
@@ -45,10 +47,7 @@ async function getUsers(query) {
   await fakeNetwork(query);
 
   let users = await localforage.getItem("users");
-
-  if (!users) {
-    return (users = []);
-  }
+  if (!users) return (users = []);
 
   return users;
 }
@@ -58,6 +57,7 @@ async function updateUser(id, update) {
   await fakeNetwork();
 
   let users = await localforage.getItem("users");
+  if (!users) return (users = []);
 
   let user = users.find((user) => {
     if (user.idNumber === id) {
