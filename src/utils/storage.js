@@ -1,14 +1,12 @@
 import localforage from "localforage";
 import { users as mockUsers } from "../mocks/users.mock";
 
-// set initial users from mock database
 async function setInitialUsers() {
   await fakeNetwork();
 
   return await localforage.setItem("users", mockUsers);
 }
 
-// get student users only
 async function getStudentUsers() {
   await fakeNetwork();
 
@@ -24,7 +22,6 @@ async function getStudentUsers() {
   return students;
 }
 
-// get admin only
 async function getAdminUsers() {
   await fakeNetwork();
 
@@ -40,7 +37,6 @@ async function getAdminUsers() {
   return admins;
 }
 
-// get all users
 async function getUsers(query) {
   await fakeNetwork(query);
 
@@ -50,7 +46,6 @@ async function getUsers(query) {
   return users;
 }
 
-// not yet finished
 async function updateUser(id, update) {
   await fakeNetwork();
 
