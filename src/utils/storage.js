@@ -3,11 +3,9 @@ import { users as mockUsers } from "../mocks/users.mock";
 
 // set initial users from mock database
 async function setInitialUsers() {
-  const existing = await localforage.getItem("students");
+  await fakeNetwork();
 
-  if (!existing) {
-    await localforage.setItem("students", mockUsers);
-  }
+  return await localforage.setItem("users", mockUsers);
 }
 
 // get student users only
