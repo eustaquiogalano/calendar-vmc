@@ -72,6 +72,7 @@ async function getCurrentUser() {
   await fakeNetwork();
 
   let users = await localforage.getItem("users");
+  if (!users) users = [];
 
   let currentUser = users.find((user) => {
     if (user.isLoggedIn === true) return user;
