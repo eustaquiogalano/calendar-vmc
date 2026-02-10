@@ -57,13 +57,9 @@ async function updateUser(id, update) {
   await fakeNetwork();
 
   let users = await localforage.getItem("users");
-  if (!users) return (users = []);
+  if (!users) users = [];
 
-  let user = users.find((user) => {
-    if (user.idNumber === id) {
-      return user;
-    }
-  });
+  let user = users.find((user) => user.idNumber === id);
 
   if (!user) throw new Error(`No user found for`);
   Object.assign(user, update);
