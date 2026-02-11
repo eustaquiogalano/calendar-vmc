@@ -1,10 +1,20 @@
-import { createContext, useContext, useState } from "react";
-import mockStudentDatabase from "../services/mockStudentDatabase";
+import { createContext, useContext, useEffect, useState } from "react";
+import { getStudentUsers, setInitialUsers } from "../utils/storage";
 
 const StudentListContext = createContext(null);
 
 export function StudentListProvider({ children }) {
-  const [studentList, setStudentList] = useState([...mockStudentDatabase]);
+  const [studentList, setStudentList] = useState([]);
+
+  useEffect(() => {
+    async function loadUsers() {
+      await setInitialUsers();
+      const students = await getStudentUsers();
+      setStudentList(students || []);
+    }
+
+    loadUsers();
+  }, []);
 
   function updateRequestStatus(studentID, requestID, status) {
     const newList = studentList.map((student) => {
