@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import { useState } from "react";
 
 import { useMenu } from "./context/MenuContext";
@@ -7,12 +7,43 @@ import vmcIcon from "./assets/images/vmc-icon.png";
 import style from "./App.module.css";
 import Icon from "./assets/icons/menu.svg?react";
 
+import { setCurrentUser, updateUser } from "./utils/storage.js";
+
+// ADDED
+export async function loader() {
+  let user = (await setCurrentUser()) || {};
+  if (!user) return;
+  console.log(user);
+
+  return { user };
+}
+// ADDED
+
 function App() {
   const { menuButtonVisibility, toggleMenuBody, toggleMenuButton } = useMenu();
-  const [student, setStudent] = useState(undefined);
-  const [admin, setAdmin] = useState(undefined);
+  const { user } = useLoaderData();
 
-  function handleLogin(user) {
+  const [student, setStudent] = useState(
+    user?.userType === "student" ? user : undefined
+  );
+  const [admin, setAdmin] = useState(
+    user?.userType === "admin" ? user : undefined
+  );
+
+  const loaderObject = {
+    userType: "loading...",
+    username: "loading...",
+    password: "loading...",
+    email: "loading...",
+    name: "loading...",
+    idNumber: "loading...",
+    isLoggedIn: false,
+  };
+
+  async function handleLogin(user) {
+    // updates the users isLoggedIn: true
+    await updateUser(user.idNumber, user);
+
     if (user.userType === "admin") {
       setAdmin(user);
     } else if (user.userType === "student") {
@@ -44,7 +75,14 @@ function App() {
         className={`${style["page-main"]} ${style["page-main--hide-scroll"]}`}
       >
         <Outlet
-          context={{ handleLogin, admin, setAdmin, student, setStudent }}
+          context={{
+            handleLogin,
+            admin,
+            setAdmin,
+            student,
+            setStudent,
+            loaderObject,
+          }}
         />
       </main>
     </>

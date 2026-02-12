@@ -7,7 +7,7 @@ import { RequestProvider } from "./context/RequestContext.jsx";
 import { StudentListProvider } from "./context/StudentListContext.jsx";
 import { EventsProvider } from "./context/EventsContext.jsx";
 
-import App from "./App.jsx";
+import App, { loader as appLoader } from "./App.jsx";
 import { StudentUI } from "./components/PageMain/StudentUI/StudentUI.jsx";
 import Login from "./components/PageMain/Login/Login.jsx";
 import AdminUI from "./components/PageMain/AdminUI/AdminUI.jsx";
@@ -24,6 +24,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader: appLoader,
     errorElement: <ErrorPage />,
     children: [
       {

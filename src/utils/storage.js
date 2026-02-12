@@ -4,6 +4,12 @@ import { users as mockUsers } from "../mocks/users.mock";
 async function setInitialUsers() {
   await fakeNetwork();
 
+  const persistentData = await localforage.getItem("users");
+
+  if (persistentData) {
+    return await localforage.setItem("users", persistentData);
+  }
+
   return await localforage.setItem("users", mockUsers);
 }
 

@@ -16,7 +16,7 @@ function Login() {
 
   async function handleAuth(event) {
     event.preventDefault();
-    const user = handleLogin(userAuth(userName, password));
+    const user = await handleLogin(userAuth(userName, password));
     user.userType === "student" ? navigate("/student") : navigate("/admin");
   }
 

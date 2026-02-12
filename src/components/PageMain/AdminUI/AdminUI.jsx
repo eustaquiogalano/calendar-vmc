@@ -6,7 +6,7 @@ import style from "./AdminUI.module.css";
 
 function AdminUI() {
   const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
-  const { admin, setAdmin } = useOutletContext();
+  const { admin, setAdmin, loaderObject } = useOutletContext();
   const navigate = useNavigate();
 
   function handleLogoutClick() {
@@ -42,7 +42,9 @@ function AdminUI() {
       </aside>
       <div className={style["adminUI__dashboard"]}>
         <div className={style["adminUI__greeting"]}>
-          <h2 className={`${style["adminUI__h2"]}`}>Hello {admin.name}</h2>
+          <h2 className={`${style["adminUI__h2"]}`}>
+            Hello {admin?.name || loaderObject?.name}
+          </h2>
         </div>
         <div className={style["adminUI__panel"]}>
           <Outlet />

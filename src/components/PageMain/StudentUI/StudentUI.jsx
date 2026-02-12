@@ -6,7 +6,7 @@ import style from "./StudentUI.module.css";
 
 function StudentUI() {
   const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
-  const { student, setStudent } = useOutletContext();
+  const { student, setStudent, loaderObject } = useOutletContext();
   const navigate = useNavigate();
 
   function handleLogoutClick() {
@@ -48,7 +48,7 @@ function StudentUI() {
           <h2
             className={`${style["studentUI__h2--shadow"]} ${style["studentUI__h2"]}`}
           >
-            Hello {student.name}
+            Hello {student?.name || loaderObject?.name}
           </h2>
         </div>
         <div className={style["studentUI__panel"]}>
