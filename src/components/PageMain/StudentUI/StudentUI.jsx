@@ -1,19 +1,12 @@
-import { Link, Outlet, useNavigate, useOutletContext } from "react-router-dom";
+import { Link, Outlet, useOutletContext } from "react-router-dom";
 
 import { useMenu } from "../../../context/MenuContext";
 
 import style from "./StudentUI.module.css";
 
 function StudentUI() {
-  const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
-  const { student, setStudent, loaderObject } = useOutletContext();
-  const navigate = useNavigate();
-
-  function handleLogoutClick() {
-    setStudent(undefined);
-    toggleMenuButton();
-    navigate("/");
-  }
+  const { menuBodyVisibility, toggleMenuBody } = useMenu();
+  const { student, loaderObject, handleLogout } = useOutletContext();
 
   return (
     <>
@@ -37,7 +30,7 @@ function StudentUI() {
           </button>
           <button
             className={`${style["studentUI__button"]} ${style["studentUI__button--logout"]} `}
-            onClick={handleLogoutClick}
+            onClick={() => handleLogout(student)}
           >
             Logout
           </button>

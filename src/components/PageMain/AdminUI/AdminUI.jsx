@@ -1,19 +1,12 @@
-import { Link, Outlet, useNavigate, useOutletContext } from "react-router-dom";
+import { Link, Outlet, useOutletContext } from "react-router-dom";
 
 import { useMenu } from "../../../context/MenuContext";
 
 import style from "./AdminUI.module.css";
 
 function AdminUI() {
-  const { toggleMenuButton, menuBodyVisibility, toggleMenuBody } = useMenu();
-  const { admin, setAdmin, loaderObject } = useOutletContext();
-  const navigate = useNavigate();
-
-  function handleLogoutClick() {
-    setAdmin(undefined);
-    toggleMenuButton();
-    navigate("/");
-  }
+  const { menuBodyVisibility, toggleMenuBody } = useMenu();
+  const { admin, loaderObject, handleLogout } = useOutletContext();
 
   return (
     <>
@@ -33,7 +26,7 @@ function AdminUI() {
             <Link to={`create-event`}> Create Event</Link>
           </button>
           <button
-            onClick={handleLogoutClick}
+            onClick={() => handleLogout(admin)}
             className={`${style["adminUI__button"]} ${style["adminUI__button--logout"]} `}
           >
             Logout

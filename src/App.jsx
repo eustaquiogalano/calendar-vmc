@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { useMenu } from "./context/MenuContext";
@@ -21,6 +21,7 @@ export async function loader() {
 
 function App() {
   const { menuButtonVisibility, toggleMenuBody, toggleMenuButton } = useMenu();
+  const navigate = useNavigate();
   const { user } = useLoaderData();
 
   const [student, setStudent] = useState(
@@ -57,6 +58,15 @@ function App() {
     return user;
   }
 
+  async function handleLogout(user) {
+    await updateUser(user.idNumber, { ...user, isLoggedIn: false });
+
+    setStudent(undefined);
+    setAdmin(undefined);
+    toggleMenuButton();
+    navigate("/");
+  }
+
   return (
     <>
       <header className={style["page-header"]}>
@@ -77,6 +87,7 @@ function App() {
         <Outlet
           context={{
             handleLogin,
+            handleLogout,
             admin,
             setAdmin,
             student,
