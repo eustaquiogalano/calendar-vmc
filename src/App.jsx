@@ -1,5 +1,5 @@
 import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useMenu } from "./context/MenuContext";
 
@@ -42,8 +42,10 @@ function App() {
   };
 
   async function handleLogin(user) {
-    // updates the users isLoggedIn: true
+    // updates the given user to
+    // be used as the current user
     await updateUser(user.idNumber, user);
+    await setCurrentUser();
 
     if (user.userType === "admin") {
       setAdmin(user);
@@ -64,6 +66,7 @@ function App() {
     setStudent(undefined);
     setAdmin(undefined);
     toggleMenuButton();
+    await setCurrentUser();
     navigate("/");
   }
 
