@@ -7,11 +7,11 @@ import vmcIcon from "./assets/images/vmc-icon.png";
 import style from "./App.module.css";
 import Icon from "./assets/icons/menu.svg?react";
 
-import { setCurrentUser, updateUser } from "./utils/storage.js";
+import { getCurrentUser, updateUser } from "./utils/storage.js";
 
 // ADDED
 export async function loader() {
-  let user = (await setCurrentUser()) || {};
+  let user = (await getCurrentUser()) || {};
   if (!user) return;
   console.log(user);
 
@@ -45,7 +45,7 @@ function App() {
     // updates the given user to
     // be used as the current user
     await updateUser(user.idNumber, user);
-    await setCurrentUser();
+    await getCurrentUser();
 
     if (user.userType === "admin") {
       setAdmin(user);
@@ -66,7 +66,7 @@ function App() {
     setStudent(undefined);
     setAdmin(undefined);
     toggleMenuButton();
-    await setCurrentUser();
+    await getCurrentUser();
     navigate("/");
   }
 

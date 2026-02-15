@@ -67,7 +67,7 @@ async function updateUser(id, update) {
   return user;
 }
 
-async function setCurrentUser() {
+async function getCurrentUser() {
   await fakeNetwork();
 
   let users = await localforage.getItem("users");
@@ -110,5 +110,5 @@ export {
   getStudentUsers,
   getAdminUsers,
   updateUser,
-  setCurrentUser,
+  getCurrentUser,
 };
