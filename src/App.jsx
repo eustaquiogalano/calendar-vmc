@@ -1,5 +1,5 @@
 import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useMenu } from "./context/MenuContext";
 
