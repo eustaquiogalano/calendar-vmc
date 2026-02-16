@@ -1,8 +1,8 @@
-import { useStudentList } from "../../../../../context/StudentListContext";
+import { useUser } from "../../../../../context/UserContext";
 import style from "./IncomingCard.module.css";
 
 function IncomingCard({ request, student }) {
-  const { updateRequestStatus } = useStudentList();
+  const { updateRequest } = useUser();
 
   return (
     <div className={style["incoming-card"]}>
@@ -23,14 +23,14 @@ function IncomingCard({ request, student }) {
       <div className={style["incoming-card__div--buttons"]}>
         <button
           onClick={() =>
-            updateRequestStatus(student.idNumber, request.id, "ACCEPTED")
+            updateRequest(student, request.id, "ACCEPTED", request)
           }
         >
           Accept
         </button>
         <button
           onClick={() =>
-            updateRequestStatus(student.idNumber, request.id, "REJECTED")
+            updateRequest(student, request.id, "REJECTED", request)
           }
         >
           Reject
