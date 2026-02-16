@@ -82,6 +82,30 @@ async function getCurrentUser() {
   return currentUser;
 }
 
+async function updateRequestStatus(studentID, requestID, update) {
+  await fakeNetwork();
+
+  let students = await getStudentUsers();
+  if (!students) return [];
+
+  let student = students.find((student) => student.idNumber === studentID);
+  if (!student) throw new Error(`No student found.`);
+
+  let request = student.requestedDocuments.find(
+    (request) => request.id === requestID
+  );
+  if (!request) throw new Error(`No request found.`);
+
+  Object.assign(request, update);
+  console.log(request);
+
+  await updateUser(student.idNumber, student);
+
+  // GET BACK HERE
+  // YOU ARE UPDATING THE REQUEST
+  //
+}
+
 function set(users, type = "users") {
   return localforage.setItem(`${type}`, users);
 }
@@ -111,4 +135,5 @@ export {
   getAdminUsers,
   updateUser,
   getCurrentUser,
+  updateRequestStatus,
 };
