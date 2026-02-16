@@ -4,8 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { MenuProvider } from "./context/MenuContext.jsx";
 import { RequestProvider } from "./context/RequestContext.jsx";
-import { StudentListProvider } from "./context/StudentListContext.jsx";
 import { EventsProvider } from "./context/EventsContext.jsx";
+import { UserProvider } from "./context/UserContext.jsx";
 
 import App, { loader as appLoader } from "./App.jsx";
 import { StudentUI } from "./components/PageMain/StudentUI/StudentUI.jsx";
@@ -75,14 +75,14 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <EventsProvider>
-      <StudentListProvider>
+    <UserProvider>
+      <EventsProvider>
         <RequestProvider>
           <MenuProvider>
             <RouterProvider router={router} />
           </MenuProvider>
         </RequestProvider>
-      </StudentListProvider>
-    </EventsProvider>
+      </EventsProvider>
+    </UserProvider>
   </StrictMode>
 );

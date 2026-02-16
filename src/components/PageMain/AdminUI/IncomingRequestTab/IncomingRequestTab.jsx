@@ -1,16 +1,16 @@
-import { useStudentList } from "../../../../context/StudentListContext";
+import { useUser } from "../../../../context/UserContext";
 import IncomingCard from "./IncomingCard/IncomingCard";
 import style from "./IncomingRequestTab.module.css";
 
 function IncomingRequestTab() {
-  const { studentList } = useStudentList();
+  const { students } = useUser();
 
   return (
     <section className={style["incoming-request__section"]}>
       <h2>Incoming Requests</h2>
 
       <div className={style["incoming-request__request-list"]}>
-        {studentList.map((student) => {
+        {students.map((student) => {
           return student.requestedDocuments
             .filter((request) => {
               if (request.status === "PENDING") {

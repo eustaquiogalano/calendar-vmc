@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useStudentList } from "../../../../context/StudentListContext";
+import { useUser } from "../../../../context/UserContext";
 import AcceptedRequestCard from "./AcceptedRequestCard/AcceptedRequestCard";
 import style from "./ManageRequestTab.module.css";
 
 function ManageRequestTab() {
-  const { studentList, updateRequestStatus } = useStudentList();
+  const { students } = useUser();
   const [selectedRequest, setSelectedRequest] = useState(undefined);
   const { student, request } = selectedRequest || {};
 
@@ -74,7 +74,7 @@ function ManageRequestTab() {
       >
         <h2>Request List</h2>
         <div className={style["manage-request__container--request-list"]}>
-          {studentList.map((student) => {
+          {students.map((student) => {
             return student.requestedDocuments
               .filter((request) => {
                 if (
