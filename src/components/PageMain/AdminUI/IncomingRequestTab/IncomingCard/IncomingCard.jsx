@@ -2,7 +2,7 @@ import { useUser } from "../../../../../context/UserContext";
 import style from "./IncomingCard.module.css";
 
 function IncomingCard({ request, student }) {
-  const { updateRequest } = useUser();
+  const { updateRequestStatus } = useUser();
 
   return (
     <div className={style["incoming-card"]}>
@@ -23,14 +23,14 @@ function IncomingCard({ request, student }) {
       <div className={style["incoming-card__div--buttons"]}>
         <button
           onClick={() =>
-            updateRequest(student, request.id, "ACCEPTED", request)
+            updateRequestStatus(student, request.id, "ACCEPTED", request)
           }
         >
           Accept
         </button>
         <button
           onClick={() =>
-            updateRequest(student, request.id, "REJECTED", request)
+            updateRequestStatus(student, request.id, "REJECTED", request)
           }
         >
           Reject

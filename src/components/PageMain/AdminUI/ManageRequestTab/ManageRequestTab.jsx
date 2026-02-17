@@ -4,7 +4,7 @@ import AcceptedRequestCard from "./AcceptedRequestCard/AcceptedRequestCard";
 import style from "./ManageRequestTab.module.css";
 
 function ManageRequestTab() {
-  const { students, updateRequest } = useUser();
+  const { students, updateRequestStatus } = useUser();
   const [selectedRequest, setSelectedRequest] = useState(undefined);
   const { student, request } = selectedRequest || {};
 
@@ -51,7 +51,7 @@ function ManageRequestTab() {
               <div className={style["manage-request__container-button"]}>
                 <button
                   onClick={() => {
-                    updateRequest(
+                    updateRequestStatus(
                       student,
                       request.id,
                       "DOCUMENT READY",

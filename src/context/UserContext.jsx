@@ -5,7 +5,7 @@ import {
   getStudentUsers,
   getUsers,
   setInitialUsers,
-  updateRequestStatus,
+  updateRequestStatusHF,
 } from "../utils/storage";
 
 const UserContext = createContext(null);
@@ -37,10 +37,10 @@ export function UserProvider({ children }) {
     initUsers();
   }, [loading]);
 
-  async function updateRequest(student, requestID, status, request) {
+  async function updateRequestStatus(student, requestID, status, request) {
     let studentID = student.idNumber;
 
-    await updateRequestStatus(studentID, requestID, {
+    await updateRequestStatusHF(studentID, requestID, {
       ...request,
       status: status,
     });
@@ -50,7 +50,13 @@ export function UserProvider({ children }) {
 
   return (
     <UserContext.Provider
-      value={{ users, students, admins, currentUser, updateRequest }}
+      value={{
+        users,
+        students,
+        admins,
+        currentUser,
+        updateRequestStatus,
+      }}
     >
       {children}
     </UserContext.Provider>

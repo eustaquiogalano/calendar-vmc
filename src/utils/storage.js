@@ -82,7 +82,7 @@ async function getCurrentUser() {
   return currentUser;
 }
 
-async function updateRequestStatus(studentID, requestID, update) {
+async function updateRequestStatusHF(studentID, requestID, update) {
   await fakeNetwork();
 
   let students = await getStudentUsers();
