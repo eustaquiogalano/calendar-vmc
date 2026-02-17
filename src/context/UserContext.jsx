@@ -40,9 +40,6 @@ export function UserProvider({ children }) {
   async function updateRequest(student, requestID, status, request) {
     let studentID = student.idNumber;
 
-    console.log(request);
-    console.log(status);
-
     await updateRequestStatus(studentID, requestID, {
       ...request,
       status: status,
