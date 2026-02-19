@@ -15,6 +15,8 @@ export function RequestProvider({ children }) {
     return dateList;
   }
 
+  console.log(requestList);
+
   return (
     <RequestContext.Provider
       value={{
