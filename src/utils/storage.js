@@ -106,6 +106,22 @@ async function updateRequestStatusHF(studentID, requestID, update) {
   //
 }
 
+async function addRequestHF(newRequest) {
+  await fakeNetwork();
+
+  let currentUser = await getCurrentUser();
+  if (!currentUser) currentUser = [];
+
+  currentUser.requestedDocuments = [
+    ...currentUser.requestedDocuments,
+    newRequest,
+  ];
+
+  await updateUser(currentUser.idNumber, currentUser);
+
+  console.log(currentUser);
+}
+
 function set(users, type = "users") {
   return localforage.setItem(`${type}`, users);
 }
@@ -135,5 +151,6 @@ export {
   getAdminUsers,
   updateUser,
   getCurrentUser,
-  updateRequestStatus,
+  updateRequestStatusHF,
+  addRequestHF,
 };

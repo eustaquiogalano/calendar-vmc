@@ -5,11 +5,12 @@ import style from "./Login.module.css";
 
 import InputField from "./InputField/InputField";
 import userAuth from "./../../../services/mockAuth.js";
+import { useUser } from "../../../context/UserContext.jsx";
 
 function Login() {
   const navigate = useNavigate();
   const { handleLogin } = useOutletContext();
-
+  const { setCurrentUser } = useUser();
   const [isVisible, setVisibility] = useState(false);
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +18,7 @@ function Login() {
   async function handleAuth(event) {
     event.preventDefault();
     const user = await handleLogin(userAuth(userName, password));
+    setCurrentUser(user);
     user.userType === "student" ? navigate("/student") : navigate("/admin");
   }
 

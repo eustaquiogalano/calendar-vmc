@@ -1,23 +1,21 @@
-import { useEffect, useRef, useState } from "react";
-import { useRequest } from "../../../../context/RequestContext";
-import style from "./DocumentRequestTab.module.css";
-import ConfirmationDialog from "./ConfirmationDialog/ConfirmationDialog";
-import { useStudentList } from "../../../../context/StudentListContext";
+import { useRef, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
-function DocumentRequestTab({ student }) {
-  const { updateRequestList } = useStudentList();
-  const { requestList, setRequestList, deletionID, setDeletionID } =
-    useRequest();
+import { useUser } from "../../../../context/UserContext";
+
+import style from "./DocumentRequestTab.module.css";
+
+import ConfirmationDialog from "./ConfirmationDialog/ConfirmationDialog";
+
+function DocumentRequestTab() {
+  const { addRequest } = useUser();
+  const { currentUser } = useOutletContext();
   const [document, setDocument] = useState("");
   const [purpose, setPurpose] = useState("");
   const [date, setDate] = useState("");
   const dialogRef = useRef();
 
-  // useEffect(() => {
-  //   updateRequestList(student.idNumber, requestList);
-  // }, [requestList]);
-
-  function submitRequest(e) {
+  async function submitRequest(e) {
     e.preventDefault();
 
     if (!e.target.checkValidity()) {
@@ -25,18 +23,15 @@ function DocumentRequestTab({ student }) {
       return;
     }
 
-    setRequestList([
-      ...requestList,
-      { status: "PENDING", id: crypto.randomUUID(), document, purpose, date },
-    ]);
+    await addRequest({
+      status: "PENDING",
+      id: crypto.randomUUID(),
+      document,
+      purpose,
+      date,
+    });
 
     resetStates();
-  }
-
-  function resetStates() {
-    setDocument("");
-    setPurpose("");
-    setDate("");
   }
 
   function deleteRequest() {
@@ -52,6 +47,12 @@ function DocumentRequestTab({ student }) {
     // reset the state right after
     // to be ready fr next use
     setDeletionID("");
+  }
+
+  function resetStates() {
+    setDocument("");
+    setPurpose("");
+    setDate("");
   }
 
   return (
@@ -131,7 +132,7 @@ function DocumentRequestTab({ student }) {
         <h2>Pending</h2>
 
         <div className={style["document-request-tab__pending-list"]}>
-          {requestList.map((request) => {
+          {currentUser.requestedDocuments.map((request) => {
             return (
               <div
                 key={request.id}

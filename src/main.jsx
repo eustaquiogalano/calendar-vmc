@@ -3,11 +3,10 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { MenuProvider } from "./context/MenuContext.jsx";
-import { RequestProvider } from "./context/RequestContext.jsx";
 import { EventsProvider } from "./context/EventsContext.jsx";
 import { UserProvider } from "./context/UserContext.jsx";
 
-import App, { loader as appLoader } from "./App.jsx";
+import App from "./App.jsx";
 import { StudentUI } from "./components/PageMain/StudentUI/StudentUI.jsx";
 import Login from "./components/PageMain/Login/Login.jsx";
 import AdminUI from "./components/PageMain/AdminUI/AdminUI.jsx";
@@ -24,7 +23,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    loader: appLoader,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -77,11 +75,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <UserProvider>
       <EventsProvider>
-        <RequestProvider>
-          <MenuProvider>
-            <RouterProvider router={router} />
-          </MenuProvider>
-        </RequestProvider>
+        <MenuProvider>
+          <RouterProvider router={router} />
+        </MenuProvider>
       </EventsProvider>
     </UserProvider>
   </StrictMode>

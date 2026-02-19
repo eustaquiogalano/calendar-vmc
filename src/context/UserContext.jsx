@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import {
   getAdminUsers,
   getCurrentUser,
+  addRequestHF,
   getStudentUsers,
   getUsers,
   setInitialUsers,
@@ -16,6 +17,7 @@ export function UserProvider({ children }) {
   const [admins, setAdmins] = useState([]);
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     async function initUsers() {
@@ -32,6 +34,8 @@ export function UserProvider({ children }) {
 
       const currentUser = await getCurrentUser();
       setCurrentUser(currentUser);
+
+      setReady(true);
     }
 
     initUsers();
@@ -48,6 +52,14 @@ export function UserProvider({ children }) {
     setLoading((prev) => !prev);
   }
 
+  async function addRequest(newRequest) {
+    await addRequestHF(newRequest);
+
+    setLoading((prev) => !prev);
+  }
+
+  if (!ready) return <div>loading...</div>;
+
   return (
     <UserContext.Provider
       value={{
@@ -55,7 +67,9 @@ export function UserProvider({ children }) {
         students,
         admins,
         currentUser,
+        setCurrentUser,
         updateRequestStatus,
+        addRequest,
       }}
     >
       {children}

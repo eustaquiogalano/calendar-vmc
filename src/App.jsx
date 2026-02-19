@@ -1,5 +1,4 @@
-import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import { useMenu } from "./context/MenuContext";
 
@@ -9,27 +8,9 @@ import Icon from "./assets/icons/menu.svg?react";
 
 import { getCurrentUser, updateUser } from "./utils/storage.js";
 
-// ADDED
-export async function loader() {
-  let user = (await getCurrentUser()) || {};
-  if (!user) return;
-  console.log(user);
-
-  return { user };
-}
-// ADDED
-
 function App() {
   const { menuButtonVisibility, toggleMenuBody, toggleMenuButton } = useMenu();
   const navigate = useNavigate();
-  const { user } = useLoaderData();
-
-  const [student, setStudent] = useState(
-    user?.userType === "student" ? user : undefined
-  );
-  const [admin, setAdmin] = useState(
-    user?.userType === "admin" ? user : undefined
-  );
 
   const loaderObject = {
     userType: "loading...",
@@ -42,16 +23,7 @@ function App() {
   };
 
   async function handleLogin(user) {
-    // updates the given user to
-    // be used as the current user
     await updateUser(user.idNumber, user);
-    await getCurrentUser();
-
-    if (user.userType === "admin") {
-      setAdmin(user);
-    } else if (user.userType === "student") {
-      setStudent(user);
-    }
 
     if (user) {
       toggleMenuButton();
@@ -63,8 +35,6 @@ function App() {
   async function handleLogout(user) {
     await updateUser(user.idNumber, { ...user, isLoggedIn: false });
 
-    setStudent(undefined);
-    setAdmin(undefined);
     toggleMenuButton();
     await getCurrentUser();
     navigate("/");
@@ -91,10 +61,6 @@ function App() {
           context={{
             handleLogin,
             handleLogout,
-            admin,
-            setAdmin,
-            student,
-            setStudent,
             loaderObject,
           }}
         />

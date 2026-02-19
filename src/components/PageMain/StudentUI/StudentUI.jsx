@@ -3,10 +3,12 @@ import { Link, Outlet, useOutletContext } from "react-router-dom";
 import { useMenu } from "../../../context/MenuContext";
 
 import style from "./StudentUI.module.css";
+import { useUser } from "../../../context/UserContext";
 
 function StudentUI() {
   const { menuBodyVisibility, toggleMenuBody } = useMenu();
-  const { student, loaderObject, handleLogout } = useOutletContext();
+  const { loaderObject, handleLogout } = useOutletContext();
+  const { currentUser } = useUser();
 
   return (
     <>
@@ -30,7 +32,7 @@ function StudentUI() {
           </button>
           <button
             className={`${style["studentUI__button"]} ${style["studentUI__button--logout"]} `}
-            onClick={() => handleLogout(student)}
+            onClick={() => handleLogout(currentUser)}
           >
             Logout
           </button>
@@ -41,11 +43,11 @@ function StudentUI() {
           <h2
             className={`${style["studentUI__h2--shadow"]} ${style["studentUI__h2"]}`}
           >
-            Hello {student?.name || loaderObject?.name}
+            Hello {currentUser?.name || loaderObject?.name}
           </h2>
         </div>
         <div className={style["studentUI__panel"]}>
-          <Outlet />
+          <Outlet context={{ currentUser }} />
         </div>
       </div>
     </>
