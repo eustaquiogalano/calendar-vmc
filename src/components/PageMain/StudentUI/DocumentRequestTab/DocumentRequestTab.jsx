@@ -8,8 +8,9 @@ import style from "./DocumentRequestTab.module.css";
 import ConfirmationDialog from "./ConfirmationDialog/ConfirmationDialog";
 
 function DocumentRequestTab() {
-  const { addRequest } = useUser();
+  const { addRequest, deleteRequest } = useUser();
   const { currentUser } = useOutletContext();
+  const [deleteionID, setDeletionID] = useState();
   const [document, setDocument] = useState("");
   const [purpose, setPurpose] = useState("");
   const [date, setDate] = useState("");
@@ -34,14 +35,16 @@ function DocumentRequestTab() {
     resetStates();
   }
 
-  function deleteRequest() {
-    setRequestList(
-      requestList.filter((request) => {
-        return request.id !== deletionID;
-      })
-    );
+  async function handleDeleteRequest() {
+    await deleteRequest(currentUser, deleteionID);
 
-    console.log(`${deletionID} deleted`);
+    // setRequestList(
+    //   requestList.filter((request) => {
+    //     return request.id !== deletionID;
+    //   })
+    // );
+
+    // console.log(`${deletionID} deleted`);
 
     // after using the deletionID for deletion
     // reset the state right after
@@ -163,7 +166,7 @@ function DocumentRequestTab() {
           })}
         </div>
 
-        <ConfirmationDialog ref={dialogRef} onConfirm={deleteRequest} />
+        <ConfirmationDialog ref={dialogRef} onConfirm={handleDeleteRequest} />
       </section>
     </>
   );

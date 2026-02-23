@@ -7,6 +7,7 @@ import {
   getUsers,
   setInitialUsers,
   updateRequestStatusHF,
+  deleteRequestHF,
 } from "../utils/storage";
 
 const UserContext = createContext(null);
@@ -58,6 +59,12 @@ export function UserProvider({ children }) {
     setLoading((prev) => !prev);
   }
 
+  async function deleteRequest(student, requestID) {
+    await deleteRequestHF(student.idNumber, requestID);
+
+    setLoading((prev) => !prev);
+  }
+
   if (!ready) return <div>loading...</div>;
 
   return (
@@ -70,6 +77,7 @@ export function UserProvider({ children }) {
         setCurrentUser,
         updateRequestStatus,
         addRequest,
+        deleteRequest,
       }}
     >
       {children}

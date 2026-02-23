@@ -122,6 +122,30 @@ async function addRequestHF(newRequest) {
   console.log(currentUser);
 }
 
+async function deleteRequestHF(studentID, requestID) {
+  await fakeNetwork();
+
+  let students = await localforage.getItem("students");
+  if (!students) return [];
+
+  // get student
+  let student = students.find((student) => student.idNumber === studentID);
+  if (!student) throw new Error(`No student found.`);
+
+  // create new request list without the selected request
+  let updatedRequestList = student.requestedDocuments.filter(
+    (request) => request.id !== requestID
+  );
+  if (!updatedRequestList) throw new Error(`No request found.`);
+
+  Object.assign(student, {
+    ...student,
+    requestedDocuments: [...updatedRequestList],
+  });
+
+  await updateUser(studentID, student);
+}
+
 function set(users, type = "users") {
   return localforage.setItem(`${type}`, users);
 }
@@ -153,4 +177,5 @@ export {
   getCurrentUser,
   updateRequestStatusHF,
   addRequestHF,
+  deleteRequestHF,
 };
