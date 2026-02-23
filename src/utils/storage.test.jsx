@@ -7,6 +7,7 @@ import {
   updateUser,
   getAdminUsers,
   getCurrentUser,
+  deleteRequestHF,
 } from "./storage";
 
 describe("storage management", () => {
@@ -65,5 +66,25 @@ describe("storage management", () => {
     currentUser = await getCurrentUser();
     console.log(currentUser);
     console.log(await getUsers());
+  });
+
+  it("delete a request", async () => {
+    let students = await getStudentUsers();
+
+    let joris = students[0];
+
+    let ja = students[2];
+
+    // await deleteRequestHF(joris.idNumber, joris.requestedDocuments[0].id);
+    // await deleteRequestHF(joris.idNumber, joris.requestedDocuments[1].id);
+
+    // await deleteRequestHF(ja.idNumber, ja.requestedDocuments[0].id);
+    // await deleteRequestHF(ja.idNumber, ja.requestedDocuments[1].id);
+
+    await deleteRequestHF(ja.idNumber, ja.requestedDocuments[1].id);
+
+    await deleteRequestHF(ja.idNumber, ja.requestedDocuments[0].id);
+
+    console.log(await getStudentUsers());
   });
 });
