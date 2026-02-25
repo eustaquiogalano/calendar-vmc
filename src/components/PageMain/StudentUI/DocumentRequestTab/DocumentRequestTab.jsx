@@ -39,18 +39,6 @@ function DocumentRequestTab() {
   async function handleDeleteRequest() {
     await deleteRequest(currentUser, deleteionID);
     setLoading((prev) => ++prev);
-
-    // setRequestList(
-    //   requestList.filter((request) => {
-    //     return request.id !== deletionID;
-    //   })
-    // );
-
-    // console.log(`${deletionID} deleted`);
-
-    // after using the deletionID for deletion
-    // reset the state right after
-    // to be ready fr next use
     setDeletionID("");
   }
 
