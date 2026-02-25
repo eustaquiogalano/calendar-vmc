@@ -1,17 +1,20 @@
 import style from "./CalendarTab.module.css";
 import HourCard from "./Calender/HourCard/HourCard";
 import Calendar from "./Calender/Calendar";
-import { useRequest } from "../../../../context/RequestContext";
+import { useUser } from "../../../../context/UserContext";
+import { useState } from "react";
 
 function CalendarTab() {
-  const { requestList, selectedDate } = useRequest();
+  const [selectedDate, setSelectedDate] = useState();
+  const { currentUser } = useUser();
+  const requests = currentUser.requestedDocuments;
 
   return (
     <>
       <section className={style["calendar-tab__section"]}>
         <h2>Calendar</h2>
         <div className={`${style["calendar-tab__calendar"]} `}>
-          <Calendar requestList={requestList} />
+          <Calendar requests={requests} setSelectedDate={setSelectedDate} />
         </div>
       </section>
 
@@ -24,7 +27,7 @@ function CalendarTab() {
           />
           <HourCard time="10:00 AM" eventList={["Oath Taking", "Disco Time"]} />
           <div className={style["calendar-tab__request-list"]}>
-            {requestList.map((request) => {
+            {requests.map((request) => {
               if (request.date === selectedDate) {
                 return (
                   <div
