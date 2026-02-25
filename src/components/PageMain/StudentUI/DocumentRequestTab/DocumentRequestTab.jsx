@@ -14,6 +14,7 @@ function DocumentRequestTab() {
   const [document, setDocument] = useState("");
   const [purpose, setPurpose] = useState("");
   const [date, setDate] = useState("");
+  const { setLoading } = useUser();
   const dialogRef = useRef();
 
   async function submitRequest(e) {
@@ -37,6 +38,7 @@ function DocumentRequestTab() {
 
   async function handleDeleteRequest() {
     await deleteRequest(currentUser, deleteionID);
+    setLoading((prev) => ++prev);
 
     // setRequestList(
     //   requestList.filter((request) => {

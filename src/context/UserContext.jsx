@@ -17,7 +17,7 @@ export function UserProvider({ children }) {
   const [currentUser, setCurrentUser] = useState({});
   const [admins, setAdmins] = useState([]);
   const [students, setStudents] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(1);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -50,19 +50,19 @@ export function UserProvider({ children }) {
       status: status,
     });
 
-    setLoading((prev) => !prev);
+    setLoading((prev) => ++prev);
   }
 
   async function addRequest(newRequest) {
     await addRequestHF(newRequest);
 
-    setLoading((prev) => !prev);
+    setLoading((prev) => ++prev);
   }
 
   async function deleteRequest(student, requestID) {
     await deleteRequestHF(student.idNumber, requestID);
 
-    setLoading((prev) => !prev);
+    setLoading((prev) => ++prev);
   }
 
   if (!ready) return <div>loading...</div>;
@@ -78,6 +78,8 @@ export function UserProvider({ children }) {
         updateRequestStatus,
         addRequest,
         deleteRequest,
+        loading,
+        setLoading,
       }}
     >
       {children}

@@ -24,6 +24,7 @@ function App() {
 
   async function handleLogin(user) {
     await updateUser(user.idNumber, user);
+    await getCurrentUser();
 
     if (user) {
       toggleMenuButton();
