@@ -135,35 +135,36 @@ function DocumentRequestTab() {
         <h2>Pending</h2>
 
         <div className={style["document-request-tab__pending-list"]}>
-          {currentUser.requestedDocuments.map((request) => {
-            return (
-              <div
-                key={request.id}
-                className={style["document-request-tab__div--pending"]}
-              >
-                <p>
-                  Document: <span>{request.document}</span>
-                </p>
-                <p>
-                  Purpose: <span>{request.purpose}</span>
-                </p>
-                <p>
-                  Date: <span>{request.date}</span>
-                </p>
-                <button
-                  className={
-                    style["document-request-tab__button--delete-request"]
-                  }
-                  onClick={() => {
-                    setDeletionID(request.id);
-                    dialogRef.current.showModal();
-                  }}
+          {currentUser &&
+            currentUser.requestedDocuments.map((request) => {
+              return (
+                <div
+                  key={request.id}
+                  className={style["document-request-tab__div--pending"]}
                 >
-                  Delete
-                </button>
-              </div>
-            );
-          })}
+                  <p>
+                    Document: <span>{request.document}</span>
+                  </p>
+                  <p>
+                    Purpose: <span>{request.purpose}</span>
+                  </p>
+                  <p>
+                    Date: <span>{request.date}</span>
+                  </p>
+                  <button
+                    className={
+                      style["document-request-tab__button--delete-request"]
+                    }
+                    onClick={() => {
+                      setDeletionID(request.id);
+                      dialogRef.current.showModal();
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              );
+            })}
         </div>
 
         <ConfirmationDialog ref={dialogRef} onConfirm={handleDeleteRequest} />

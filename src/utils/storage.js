@@ -125,11 +125,11 @@ async function addRequestHF(newRequest) {
 async function deleteRequestHF(studentID, requestID) {
   await fakeNetwork();
 
-  let students = await localforage.getItem("students");
-  if (!students) return [];
+  let users = await localforage.getItem("users");
+  if (!users) return [];
 
   // get student
-  let student = students.find((student) => student.idNumber === studentID);
+  let student = users.find((user) => user.idNumber === studentID);
   if (!student) throw new Error(`No student found.`);
 
   // create new request list without the selected request
@@ -139,7 +139,6 @@ async function deleteRequestHF(studentID, requestID) {
   if (!updatedRequestList) throw new Error(`No request found.`);
 
   Object.assign(student, {
-    ...student,
     requestedDocuments: [...updatedRequestList],
   });
 
