@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEvent } from "../../../../context/EventsContext";
 import style from "./CreateEventTab.module.css";
-import { addEvent } from "../../../../utils/storage";
+import { addEvent, deleteEvent } from "../../../../utils/storage";
 
 function CreateEvent() {
   const { events, setEvents } = useEvent();
@@ -12,10 +12,22 @@ function CreateEvent() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const updatedEvents = await addEvent({ name, time, date });
+    const updatedEvents = await addEvent({
+      id: crypto.randomUUID(),
+      name,
+      time,
+      date,
+    });
     setEvents(updatedEvents);
     resetState();
     console.log("submit");
+  }
+
+  async function handleDelete(eventID) {
+    const updatedEvents = await deleteEvent(eventID);
+
+    setEvents(updatedEvents);
+    console.log("deleted");
   }
 
   function resetState() {
@@ -90,7 +102,9 @@ function CreateEvent() {
                     Date: <span>{event.date}</span>
                   </p>
                   <div>
-                    <button>Delete</button>
+                    <button onClick={() => handleDelete(event.id)}>
+                      Delete
+                    </button>
                   </div>
                 </div>
               );

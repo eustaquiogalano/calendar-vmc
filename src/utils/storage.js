@@ -183,6 +183,15 @@ async function addEvent(newEvent) {
   return events;
 }
 
+async function deleteEvent(eventID) {
+  let events = (await localforage.getItem("events")) || [];
+
+  let updatedEvents = events.filter((event) => event.id !== eventID);
+
+  await set(updatedEvents, "events");
+  return updatedEvents;
+}
+
 export {
   setInitialUsers,
   getUsers,
@@ -195,4 +204,5 @@ export {
   deleteRequestHF,
   addEvent,
   getEvents,
+  deleteEvent,
 };
