@@ -1,11 +1,22 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { getEvents } from "../utils/storage";
 
 const EventsContext = createContext(null);
 
 export function EventsProvider({ children }) {
-  const [eventList, setEventList] = useState([]);
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    async function initEvents() {
+      const events = await getEvents();
+      setEvents(events);
+    }
+
+    initEvents();
+  }, []);
+
   return (
-    <EventsContext.Provider value={{ eventList, setEventList }}>
+    <EventsContext.Provider value={{ events, setEvents }}>
       {children}
     </EventsContext.Provider>
   );

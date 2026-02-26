@@ -1,6 +1,28 @@
 import localforage from "localforage";
 import { users as mockUsers } from "../mocks/users.mock";
 
+function set(users, type = "users") {
+  return localforage.setItem(`${type}`, users);
+}
+
+// fake a cache so we don't slow down stuff we've already seen
+let fakeCache = {};
+
+async function fakeNetwork(key) {
+  if (!key) {
+    fakeCache = {};
+  }
+
+  if (fakeCache[key]) {
+    return;
+  }
+
+  fakeCache[key] = true;
+  return new Promise((res) => {
+    setTimeout(res, Math.random() * 800);
+  });
+}
+
 async function setInitialUsers() {
   await fakeNetwork();
 
@@ -145,26 +167,20 @@ async function deleteRequestHF(studentID, requestID) {
   await updateUser(studentID, student);
 }
 
-function set(users, type = "users") {
-  return localforage.setItem(`${type}`, users);
+async function getEvents() {
+  let events = (await localforage.getItem("events")) || [];
+
+  return events;
 }
 
-// fake a cache so we don't slow down stuff we've already seen
-let fakeCache = {};
+async function addEvent(newEvent) {
+  let events = (await localforage.getItem("events")) || [];
 
-async function fakeNetwork(key) {
-  if (!key) {
-    fakeCache = {};
-  }
+  events = [...events, newEvent];
+  await set(events, "events");
+  console.log(events);
 
-  if (fakeCache[key]) {
-    return;
-  }
-
-  fakeCache[key] = true;
-  return new Promise((res) => {
-    setTimeout(res, Math.random() * 800);
-  });
+  return events;
 }
 
 export {
@@ -177,4 +193,6 @@ export {
   updateRequestStatusHF,
   addRequestHF,
   deleteRequestHF,
+  addEvent,
+  getEvents,
 };

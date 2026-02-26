@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { useEvent } from "../../../../context/EventsContext";
 import style from "./CreateEventTab.module.css";
+import { addEvent } from "../../../../utils/storage";
 
 function CreateEvent() {
-  const { eventList, setEventList } = useEvent();
+  const { events, setEvents } = useEvent();
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    setEventList([...eventList, { name, time, date }]);
+    const updatedEvents = await addEvent({ name, time, date });
+    setEvents(updatedEvents);
     resetState();
     console.log("submit");
   }
@@ -21,6 +23,8 @@ function CreateEvent() {
     setName("");
     setDate("");
   }
+
+  console.log(Array.isArray(events));
 
   return (
     <>
@@ -70,26 +74,27 @@ function CreateEvent() {
       >
         <h2>Event List</h2>
         <div className={style["create-event__container--event-list"]}>
-          {eventList.map((event) => {
-            console.log(event);
+          {events &&
+            events.map((event) => {
+              console.log(event);
 
-            return (
-              <div className={style["create-event__event-card"]}>
-                <p>
-                  Event Name: <span>{event.name}</span>
-                </p>
-                <p>
-                  Time: <span>{event.time}</span>
-                </p>
-                <p>
-                  Date: <span>{event.date}</span>
-                </p>
-                <div>
-                  <button>Delete</button>
+              return (
+                <div className={style["create-event__event-card"]}>
+                  <p>
+                    Event Name: <span>{event.name}</span>
+                  </p>
+                  <p>
+                    Time: <span>{event.time}</span>
+                  </p>
+                  <p>
+                    Date: <span>{event.date}</span>
+                  </p>
+                  <div>
+                    <button>Delete</button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </section>
       ;
