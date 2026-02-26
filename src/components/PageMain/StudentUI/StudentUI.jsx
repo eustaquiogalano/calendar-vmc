@@ -1,4 +1,4 @@
-import { Link, Outlet, useOutletContext } from "react-router-dom";
+import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 
 import { useMenu } from "../../../context/MenuContext";
 
@@ -22,13 +22,13 @@ function StudentUI() {
             onClick={toggleMenuBody}
             className={style["studentUI__button"]}
           >
-            <Link to={`calendar`}>Calendar</Link>
+            <NavLink to={`calendar`}>Calendar</NavLink>
           </button>
           <button
             onClick={toggleMenuBody}
             className={style["studentUI__button"]}
           >
-            <Link to={`document-request`}>Document Request</Link>
+            <NavLink to={`document-request`}>Document Request</NavLink>
           </button>
           <button
             className={`${style["studentUI__button"]} ${style["studentUI__button--logout"]} `}

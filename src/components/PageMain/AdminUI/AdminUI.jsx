@@ -1,4 +1,4 @@
-import { Link, Outlet, useOutletContext } from "react-router-dom";
+import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
 
 import { useMenu } from "../../../context/MenuContext";
 
@@ -19,13 +19,13 @@ function AdminUI() {
       >
         <nav className={style["adminUI__nav"]}>
           <button onClick={toggleMenuBody} className={style["adminUI__button"]}>
-            <Link to={`incoming-request`}>Incoming Request</Link>
+            <NavLink to={`incoming-request`}>Incoming Request</NavLink>
           </button>
           <button onClick={toggleMenuBody} className={style["adminUI__button"]}>
-            <Link to={`manage-request`}>Manage Requests</Link>
+            <NavLink to={`manage-request`}>Manage Requests</NavLink>
           </button>
           <button onClick={toggleMenuBody} className={style["adminUI__button"]}>
-            <Link to={`create-event`}> Create Event</Link>
+            <NavLink to={`create-event`}> Create Event</NavLink>
           </button>
           <button
             onClick={() => handleLogout(currentUser)}
