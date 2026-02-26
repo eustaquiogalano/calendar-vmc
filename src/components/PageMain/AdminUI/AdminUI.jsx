@@ -3,10 +3,12 @@ import { Link, Outlet, useOutletContext } from "react-router-dom";
 import { useMenu } from "../../../context/MenuContext";
 
 import style from "./AdminUI.module.css";
+import { useUser } from "../../../context/UserContext";
 
 function AdminUI() {
   const { menuBodyVisibility, toggleMenuBody } = useMenu();
-  const { admin, loaderObject, handleLogout } = useOutletContext();
+  const { loaderObject, handleLogout } = useOutletContext();
+  const { currentUser } = useUser();
 
   return (
     <>
@@ -26,7 +28,7 @@ function AdminUI() {
             <Link to={`create-event`}> Create Event</Link>
           </button>
           <button
-            onClick={() => handleLogout(admin)}
+            onClick={() => handleLogout(currentUser)}
             className={`${style["adminUI__button"]} ${style["adminUI__button--logout"]} `}
           >
             Logout
@@ -36,7 +38,7 @@ function AdminUI() {
       <div className={style["adminUI__dashboard"]}>
         <div className={style["adminUI__greeting"]}>
           <h2 className={`${style["adminUI__h2"]}`}>
-            Hello {admin?.name || loaderObject?.name}
+            Hello {currentUser?.name || loaderObject?.name}
           </h2>
         </div>
         <div className={style["adminUI__panel"]}>
