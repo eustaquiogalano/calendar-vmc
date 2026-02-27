@@ -35,6 +35,15 @@ async function setInitialUsers() {
   return await localforage.setItem("users", mockUsers);
 }
 
+async function addStudentUser(newUser) {
+  let users = (await localforage.getItem("users")) || [];
+
+  users = [...users, newUser];
+
+  await set(users, "users");
+  return users;
+}
+
 async function getStudentUsers() {
   await fakeNetwork();
 
@@ -194,6 +203,7 @@ async function deleteEvent(eventID) {
 
 export {
   setInitialUsers,
+  addStudentUser,
   getUsers,
   getStudentUsers,
   getAdminUsers,

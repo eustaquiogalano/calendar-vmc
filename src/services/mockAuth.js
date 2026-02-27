@@ -1,6 +1,8 @@
-import { users } from "../mocks/users.mock";
+import { getUsers } from "../utils/storage";
 
-function userAuth(username, password) {
+async function userAuth(username, password) {
+  let users = await getUsers();
+
   let verifiedUser = users.find((user) => {
     return user.username === username && user.password === password;
   });

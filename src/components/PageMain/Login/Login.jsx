@@ -6,6 +6,7 @@ import style from "./Login.module.css";
 import InputField from "./InputField/InputField";
 import userAuth from "./../../../services/mockAuth.js";
 import { useUser } from "../../../context/UserContext.jsx";
+import { addStudentUser } from "../../../utils/storage.js";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,9 +16,19 @@ function Login() {
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  // states for register
+  const [firstName, setFirstname] = useState("");
+  const [lastName, setLastname] = useState("");
+  const [middleName, setMiddlename] = useState("");
+  const [email, setEmail] = useState("");
+  const [idNumber, setIDnumber] = useState("");
+  const [regUsername, setRegUsername] = useState("");
+  const [regPassword, setRegPassword] = useState("");
+  const [yearLevel, setYearLevel] = useState(0);
+
   async function handleAuth(event) {
     event.preventDefault();
-    const user = await handleLogin(userAuth(userName, password));
+    const user = await handleLogin(await userAuth(userName, password));
     setCurrentUser(user);
     user.userType === "student" ? navigate("/student") : navigate("/admin");
   }
@@ -37,6 +48,21 @@ function Login() {
     } else {
       setVisibility(true);
     }
+  }
+
+  async function handleRegister() {
+    await addStudentUser({
+      firstName,
+      lastName,
+      middleName,
+      email,
+      idNumber,
+      username: regUsername,
+      password: regPassword,
+      yearLevel,
+      userType: "student",
+      requestedDocuments: [],
+    });
   }
 
   return (
@@ -98,29 +124,78 @@ function Login() {
             action=""
             className={`${style["login__register-form"]} ${style["login__form"]}`}
           >
-            <InputField htmlFor="name" text="Name: " name="name" id="name" />
+            <InputField
+              htmlFor="first-name"
+              text="First Name: "
+              name="first-name"
+              id="first-name"
+              value={firstName}
+              onValueChange={(e) => setFirstname(e.target.value)}
+            />
+            <InputField
+              htmlFor="last-name"
+              text="Last Name: "
+              name="last-name"
+              id="last-name"
+              value={lastName}
+              onValueChange={(e) => setLastname(e.target.value)}
+            />
+            <InputField
+              htmlFor="middle-name"
+              text="Middle Name: "
+              name="middle-name"
+              id="middle-name"
+              value={middleName}
+              onValueChange={(e) => setMiddlename(e.target.value)}
+            />
+
             <InputField
               htmlFor="id-number"
               text="ID Number: "
               name="id-number"
               id="id-number"
+              value={idNumber}
+              onValueChange={(e) => setIDnumber(e.target.value)}
             />
             <InputField
               htmlFor="email"
               text="Email: "
               name="email"
               id="email"
+              value={email}
+              onValueChange={(e) => setEmail(e.target.value)}
             />
             <InputField
-              htmlFor="last-year-attended"
-              text="Last Year Attended: "
-              name="last-year-attended"
-              id="last-year-attended"
+              htmlFor="year-level"
+              text="Year Level: "
+              name="year-level"
+              id="year-level"
+              value={yearLevel}
+              onValueChange={(e) => setYearLevel(e.target.value)}
             />
+
+            <InputField
+              htmlFor="username"
+              text="Username: "
+              name="username"
+              id="username"
+              value={regUsername}
+              onValueChange={(e) => setRegUsername(e.target.value)}
+            />
+
+            <InputField
+              htmlFor="username"
+              text="Username: "
+              name="username"
+              id="username"
+              value={regPassword}
+              onValueChange={(e) => setRegPassword(e.target.value)}
+            />
+
             <div className={style["login__button-container"]}>
               <button
                 className={`${style["login__register-button"]} ${style["login__button"]}`}
-                onClick={showRegisterForm}
+                onClick={handleRegister}
               >
                 Register
               </button>
