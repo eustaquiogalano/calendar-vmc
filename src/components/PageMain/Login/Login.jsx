@@ -62,6 +62,7 @@ function Login() {
       yearLevel,
       userType: "student",
       requestedDocuments: [],
+      isLoggedIn: false,
     });
   }
 
