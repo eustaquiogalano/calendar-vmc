@@ -43,7 +43,7 @@ function StudentUI() {
           <h2
             className={`${style["studentUI__h2--shadow"]} ${style["studentUI__h2"]}`}
           >
-            Hello {currentUser?.name || loaderObject?.name}
+            Hello {currentUser?.firstName || loaderObject?.name}
           </h2>
         </div>
         <div className={style["studentUI__panel"]}>
