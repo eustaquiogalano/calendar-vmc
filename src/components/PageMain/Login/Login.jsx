@@ -185,10 +185,10 @@ function Login() {
             />
 
             <InputField
-              htmlFor="username"
-              text="Username: "
-              name="username"
-              id="username"
+              htmlFor="password"
+              text="Password: "
+              name="password"
+              id="password"
               value={regPassword}
               onValueChange={(e) => setRegPassword(e.target.value)}
             />
