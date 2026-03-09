@@ -43,7 +43,7 @@ function CreateEvent() {
       <section className={style["create-event__section"]}>
         <h2>Create Event</h2>
         <form onSubmit={handleSubmit} className={style["create-event__form"]}>
-          <div>
+          <div className={style["create-event__form-field"]}>
             <label htmlFor="event-name">Event Name:</label>
             <input
               value={name}
@@ -54,7 +54,7 @@ function CreateEvent() {
               id="event-name"
             />
           </div>
-          <div>
+          <div className={style["create-event__form-field"]}>
             <label htmlFor="event-time">Time:</label>
             <input
               onChange={(e) => {
@@ -65,7 +65,7 @@ function CreateEvent() {
               id="event-time"
             />
           </div>
-          <div>
+          <div className={style["create-event__form-field"]}>
             <label htmlFor="event-date">Date:</label>
             <input
               onChange={(e) => {

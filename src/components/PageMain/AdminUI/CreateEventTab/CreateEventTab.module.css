@@ -19,6 +19,20 @@
   gap: 1rem;
 }
 
+.create-event__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.create-event__form-field input {
+  width: 100%;
+  font-size: 16px;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--dark-azure);
+}
+
 .create-event__form button {
   border-radius: 4px;
   padding: 1rem;
