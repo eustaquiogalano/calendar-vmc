@@ -3,11 +3,14 @@ import HourCard from "./Calender/HourCard/HourCard";
 import Calendar from "./Calender/Calendar";
 import { useUser } from "../../../../context/UserContext";
 import { useState } from "react";
+import { useEvent } from "../../../../context/EventsContext";
 
 function CalendarTab() {
   const [selectedDate, setSelectedDate] = useState();
   const { currentUser } = useUser();
+  const { events } = useEvent();
   const requests = currentUser.requestedDocuments;
+  const announcements = [...requests, ...events];
 
   return (
     <>
@@ -27,26 +30,30 @@ function CalendarTab() {
           />
           <HourCard time="10:00 AM" eventList={["Oath Taking", "Disco Time"]} />
           <div className={style["calendar-tab__request-list"]}>
-            {requests.map((request) => {
-              if (request.date === selectedDate) {
-                return (
-                  <div
-                    key={request.id}
-                    className={style["calendar-tab__request-card"]}
-                  >
-                    <p>
-                      Document: <span>{request.document}</span>
-                    </p>
-                    <p>
-                      Purpose: <span>{request.purpose}</span>
-                    </p>
-                    <p>
-                      Date: <span>{request.date}</span>
-                    </p>
-                  </div>
-                );
-              }
-            })}
+            {announcements &&
+              announcements.map((announcement) => {
+                if (announcement.date === selectedDate) {
+                  return (
+                    <div
+                      key={announcement.id}
+                      className={style["calendar-tab__request-card"]}
+                    >
+                      <p>
+                        Document:{" "}
+                        <span>
+                          {announcement.document || announcement.name}
+                        </span>
+                      </p>
+                      <p>
+                        Purpose: <span>{announcement.purpose}</span>
+                      </p>
+                      <p>
+                        Date: <span>{announcement.date}</span>
+                      </p>
+                    </div>
+                  );
+                }
+              })}
           </div>
         </div>
       </section>
