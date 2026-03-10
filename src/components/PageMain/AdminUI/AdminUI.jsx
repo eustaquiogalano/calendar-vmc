@@ -18,15 +18,42 @@ function AdminUI() {
         }`}
       >
         <nav className={style["adminUI__nav"]}>
-          <button onClick={toggleMenuBody} className={style["adminUI__button"]}>
-            <NavLink to={`incoming-request`}>Incoming Request</NavLink>
-          </button>
-          <button onClick={toggleMenuBody} className={style["adminUI__button"]}>
-            <NavLink to={`manage-request`}>Manage Requests</NavLink>
-          </button>
-          <button onClick={toggleMenuBody} className={style["adminUI__button"]}>
-            <NavLink to={`create-event`}> Create Event</NavLink>
-          </button>
+          <NavLink
+            to={`incoming-request`}
+            onClick={toggleMenuBody}
+            className={({ isActive }) =>
+              `${style["adminUI__button"]} ${
+                isActive ? style["adminUI__button--active"] : ""
+              }`
+            }
+          >
+            Incoming Request
+          </NavLink>
+
+          <NavLink
+            to={`manage-request`}
+            onClick={toggleMenuBody}
+            className={({ isActive }) =>
+              `${style["adminUI__button"]} ${
+                isActive ? style["adminUI__button--active"] : ""
+              }`
+            }
+          >
+            Manage Requests
+          </NavLink>
+
+          <NavLink
+            to={`create-event`}
+            onClick={toggleMenuBody}
+            className={({ isActive }) =>
+              `${style["adminUI__button"]} ${
+                isActive ? style["adminUI__button--active"] : ""
+              }`
+            }
+          >
+            Create Event
+          </NavLink>
+
           <button
             onClick={() => handleLogout(currentUser)}
             className={`${style["adminUI__button"]} ${style["adminUI__button--logout"]} `}

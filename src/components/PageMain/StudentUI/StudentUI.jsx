@@ -18,18 +18,30 @@ function StudentUI() {
         }`}
       >
         <nav className={`${style["studentUI__nav"]}`}>
-          <button
+          <NavLink
+            to={`calendar`}
             onClick={toggleMenuBody}
-            className={style["studentUI__button"]}
+            className={({ isActive }) =>
+              `${style["studentUI__button"]} ${
+                isActive ? style["studentUI__button--active"] : ""
+              }`
+            }
           >
-            <NavLink to={`calendar`}>Calendar</NavLink>
-          </button>
-          <button
+            Calendar
+          </NavLink>
+
+          <NavLink
+            to={`document-request`}
             onClick={toggleMenuBody}
-            className={style["studentUI__button"]}
+            className={({ isActive }) =>
+              `${style["studentUI__button"]} ${
+                isActive ? style["studentUI__button--active"] : ""
+              }`
+            }
           >
-            <NavLink to={`document-request`}>Document Request</NavLink>
-          </button>
+            Document Request
+          </NavLink>
+
           <button
             className={`${style["studentUI__button"]} ${style["studentUI__button--logout"]} `}
             onClick={() => handleLogout(currentUser)}
