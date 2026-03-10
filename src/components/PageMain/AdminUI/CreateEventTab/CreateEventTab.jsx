@@ -20,14 +20,12 @@ function CreateEvent() {
     });
     setEvents(updatedEvents);
     resetState();
-    console.log("submit");
   }
 
   async function handleDelete(eventID) {
     const updatedEvents = await deleteEvent(eventID);
 
     setEvents(updatedEvents);
-    console.log("deleted");
   }
 
   function resetState() {
@@ -35,8 +33,6 @@ function CreateEvent() {
     setName("");
     setDate("");
   }
-
-  console.log(Array.isArray(events));
 
   return (
     <>
