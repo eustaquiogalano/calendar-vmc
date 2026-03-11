@@ -122,7 +122,7 @@ function DocumentRequestTab() {
       <section
         className={`${style["document-request-tab__section"]} ${style["document-request-tab__pending-request"]}`}
       >
-        <h2>Pending</h2>
+        <h2>Request List</h2>
 
         <div className={style["document-request-tab__pending-list"]}>
           {currentUser &&
@@ -140,6 +140,9 @@ function DocumentRequestTab() {
                   </p>
                   <p>
                     Date: <span>{request.date}</span>
+                  </p>
+                  <p>
+                    Status: <span>{request.status}</span>
                   </p>
                   <button
                     className={
