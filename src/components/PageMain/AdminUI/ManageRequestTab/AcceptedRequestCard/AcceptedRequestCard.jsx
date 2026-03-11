@@ -5,7 +5,7 @@ function AcceptedRequestCard({ student, request, setSelectedRequest }) {
     <div className={style["accepted-request"]}>
       <div className={style["accepted-request__request-details"]}>
         <p>
-          Student: <span>{student.name}</span>
+          Student: <span>{student.firstName}</span>
         </p>
         <p>
           Document: <span>{request.document}</span>

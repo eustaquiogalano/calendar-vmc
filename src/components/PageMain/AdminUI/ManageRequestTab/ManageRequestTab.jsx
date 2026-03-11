@@ -20,7 +20,7 @@ function ManageRequestTab() {
               <div className={style["manage-request__selected--student"]}>
                 <h4>Student: </h4>
                 <p>
-                  Name: <span>{student.name}</span>
+                  Name: <span>{student.firstName}</span>
                 </p>
                 <p>
                   ID#: <span>{student.idNumber}</span>
