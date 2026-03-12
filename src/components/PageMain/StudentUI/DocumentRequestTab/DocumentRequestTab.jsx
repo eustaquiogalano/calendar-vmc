@@ -72,9 +72,13 @@ function DocumentRequestTab() {
               <option value="" disabled>
                 Select a document
               </option>
-              <option value="diploma">Diploma</option>
-              <option value="ctc-reg-form">CTC Registration Form</option>
-              <option value="tor">Transcript of Records</option>
+              <option value="Diploma">Diploma</option>
+              <option value="Registration Form (CTC)">
+                Registration Form (CTC)
+              </option>
+              <option value="Transcript of Records">
+                Transcript of Records
+              </option>
             </select>
           </div>
 
