@@ -84,8 +84,6 @@ function CreateEvent() {
         <div className={style["create-event__container--event-list"]}>
           {events &&
             events.map((event) => {
-              console.log(event);
-
               return (
                 <div className={style["create-event__event-card"]}>
                   <p>
