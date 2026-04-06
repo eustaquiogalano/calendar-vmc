@@ -11,7 +11,7 @@ import { addStudentUser } from "../../../utils/storage.js";
 function Login() {
   const navigate = useNavigate();
   const { handleLogin } = useOutletContext();
-  const { setCurrentUser } = useUser();
+  const { loginCurrentUser } = useUser();
   const [isVisible, setVisibility] = useState(false);
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +29,7 @@ function Login() {
   async function handleAuth(event) {
     event.preventDefault();
     const user = await handleLogin(await userAuth(userName, password));
-    setCurrentUser(user);
+    loginCurrentUser(user);
     user.userType === "student" ? navigate("/student") : navigate("/admin");
   }
 

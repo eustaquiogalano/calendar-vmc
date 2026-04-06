@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import {
   getAdminUsers,
   getCurrentUser,
@@ -9,14 +15,19 @@ import {
   updateRequestStatusHF,
   deleteRequestHF,
 } from "../utils/storage";
+import usersReducer from "../reducers/userReducer";
 
 const UserContext = createContext(null);
 
+const initialState = {
+  users: [],
+  currentUser: {},
+  admins: [],
+  students: [],
+};
+
 export function UserProvider({ children }) {
-  const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState({});
-  const [admins, setAdmins] = useState([]);
-  const [students, setStudents] = useState([]);
+  const [state, dispatch] = useReducer(usersReducer, initialState);
   const [loading, setLoading] = useState(1);
   const [ready, setReady] = useState(false);
 
@@ -25,16 +36,14 @@ export function UserProvider({ children }) {
       await setInitialUsers();
 
       const users = await getUsers();
-      setUsers(users);
-
       const students = await getStudentUsers();
-      setStudents(students);
-
       const admins = await getAdminUsers();
-      setAdmins(admins);
-
       const currentUser = await getCurrentUser();
-      setCurrentUser(currentUser);
+
+      dispatch({
+        type: "INIT_USERS",
+        payload: { users, students, admins, currentUser },
+      });
 
       setReady(true);
     }
@@ -65,16 +74,25 @@ export function UserProvider({ children }) {
     setLoading((prev) => ++prev);
   }
 
+  const loginCurrentUser = (currentUser) => {
+    dispatch({ type: "LOGIN", payload: currentUser });
+  };
+
+  const logoutCurrentUser = () => {
+    dispatch({ type: "LOGOUT" });
+  };
+
   if (!ready) return <div>loading...</div>;
 
   return (
     <UserContext.Provider
       value={{
-        users,
-        students,
-        admins,
-        currentUser,
-        setCurrentUser,
+        users: state.users,
+        students: state.students,
+        admins: state.admins,
+        currentUser: state.currentUser,
+        loginCurrentUser,
+        logoutCurrentUser,
         updateRequestStatus,
         addRequest,
         deleteRequest,
