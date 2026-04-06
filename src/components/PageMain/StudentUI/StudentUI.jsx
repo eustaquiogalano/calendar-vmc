@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet, useOutletContext } from "react-router-dom";
+import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 
 import { useMenu } from "../../../context/MenuContext";
 
