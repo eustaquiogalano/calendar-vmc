@@ -51,7 +51,7 @@ function IncomingRequestTab() {
                   </CardContent>
                   <CardFooter className="flex justify-between">
                     <Button
-                      variant="outline"
+                      variant="default"
                       size="sm"
                       className=""
                       onClick={() =>
@@ -66,7 +66,7 @@ function IncomingRequestTab() {
                       Accept
                     </Button>
                     <Button
-                      variant="outline"
+                      variant="default"
                       size="sm"
                       onClick={() =>
                         updateRequestStatus(
