@@ -3,6 +3,17 @@ import { useUser } from "../../../../context/UserContext";
 import AcceptedRequestCard from "./AcceptedRequestCard/AcceptedRequestCard";
 import style from "./ManageRequestTab.module.css";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import { Button } from "@/components/ui/button";
+
 function ManageRequestTab() {
   const { students, updateRequestStatus } = useUser();
   const [selectedRequest, setSelectedRequest] = useState(undefined);
@@ -16,54 +27,44 @@ function ManageRequestTab() {
         <h2>Request View</h2>
         <div className={style["manage-request__display-box"]}>
           {selectedRequest ? (
-            <div className={style["manage-request__selected-container"]}>
-              <div className={style["manage-request__selected--student"]}>
-                <h4>Student: </h4>
-                <p>
-                  Name: <span>{student.firstName}</span>
-                </p>
-                <p>
-                  ID#: <span>{student.idNumber}</span>
-                </p>
-                <p>
-                  Year Level: <span>{student.yearLevel}</span>
-                </p>
-                <p>
-                  e-mail: <span>{student.email}</span>
-                </p>
-              </div>
-
-              <div className={style["manage-request__selected--request"]}>
-                <h4>Requesting for:</h4>
-                <p>
-                  Document: <span>{request.document}</span>
-                </p>
-                <p>
-                  Purpose: <span>{request.purpose}</span>
-                </p>
-                <p>
-                  Claim Date: <span>{request.date}</span>
-                </p>
-                <p>
-                  Status: <span>{request.status}</span>
-                </p>
-              </div>
-              <div className={style["manage-request__container-button"]}>
-                <button
-                  onClick={() => {
-                    updateRequestStatus(
-                      student,
-                      request.id,
-                      "DOCUMENT READY",
-                      request
-                    );
-                  }}
-                  className={style["manage-request__button--document-ready"]}
-                >
+            <Card className="w-full">
+              <CardHeader>
+                <CardTitle>{`${student.firstName} ${student.lastName}`}</CardTitle>
+                <CardDescription>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">ID#:</span>
+                    <span>{student.idNumber}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Year Level:</span>
+                    <span>{student.yearLevel}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Email:</span>
+                    <span>{student.email}</span>
+                  </div>
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Document:</span>
+                  <span>{request.document}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Purpose:</span>
+                  <span>{request.purpose}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Date:</span>
+                  <span>{request.date}</span>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="default" className="w-full">
                   Document Ready
-                </button>
-              </div>
-            </div>
+                </Button>
+              </CardFooter>
+            </Card>
           ) : (
             <p>Select a request to view here</p>
           )}
@@ -89,12 +90,35 @@ function ManageRequestTab() {
                 console.log(request);
 
                 return (
-                  <AcceptedRequestCard
-                    key={request.id}
-                    request={request}
-                    student={student}
-                    setSelectedRequest={setSelectedRequest}
-                  />
+                  <Card className="border-2 h-full">
+                    <CardHeader>
+                      <CardTitle>{`${student.firstName} ${student.lastName}`}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Document:</span>
+                        <span>{request.document}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Purpose:</span>
+                        <span>{request.purpose}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Date:</span>
+                        <span>{request.date}</span>
+                      </div>
+                    </CardContent>
+                    <CardFooter>
+                      <Button
+                        variant="default"
+                        size="sm"
+                        className="w-full"
+                        onClick={() => setSelectedRequest({ student, request })}
+                      >
+                        View Full Details
+                      </Button>
+                    </CardFooter>
+                  </Card>
                 );
               });
           })}
