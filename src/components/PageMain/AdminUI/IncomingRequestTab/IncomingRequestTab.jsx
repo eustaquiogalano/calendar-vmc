@@ -2,8 +2,18 @@ import { useUser } from "../../../../context/UserContext";
 import IncomingCard from "./IncomingCard/IncomingCard";
 import style from "./IncomingRequestTab.module.css";
 
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import { Button } from "@/components/ui/button";
+
 function IncomingRequestTab() {
-  const { students } = useUser();
+  const { students, updateRequestStatus } = useUser();
 
   return (
     <section className={style["incoming-request__section"]}>
@@ -19,11 +29,58 @@ function IncomingRequestTab() {
             })
             .map((request) => {
               return (
-                <IncomingCard
-                  key={request.id}
-                  student={student}
-                  request={request}
-                />
+                <Card key={request.id} className="border-2 w-auto h-full">
+                  <CardHeader className="p3">
+                    <CardTitle>
+                      {`${student.firstName} ${student.lastName}`}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-3">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Document:</span>
+                      <span>{request.document}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Purpose:</span>
+                      <span>{request.purpose}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Date:</span>
+                      <span>{request.date}</span>
+                    </div>
+                  </CardContent>
+                  <CardFooter className="flex justify-between">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className=""
+                      onClick={() =>
+                        updateRequestStatus(
+                          student,
+                          request.id,
+                          "ACCEPTED",
+                          request
+                        )
+                      }
+                    >
+                      Accept
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        updateRequestStatus(
+                          student,
+                          request.id,
+                          "REJECTED",
+                          request
+                        )
+                      }
+                    >
+                      Reject
+                    </Button>
+                  </CardFooter>
+                </Card>
               );
             });
         })}
