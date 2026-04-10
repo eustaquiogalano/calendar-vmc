@@ -29,7 +29,7 @@ function IncomingRequestTab() {
             })
             .map((request) => {
               return (
-                <Card key={request.id} className="border-2 w-auto h-full">
+                <Card key={request.id} className="border-2 shrink-0">
                   <CardHeader className="p3">
                     <CardTitle>
                       {`${student.firstName} ${student.lastName}`}

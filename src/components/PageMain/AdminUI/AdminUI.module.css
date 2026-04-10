@@ -71,10 +71,10 @@
 .adminUI__panel {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: flex-start;
   height: 100%;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 @media (min-width: 600px) {
@@ -87,8 +87,7 @@
   }
 
   .adminUI__panel {
-    display: grid;
-    grid-template-columns: 60% 1fr;
+    flex-direction: row;
     gap: 1rem;
   }
 }
