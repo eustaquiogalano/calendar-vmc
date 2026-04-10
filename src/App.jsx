@@ -52,7 +52,7 @@ function App() {
             style["studentUI__button"]
           } ${menuButtonVisibility ? "" : style["studentUI__menu--hide"]}`}
         >
-          <Icon className={style["studentUI__menu-icon"]} />
+          <Icon fill="#e8f4fb" className={style["studentUI__menu-icon"]} />
         </button>
       </header>
       <main
