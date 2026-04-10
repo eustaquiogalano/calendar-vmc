@@ -66,7 +66,7 @@ function IncomingRequestTab() {
                       Accept
                     </Button>
                     <Button
-                      variant="default"
+                      variant="secondary"
                       size="sm"
                       onClick={() =>
                         updateRequestStatus(
