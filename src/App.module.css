@@ -1,8 +1,6 @@
 .page-header {
   position: relative;
   width: 100%;
-  height: 100%;
-  grid-area: header;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -47,10 +45,8 @@
 
 .page-main {
   max-width: 1920px;
-  grid-area: main;
+  flex: 1;
   width: 100%;
-  height: 100%;
-  padding: 0rem;
   background: linear-gradient(0deg, rgb(35, 205, 243) 0%, rgb(1, 79, 143) 100%);
   display: flex;
   justify-content: center;
