@@ -62,6 +62,7 @@
 }
 
 .manage-request__section--request-list {
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   flex: 1;
