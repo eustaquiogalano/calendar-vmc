@@ -90,7 +90,7 @@ function ManageRequestTab() {
                 console.log(request);
 
                 return (
-                  <Card className="border-2 h-full">
+                  <Card className="border-2 h-fit shrink-0">
                     <CardHeader>
                       <CardTitle>{`${student.firstName} ${student.lastName}`}</CardTitle>
                     </CardHeader>

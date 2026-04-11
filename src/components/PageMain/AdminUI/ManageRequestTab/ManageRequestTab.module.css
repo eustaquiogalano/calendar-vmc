@@ -62,10 +62,15 @@
 }
 
 .manage-request__section--request-list {
-  height: 500px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
 }
 
 .manage-request__container--request-list {
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -75,8 +80,12 @@
 @media (min-width: 600px) {
   .manage-request__section--request-list {
     height: 100%;
+    width: 40%;
   }
 
+  .manage-request__section--full-view {
+    width: 60%;
+  }
   .manage-request__display-box {
     padding: 0.5rem;
   }
