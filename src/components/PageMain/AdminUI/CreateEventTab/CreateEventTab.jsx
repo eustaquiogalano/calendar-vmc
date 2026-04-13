@@ -69,7 +69,9 @@ function CreateEvent() {
 
   return (
     <>
-      <section className={style["create-event__section"]}>
+      <section
+        className={`${style["create-event__section"]} ${style["create-event__section--event-form"]}`}
+      >
         <h2>Create Event</h2>
         <form onSubmit={handleSubmit}>
           <FieldGroup>
@@ -178,7 +180,7 @@ function CreateEvent() {
                 //     </button>
                 //   </div>
                 // </div>
-                <Card className="border-2 h-full">
+                <Card className="border-2 h-fit shrink-0">
                   <CardHeader>
                     <CardTitle>{event.name}</CardTitle>
                   </CardHeader>
@@ -211,7 +213,6 @@ function CreateEvent() {
             })}
         </div>
       </section>
-      ;
     </>
   );
 }

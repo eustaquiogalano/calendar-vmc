@@ -9,10 +9,6 @@
   flex-direction: column;
 }
 
-.create-event__section--event-list {
-  height: 100%;
-}
-
 .create-event__form {
   display: flex;
   flex-direction: column;
@@ -50,9 +46,19 @@
   border: 1px solid var(--dark-azure);
 }
 
+.create-event__section--event-list {
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
 .create-event__container--event-list {
   display: flex;
   flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
   gap: 0.5rem;
 }
 
@@ -84,4 +90,18 @@
   background-color: var(--pure-white);
   color: var(--dark-azure);
   border: 1px solid var(--dark-azure);
+}
+
+@media (min-width: 600px) {
+  .create-event__section--event-list {
+    height: 100%;
+    width: 40%;
+  }
+
+  .create-event__section--event-form {
+    width: 60%;
+  }
+  .manage-request__display-box {
+    padding: 0.5rem;
+  }
 }
