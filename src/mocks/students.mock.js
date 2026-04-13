@@ -17,6 +17,7 @@ const mockStudentDatabase = [
         purpose: "Job Application",
         date: "2026-01-01",
         status: "PENDING",
+        type: "request",
       },
       {
         id: crypto.randomUUID(),
@@ -24,6 +25,7 @@ const mockStudentDatabase = [
         purpose: "Scholarship",
         date: "2026-01-01",
         status: "PENDING",
+        type: "request",
       },
     ],
   },
@@ -45,6 +47,7 @@ const mockStudentDatabase = [
         purpose: "Scholarship",
         date: "2026-03-04",
         status: "PENDING",
+        type: "request",
       },
       {
         id: crypto.randomUUID(),
@@ -52,6 +55,7 @@ const mockStudentDatabase = [
         purpose: "Scholarship",
         date: "2026-04-03",
         status: "PENDING",
+        type: "request",
       },
       {
         id: crypto.randomUUID(),
@@ -59,6 +63,7 @@ const mockStudentDatabase = [
         purpose: "Scholarship",
         date: "2026-01-01",
         status: "PENDING",
+        type: "request",
       },
     ],
   },
@@ -80,6 +85,7 @@ const mockStudentDatabase = [
         purpose: "Scholarship",
         date: "2026-03-05",
         status: "PENDING",
+        type: "request",
       },
       {
         id: crypto.randomUUID(),
@@ -87,6 +93,7 @@ const mockStudentDatabase = [
         purpose: "Scholarship",
         date: "2026-03-04",
         status: "PENDING",
+        type: "request",
       },
       {
         id: crypto.randomUUID(),
@@ -94,6 +101,7 @@ const mockStudentDatabase = [
         purpose: "Scholarship",
         date: "2026-04-05",
         status: "PENDING",
+        type: "request",
       },
     ],
   },
