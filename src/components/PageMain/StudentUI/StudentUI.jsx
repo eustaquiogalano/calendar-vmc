@@ -4,7 +4,6 @@ import { useMenu } from "../../../context/MenuContext";
 
 import style from "./StudentUI.module.css";
 import { useUser } from "../../../context/UserContext";
-import { Button } from "@/components/ui/button";
 
 function StudentUI() {
   const { menuBodyVisibility, toggleMenuBody } = useMenu();
@@ -42,7 +41,6 @@ function StudentUI() {
           >
             Document Request
           </NavLink>
-          <Button>Hello</Button>
 
           <button
             className={`${style["studentUI__button"]} ${style["studentUI__button--logout"]} `}
