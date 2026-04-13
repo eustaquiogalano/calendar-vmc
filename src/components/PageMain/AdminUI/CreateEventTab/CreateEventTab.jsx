@@ -48,7 +48,8 @@ function CreateEvent() {
       name,
       startTime,
       endTime,
-      date: format(date, "PPP"),
+      date: format(date, "yyyy-MM-dd"),
+      type: "event",
     });
     setEvents(updatedEvents);
     resetState();

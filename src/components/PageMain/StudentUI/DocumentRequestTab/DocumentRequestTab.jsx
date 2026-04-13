@@ -31,6 +31,7 @@ function DocumentRequestTab() {
       document,
       purpose,
       date,
+      type: "request",
     });
 
     resetStates();
