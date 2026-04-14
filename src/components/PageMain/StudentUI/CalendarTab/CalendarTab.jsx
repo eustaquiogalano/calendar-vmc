@@ -5,6 +5,15 @@ import { useUser } from "../../../../context/UserContext";
 import { useState } from "react";
 import { useEvent } from "../../../../context/EventsContext";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 function CalendarTab() {
   const [selectedDate, setSelectedDate] = useState();
   const { currentUser } = useUser();
@@ -27,25 +36,42 @@ function CalendarTab() {
           <div className={style["calendar-tab__request-list"]}>
             {announcements &&
               announcements.map((announcement) => {
+                console.log(announcement);
+
                 if (announcement.date === selectedDate) {
                   return (
-                    <div
-                      key={announcement.id}
-                      className={style["calendar-tab__request-card"]}
-                    >
-                      <p>
-                        Document:{" "}
-                        <span>
-                          {announcement.document || announcement.name}
-                        </span>
-                      </p>
-                      <p>
-                        Purpose: <span>{announcement.purpose}</span>
-                      </p>
-                      <p>
-                        Date: <span>{announcement.date}</span>
-                      </p>
-                    </div>
+                    <Card className="border-2 h-fit shrink-0">
+                      <CardHeader>
+                        <CardTitle>
+                          {announcement.type === "request"
+                            ? announcement.document
+                            : announcement.name}
+                        </CardTitle>
+                        <CardDescription>
+                          {announcement.type === "request"
+                            ? "Document Request"
+                            : "Event"}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">
+                            Start Time:
+                          </span>
+                          <span>{announcement.startTime || "08:00"}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">
+                            End Time:
+                          </span>
+                          <span>{announcement.endTime || "17:00"}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-muted-foreground">Date:</span>
+                          <span>{announcement.date}</span>
+                        </div>
+                      </CardContent>
+                    </Card>
                   );
                 }
               })}
