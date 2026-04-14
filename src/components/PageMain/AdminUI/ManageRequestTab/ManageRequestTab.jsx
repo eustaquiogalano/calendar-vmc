@@ -58,9 +58,24 @@ function ManageRequestTab() {
                   <span className="text-muted-foreground">Date:</span>
                   <span>{request.date}</span>
                 </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Status:</span>
+                  <span>{request.status}</span>
+                </div>
               </CardContent>
               <CardFooter>
-                <Button variant="default" className="w-full">
+                <Button
+                  variant="default"
+                  className="w-full"
+                  onClick={() =>
+                    updateRequestStatus(
+                      student,
+                      request.id,
+                      "DOCUMENT READY",
+                      request,
+                    )
+                  }
+                >
                   Document Ready
                 </Button>
               </CardFooter>
@@ -106,6 +121,10 @@ function ManageRequestTab() {
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Date:</span>
                         <span>{request.date}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Status:</span>
+                        <span>{request.status}</span>
                       </div>
                     </CardContent>
                     <CardFooter>
