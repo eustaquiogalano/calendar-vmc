@@ -29,7 +29,10 @@ function IncomingRequestTab() {
             })
             .map((request) => {
               return (
-                <Card key={request.id} className="border-2 shrink-0">
+                <Card
+                  key={request.id}
+                  className="border-2 shrink-0 flex flex-col justify-between"
+                >
                   <CardHeader className="p3">
                     <CardTitle>
                       {`${student.firstName} ${student.lastName}`}
@@ -59,7 +62,7 @@ function IncomingRequestTab() {
                           student,
                           request.id,
                           "ACCEPTED",
-                          request
+                          request,
                         )
                       }
                     >
@@ -73,7 +76,7 @@ function IncomingRequestTab() {
                           student,
                           request.id,
                           "REJECTED",
-                          request
+                          request,
                         )
                       }
                     >
