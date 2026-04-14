@@ -12,11 +12,6 @@
   gap: 1rem;
 }
 
-.document-request-tab__pending-request {
-  height: 100%;
-  overflow: hidden;
-}
-
 .document-request-tab__request-form {
   display: flex;
   flex-direction: column;
@@ -77,12 +72,18 @@
   border: 1px solid var(--dark-azure);
 }
 
+.document-request-tab__pending-request {
+  min-height: 500px;
+  flex: 1;
+  overflow-y: hidden;
+}
+
 .document-request-tab__pending-list {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  height: 100%;
-  overflow: auto;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .document-request-tab__div--pending {
@@ -92,6 +93,17 @@
   padding: 1rem;
   border: 1px solid var(--dark-azure);
   border-radius: 10px;
+}
+
+@media (min-width: 600px) {
+  .document-request-tab__pending-request {
+    height: 100%;
+    width: 40%;
+  }
+
+  .document-request-tab__create-request {
+    width: 60%;
+  }
 }
 
 @media (min-width: 1200px) {

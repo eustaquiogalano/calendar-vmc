@@ -87,8 +87,7 @@
   }
 
   .studentUI__panel {
-    display: grid;
-    grid-template-columns: 60% 1fr;
+    flex-direction: row;
     gap: 1rem;
   }
 }
