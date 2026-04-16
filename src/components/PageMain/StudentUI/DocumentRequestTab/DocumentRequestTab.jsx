@@ -27,6 +27,15 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 function DocumentRequestTab() {
   const { addRequest, deleteRequest } = useUser();
   const { currentUser } = useOutletContext();
@@ -169,34 +178,42 @@ function DocumentRequestTab() {
           {currentUser &&
             currentUser.requestedDocuments.map((request) => {
               return (
-                <div
-                  key={request.id}
-                  className={style["document-request-tab__div--pending"]}
-                >
-                  <p>
-                    Document: <span>{request.document}</span>
-                  </p>
-                  <p>
-                    Purpose: <span>{request.purpose}</span>
-                  </p>
-                  <p>
-                    Date: <span>{request.date}</span>
-                  </p>
-                  <p>
-                    Status: <span>{request.status}</span>
-                  </p>
-                  <button
-                    className={
-                      style["document-request-tab__button--delete-request"]
-                    }
-                    onClick={() => {
-                      setDeletionID(request.id);
-                      dialogRef.current.showModal();
-                    }}
-                  >
-                    Delete
-                  </button>
-                </div>
+                <Card className="border-2 h-fit shrink-0">
+                  <CardHeader>
+                    <CardTitle>{`${request.document}`}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Document:</span>
+                      <span>{request.document}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Purpose:</span>
+                      <span>{request.purpose}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Date:</span>
+                      <span>{request.date}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Status:</span>
+                      <span>{request.status}</span>
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="w-full"
+                      onClick={() => {
+                        setDeletionID(request.id);
+                        dialogRef.current.showModal();
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </CardFooter>
+                </Card>
               );
             })}
         </div>
