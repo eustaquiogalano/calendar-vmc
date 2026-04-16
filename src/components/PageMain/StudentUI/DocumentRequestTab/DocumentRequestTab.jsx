@@ -7,6 +7,26 @@ import style from "./DocumentRequestTab.module.css";
 
 import ConfirmationDialog from "./ConfirmationDialog/ConfirmationDialog";
 
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+} from "@/components/ui/field";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ChevronDownIcon } from "lucide-react";
+import {
+  PopoverTrigger,
+  PopoverContent,
+  Popover,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
+
 function DocumentRequestTab() {
   const { addRequest, deleteRequest } = useUser();
   const { currentUser } = useOutletContext();
@@ -30,7 +50,7 @@ function DocumentRequestTab() {
       id: crypto.randomUUID(),
       document,
       purpose,
-      date,
+      date: format(date, "yyyy-MM-dd"),
       type: "request",
     });
 
@@ -59,68 +79,84 @@ function DocumentRequestTab() {
           onSubmit={submitRequest}
           className={style["document-request-tab__request-form"]}
         >
-          <div className={style["document-request-tab__form-field"]}>
-            <label htmlFor="document">Document Requested:</label>
-            <select
-              required
-              onChange={(e) => {
-                setDocument(e.target.value);
-              }}
-              value={document}
-              name="document"
-              id="document"
-            >
-              <option value="" disabled>
-                Select a document
-              </option>
-              <option value="Diploma">Diploma</option>
-              <option value="Registration Form (CTC)">
-                Registration Form (CTC)
-              </option>
-              <option value="Transcript of Records">
-                Transcript of Records
-              </option>
-            </select>
-          </div>
+          <FieldGroup>
+            <FieldSet>
+              <FieldGroup>
+                <Field>
+                  <FieldLabel htmlFor="checkout-7j9-card-name-43j">
+                    Select Document:
+                  </FieldLabel>
+                  <select
+                    className="border-2 "
+                    required
+                    onChange={(e) => {
+                      setDocument(e.target.value);
+                    }}
+                    value={document}
+                    name="document"
+                    id="document"
+                  >
+                    <option value="" disabled></option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Registration Form (CTC)">
+                      Registration Form (CTC)
+                    </option>
+                    <option value="Transcript of Records">
+                      Transcript of Records
+                    </option>
+                  </select>
+                </Field>
 
-          <div className={style["document-request-tab__form-field"]}>
-            <label htmlFor="purpose"> Documents's Purpose:</label>
-            <input
-              required
-              onChange={(e) => {
-                setPurpose(e.target.value);
-              }}
-              value={purpose}
-              type="text"
-              name="purpose"
-              id="purpose"
-            />
-          </div>
+                <Field>
+                  <FieldLabel htmlFor="checkout-7j9-card-name-43j">
+                    Document's Purpose:
+                  </FieldLabel>
+                  <Input
+                    required
+                    onChange={(e) => {
+                      setPurpose(e.target.value);
+                    }}
+                    value={purpose}
+                    type="text"
+                    name="purpose"
+                    id="purpose"
+                  />
+                </Field>
 
-          <div className={`${style["document-request-tab__form-field"]} `}>
-            <label htmlFor="claim-date">Preferred Ready Date:</label>
-            <input
-              required
-              onChange={(e) => {
-                setDate(e.target.value);
-              }}
-              value={date}
-              type="date"
-              name="claim-date"
-              id="claim-date"
-            />
-          </div>
+                <Field>
+                  <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
+                    Date:
+                  </FieldLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        data-empty={!date}
+                        className="w-[212px] justify-between text-left font-normal data-[empty=true]:text-muted-foreground"
+                      >
+                        {date ? format(date, "PPP") : <span>Pick a date</span>}
+                        <ChevronDownIcon />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={date}
+                        onSelect={setDate}
+                        defaultMonth={date}
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </Field>
+              </FieldGroup>
+            </FieldSet>
 
-          <div
-            className={`${style["document-request-tab__div"]} ${style["document-request-tab__div--button-container"]}`}
-          >
-            <button
-              className={style["document-request-tab__button--submit"]}
-              type="submit"
-            >
-              Submit Request
-            </button>
-          </div>
+            <FieldSeparator></FieldSeparator>
+
+            <Field>
+              <Button type="submit">Submit Request</Button>
+            </Field>
+          </FieldGroup>
         </form>
       </section>
 
