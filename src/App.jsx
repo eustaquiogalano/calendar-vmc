@@ -2,7 +2,6 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import { useMenu } from "./context/MenuContext";
 
-import vmcIcon from "./assets/images/vmc-icon.png";
 import style from "./App.module.css";
 import Icon from "./assets/icons/menu.svg?react";
 
@@ -44,7 +43,8 @@ function App() {
   return (
     <>
       <header className={style["page-header"]}>
-        <img className={style["page-header__img"]} src={vmcIcon} alt="" />
+        {/* <img className={style["page-header__img"]} src={} alt="" /> */}
+        <h1 className="text-2xl md:text-3xl lg:text-5xl">SCHOOL LOGO</h1>
         <h1 className={style["page-header__h1"]}>Services</h1>
         <button
           onClick={toggleMenuBody}
