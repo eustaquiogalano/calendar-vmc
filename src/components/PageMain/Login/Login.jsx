@@ -204,10 +204,6 @@ function Login() {
           </form>
         </section>
       </div>
-      <div>
-        <p>dean.office deanmalakas</p>
-        <p>joris.arancon jorispogi</p>
-      </div>
     </div>
   );
 }
