@@ -1,6 +1,6 @@
 import { StudentUI } from "../components/PageMain/StudentUI/StudentUI";
 import style from "./PageMain.module.css";
-import Login from "../components/PageMain/Login/Login";
+import Login from "./Login";
 import { useState } from "react";
 import { useMenu } from "../context/MenuContext";
 import AdminUI from "../components/PageMain/AdminUI/AdminUI";

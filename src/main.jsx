@@ -8,7 +8,7 @@ import { UserProvider } from "./context/UserContext.jsx";
 
 import App from "./App.jsx";
 import { StudentUI } from "./components/PageMain/StudentUI/StudentUI.jsx";
-import Login from "./components/PageMain/Login/Login.jsx";
+import Login from "./trash/Login.jsx";
 import AdminUI from "./components/PageMain/AdminUI/AdminUI.jsx";
 import ErrorPage from "./components/ErrorPage.jsx";
 import IncomingRequestTab from "./components/PageMain/AdminUI/IncomingRequestTab/IncomingRequestTab.jsx";
@@ -18,6 +18,7 @@ import CalendarTab from "./components/PageMain/StudentUI/CalendarTab/CalendarTab
 import DocumentRequestTab from "./components/PageMain/StudentUI/DocumentRequestTab/DocumentRequestTab.jsx";
 
 import "./global.css";
+import { LoginForm } from "./components/PageMain/AuthForm/AuthForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Login />,
+            element: <LoginForm />,
           },
           {
             path: "student",
@@ -80,5 +81,5 @@ createRoot(document.getElementById("root")).render(
         </MenuProvider>
       </EventsProvider>
     </UserProvider>
-  </StrictMode>
+  </StrictMode>,
 );
