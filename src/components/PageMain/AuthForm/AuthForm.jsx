@@ -30,10 +30,8 @@ export function LoginForm({ className, ...props }) {
   // states for register
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
-  const [middleName, setMiddlename] = useState("");
   const [email, setEmail] = useState("");
   const [idNumber, setIDnumber] = useState("");
-  const [regUsername, setRegUsername] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const [yearLevel, setYearLevel] = useState(1);
 
@@ -65,10 +63,8 @@ export function LoginForm({ className, ...props }) {
     await addStudentUser({
       firstName,
       lastName,
-      middleName,
       email,
       idNumber,
-      username: regUsername,
       password: regPassword,
       yearLevel,
       userType: "student",
