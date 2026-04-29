@@ -1,10 +1,10 @@
 import { getUsers } from "../utils/storage";
 
-async function userAuth(username, password) {
+async function userAuth(email, password) {
   let users = await getUsers();
 
   let verifiedUser = users.find((user) => {
-    return user.username === username && user.password === password;
+    return user.email === email && user.password === password;
   });
 
   // if no user matched the given username and password
