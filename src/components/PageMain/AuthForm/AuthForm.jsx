@@ -35,7 +35,7 @@ export function LoginForm({ className, ...props }) {
   const [idNumber, setIDnumber] = useState("");
   const [regUsername, setRegUsername] = useState("");
   const [regPassword, setRegPassword] = useState("");
-  const [yearLevel, setYearLevel] = useState(0);
+  const [yearLevel, setYearLevel] = useState(1);
 
   async function handleAuth(event) {
     event.preventDefault();
@@ -203,12 +203,26 @@ export function LoginForm({ className, ...props }) {
               <Field>
                 <FieldLabel htmlFor="idNumber">ID Number:</FieldLabel>
                 <Input
+                  value={idNumber}
+                  onChange={(e) => setIDnumber(e.target.value)}
                   id="idNumber"
                   type="text"
                   placeholder="26-0COL-XXXXXX"
                   required
                 />
                 <FieldDescription>Look at your ID.</FieldDescription>
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="yearLevel">Year Level:</FieldLabel>
+                <Input
+                  value={yearLevel}
+                  onChange={(e) => setYearLevel(e.target.value)}
+                  id="yearLevel"
+                  type="number"
+                  placeholder="3"
+                  required
+                />
               </Field>
 
               <Field>
