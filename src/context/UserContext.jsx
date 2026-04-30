@@ -16,6 +16,7 @@ import {
   deleteRequestHF,
 } from "../utils/storage";
 import usersReducer from "../reducers/userReducer";
+import Loader from "@/components/Loader/Loader";
 
 const UserContext = createContext(null);
 
@@ -82,7 +83,7 @@ export function UserProvider({ children }) {
     dispatch({ type: "LOGOUT" });
   };
 
-  if (!ready) return <div>loading...</div>;
+  if (!ready) return <Loader />;
 
   return (
     <UserContext.Provider
