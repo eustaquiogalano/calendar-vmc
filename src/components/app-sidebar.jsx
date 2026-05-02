@@ -1,0 +1,81 @@
+import * as React from "react";
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarRail,
+  SidebarTrigger,
+  useSidebar,
+} from "@/components/ui/sidebar";
+import { CalendarDays, FileText, GalleryVerticalEndIcon } from "lucide-react";
+import { NavLink } from "react-router-dom";
+
+// This is sample data.
+const data = {
+  studentNav: [
+    {
+      title: "Calendar",
+      path: "student/calendar",
+      icon: <CalendarDays />,
+    },
+    {
+      title: "Document Request",
+      path: "student/document-request",
+      icon: <FileText />,
+    },
+  ],
+};
+
+export function AppSidebar({ ...props }) {
+  const { toggleSidebar } = useSidebar();
+
+  return (
+    <Sidebar {...props} className="h-full">
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem className="h-[2rem]">
+            <SidebarMenuButton size="lg" asChild className="flex justify-end">
+              {/* <a href="#">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  <GalleryVerticalEndIcon className="size-4" />
+                </div>
+                <div className="flex flex-col gap-0.5 leading-none">
+                  <span className="font-medium">Documentation</span>
+                  <span className="">v1.0.0</span>
+                </div>
+              </a> */}
+
+              <SidebarTrigger className=" h-full flex justify-center items-center p-0"></SidebarTrigger>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarMenu>
+            {data.studentNav.map((item) => (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton asChild onClick={toggleSidebar}>
+                  <NavLink to={item.path} className="font-medium">
+                    {item.icon}
+                    {item.title}
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarRail />
+    </Sidebar>
+  );
+}

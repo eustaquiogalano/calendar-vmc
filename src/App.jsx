@@ -6,10 +6,19 @@ import style from "./App.module.css";
 import Icon from "./assets/icons/menu.svg?react";
 
 import { getCurrentUser, updateUser } from "./utils/storage.js";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "./components/ui/sidebar";
+import { AppSidebar } from "./components/app-sidebar";
+
+import { useUser } from "./context/UserContext";
 
 function App() {
   const { menuButtonVisibility, toggleMenuBody, toggleMenuButton } = useMenu();
   const navigate = useNavigate();
+  const { currentUser } = useUser();
 
   const loaderObject = {
     userType: "loading...",
@@ -52,19 +61,30 @@ function App() {
             style["studentUI__button"]
           } ${menuButtonVisibility ? "" : style["studentUI__menu--hide"]}`}
         >
-          <Icon fill="#e8f4fb" className={style["studentUI__menu-icon"]} />
+          {/* <Icon fill="#e8f4fb" className={style["studentUI__menu-icon"]} /> */}
         </button>
       </header>
+
       <main
-        className={`${style["page-main"]} ${style["page-main--hide-scroll"]}`}
+        className={`${style["page-main"]} ${style["page-main--hide-scroll"]} relative overflow-hidden`}
       >
-        <Outlet
-          context={{
-            handleLogin,
-            handleLogout,
-            loaderObject,
-          }}
-        />
+        <SidebarProvider
+          style={{ minHeight: "unset" }}
+          className="h-full bg-transparent"
+        >
+          <div className={`${currentUser ? "" : "hidden"} `}>
+            <AppSidebar variant="floating" collapsible="icon" />
+          </div>
+          <SidebarInset className="flex flex-row ">
+            <Outlet
+              context={{
+                handleLogin,
+                handleLogout,
+                loaderObject,
+              }}
+            />
+          </SidebarInset>
+        </SidebarProvider>
       </main>
     </>
   );

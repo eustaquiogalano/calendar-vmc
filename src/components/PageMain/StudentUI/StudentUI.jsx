@@ -4,6 +4,7 @@ import { useMenu } from "../../../context/MenuContext";
 
 import style from "./StudentUI.module.css";
 import { useUser } from "../../../context/UserContext";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 function StudentUI() {
   const { menuBodyVisibility, toggleMenuBody } = useMenu();
@@ -12,7 +13,7 @@ function StudentUI() {
 
   return (
     <>
-      <aside
+      {/* <aside
         className={`${style["studentUI__aside"]} ${
           menuBodyVisibility ? style["studentUI__aside--show"] : ""
         }`}
@@ -49,9 +50,10 @@ function StudentUI() {
             Logout
           </button>
         </nav>
-      </aside>
+      </aside> */}
       <div className={style["studentUI__dashboard"]}>
         <div className={style["studentUI__greeting"]}>
+          <SidebarTrigger className="md:hidden" />
           <h2
             className={`${style["studentUI__h2--shadow"]} ${style["studentUI__h2"]}`}
           >
