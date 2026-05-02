@@ -72,12 +72,14 @@ export function AppSidebar({ ...props }) {
           <SidebarMenu>
             {data.studentNav.map((item) => (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild onClick={toggleSidebar}>
-                  <NavLink to={item.path} className="font-medium">
-                    {item.icon}
-                    {item.title}
-                  </NavLink>
-                </SidebarMenuButton>
+                <NavLink to={item.path} className="w-full">
+                  {({ isActive }) => (
+                    <SidebarMenuButton isActive={isActive}>
+                      {item.icon}
+                      {item.title}
+                    </SidebarMenuButton>
+                  )}
+                </NavLink>
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
