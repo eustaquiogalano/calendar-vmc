@@ -9,23 +9,14 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarRail,
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-import {
-  CalendarDays,
-  FileText,
-  GalleryVerticalEndIcon,
-  LogOut,
-} from "lucide-react";
+import { CalendarDays, FileText, LogOut } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useUser } from "@/context/UserContext";
 
-// This is sample data.
 const data = {
   studentNav: [
     {
@@ -51,16 +42,6 @@ export function AppSidebar({ ...props }) {
         <SidebarMenu>
           <SidebarMenuItem className="h-[2rem]">
             <SidebarMenuButton size="lg" asChild className="flex justify-end">
-              {/* <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <GalleryVerticalEndIcon className="size-4" />
-                </div>
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-medium">Documentation</span>
-                  <span className="">v1.0.0</span>
-                </div>
-              </a> */}
-
               <SidebarTrigger className=" h-full flex justify-center items-center p-0"></SidebarTrigger>
             </SidebarMenuButton>
           </SidebarMenuItem>
