@@ -73,7 +73,11 @@ function App() {
           className="h-full bg-transparent"
         >
           <div className={`${currentUser ? "" : "hidden"} `}>
-            <AppSidebar variant="floating" collapsible="icon" />
+            <AppSidebar
+              variant="floating"
+              collapsible="icon"
+              handleLogout={handleLogout}
+            />
           </div>
           <SidebarInset className="flex flex-col justify-center items-center">
             <Outlet

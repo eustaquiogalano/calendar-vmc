@@ -404,7 +404,7 @@ function SidebarMenu({ className, ...props }) {
     <ul
       data-slot="sidebar-menu"
       data-sidebar="menu"
-      className={cn("flex w-full min-w-0 flex-col gap-0", className)}
+      className={cn("flex w-full min-w-0 flex-col gap-1  ", className)}
       {...props}
     />
   );
@@ -415,7 +415,7 @@ function SidebarMenuItem({ className, ...props }) {
     <li
       data-slot="sidebar-menu-item"
       data-sidebar="menu-item"
-      className={cn("group/menu-item relative", className)}
+      className={`${cn("group/menu-item relative", className)} p-[.25rem] flex justify-center items-center`}
       {...props}
     />
   );

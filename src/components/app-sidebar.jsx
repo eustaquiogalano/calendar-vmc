@@ -3,6 +3,7 @@ import * as React from "react";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarHeader,
   SidebarMenu,
@@ -15,8 +16,14 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { CalendarDays, FileText, GalleryVerticalEndIcon } from "lucide-react";
+import {
+  CalendarDays,
+  FileText,
+  GalleryVerticalEndIcon,
+  LogOut,
+} from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { useUser } from "@/context/UserContext";
 
 // This is sample data.
 const data = {
@@ -36,6 +43,7 @@ const data = {
 
 export function AppSidebar({ ...props }) {
   const { toggleSidebar } = useSidebar();
+  const { currentUser } = useUser();
 
   return (
     <Sidebar {...props} className="h-full">
@@ -75,6 +83,22 @@ export function AppSidebar({ ...props }) {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
+
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              onClick={() => {
+                props.handleLogout(currentUser);
+                toggleSidebar();
+              }}
+            >
+              <LogOut />
+              Logout
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
