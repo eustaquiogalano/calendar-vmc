@@ -6,25 +6,26 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --dark-azure: #003153;
-  --pure-white: #fff;
   --vmc-gradient: linear-gradient(0deg, #23cdf3 0%, rgb(1, 79, 143) 100%);
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --background: #ffffff;
+  --foreground: #003f7a;
+
+  --card: #ffffff;
+  --card-foreground: #003f7a;
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #003153;
-  --primary-foreground: #e8f4fb;
-  --secondary: #e8a020;
-  --secondary-foreground: #001f3a;
-  --muted: #eaf1f5;
-  --muted-foreground: #4a6278;
-  --accent: #e8f4fb;
-  --accent-foreground: #003153;
+
+  --primary: #005eb8;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f9fe;
+  --secondary-foreground: #003f7a;
+  --accent: #23cdf3;
+  --accent-foreground: #003f7a;
+  --muted: #eaf3fd;
+  --muted-foreground: #5a7fa3;
+
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
+  --border: #c8dff2;
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.87 0 0);
@@ -33,14 +34,15 @@
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  --sidebar: #f5f9fe;
+  --sidebar-foreground: #003f7a;
+  --sidebar-primary: #005eb8;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eaf3fd;
+  --sidebar-accent-foreground: #003f7a;
+  --sidebar-border: #c8dff2;
+  --sidebar-ring: #23cdf3;
 }
 
 html {
@@ -54,6 +56,14 @@ html {
   flex-direction: column;
   align-items: center;
   font-family: system-ui, sans-serif;
+}
+
+[data-slot="sidebar-container"] {
+  position: absolute !important;
+}
+
+[data-slot="sidebar-inset"] {
+  background-color: transparent !important;
 }
 
 @theme inline {
