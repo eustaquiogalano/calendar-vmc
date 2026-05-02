@@ -63,8 +63,8 @@
 
 .studentUI__h2 {
   text-align: start;
-  color: var(--dark-azure);
-  background-color: var(--pure-white);
+  color: var(--color-secondary-foreground);
+  background-color: var(--color-secondary);
   padding: 1rem;
   border-radius: 15px;
   height: 100%;

@@ -1,4 +1,4 @@
-.document-request-tab {
+q.document-request-tab {
   height: auto;
 }
 
@@ -8,7 +8,7 @@
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  background-color: var(--pure-white);
+  background-color: var(--color-secondary);
   gap: 1rem;
 }
 
@@ -30,7 +30,7 @@
   font-size: 16px;
   padding: 0.5rem;
   border-radius: 4px;
-  border: 1px solid var(--dark-azure);
+  border: 1px solid var(--color-primary);
 }
 
 .document-request-tab__div label,
@@ -59,7 +59,7 @@
   padding: 1rem;
   width: 100%;
   font-size: 1rem;
-  background-color: var(--dark-azure);
+  background-color: var(--color-primary);
   color: var(--pure-white);
   border: 1px solid transparent;
   transition: all 0.5s;
@@ -67,9 +67,9 @@
 
 .document-request-tab__button--delete-request:hover,
 .document-request-tab__button--submit:hover {
-  background-color: var(--pure-white);
+  background-color: var(--color-secondary);
   color: var(--dark-azure);
-  border: 1px solid var(--dark-azure);
+  border: 1px solid var(--color-primary);
 }
 
 .document-request-tab__pending-request {
@@ -91,7 +91,7 @@
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-  border: 1px solid var(--dark-azure);
+  border: 1px solid var(--color-primary);
   border-radius: 10px;
 }
 

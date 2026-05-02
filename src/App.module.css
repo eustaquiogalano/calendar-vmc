@@ -8,7 +8,7 @@
   padding: 0.5rem 0 0 0;
   gap: 0.5rem;
   z-index: 3;
-  background-color: var(--pure-white);
+  background-color: var(--color-secondary);
 }
 
 .page-header__img {
@@ -16,10 +16,10 @@
 }
 
 .page-header__h1 {
-  background-color: var(--dark-azure);
+  background-color: var(--color-primary);
   width: 100%;
   text-align: center;
-  color: var(--pure-white);
+  color: var(--color-primary-foreground);
   padding: 0.5rem 0;
 }
 
