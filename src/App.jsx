@@ -75,7 +75,7 @@ function App() {
           <div className={`${currentUser ? "" : "hidden"} `}>
             <AppSidebar variant="floating" collapsible="icon" />
           </div>
-          <SidebarInset className="flex flex-row ">
+          <SidebarInset className="flex flex-col justify-center items-center">
             <Outlet
               context={{
                 handleLogin,
