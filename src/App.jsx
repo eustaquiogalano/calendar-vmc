@@ -79,7 +79,7 @@ function App() {
               handleLogout={handleLogout}
             />
           </div>
-          <SidebarInset className="flex flex-col justify-center items-center">
+          <SidebarInset className="flex flex-col justify-center items-center md:ml-[3.5rem] lg:ml-0">
             <Outlet
               context={{
                 handleLogin,
