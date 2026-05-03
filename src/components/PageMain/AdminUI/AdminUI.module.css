@@ -11,15 +11,21 @@
 
 .adminUI__greeting {
   width: 100%;
-  border-radius: 4px;
+  padding: 1rem;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-secondary-foreground);
+  background-color: var(--color-secondary);
 }
 
 .adminUI__h2 {
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: end;
   text-align: start;
-  color: var(--color-primary);
-  background-color: var(--color-primary-foreground);
-  padding: 1rem;
-  border-radius: 15px;
   height: 100%;
   width: 100%;
 }
