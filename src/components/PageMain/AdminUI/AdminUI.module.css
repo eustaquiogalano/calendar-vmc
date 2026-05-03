@@ -55,16 +55,6 @@
 }
 
 @media (min-width: 900px) {
-  .adminUI__aside {
-    width: 200px;
-    position: static;
-    transform: translate(0);
-  }
-
-  .adminUI__menu.adminUI__button {
-    top: -7.3%;
-  }
-
   .adminUI__dashboard {
     flex: 1;
     height: 100%;
@@ -79,10 +69,6 @@
 }
 
 @media (min-width: 1200px) {
-  .adminUI__menu.adminUI__button {
-    top: -7.3%;
-  }
-
   .adminUI__greeting {
     padding: 0 1rem;
   }
