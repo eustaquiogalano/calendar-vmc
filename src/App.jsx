@@ -1,16 +1,10 @@
 import { Outlet, useNavigate } from "react-router-dom";
 
 import style from "./App.module.css";
-import Icon from "./assets/icons/menu.svg?react";
 
 import { getCurrentUser, updateUser } from "./utils/storage.js";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "./components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "./components/ui/sidebar";
 import { AppSidebar } from "./components/app-sidebar";
-
 import { useUser } from "./context/UserContext";
 
 function App() {
@@ -47,7 +41,6 @@ function App() {
   return (
     <>
       <header className={style["page-header"]}>
-        {/* <img className={style["page-header__img"]} src={} alt="" /> */}
         <h1 className="text-2xl md:text-3xl lg:text-5xl">SCHOOL LOGO</h1>
         <h1 className={style["page-header__h1"]}>Services</h1>
       </header>
