@@ -18,7 +18,7 @@ import { useUser } from "./context/UserContext";
 function App() {
   const { menuButtonVisibility, toggleMenuBody, toggleMenuButton } = useMenu();
   const navigate = useNavigate();
-  const { currentUser } = useUser();
+  const { currentUser, logoutCurrentUser } = useUser();
 
   const loaderObject = {
     userType: "loading...",
@@ -41,8 +41,12 @@ function App() {
     return user;
   }
 
-  async function handleLogout(user) {
-    await updateUser(user.idNumber, { ...user, isLoggedIn: false });
+  async function handleLogout() {
+    await updateUser(currentUser.idNumber, {
+      ...currentUser,
+      isLoggedIn: false,
+    });
+    logoutCurrentUser();
 
     toggleMenuButton();
     await getCurrentUser();
@@ -72,14 +76,16 @@ function App() {
           style={{ minHeight: "unset" }}
           className="h-full bg-transparent"
         >
-          <div className={`${currentUser ? "" : "hidden"} `}>
+          {currentUser && (
             <AppSidebar
               variant="floating"
               collapsible="icon"
               handleLogout={handleLogout}
             />
-          </div>
-          <SidebarInset className="flex flex-col justify-center items-center md:ml-[3.5rem] lg:ml-0">
+          )}
+          <SidebarInset
+            className={`flex flex-col justify-center items-center  ${currentUser ? "md:ml-[3.5rem]" : ""} lg:ml-0`}
+          >
             <Outlet
               context={{
                 handleLogin,

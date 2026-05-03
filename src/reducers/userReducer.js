@@ -17,7 +17,7 @@ function usersReducer(state, action) {
     case "LOGOUT":
       return {
         ...state,
-        currentUser: {},
+        currentUser: null,
       };
     default:
       return state;

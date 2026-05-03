@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/sidebar";
 import { CalendarDays, FileText, LogOut } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import { useUser } from "@/context/UserContext";
 
 const data = {
   studentNav: [
@@ -32,9 +31,8 @@ const data = {
   ],
 };
 
-export function AppSidebar({ ...props }) {
+export function AppSidebar({ handleLogout, ...props }) {
   const { toggleSidebar } = useSidebar();
-  const { currentUser } = useUser();
 
   return (
     <Sidebar {...props} className="h-full">
@@ -72,7 +70,7 @@ export function AppSidebar({ ...props }) {
           <SidebarMenuItem>
             <SidebarMenuButton
               onClick={() => {
-                props.handleLogout(currentUser);
+                handleLogout();
                 toggleSidebar();
               }}
             >

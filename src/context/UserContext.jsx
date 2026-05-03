@@ -22,7 +22,7 @@ const UserContext = createContext(null);
 
 const initialState = {
   users: [],
-  currentUser: {},
+  currentUser: null,
   admins: [],
   students: [],
 };
