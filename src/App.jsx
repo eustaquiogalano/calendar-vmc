@@ -1,7 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
 
-import { useMenu } from "./context/MenuContext";
-
 import style from "./App.module.css";
 import Icon from "./assets/icons/menu.svg?react";
 
@@ -16,7 +14,6 @@ import { AppSidebar } from "./components/app-sidebar";
 import { useUser } from "./context/UserContext";
 
 function App() {
-  const { menuButtonVisibility, toggleMenuBody, toggleMenuButton } = useMenu();
   const navigate = useNavigate();
   const { currentUser, logoutCurrentUser } = useUser();
 
@@ -34,10 +31,6 @@ function App() {
     await updateUser(user.idNumber, user);
     await getCurrentUser();
 
-    if (user) {
-      toggleMenuButton();
-    }
-
     return user;
   }
 
@@ -47,8 +40,6 @@ function App() {
       isLoggedIn: false,
     });
     logoutCurrentUser();
-
-    toggleMenuButton();
     await getCurrentUser();
     navigate("/");
   }
@@ -59,14 +50,6 @@ function App() {
         {/* <img className={style["page-header__img"]} src={} alt="" /> */}
         <h1 className="text-2xl md:text-3xl lg:text-5xl">SCHOOL LOGO</h1>
         <h1 className={style["page-header__h1"]}>Services</h1>
-        <button
-          onClick={toggleMenuBody}
-          className={`${style["studentUI__menu"]} ${
-            style["studentUI__button"]
-          } ${menuButtonVisibility ? "" : style["studentUI__menu--hide"]}`}
-        >
-          {/* <Icon fill="#e8f4fb" className={style["studentUI__menu-icon"]} /> */}
-        </button>
       </header>
 
       <main

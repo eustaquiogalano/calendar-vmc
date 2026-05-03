@@ -2,7 +2,7 @@ import { StudentUI } from "../components/PageMain/StudentUI/StudentUI";
 import style from "./PageMain.module.css";
 import Login from "./Login";
 import { useState } from "react";
-import { useMenu } from "../context/MenuContext";
+import { useMenu } from "./MenuContext";
 import AdminUI from "../components/PageMain/AdminUI/AdminUI";
 import { Outlet } from "react-router-dom";
 

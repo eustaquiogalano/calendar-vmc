@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 
-import { useMenu } from "../../../context/MenuContext";
+import { useMenu } from "../../../trash/MenuContext";
 
 import style from "./AdminUI.module.css";
 import { useUser } from "../../../context/UserContext";

@@ -23,26 +23,6 @@
   padding: 0.5rem 0;
 }
 
-.studentUI__menu.studentUI__button {
-  z-index: 3;
-  width: 50px;
-  position: absolute;
-  top: 56%;
-  border-radius: 0px;
-  left: 0;
-  padding: 0.5rem;
-  border: none;
-  transition: transform 0.2s ease-out;
-}
-
-.studentUI__menu-icon {
-  width: 100%;
-}
-
-.studentUI__menu--hide {
-  transform: translateX(-100%);
-}
-
 .page-main {
   max-width: 1464px;
   flex: 1;

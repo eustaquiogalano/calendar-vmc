@@ -1,7 +1,7 @@
 import vmcIcon from "../../assets/images/vmc-icon.png";
 import style from "./PageHeader.module.css";
 import Icon from "./../../assets/icons/menu.svg?react";
-import { useMenu } from "../../context/MenuContext";
+import { useMenu } from "../MenuContext";
 
 function PageHeader() {
   const { menuButtonVisibility, toggleMenuBody } = useMenu();

@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { MenuProvider } from "./context/MenuContext.jsx";
+import { MenuProvider } from "./trash/MenuContext.jsx";
 import { EventsProvider } from "./context/EventsContext.jsx";
 import { UserProvider } from "./context/UserContext.jsx";
 
