@@ -1,65 +1,15 @@
-import { NavLink, Outlet, useOutletContext } from "react-router-dom";
+import { Outlet, useOutletContext } from "react-router-dom";
 
 import style from "./AdminUI.module.css";
 import { useUser } from "../../../context/UserContext";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 function AdminUI() {
-  const { loaderObject, handleLogout } = useOutletContext();
+  const { loaderObject } = useOutletContext();
   const { currentUser } = useUser();
 
   return (
     <>
-      {/* <aside
-        className={`${style["adminUI__aside"]} ${
-          menuBodyVisibility ? style["adminUI__aside--show"] : ""
-        }`}
-      >
-        <nav className={style["adminUI__nav"]}>
-          <NavLink
-            to={`incoming-request`}
-            onClick={toggleMenuBody}
-            className={({ isActive }) =>
-              `${style["adminUI__button"]} ${
-                isActive ? style["adminUI__button--active"] : ""
-              }`
-            }
-          >
-            Incoming Request
-          </NavLink>
-
-          <NavLink
-            to={`manage-request`}
-            onClick={toggleMenuBody}
-            className={({ isActive }) =>
-              `${style["adminUI__button"]} ${
-                isActive ? style["adminUI__button--active"] : ""
-              }`
-            }
-          >
-            Manage Requests
-          </NavLink>
-
-          <NavLink
-            to={`create-event`}
-            onClick={toggleMenuBody}
-            className={({ isActive }) =>
-              `${style["adminUI__button"]} ${
-                isActive ? style["adminUI__button--active"] : ""
-              }`
-            }
-          >
-            Create Event
-          </NavLink>
-
-          <button
-            onClick={() => handleLogout(currentUser)}
-            className={`${style["adminUI__button"]} ${style["adminUI__button--logout"]} `}
-          >
-            Logout
-          </button>
-        </nav>
-      </aside> */}
       <div className={style["adminUI__dashboard"]}>
         <div className={style["adminUI__greeting"]}>
           <SidebarTrigger className="md:hidden" />
