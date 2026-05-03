@@ -64,6 +64,7 @@ function App() {
               variant="floating"
               collapsible="icon"
               handleLogout={handleLogout}
+              currentUser={currentUser}
             />
           )}
           <SidebarInset

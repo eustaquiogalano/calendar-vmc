@@ -1,18 +1,15 @@
 import { NavLink, Outlet, useOutletContext } from "react-router-dom";
 
-import { useMenu } from "../../../trash/MenuContext";
-
 import style from "./AdminUI.module.css";
 import { useUser } from "../../../context/UserContext";
 
 function AdminUI() {
-  const { menuBodyVisibility, toggleMenuBody } = useMenu();
   const { loaderObject, handleLogout } = useOutletContext();
   const { currentUser } = useUser();
 
   return (
     <>
-      <aside
+      {/* <aside
         className={`${style["adminUI__aside"]} ${
           menuBodyVisibility ? style["adminUI__aside--show"] : ""
         }`}
@@ -61,7 +58,7 @@ function AdminUI() {
             Logout
           </button>
         </nav>
-      </aside>
+      </aside> */}
       <div className={style["adminUI__dashboard"]}>
         <div className={style["adminUI__greeting"]}>
           <h2 className={`${style["adminUI__h2"]}`}>

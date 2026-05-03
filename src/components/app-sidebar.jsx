@@ -13,7 +13,14 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { CalendarDays, FileText, LogOut } from "lucide-react";
+import {
+  CalendarDays,
+  CalendarPlus,
+  FileCog,
+  FileInput,
+  FileText,
+  LogOut,
+} from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 const data = {
@@ -29,10 +36,29 @@ const data = {
       icon: <FileText />,
     },
   ],
+
+  adminNav: [
+    {
+      title: "Incoming Request",
+      path: "admin/incoming-request",
+      icon: <FileInput />,
+    },
+    {
+      title: "Manage Request",
+      path: "admin/manage-request",
+      icon: <FileCog />,
+    },
+    {
+      title: "Create Event",
+      path: "admin/create-event",
+      icon: <CalendarPlus />,
+    },
+  ],
 };
 
-export function AppSidebar({ handleLogout, ...props }) {
-  const { toggleSidebar } = useSidebar();
+export function AppSidebar({ currentUser, handleLogout, ...props }) {
+  const navData =
+    currentUser.userType === "admin" ? data.adminNav : data.studentNav;
 
   return (
     <Sidebar {...props} className="h-full">
@@ -49,7 +75,7 @@ export function AppSidebar({ handleLogout, ...props }) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
-            {data.studentNav.map((item) => (
+            {navData.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <NavLink to={item.path} className="w-full">
                   {({ isActive }) => (
@@ -71,7 +97,6 @@ export function AppSidebar({ handleLogout, ...props }) {
             <SidebarMenuButton
               onClick={() => {
                 handleLogout();
-                toggleSidebar();
               }}
             >
               <LogOut />
