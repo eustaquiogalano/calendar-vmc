@@ -66,7 +66,7 @@ function ManageRequestTab() {
               <CardFooter>
                 <Button
                   variant="default"
-                  className="w-full"
+                  className="w-full h-fit p-2"
                   onClick={() =>
                     updateRequestStatus(
                       student,
@@ -130,8 +130,7 @@ function ManageRequestTab() {
                     <CardFooter>
                       <Button
                         variant="default"
-                        size="sm"
-                        className="w-full"
+                        className="w-full h-fit p-2"
                         onClick={() => setSelectedRequest({ student, request })}
                       >
                         View Full Details
