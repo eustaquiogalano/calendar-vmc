@@ -149,7 +149,9 @@ function CreateEvent() {
             </FieldSet>
             <FieldSeparator></FieldSeparator>
             <Field>
-              <Button type="submit">Create Event</Button>
+              <Button className="w-full h-fit p-2" type="submit">
+                Create Event
+              </Button>
             </Field>
           </FieldGroup>
         </form>
@@ -202,8 +204,7 @@ function CreateEvent() {
                   <CardFooter>
                     <Button
                       variant="default"
-                      size="sm"
-                      className="w-full"
+                      className="w-full h-fit p-2"
                       onClick={() => handleDelete(event.id)}
                     >
                       Delete
