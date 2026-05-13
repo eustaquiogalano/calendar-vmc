@@ -52,11 +52,10 @@ function IncomingRequestTab() {
                       <span>{request.date}</span>
                     </div>
                   </CardContent>
-                  <CardFooter className="flex justify-between">
+                  <CardFooter className="flex justify-between gap-2">
                     <Button
                       variant="default"
-                      size="sm"
-                      className=""
+                      className="w-[50%] h-fit p-2"
                       onClick={() =>
                         updateRequestStatus(
                           student,
@@ -69,8 +68,8 @@ function IncomingRequestTab() {
                       Accept
                     </Button>
                     <Button
-                      variant="secondary"
-                      size="sm"
+                      variant="outline"
+                      className="w-[50%] h-fit p-2"
                       onClick={() =>
                         updateRequestStatus(
                           student,
