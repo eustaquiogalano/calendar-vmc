@@ -163,7 +163,9 @@ function DocumentRequestTab() {
             <FieldSeparator></FieldSeparator>
 
             <Field>
-              <Button type="submit">Submit Request</Button>
+              <Button className="h-fit p-2" type="submit">
+                Submit Request
+              </Button>
             </Field>
           </FieldGroup>
         </form>
@@ -203,8 +205,7 @@ function DocumentRequestTab() {
                   <CardFooter>
                     <Button
                       variant="default"
-                      size="sm"
-                      className="w-full"
+                      className="w-full h-fit p-2"
                       onClick={() => {
                         setDeletionID(request.id);
                         dialogRef.current.showModal();
