@@ -125,13 +125,16 @@ export function LoginForm({ className, ...props }) {
                 />
               </Field>
               <Field>
-                <Button onClick={handleAuth}>Login</Button>
+                <Button className="h-fit p-2" onClick={handleAuth}>
+                  Login
+                </Button>
               </Field>
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                 Or
               </FieldSeparator>
               <Field className="flex">
                 <Button
+                  className="h-fit p-2"
                   variant="outline"
                   type="button"
                   onClick={toggleRegisterForm}
