@@ -2,7 +2,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "./Calendar.css";
-import { getEvents } from "../../../../../utils/storage";
+import { getEvents } from "../../../../../utils/storage/storage";
 import { useEffect, useState } from "react";
 import { format, parse } from "date-fns";
 

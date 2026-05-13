@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 
 import userAuth from "../../../services/mockAuth.js";
 import { useUser } from "../../../context/UserContext.jsx";
-import { addStudentUser } from "../../../utils/storage.js";
+import { addStudentUser } from "../../../utils/storage/storage.js";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";

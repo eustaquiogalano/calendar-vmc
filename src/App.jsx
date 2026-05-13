@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import style from "./App.module.css";
 
-import { getCurrentUser, updateUser } from "./utils/storage.js";
+import { getCurrentUser, updateUser } from "./utils/storage/storage.js";
 import { SidebarInset, SidebarProvider } from "./components/ui/sidebar";
 import { AppSidebar } from "./components/app-sidebar";
 import { useUser } from "./context/UserContext";

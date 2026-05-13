@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEvent } from "../../../../context/EventsContext";
 import style from "./CreateEventTab.module.css";
-import { addEvent, deleteEvent } from "../../../../utils/storage";
+import { addEvent, deleteEvent } from "../../../../utils/storage/storage.js";
 
 import {
   Field,

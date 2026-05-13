@@ -1,5 +1,5 @@
 import localforage from "localforage";
-import { users as mockUsers } from "../mocks/users.mock";
+import { users as mockUsers } from "../../mocks/users.mock";
 
 function set(users, type = "users") {
   return localforage.setItem(`${type}`, users);
@@ -123,7 +123,7 @@ async function updateRequestStatusHF(studentID, requestID, update) {
   if (!student) throw new Error(`No student found.`);
 
   let request = student.requestedDocuments.find(
-    (request) => request.id === requestID
+    (request) => request.id === requestID,
   );
   if (!request) throw new Error(`No request found.`);
 
@@ -165,7 +165,7 @@ async function deleteRequestHF(studentID, requestID) {
 
   // create new request list without the selected request
   let updatedRequestList = student.requestedDocuments.filter(
-    (request) => request.id !== requestID
+    (request) => request.id !== requestID,
   );
   if (!updatedRequestList) throw new Error(`No request found.`);
 

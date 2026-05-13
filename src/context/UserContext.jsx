@@ -14,7 +14,7 @@ import {
   setInitialUsers,
   updateRequestStatusHF,
   deleteRequestHF,
-} from "../utils/storage";
+} from "../utils/storage/storage";
 import usersReducer from "../reducers/userReducer";
 import Loader from "@/components/Loader/Loader";
 

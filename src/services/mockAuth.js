@@ -1,4 +1,4 @@
-import { getUsers } from "../utils/storage";
+import { getUsers } from "../utils/storage/storage.js";
 
 async function userAuth(email, password) {
   let users = await getUsers();

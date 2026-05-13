@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getEvents } from "../utils/storage";
+import { getEvents } from "../utils/storage/storage";
 
 const EventsContext = createContext(null);
 
