@@ -1,39 +1,11 @@
 .confirmation-dialog {
-  padding: 1.5rem;
   margin: auto;
-  border: 1px solid var(--dark-azure);
-  border-radius: 4px;
+  background-color: transparent;
+  height: fit-content;
+  width: fit-content;
 }
 
-.confirmation-dialog[open] {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.confirmation-dialog p {
-  font-size: 1rem;
-}
-
-.confirmation-dialog__button-container {
-  display: flex;
-  gap: 1rem;
-}
-
-.confirmation-dialog__button {
-  width: 50%;
-  height: 110%;
-  font-size: 1rem;
-  background-color: var(--dark-azure);
-  color: var(--pure-white);
-  border: 1px solid transparent;
-  transition: all 0.5s;
-  border-radius: 4px;
-  padding: 1rem;
-}
-
-.confirmation-dialog__button:hover {
-  background-color: var(--pure-white);
-  color: var(--dark-azure);
-  border: 1px solid var(--dark-azure);
+.confirmation-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
 }
