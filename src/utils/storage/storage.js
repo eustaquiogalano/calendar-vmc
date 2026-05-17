@@ -24,7 +24,7 @@ async function fakeNetwork(key) {
 }
 
 async function setInitialUsers() {
-  await fakeNetwork();
+  await fakeNetwork("initUsers");
 
   const persistentData = await localforage.getItem("users");
 
@@ -45,7 +45,7 @@ async function addStudentUser(newUser) {
 }
 
 async function getStudentUsers() {
-  await fakeNetwork();
+  await fakeNetwork("getStudentUsers");
 
   let users = await localforage.getItem("users");
   if (!users) users = [];
@@ -60,7 +60,7 @@ async function getStudentUsers() {
 }
 
 async function getAdminUsers() {
-  await fakeNetwork();
+  await fakeNetwork("getAdminUsers");
 
   let users = await localforage.getItem("users");
   if (!users) users = [];
@@ -84,7 +84,7 @@ async function getUsers(query) {
 }
 
 async function updateUser(id, update) {
-  await fakeNetwork();
+  await fakeNetwork("updateUser");
 
   let users = await localforage.getItem("users");
   if (!users) users = [];
@@ -99,7 +99,7 @@ async function updateUser(id, update) {
 }
 
 async function getCurrentUser() {
-  await fakeNetwork();
+  await fakeNetwork("getCurrentUser");
 
   let users = await localforage.getItem("users");
   if (!users) users = [];
@@ -114,7 +114,7 @@ async function getCurrentUser() {
 }
 
 async function updateRequestStatusHF(studentID, requestID, update) {
-  await fakeNetwork();
+  await fakeNetwork("updateRequestStatusHF");
 
   let students = await getStudentUsers();
   if (!students) return [];
@@ -138,7 +138,7 @@ async function updateRequestStatusHF(studentID, requestID, update) {
 }
 
 async function addRequestHF(newRequest) {
-  await fakeNetwork();
+  await fakeNetwork("addRequestHF");
 
   let currentUser = await getCurrentUser();
   if (!currentUser) currentUser = [];
@@ -154,7 +154,7 @@ async function addRequestHF(newRequest) {
 }
 
 async function deleteRequestHF(studentID, requestID) {
-  await fakeNetwork();
+  await fakeNetwork("deleteRequestHF");
 
   let users = await localforage.getItem("users");
   if (!users) return [];
@@ -177,12 +177,16 @@ async function deleteRequestHF(studentID, requestID) {
 }
 
 async function getEvents() {
+  await fakeNetwork("getEvents");
+
   let events = (await localforage.getItem("events")) || [];
 
   return events;
 }
 
 async function addEvent(newEvent) {
+  await fakeNetwork("addEvent");
+
   let events = (await localforage.getItem("events")) || [];
 
   events = [...events, newEvent];
