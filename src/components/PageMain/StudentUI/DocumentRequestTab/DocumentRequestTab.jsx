@@ -8,6 +8,15 @@ import style from "./DocumentRequestTab.module.css";
 import ConfirmationDialog from "./ConfirmationDialog/ConfirmationDialog";
 
 import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import {
   Field,
   FieldDescription,
   FieldGroup,
@@ -117,8 +126,8 @@ function DocumentRequestTab() {
                     <FieldLabel htmlFor="checkout-7j9-card-name-43j">
                       Select Document:
                     </FieldLabel>
-                    <select
-                      className="border-2 "
+                    {/* <select
+                      className="border-2 rounded-md"
                       required
                       onChange={(e) => {
                         setDocument(e.target.value);
@@ -135,7 +144,23 @@ function DocumentRequestTab() {
                       <option value="Transcript of Records">
                         Transcript of Records
                       </option>
-                    </select>
+                    </select> */}
+                    <Select>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Diploma" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="Diploma">Diploma</SelectItem>
+                          <SelectItem value="Registration Form (CTC)">
+                            Registration Form (CTC)
+                          </SelectItem>
+                          <SelectItem value="Transcript of Records">
+                            Transcript of Records
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </Field>
 
                   <Field>
