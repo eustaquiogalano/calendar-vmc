@@ -14,7 +14,7 @@ function StudentUI() {
         <div className={style["studentUI__greeting"]}>
           <SidebarTrigger className="md:hidden" />
           <h2
-            className={`${style["studentUI__h2--shadow"]} ${style["studentUI__h2"]}`}
+            className={`${style["studentUI__h2--shadow"]} ${style["studentUI__h2"]} text-xl font-bold`}
           >
             Hello {currentUser?.firstName || loaderObject?.name}
           </h2>

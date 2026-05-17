@@ -113,8 +113,8 @@ function DocumentRequestTab() {
           twclass={`${isActive ? "" : "hidden"}`}
           setIsActive={setIsActive}
         />
-        <div className={`${isActive ? "hidden" : ""}`}>
-          <h2>Create Request</h2>
+        <div className={`${isActive ? "hidden" : ""} flex flex-col gap-4`}>
+          <h2 className="text-xl font-bold">Create Request</h2>
           <form
             onSubmit={submitRequest}
             className={style["document-request-tab__request-form"]}
@@ -226,7 +226,7 @@ function DocumentRequestTab() {
       <section
         className={`${style["document-request-tab__section"]} ${style["document-request-tab__pending-request"]}`}
       >
-        <h2>Request List</h2>
+        <h2 className="text-xl font-bold">Request List</h2>
 
         <div className={style["document-request-tab__pending-list"]}>
           {currentUser &&

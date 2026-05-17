@@ -26,7 +26,7 @@ function CalendarTab() {
       <section
         className={`${style["calendar-tab__section"]} ${style["calendar-tab__section--calendar"]}`}
       >
-        <h2>Calendar</h2>
+        <h2 className="text-xl font-bold">Calendar</h2>
         <div className={`${style["calendar-tab__calendar"]} `}>
           <Calendar requests={requests} setSelectedDate={setSelectedDate} />
         </div>
@@ -35,7 +35,7 @@ function CalendarTab() {
       <section
         className={`${style["calendar-tab__section"]} ${style["calendar-tab__section--events"]}`}
       >
-        <h2>Events</h2>
+        <h2 className="text-xl font-bold">Events</h2>
         {/* <div className={`${style["calendar-tab__events"]} `}> */}
         <div className={style["calendar-tab__request-list"]}>
           {announcements &&
