@@ -145,7 +145,13 @@ function DocumentRequestTab() {
                         Transcript of Records
                       </option>
                     </select> */}
-                    <Select>
+                    <Select
+                      onValueChange={(value) => setDocument(value)}
+                      value={document}
+                      name="document"
+                      id="document"
+                      required
+                    >
                       <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Diploma" />
                       </SelectTrigger>
