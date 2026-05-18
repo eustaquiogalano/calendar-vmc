@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useEvent } from "../../../../context/EventsContext";
 import style from "./CreateEventTab.module.css";
 import { addEvent, deleteEvent } from "../../../../utils/storage/storage.js";
@@ -30,6 +30,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import DeleteRequestDialog from "@/components/DeleteRequestDialog/DeleteRequestDialog";
 
 function CreateEvent() {
   const { events, setEvents } = useEvent();
@@ -37,8 +38,8 @@ function CreateEvent() {
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-
-  console.log(date);
+  const [eventID, setEventID] = useState("");
+  const deleteDialogRef = useRef();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -55,7 +56,7 @@ function CreateEvent() {
     resetState();
   }
 
-  async function handleDelete(eventID) {
+  async function handleDelete() {
     const updatedEvents = await deleteEvent(eventID);
 
     setEvents(updatedEvents);
@@ -206,7 +207,10 @@ function CreateEvent() {
                     <Button
                       variant="default"
                       className="w-full h-fit p-2"
-                      onClick={() => handleDelete(event.id)}
+                      onClick={() => {
+                        setEventID(event.id);
+                        deleteDialogRef.current.showModal();
+                      }}
                     >
                       Delete
                     </Button>
@@ -215,6 +219,7 @@ function CreateEvent() {
               );
             })}
         </div>
+        <DeleteRequestDialog ref={deleteDialogRef} onDeletion={handleDelete} />
       </section>
     </>
   );
