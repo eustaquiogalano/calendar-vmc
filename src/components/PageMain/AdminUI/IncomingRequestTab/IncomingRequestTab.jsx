@@ -11,9 +11,19 @@ import {
 } from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
+import RejectRequestDialog from "@/components/RejectRequestDialog/RejectRequestDialog";
+import { useRef, useState } from "react";
 
 function IncomingRequestTab() {
   const { students, updateRequestStatus } = useUser();
+  const rejectionDialogRef = useRef();
+  const [student, setStudent] = useState();
+  const [requestID, setRequestID] = useState();
+  const [request, setRequest] = useState();
+
+  const handleRequestRejection = () => {
+    updateRequestStatus(student, requestID, "REJECTED", request);
+  };
 
   return (
     <section
@@ -72,14 +82,12 @@ function IncomingRequestTab() {
                     <Button
                       variant="outline"
                       className="w-[50%] h-fit p-2"
-                      onClick={() =>
-                        updateRequestStatus(
-                          student,
-                          request.id,
-                          "REJECTED",
-                          request,
-                        )
-                      }
+                      onClick={() => {
+                        setStudent(student);
+                        setRequestID(request.id);
+                        setRequest(request);
+                        rejectionDialogRef.current.showModal();
+                      }}
                     >
                       Reject
                     </Button>
@@ -89,6 +97,11 @@ function IncomingRequestTab() {
             });
         })}
       </div>
+
+      <RejectRequestDialog
+        ref={rejectionDialogRef}
+        onRejection={handleRequestRejection}
+      />
     </section>
   );
 }
