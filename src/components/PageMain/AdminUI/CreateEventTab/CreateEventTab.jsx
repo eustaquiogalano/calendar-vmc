@@ -71,7 +71,7 @@ function CreateEvent() {
   return (
     <>
       <section
-        className={`${style["create-event__section"]} ${style["create-event__section--event-form"]}`}
+        className={`${style["create-event__section"]} ${style["create-event__section--event-form"]} text-xl font-bold`}
       >
         <h2>Create Event</h2>
         <form onSubmit={handleSubmit}>
@@ -156,8 +156,9 @@ function CreateEvent() {
           </FieldGroup>
         </form>
       </section>
+
       <section
-        className={`${style["create-event__section"]} ${style["create-event__section--event-list"]}`}
+        className={`${style["create-event__section"]} ${style["create-event__section--event-list"]} text-xl font-bold `}
       >
         <h2>Event List</h2>
         <div className={style["create-event__container--event-list"]}>

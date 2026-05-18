@@ -13,7 +13,7 @@ function AdminUI() {
       <div className={style["adminUI__dashboard"]}>
         <div className={style["adminUI__greeting"]}>
           <SidebarTrigger className="md:hidden" />
-          <h2 className={`${style["adminUI__h2"]}`}>
+          <h2 className={`${style["adminUI__h2"]} text-xl font-bold`}>
             Hello {currentUser?.name || loaderObject?.name}
           </h2>
         </div>

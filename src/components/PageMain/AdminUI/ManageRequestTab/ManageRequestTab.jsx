@@ -22,7 +22,7 @@ function ManageRequestTab() {
   return (
     <>
       <section
-        className={`${style["manage-request__section"]} ${style["manage-request__section--full-view"]}`}
+        className={`${style["manage-request__section"]} ${style["manage-request__section--full-view"]} text-xl font-bold`}
       >
         <h2>Request View</h2>
         <div className={style["manage-request__display-box"]}>
@@ -87,7 +87,7 @@ function ManageRequestTab() {
       </section>
 
       <section
-        className={`${style["manage-request__section"]} ${style["manage-request__section--request-list"]}`}
+        className={`${style["manage-request__section"]} ${style["manage-request__section--request-list"]} text-xl font-bold`}
       >
         <h2>Request List</h2>
         <div className={style["manage-request__container--request-list"]}>

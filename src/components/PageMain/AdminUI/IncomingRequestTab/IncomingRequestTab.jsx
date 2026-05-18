@@ -16,7 +16,9 @@ function IncomingRequestTab() {
   const { students, updateRequestStatus } = useUser();
 
   return (
-    <section className={style["incoming-request__section"]}>
+    <section
+      className={`${style["incoming-request__section"]} text-xl font-bold`}
+    >
       <h2>Incoming Requests</h2>
 
       <div className={style["incoming-request__request-list"]}>
