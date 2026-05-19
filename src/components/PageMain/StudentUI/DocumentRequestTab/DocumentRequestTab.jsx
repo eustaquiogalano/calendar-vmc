@@ -27,14 +27,14 @@ import {
 } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, Loader } from "lucide-react";
 import {
   PopoverTrigger,
   PopoverContent,
   Popover,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 
 import {
   Card,
@@ -48,7 +48,7 @@ import { validateRequest } from "@/utils/validateRequest/validateRequest";
 import RequestBlockedCard from "@/components/RequestBlockedCard/RequestBlockedCard";
 
 function DocumentRequestTab() {
-  const { addRequest, deleteRequest, setLoading } = useUser();
+  const { addRequest, deleteRequest, setLoading, loading } = useUser();
   const { currentUser } = useOutletContext();
   const dialogRef = useRef();
 
@@ -57,6 +57,8 @@ function DocumentRequestTab() {
   const [purpose, setPurpose] = useState("");
   const [date, setDate] = useState("");
   const [isActive, setIsActive] = useState(false);
+
+  console.log(loading);
 
   async function submitRequest(e) {
     e.preventDefault();
@@ -94,8 +96,9 @@ function DocumentRequestTab() {
 
   async function handleDeleteRequest() {
     await deleteRequest(currentUser, deleteionID);
-    setLoading((prev) => ++prev);
+    setLoading(true);
     setDeletionID("");
+    setLoading(false);
   }
 
   function resetStates() {
@@ -220,8 +223,16 @@ function DocumentRequestTab() {
               <FieldSeparator></FieldSeparator>
 
               <Field>
-                <Button className="h-fit p-2" type="submit">
-                  Submit Request
+                <Button
+                  disabled={loading}
+                  className={` h-fit p-2`}
+                  type="submit"
+                >
+                  {loading ? (
+                    <Loader className="animate-spin" />
+                  ) : (
+                    "Submit Request"
+                  )}
                 </Button>
               </Field>
             </FieldGroup>
@@ -262,6 +273,7 @@ function DocumentRequestTab() {
                   </CardContent>
                   <CardFooter>
                     <Button
+                      disabled={loading}
                       variant="default"
                       className="w-full h-fit p-2"
                       onClick={() => {
@@ -269,7 +281,11 @@ function DocumentRequestTab() {
                         dialogRef.current.showModal();
                       }}
                     >
-                      Delete
+                      {loading ? (
+                        <Loader className="animate-spin" />
+                      ) : (
+                        "Delete Request"
+                      )}
                     </Button>
                   </CardFooter>
                 </Card>

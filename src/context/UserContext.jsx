@@ -29,7 +29,7 @@ const initialState = {
 
 export function UserProvider({ children }) {
   const [state, dispatch] = useReducer(usersReducer, initialState);
-  const [loading, setLoading] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -53,6 +53,7 @@ export function UserProvider({ children }) {
   }, [loading]);
 
   async function updateRequestStatus(student, requestID, status, request) {
+    setLoading(true);
     let studentID = student.idNumber;
 
     await updateRequestStatusHF(studentID, requestID, {
@@ -60,19 +61,21 @@ export function UserProvider({ children }) {
       status: status,
     });
 
-    setLoading((prev) => ++prev);
+    setLoading(false);
   }
 
   async function addRequest(newRequest) {
+    setLoading(true);
     await addRequestHF(newRequest);
 
-    setLoading((prev) => ++prev);
+    setLoading(false);
   }
 
   async function deleteRequest(student, requestID) {
+    setLoading(true);
     await deleteRequestHF(student.idNumber, requestID);
 
-    setLoading((prev) => ++prev);
+    setLoading(false);
   }
 
   const loginCurrentUser = (currentUser) => {
