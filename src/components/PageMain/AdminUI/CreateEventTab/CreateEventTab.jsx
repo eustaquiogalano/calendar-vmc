@@ -5,10 +5,8 @@ import { addEvent, deleteEvent } from "../../../../utils/storage/storage.js";
 
 import {
   Field,
-  FieldDescription,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
   FieldSeparator,
   FieldSet,
 } from "@/components/ui/field";
@@ -25,7 +23,6 @@ import { ChevronDownIcon } from "lucide-react";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -166,25 +163,6 @@ function CreateEvent() {
           {events &&
             events.map((event) => {
               return (
-                // <div className={style["create-event__event-card"]}>
-                //   <p>
-                //     Event Name: <span>{event.name}</span>
-                //   </p>
-                //   <p>
-                //     Time: <span>{event.endTime}</span>
-                //   </p>
-                //   <p>
-                //     Time: <span>{event.startTime}</span>
-                //   </p>
-                //   <p>
-                //     Date: <span>{event.date}</span>
-                //   </p>
-                //   <div>
-                //     <button onClick={() => handleDelete(event.id)}>
-                //       Delete
-                //     </button>
-                //   </div>
-                // </div>
                 <Card className="border-2 h-fit shrink-0">
                   <CardHeader>
                     <CardTitle>{event.name}</CardTitle>
