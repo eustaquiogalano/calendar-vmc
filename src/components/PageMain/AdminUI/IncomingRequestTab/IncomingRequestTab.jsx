@@ -13,16 +13,26 @@ import {
 import { Button } from "@/components/ui/button";
 import RejectRequestDialog from "@/components/RejectRequestDialog/RejectRequestDialog";
 import { useRef, useState } from "react";
+import { set } from "date-fns";
+import { LoaderCircle } from "lucide-react";
 
 function IncomingRequestTab() {
-  const { students, updateRequestStatus } = useUser();
+  const { students, updateRequestStatus, loading, setLoading } = useUser();
   const rejectionDialogRef = useRef();
   const [student, setStudent] = useState();
   const [requestID, setRequestID] = useState();
   const [request, setRequest] = useState();
 
-  const handleRequestRejection = () => {
-    updateRequestStatus(student, requestID, "REJECTED", request);
+  const handleRequestRejection = async () => {
+    setLoading(true);
+    await updateRequestStatus(student, requestID, "REJECTED", request);
+    setLoading(false);
+  };
+
+  const handleRequestAcceptance = async (student, requestID, request) => {
+    setLoading(true);
+    await updateRequestStatus(student, requestID, "ACCEPTED", request);
+    setLoading(false);
   };
 
   return (
@@ -66,18 +76,18 @@ function IncomingRequestTab() {
                   </CardContent>
                   <CardFooter className="flex justify-between gap-2">
                     <Button
+                      disabled={loading}
                       variant="default"
                       className="w-[50%] h-fit p-2"
-                      onClick={() =>
-                        updateRequestStatus(
-                          student,
-                          request.id,
-                          "ACCEPTED",
-                          request,
-                        )
-                      }
+                      onClick={() => {
+                        handleRequestAcceptance(student, request.id, request);
+                      }}
                     >
-                      Accept
+                      {loading ? (
+                        <LoaderCircle className="animate-spin" />
+                      ) : (
+                        "Accept"
+                      )}
                     </Button>
                     <Button
                       variant="outline"
@@ -89,7 +99,11 @@ function IncomingRequestTab() {
                         rejectionDialogRef.current.showModal();
                       }}
                     >
-                      Reject
+                      {loading ? (
+                        <LoaderCircle className="animate-spin" />
+                      ) : (
+                        "Reject"
+                      )}
                     </Button>
                   </CardFooter>
                 </Card>

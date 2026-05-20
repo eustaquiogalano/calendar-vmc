@@ -13,11 +13,14 @@ import {
 } from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
+import { LoaderCircle } from "lucide-react";
 
 function ManageRequestTab() {
-  const { students, updateRequestStatus } = useUser();
+  const { students, updateRequestStatus, loading, setLoading } = useUser();
   const [selectedRequest, setSelectedRequest] = useState(undefined);
   const { student, request } = selectedRequest || {};
+
+  console.log(selectedRequest);
 
   return (
     <>
@@ -65,18 +68,31 @@ function ManageRequestTab() {
               </CardContent>
               <CardFooter>
                 <Button
+                  disabled={loading}
                   variant="default"
                   className="w-full h-fit p-2"
-                  onClick={() =>
-                    updateRequestStatus(
+                  onClick={async () => {
+                    setLoading(true);
+                    await updateRequestStatus(
                       student,
                       request.id,
                       "DOCUMENT READY",
                       request,
-                    )
-                  }
+                    );
+                    setSelectedRequest({
+                      student,
+                      request: { ...request, status: "DOCUMENT READY" },
+                    });
+                    console.log(selectedRequest);
+
+                    setLoading(false);
+                  }}
                 >
-                  Document Ready
+                  {loading ? (
+                    <LoaderCircle className="animate-spin" />
+                  ) : (
+                    "Mark as Document Ready"
+                  )}
                 </Button>
               </CardFooter>
             </Card>
@@ -102,8 +118,6 @@ function ManageRequestTab() {
                 }
               })
               .map((request) => {
-                console.log(request);
-
                 return (
                   <Card className="border-2 h-fit shrink-0">
                     <CardHeader>

@@ -19,7 +19,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { format } from "date-fns";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, LoaderPinwheel } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -28,9 +28,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import DeleteRequestDialog from "@/components/DeleteRequestDialog/DeleteRequestDialog";
+import { useUser } from "@/context/UserContext";
 
 function CreateEvent() {
   const { events, setEvents } = useEvent();
+  const { loading, setLoading } = useUser();
+
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -39,6 +42,8 @@ function CreateEvent() {
   const deleteDialogRef = useRef();
 
   async function handleSubmit(e) {
+    setLoading(true);
+
     e.preventDefault();
 
     const updatedEvents = await addEvent({
@@ -51,12 +56,15 @@ function CreateEvent() {
     });
     setEvents(updatedEvents);
     resetState();
+    setLoading(false);
   }
 
   async function handleDelete() {
+    setLoading(true);
     const updatedEvents = await deleteEvent(eventID);
 
     setEvents(updatedEvents);
+    setLoading(false);
   }
 
   function resetState() {
@@ -147,8 +155,16 @@ function CreateEvent() {
             </FieldSet>
             <FieldSeparator></FieldSeparator>
             <Field>
-              <Button className="w-full h-fit p-2" type="submit">
-                Create Event
+              <Button
+                disabled={loading}
+                className="w-full h-fit p-2"
+                type="submit"
+              >
+                {loading ? (
+                  <LoaderPinwheel className="animate-spin" />
+                ) : (
+                  "Create Event"
+                )}
               </Button>
             </Field>
           </FieldGroup>
@@ -183,6 +199,7 @@ function CreateEvent() {
                   </CardContent>
                   <CardFooter>
                     <Button
+                      disabled={loading}
                       variant="default"
                       className="w-full h-fit p-2"
                       onClick={() => {
@@ -190,7 +207,11 @@ function CreateEvent() {
                         deleteDialogRef.current.showModal();
                       }}
                     >
-                      Delete
+                      {loading ? (
+                        <LoaderPinwheel className="animate-spin" />
+                      ) : (
+                        "Delete"
+                      )}
                     </Button>
                   </CardFooter>
                 </Card>
