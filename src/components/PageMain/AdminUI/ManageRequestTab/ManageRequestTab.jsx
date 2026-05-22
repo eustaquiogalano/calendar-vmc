@@ -119,7 +119,7 @@ function ManageRequestTab() {
               })
               .map((request) => {
                 return (
-                  <Card className="border-2 h-fit shrink-0">
+                  <Card key={request.id} className="border-2 h-fit shrink-0">
                     <CardHeader>
                       <CardTitle>{`${student.firstName} ${student.lastName}`}</CardTitle>
                     </CardHeader>

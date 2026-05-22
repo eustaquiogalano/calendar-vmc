@@ -44,7 +44,10 @@ function CalendarTab() {
 
               if (announcement.date === selectedDate) {
                 return (
-                  <Card className="border-2 h-fit shrink-0">
+                  <Card
+                    key={announcement.id}
+                    className="border-2 h-fit shrink-0"
+                  >
                     <CardHeader>
                       <CardTitle>
                         {announcement.type === "request"

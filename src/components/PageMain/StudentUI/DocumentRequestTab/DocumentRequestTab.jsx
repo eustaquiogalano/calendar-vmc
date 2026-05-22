@@ -249,7 +249,7 @@ function DocumentRequestTab() {
           {currentUser &&
             currentUser.requestedDocuments.map((request) => {
               return (
-                <Card className="border-2 h-fit shrink-0">
+                <Card key={request.id} className="border-2 h-fit shrink-0">
                   <CardHeader>
                     <CardTitle>{`${request.document}`}</CardTitle>
                   </CardHeader>
