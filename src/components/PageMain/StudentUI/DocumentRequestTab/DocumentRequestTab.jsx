@@ -44,7 +44,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { validateRequest } from "@/utils/validateRequest/validateRequest";
+import { validateRequest } from "@/utils/validateRequest/validateRequest.ts";
 import RequestBlockedCard from "@/components/RequestBlockedCard/RequestBlockedCard";
 
 function DocumentRequestTab() {

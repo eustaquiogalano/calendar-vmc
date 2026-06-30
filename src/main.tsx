@@ -4,9 +4,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { MenuProvider } from "./trash/MenuContext.jsx";
 import { EventsProvider } from "./context/EventsContext.jsx";
-import { UserProvider } from "./context/UserContext.jsx";
+import { UserProvider } from "./context/UserContext.js";
 
-import App from "./App.jsx";
+import App from "./App.js";
 import { StudentUI } from "./components/PageMain/StudentUI/StudentUI.jsx";
 import Login from "./trash/Login.jsx";
 import AdminUI from "./components/PageMain/AdminUI/AdminUI.jsx";

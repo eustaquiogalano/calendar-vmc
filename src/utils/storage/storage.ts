@@ -1,14 +1,36 @@
 import localforage from "localforage";
 import { users as mockUsers } from "../../mocks/users.mock";
 
-function set(users, type = "users") {
-  return localforage.setItem(`${type}`, users);
+interface User {
+  userType: string;
+  username: string;
+  password: string;
+  email: string;
+  name: string;
+  idNumber: string;
+  yearLevel: number;
+  isLoggedIn: boolean;
+  requestedDocuments: Array<{
+    id: string;
+    document: string;
+    status: "PENDING" | "APPROVED" | "REJECTED";
+    purpose: string;
+    date: string;
+  }>;
+}
+
+type Item = User[] | User | SchoolEvent | SchoolEvent[] | null;
+
+function set(item: Item, type = "users") {
+  if (item === undefined) return;
+
+  return localforage.setItem(`${type}`, item);
 }
 
 // fake a cache so we don't slow down stuff we've already seen
-let fakeCache = {};
+let fakeCache: Record<string, boolean> = {};
 
-async function fakeNetwork(key) {
+async function fakeNetwork(key: string) {
   if (!key) {
     fakeCache = {};
   }
@@ -35,8 +57,8 @@ async function setInitialUsers() {
   return await localforage.setItem("users", mockUsers);
 }
 
-async function addStudentUser(newUser) {
-  let users = (await localforage.getItem("users")) || [];
+async function addStudentUser(newUser: User) {
+  let users: User[] = (await localforage.getItem("users")) || [];
 
   users = [...users, newUser];
 
@@ -47,7 +69,7 @@ async function addStudentUser(newUser) {
 async function getStudentUsers() {
   await fakeNetwork("getStudentUsers");
 
-  let users = await localforage.getItem("users");
+  let users = await localforage.getItem<User[]>("users");
   if (!users) users = [];
 
   let students = users.filter((user) => {
@@ -62,7 +84,7 @@ async function getStudentUsers() {
 async function getAdminUsers() {
   await fakeNetwork("getAdminUsers");
 
-  let users = await localforage.getItem("users");
+  let users = await localforage.getItem<User[]>("users");
   if (!users) users = [];
 
   let admins = users.filter((user) => {
@@ -74,19 +96,19 @@ async function getAdminUsers() {
   return admins;
 }
 
-async function getUsers(query) {
-  await fakeNetwork(query);
+async function getUsers() {
+  await fakeNetwork("getUsers");
 
-  let users = await localforage.getItem("users");
+  let users = await localforage.getItem<User[]>("users");
   if (!users) users = [];
 
   return users;
 }
 
-async function updateUser(id, update) {
+async function updateUser(id: string, update: Partial<User>) {
   await fakeNetwork("updateUser");
 
-  let users = await localforage.getItem("users");
+  let users = await localforage.getItem<User[]>("users");
   if (!users) users = [];
 
   let user = users.find((user) => user.idNumber === id);
@@ -101,19 +123,21 @@ async function updateUser(id, update) {
 async function getCurrentUser() {
   await fakeNetwork("getCurrentUser");
 
-  let users = await localforage.getItem("users");
+  let users = await localforage.getItem<User[]>("users");
   if (!users) users = [];
 
-  let currentUser = users.find((user) => {
-    if (user.isLoggedIn === true) return user;
-  });
+  let currentUser = users.find((user) => user.isLoggedIn === true) ?? null;
 
   await set(currentUser, "currentUser");
 
   return currentUser;
 }
 
-async function updateRequestStatusHF(studentID, requestID, update) {
+async function updateRequestStatusHF(
+  studentID: string,
+  requestID: string,
+  update: Partial<DocumentRequest>,
+) {
   await fakeNetwork("updateRequestStatusHF");
 
   let students = await getStudentUsers();
@@ -137,11 +161,19 @@ async function updateRequestStatusHF(studentID, requestID, update) {
   //
 }
 
-async function addRequestHF(newRequest) {
+interface DocumentRequest {
+  id: string;
+  document: string;
+  purpose: string;
+  date: string;
+  status: "PENDING" | "APPROVED" | "REJECTED";
+}
+
+async function addRequestHF(newRequest: DocumentRequest) {
   await fakeNetwork("addRequestHF");
 
   let currentUser = await getCurrentUser();
-  if (!currentUser) currentUser = [];
+  if (!currentUser) currentUser = {} as User;
 
   currentUser.requestedDocuments = [
     ...currentUser.requestedDocuments,
@@ -153,10 +185,10 @@ async function addRequestHF(newRequest) {
   console.log(currentUser);
 }
 
-async function deleteRequestHF(studentID, requestID) {
+async function deleteRequestHF(studentID: string, requestID: string) {
   await fakeNetwork("deleteRequestHF");
 
-  let users = await localforage.getItem("users");
+  let users = await localforage.getItem<User[]>("users");
   if (!users) return [];
 
   // get student
@@ -176,18 +208,27 @@ async function deleteRequestHF(studentID, requestID) {
   await updateUser(studentID, student);
 }
 
+interface SchoolEvent {
+  date: string;
+  endTime: string;
+  id: string;
+  name: string;
+  startTime: string;
+  type: string;
+}
+
 async function getEvents() {
   await fakeNetwork("getEvents");
 
-  let events = (await localforage.getItem("events")) || [];
+  let events = (await localforage.getItem<SchoolEvent[]>("events")) || [];
 
   return events;
 }
 
-async function addEvent(newEvent) {
+async function addEvent(newEvent: SchoolEvent) {
   await fakeNetwork("addEvent");
 
-  let events = (await localforage.getItem("events")) || [];
+  let events = (await localforage.getItem<SchoolEvent[]>("events")) || [];
 
   events = [...events, newEvent];
   await set(events, "events");
@@ -196,8 +237,8 @@ async function addEvent(newEvent) {
   return events;
 }
 
-async function deleteEvent(eventID) {
-  let events = (await localforage.getItem("events")) || [];
+async function deleteEvent(eventID: string) {
+  let events = (await localforage.getItem<SchoolEvent[]>("events")) || [];
 
   let updatedEvents = events.filter((event) => event.id !== eventID);
 

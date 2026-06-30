@@ -4,6 +4,7 @@ import {
   useEffect,
   useReducer,
   useState,
+  ReactNode,
 } from "react";
 import {
   getAdminUsers,
@@ -14,20 +15,72 @@ import {
   setInitialUsers,
   updateRequestStatusHF,
   deleteRequestHF,
-} from "../utils/storage/storage";
-import usersReducer from "../reducers/userReducer";
+} from "../utils/storage/storage.ts";
+import usersReducer from "../reducers/userReducer.ts";
 import Loader from "@/components/Loader/Loader";
 
-const UserContext = createContext(null);
+interface DocumentRequest {
+  id: string;
+  document: string;
+  purpose: string;
+  date: string;
+  status: "PENDING" | "APPROVED" | "REJECTED";
+}
 
-const initialState = {
+interface UserContextType {
+  users: User[];
+  students: User[];
+  admins: User[];
+  currentUser: User | null;
+  loginCurrentUser: (currentUser: User | null) => void;
+  logoutCurrentUser: () => void;
+  updateRequestStatus: (
+    student: User,
+    requestID: string,
+    status: "PENDING" | "APPROVED" | "REJECTED",
+    request: DocumentRequest,
+  ) => Promise<void>;
+  addRequest: (newRequest: DocumentRequest) => Promise<void>;
+  deleteRequest: (student: User, requestID: string) => Promise<void>;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const UserContext = createContext<UserContextType | null>(null);
+
+interface State {
+  users: User[];
+  currentUser: User | null;
+  admins: User[];
+  students: User[];
+}
+
+const initialState: State = {
   users: [],
   currentUser: null,
   admins: [],
   students: [],
 };
 
-export function UserProvider({ children }) {
+interface User {
+  userType: string;
+  username: string;
+  password: string;
+  email: string;
+  name: string;
+  idNumber: string;
+  yearLevel: number;
+  isLoggedIn: boolean;
+  requestedDocuments: Array<{
+    id: string;
+    document: string;
+    status: "PENDING" | "APPROVED" | "REJECTED";
+    purpose: string;
+    date: string;
+  }>;
+}
+
+export function UserProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(usersReducer, initialState);
   const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
@@ -52,7 +105,12 @@ export function UserProvider({ children }) {
     initUsers();
   }, [loading]);
 
-  async function updateRequestStatus(student, requestID, status, request) {
+  async function updateRequestStatus(
+    student: User,
+    requestID: string,
+    status: "PENDING" | "APPROVED" | "REJECTED",
+    request: DocumentRequest,
+  ) {
     setLoading(true);
     let studentID = student.idNumber;
 
@@ -64,21 +122,21 @@ export function UserProvider({ children }) {
     setLoading(false);
   }
 
-  async function addRequest(newRequest) {
+  async function addRequest(newRequest: DocumentRequest) {
     setLoading(true);
     await addRequestHF(newRequest);
 
     setLoading(false);
   }
 
-  async function deleteRequest(student, requestID) {
+  async function deleteRequest(student: User, requestID: string) {
     setLoading(true);
     await deleteRequestHF(student.idNumber, requestID);
 
     setLoading(false);
   }
 
-  const loginCurrentUser = (currentUser) => {
+  const loginCurrentUser = (currentUser: User | null) => {
     dispatch({ type: "LOGIN", payload: currentUser });
   };
 

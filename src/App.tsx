@@ -2,10 +2,28 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import style from "./App.module.css";
 
-import { getCurrentUser, updateUser } from "./utils/storage/storage.js";
-import { SidebarInset, SidebarProvider } from "./components/ui/sidebar";
-import { AppSidebar } from "./components/app-sidebar";
-import { useUser } from "./context/UserContext";
+import { getCurrentUser, updateUser } from "./utils/storage/storage.ts";
+import { SidebarInset, SidebarProvider } from "./components/ui/sidebar.jsx";
+import { AppSidebar } from "./components/app-sidebar.jsx";
+import { useUser } from "./context/UserContext.js";
+
+interface User {
+  userType: string;
+  username: string;
+  password: string;
+  email: string;
+  name: string;
+  idNumber: string;
+  yearLevel: number;
+  isLoggedIn: boolean;
+  requestedDocuments: Array<{
+    id: string;
+    document: string;
+    status: "PENDING" | "APPROVED" | "REJECTED";
+    purpose: string;
+    date: string;
+  }>;
+}
 
 function App() {
   const navigate = useNavigate();
@@ -21,7 +39,7 @@ function App() {
     isLoggedIn: false,
   };
 
-  async function handleLogin(user) {
+  async function handleLogin(user: User) {
     await updateUser(user.idNumber, user);
     await getCurrentUser();
 

@@ -1,4 +1,15 @@
-export function validateRequest(request, userRequests) {
+interface DocumentRequest {
+  id: string;
+  document: string;
+  purpose: string;
+  date: string;
+  status: "PENDING" | "APPROVED" | "REJECTED";
+}
+
+export function validateRequest(
+  request: DocumentRequest,
+  userRequests: DocumentRequest[],
+): boolean {
   const matchingRequest = userRequests.find((requestItem) => {
     return request.document === requestItem.document;
   });
