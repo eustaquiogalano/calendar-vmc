@@ -1,16 +1,106 @@
-# React + Vite
+# School Online Service — School Document Request & Academic Calendar Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application built for [School Name] that digitizes two student-facing services: an academic calendar and an online document request system. The project was developed as a college capstone to address the inefficiencies of the current manual, onsite-only document request process.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Students previously had to visit the registrar's office in person just to request academic documents (e.g., Transcript of Records, Certificate of Enrollment, Good Moral Certificate), even before the document was ready. This system removes that initial onsite step — students can now submit a request online, track its status, and only visit in person once the document is confirmed ready for pickup.
 
-## React Compiler
+The system also includes an academic calendar module, giving students a centralized place to view upcoming and past school events without relying on physical postings or announcements.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+### Student
+- Register and log in to a personal dashboard
+- View upcoming and past academic calendar events
+- Submit a document request from a fixed list of document types
+- Track the status of submitted requests (Pending → Processing → Ready for Pickup → Completed)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Admin
+- Log in to a dedicated admin dashboard
+- Create, edit, and delete academic calendar events
+- Manage the list of requestable document types
+- View and update the status of incoming document requests
+
+## Tech Stack
+
+- **Frontend:** React, Vite, Tailwind CSS, shadcn/ui
+- **Backend / Auth / Database:** Supabase
+- **Deployment:** Cloudflare Pages
+- **Version Control:** Git, GitHub
+
+## Status Flow
+
+Document requests move through the following stages, set by the admin:
+
+```
+Pending → Processing → Ready for Pickup → Completed
+```
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- npm
+- A Supabase project (URL and anon key)
+
+### Installation
+
+```bash
+git clone https://github.com/eustaquiogalano/[repo-name].git
+cd [repo-name]
+npm install
+```
+
+### Environment Variables
+
+Create a `.env` file in the project root with the following:
+
+```
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### Run Locally
+
+```bash
+npm run dev
+```
+
+## Usage
+
+- **Students** register with their school email and can immediately log in to view the calendar and submit document requests.
+- **Admins** log in through a separate admin account to manage events, document types, and request statuses.
+
+## Project Structure
+
+```
+src/
+├── components/      # Reusable UI components (shadcn/ui based)
+├── pages/           # Student and admin dashboard pages
+├── context/         # Auth and state management
+├── lib/             # Supabase client and helper functions
+└── assets/          # Images and static assets
+```
+
+## Known Limitations
+
+- **No online payment** — document fees are paid in cash upon pickup.
+- **No automated email/SMS notification yet** — students currently need to check their dashboard manually to see if a request status has changed. *(Email notification on "Ready for Pickup" is planned — see Future Enhancements.)*
+- Document pickup itself still requires an onsite visit; only the initial request step has been moved online.
+
+## Future Enhancements
+
+- Email notification to students when their document is marked "Ready for Pickup"
+- Optional online payment integration
+- SMS notification as an alternative to email
+- Admin analytics/reporting on request volume and turnaround time
+
+## Author
+
+Eustaquio
+Developed as a capstone project, [2025]
+
+## Acknowledgments
+
+- School Registrar's Office, for process insights during requirements gathering
