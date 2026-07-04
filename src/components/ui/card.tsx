@@ -2,7 +2,11 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-function Card({ className, size = "default", ...props }) {
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  size?: "default" | "sm";
+}
+
+function Card({ className, size = "default", ...props }: CardProps) {
   return (
     <div
       data-slot="card"
@@ -16,7 +20,10 @@ function Card({ className, size = "default", ...props }) {
   );
 }
 
-function CardHeader({ className, ...props }) {
+function CardHeader({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       data-slot="card-header"
@@ -29,7 +36,10 @@ function CardHeader({ className, ...props }) {
   );
 }
 
-function CardTitle({ className, ...props }) {
+function CardTitle({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       data-slot="card-title"
@@ -42,7 +52,10 @@ function CardTitle({ className, ...props }) {
   );
 }
 
-function CardDescription({ className, ...props }) {
+function CardDescription({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       data-slot="card-description"
@@ -52,7 +65,10 @@ function CardDescription({ className, ...props }) {
   );
 }
 
-function CardAction({ className, ...props }) {
+function CardAction({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       data-slot="card-action"
@@ -65,7 +81,10 @@ function CardAction({ className, ...props }) {
   );
 }
 
-function CardContent({ className, ...props }) {
+function CardContent({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       data-slot="card-content"
@@ -75,7 +94,10 @@ function CardContent({ className, ...props }) {
   );
 }
 
-function CardFooter({ className, ...props }) {
+function CardFooter({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       data-slot="card-footer"
