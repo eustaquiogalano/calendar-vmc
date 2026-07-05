@@ -4,7 +4,7 @@ export interface User {
   userType: "student" | "admin";
 }
 
-export interface Student {
+export interface Student extends User {
   userId: string;
   firstName: string;
   middleName?: string;
@@ -14,7 +14,7 @@ export interface Student {
   yearLevel: number;
 }
 
-export interface Admin {
+export interface Admin extends User {
   userId: string;
   name: string;
   idNumber: string;
