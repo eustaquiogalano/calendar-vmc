@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
-import userAuth from "../../../services/mockAuth.js";
-import { useUser } from "../../../context/UserContext.jsx";
-import { addStudentUser } from "../../../utils/storage/storage.js";
+import { signIn, signUp } from "../../../lib/supabaseAuth.js";
+import { useUser } from "../../../context/UserContext.js";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils.js";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -19,58 +18,86 @@ import { Input } from "@/components/ui/input";
 
 import loginImage from "../../../assets/images/login-image.jpg";
 
-export function LoginForm({ className, ...props }) {
+export function AuthForm({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   const navigate = useNavigate();
-  const { handleLogin } = useOutletContext();
   const { loginCurrentUser } = useUser();
   const [isVisible, setVisibility] = useState(false);
-  const [userName, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // states for register
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
-  const [email, setEmail] = useState("");
   const [idNumber, setIDnumber] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const [yearLevel, setYearLevel] = useState(1);
 
-  async function handleAuth(event) {
+  // login
+  async function handleSignIn(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const user = await handleLogin(await userAuth(userName, password));
+
+    // Authenticate user using supabase auth function
+    const user = await signIn(email, password);
+
+    // handle the case where user is undefined (authentication failed)
+    if (!user) {
+      alert("Invalid email or password");
+      return;
+    }
+
+    // if successful store the user in user context
+    // as the current user
     loginCurrentUser(user);
+
+    // navigate to the appropriate dashboard based on user type
     user.userType === "student" ? navigate("/student") : navigate("/admin");
   }
 
-  function handleUsername(event) {
-    setUsername(event.target.value);
+  // register
+  async function handleSignUp(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    // register the user
+    const user = await signUp({
+      email,
+      password: regPassword,
+      userType: "student",
+      studentData: {
+        first_name: firstName,
+        last_name: lastName,
+        id_number: idNumber,
+        year_level: Number(yearLevel),
+      },
+    });
+
+    // handle failed registraton
+    if (!user) {
+      alert("Registration failed");
+      return;
+    }
+
+    // if successful toggle the register form visibility
+    toggleRegisterForm();
   }
 
-  function handlePassword(event) {
+  function handleEmail(event: React.ChangeEvent<HTMLInputElement>) {
+    setEmail(event.target.value);
+  }
+
+  function handlePassword(event: React.ChangeEvent<HTMLInputElement>) {
     setPassword(event.target.value);
   }
 
-  function toggleRegisterForm(e) {
-    e.preventDefault();
+  function toggleRegisterForm(e?: React.MouseEvent<HTMLButtonElement>) {
+    e?.preventDefault();
     if (isVisible) {
       setVisibility(false);
     } else {
       setVisibility(true);
     }
-  }
-
-  async function handleRegister() {
-    await addStudentUser({
-      firstName,
-      lastName,
-      email,
-      idNumber,
-      password: regPassword,
-      yearLevel,
-      userType: "student",
-      requestedDocuments: [],
-      isLoggedIn: false,
-    });
   }
 
   return (
@@ -87,7 +114,7 @@ export function LoginForm({ className, ...props }) {
     absolute inset-0 transition-opacity duration-300 ease-in-out overflow-hidden p-0 bg-transparent flex justify-center border-none border-0 ring-0`}
       >
         <CardContent className="grid p-0 md:grid-cols-2 overflow-hidden bg-card rounded-xl ring-1 ring-foreground/10">
-          <form className="p-6 md:p-8">
+          <form className="p-6 md:p-8" onSubmit={handleSignIn}>
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">Welcome back</h1>
@@ -98,8 +125,8 @@ export function LoginForm({ className, ...props }) {
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
-                  value={userName}
-                  onChange={handleUsername}
+                  value={email}
+                  onChange={handleEmail}
                   id="email"
                   type="email"
                   placeholder="m@example.com"
@@ -125,7 +152,7 @@ export function LoginForm({ className, ...props }) {
                 />
               </Field>
               <Field>
-                <Button className="h-fit p-2" onClick={handleAuth}>
+                <Button className="h-fit p-2" type="submit">
                   Login
                 </Button>
               </Field>
@@ -167,7 +194,7 @@ export function LoginForm({ className, ...props }) {
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
             />
           </div>
-          <form className="p-6 md:p-8">
+          <form className="p-6 md:p-8" onSubmit={handleSignUp}>
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">Create your account</h1>
@@ -216,7 +243,7 @@ export function LoginForm({ className, ...props }) {
                 <FieldLabel htmlFor="yearLevel">Year Level:</FieldLabel>
                 <Input
                   value={yearLevel}
-                  onChange={(e) => setYearLevel(e.target.value)}
+                  onChange={(e) => setYearLevel(Number(e.target.value))}
                   id="yearLevel"
                   type="number"
                   placeholder="3"
@@ -261,7 +288,7 @@ export function LoginForm({ className, ...props }) {
               </Field>
 
               <Field>
-                <Button onClick={handleRegister}>Create Account</Button>
+                <Button type="submit">Create Account</Button>
               </Field>
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                 Or

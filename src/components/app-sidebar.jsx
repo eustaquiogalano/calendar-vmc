@@ -1,5 +1,7 @@
 import * as React from "react";
-
+import { useNavigate } from "react-router-dom";
+import { signOut } from "@/lib/supabaseAuth.js";
+import { useUser } from "@/context/UserContext.js";
 import {
   Sidebar,
   SidebarContent,
@@ -56,9 +58,24 @@ const data = {
   ],
 };
 
-export function AppSidebar({ currentUser, handleLogout, ...props }) {
+export function AppSidebar({ currentUser, ...props }) {
+  const navigate = useNavigate();
+  const { logoutCurrentUser } = useUser();
+
   const navData =
     currentUser.userType === "admin" ? data.adminNav : data.studentNav;
+
+  // logout
+  async function handleLogout() {
+    // signout the user from supabase auth
+    await signOut();
+
+    // update the current user state to null
+    logoutCurrentUser();
+
+    // navigate to the login page
+    navigate("/");
+  }
 
   return (
     <Sidebar {...props} className="h-full">

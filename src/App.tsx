@@ -26,7 +26,6 @@ interface User {
 }
 
 function App() {
-  const navigate = useNavigate();
   const { currentUser, logoutCurrentUser } = useUser();
 
   const loaderObject = {
@@ -38,23 +37,6 @@ function App() {
     idNumber: "loading...",
     isLoggedIn: false,
   };
-
-  async function handleLogin(user: User) {
-    await updateUser(user.idNumber, user);
-    await getCurrentUser();
-
-    return user;
-  }
-
-  async function handleLogout() {
-    await updateUser(currentUser.idNumber, {
-      ...currentUser,
-      isLoggedIn: false,
-    });
-    logoutCurrentUser();
-    await getCurrentUser();
-    navigate("/");
-  }
 
   return (
     <>
@@ -74,7 +56,6 @@ function App() {
             <AppSidebar
               variant="floating"
               collapsible="icon"
-              handleLogout={handleLogout}
               currentUser={currentUser}
             />
           )}
@@ -83,8 +64,6 @@ function App() {
           >
             <Outlet
               context={{
-                handleLogin,
-                handleLogout,
                 loaderObject,
               }}
             />
