@@ -5,6 +5,7 @@ export interface User {
 }
 
 export interface Student extends User {
+  userType: "student";
   userId: string;
   firstName: string;
   middleName?: string;
@@ -15,6 +16,7 @@ export interface Student extends User {
 }
 
 export interface Admin extends User {
+  userType: "admin";
   userId: string;
   name: string;
   idNumber: string;
