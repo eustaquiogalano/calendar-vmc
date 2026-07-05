@@ -21,3 +21,29 @@ export interface Admin extends User {
   name: string;
   idNumber: string;
 }
+
+export function mapStudent(data: Record<string, any>): Student {
+  return {
+    id: data.id,
+    email: data.email,
+    userType: data.user_type,
+    userId: data.user_id,
+    firstName: data.first_name,
+    middleName: data.middle_name,
+    suffix: data.suffix,
+    lastName: data.last_name,
+    idNumber: data.id_number,
+    yearLevel: data.year_level,
+  };
+}
+
+export function mapAdmin(data: Record<string, any>): Admin {
+  return {
+    id: data.id,
+    email: data.email,
+    userType: data.user_type,
+    userId: data.user_id,
+    name: data.name,
+    idNumber: data.id_number,
+  };
+}
