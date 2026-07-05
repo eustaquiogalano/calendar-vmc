@@ -1,26 +1,11 @@
-interface User {
-  userType: string;
-  username: string;
-  password: string;
-  email: string;
-  name: string;
-  idNumber: string;
-  yearLevel: number;
-  isLoggedIn: boolean;
-  requestedDocuments: Array<{
-    id: string;
-    document: string;
-    status: "PENDING" | "APPROVED" | "REJECTED";
-    purpose: string;
-    date: string;
-  }>;
-}
+import { Admin, Student } from "@/types/user";
+
 
 interface State {
-  users: User[];
-  currentUser: User | null;
-  admins: User[];
-  students: User[];
+  users: Student[] | Admin[];
+  currentUser: Student | Admin | null;
+  admins: Admin[];
+  students: Student[];
 }
 
 interface InitUsersAction {
@@ -30,7 +15,7 @@ interface InitUsersAction {
 
 interface LoginAction {
   type: "LOGIN";
-  payload: User | null;
+  payload: Student | Admin | null;
 }
 
 interface LogoutAction {
