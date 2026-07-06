@@ -6,16 +6,7 @@ import {
   useState,
   ReactNode,
 } from "react";
-import {
-  getAdminUsers,
-  getCurrentUser,
-  addRequestHF,
-  getStudentUsers,
-  getUsers,
-  setInitialUsers,
-  updateRequestStatusHF,
-  deleteRequestHF,
-} from "../utils/storage/storage.ts";
+import { supabase } from "../supabase-client.ts";
 import usersReducer from "../reducers/userReducer.ts";
 import Loader from "@/components/Loader/Loader";
 
