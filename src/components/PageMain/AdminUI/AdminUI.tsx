@@ -5,7 +5,6 @@ import { useUser } from "../../../context/UserContext";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 function AdminUI() {
-  const { loaderObject } = useOutletContext();
   const { currentUser } = useUser();
 
   return (
@@ -14,7 +13,11 @@ function AdminUI() {
         <div className={style["adminUI__greeting"]}>
           <SidebarTrigger className="md:hidden" />
           <h2 className={`${style["adminUI__h2"]} text-xl font-bold`}>
-            Hello {currentUser?.name || loaderObject?.name}
+            Hello{" "}
+            {currentUser?.userType === "student"
+              ? currentUser.firstName
+              : currentUser?.name}
+            !
           </h2>
         </div>
         <div className={style["adminUI__panel"]}>
