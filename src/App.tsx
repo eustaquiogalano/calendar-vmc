@@ -2,41 +2,12 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import style from "./App.module.css";
 
-import { getCurrentUser, updateUser } from "./utils/storage/storage.ts";
 import { SidebarInset, SidebarProvider } from "./components/ui/sidebar.jsx";
 import { AppSidebar } from "./components/app-sidebar.jsx";
 import { useUser } from "./context/UserContext.js";
 
-interface User {
-  userType: string;
-  username: string;
-  password: string;
-  email: string;
-  name: string;
-  idNumber: string;
-  yearLevel: number;
-  isLoggedIn: boolean;
-  requestedDocuments: Array<{
-    id: string;
-    document: string;
-    status: "PENDING" | "APPROVED" | "REJECTED";
-    purpose: string;
-    date: string;
-  }>;
-}
-
 function App() {
-  const { currentUser, logoutCurrentUser } = useUser();
-
-  const loaderObject = {
-    userType: "loading...",
-    username: "loading...",
-    password: "loading...",
-    email: "loading...",
-    name: "loading...",
-    idNumber: "loading...",
-    isLoggedIn: false,
-  };
+  const { currentUser } = useUser();
 
   return (
     <>
@@ -62,11 +33,7 @@ function App() {
           <SidebarInset
             className={`flex flex-col justify-center items-center  ${currentUser ? "md:ml-[3.5rem]" : ""} lg:ml-0`}
           >
-            <Outlet
-              context={{
-                loaderObject,
-              }}
-            />
+            <Outlet />
           </SidebarInset>
         </SidebarProvider>
       </main>
