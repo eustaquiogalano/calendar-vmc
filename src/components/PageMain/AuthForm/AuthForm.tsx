@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import loginImage from "../../../assets/images/login-image.jpg";
+import { mapAdmin, mapStudent } from "@/types/user.js";
 
 export function AuthForm({
   className,
@@ -47,10 +48,12 @@ export function AuthForm({
       alert("Invalid email or password");
       return;
     }
+    const mappedUser =
+      user.user_type === "student" ? mapStudent(user) : mapAdmin(user);
 
     // if successful store the user in user context
     // as the current user
-    loginCurrentUser(user);
+    loginCurrentUser(mappedUser);
 
     // navigate to the appropriate dashboard based on user type
     user.userType === "student" ? navigate("/student") : navigate("/admin");
