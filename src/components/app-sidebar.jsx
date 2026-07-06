@@ -58,10 +58,9 @@ const data = {
   ],
 };
 
-export function AppSidebar({ currentUser, ...props }) {
+export function AppSidebar({ ...props }) {
   const navigate = useNavigate();
-  const { logoutCurrentUser } = useUser();
-
+  const { currentUser, logoutCurrentUser } = useUser();
   const navData =
     currentUser.userType === "admin" ? data.adminNav : data.studentNav;
 
