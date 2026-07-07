@@ -61,12 +61,24 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     async function initUsers() {
-      await setInitialUsers();
+      // Fetch all users
+      const { data: users } = await supabase.from("users").select("*");
+      const { data: students } = await supabase.from("students").select("*");
+      const { data: admins } = await supabase.from("admins").select("*");
 
-      const users = await getUsers();
-      const students = await getStudentUsers();
-      const admins = await getAdminUsers();
-      const currentUser = await getCurrentUser();
+      // Get current logged in user
+      const { data: authData } = await supabase.auth.getUser();
+      let currentUser = null;
+
+      if (authData.user) {
+        const { data: profile } = await supabase
+          .from("users")
+          .select("*")
+          .eq("id", authData.user.id)
+          .single();
+
+        currentUser = profile;
+      }
 
       dispatch({
         type: "INIT_USERS",
