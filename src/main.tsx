@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { MenuProvider } from "./trash/MenuContext.jsx";
 import { EventsProvider } from "./context/EventsContext.jsx";
 import { UserProvider } from "./context/UserContext.js";
 
@@ -76,9 +75,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <UserProvider>
       <EventsProvider>
-        <MenuProvider>
-          <RouterProvider router={router} />
-        </MenuProvider>
+        <RouterProvider router={router} />
       </EventsProvider>
     </UserProvider>
   </StrictMode>,
