@@ -28,7 +28,6 @@ export async function signUp({
     password,
   });
 
-  console.log(authError);
   if (authError) return { error: authError };
 
   const userId = authData.user!.id;
