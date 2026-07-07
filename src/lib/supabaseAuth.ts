@@ -82,9 +82,24 @@ export async function signIn(email: string, password: string) {
     return undefined;
   }
 
+  // Fetch from admins or students table based on user_type
+  const table = profile.user_type === "admin" ? "admins" : "students";
+
+  const { data: extendedProfile, error: extendedError } = await supabase
+    .from(table)
+    .select("*")
+    .eq("user_id", data.user.id)
+    .single();
+
+  if (extendedError) {
+    alert("Could not fetch extended profile");
+    console.error(extendedError);
+    return undefined;
+  }
+
   // If everything is successful, return the user's profile
   alert("You are logged in");
-  return profile;
+  return { ...profile, ...extendedProfile };
 }
 
 export async function signOut() {
