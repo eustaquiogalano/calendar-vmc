@@ -103,26 +103,27 @@ export function UserProvider({ children }: { children: ReactNode }) {
     request: DocumentRequest,
   ) {
     setLoading(true);
-    let studentID = student.idNumber;
 
-    await updateRequestStatusHF(studentID, requestID, {
-      ...request,
-      status: status,
-    });
+    await supabase
+      .from("document_requests")
+      .update({ ...request, status })
+      .eq("id", requestID);
 
     setLoading(false);
   }
 
   async function addRequest(newRequest: DocumentRequest) {
     setLoading(true);
-    await addRequestHF(newRequest);
+
+    await supabase.from("document_requests").insert(newRequest);
 
     setLoading(false);
   }
 
   async function deleteRequest(student: Student, requestID: string) {
     setLoading(true);
-    await deleteRequestHF(student.idNumber, requestID);
+
+    await supabase.from("document_requests").delete().eq("id", requestID);
 
     setLoading(false);
   }
