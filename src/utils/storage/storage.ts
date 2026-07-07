@@ -1,25 +1,33 @@
 import localforage from "localforage";
 import { users as mockUsers } from "../../mocks/users.mock";
+import { User, Student, Admin } from "@/types/user";
 
-interface User {
-  userType: string;
-  username: string;
-  password: string;
-  email: string;
-  name: string;
-  idNumber: string;
-  yearLevel: number;
-  isLoggedIn: boolean;
-  requestedDocuments: Array<{
-    id: string;
-    document: string;
-    status: "PENDING" | "APPROVED" | "REJECTED";
-    purpose: string;
-    date: string;
-  }>;
-}
+// interface User {
+//   userType: string;
+//   username: string;
+//   password: string;
+//   email: string;
+//   name: string;
+//   idNumber: string;
+//   yearLevel: number;
+//   isLoggedIn: boolean;
+//   requestedDocuments: Array<{
+//     id: string;
+//     document: string;
+//     status: "PENDING" | "APPROVED" | "REJECTED";
+//     purpose: string;
+//     date: string;
+//   }>;
+// }
 
-type Item = User[] | User | SchoolEvent | SchoolEvent[] | null;
+type Item =
+  | Student[]
+  | Admin[]
+  | Student
+  | Admin
+  | SchoolEvent
+  | SchoolEvent[]
+  | null;
 
 function set(item: Item, type = "users") {
   if (item === undefined) return;
@@ -57,8 +65,8 @@ async function setInitialUsers() {
   return await localforage.setItem("users", mockUsers);
 }
 
-async function addStudentUser(newUser: User) {
-  let users: User[] = (await localforage.getItem("users")) || [];
+async function addStudentUser(newUser: Student) {
+  let users: Student[] = (await localforage.getItem("users")) || [];
 
   users = [...users, newUser];
 
@@ -69,7 +77,7 @@ async function addStudentUser(newUser: User) {
 async function getStudentUsers() {
   await fakeNetwork("getStudentUsers");
 
-  let users = await localforage.getItem<User[]>("users");
+  let users = await localforage.getItem<Student[]>("users");
   if (!users) users = [];
 
   let students = users.filter((user) => {
@@ -84,7 +92,7 @@ async function getStudentUsers() {
 async function getAdminUsers() {
   await fakeNetwork("getAdminUsers");
 
-  let users = await localforage.getItem<User[]>("users");
+  let users = await localforage.getItem<Admin[]>("users");
   if (!users) users = [];
 
   let admins = users.filter((user) => {
@@ -99,16 +107,16 @@ async function getAdminUsers() {
 async function getUsers() {
   await fakeNetwork("getUsers");
 
-  let users = await localforage.getItem<User[]>("users");
+  let users = await localforage.getItem<Student[] | Admin[]>("users");
   if (!users) users = [];
 
   return users;
 }
 
-async function updateUser(id: string, update: Partial<User>) {
+async function updateUser(id: string, update: Partial<Student | Admin>) {
   await fakeNetwork("updateUser");
 
-  let users = await localforage.getItem<User[]>("users");
+  let users = await localforage.getItem<Student[] | Admin[]>("users");
   if (!users) users = [];
 
   let user = users.find((user) => user.idNumber === id);
