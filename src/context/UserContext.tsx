@@ -82,7 +82,12 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
       dispatch({
         type: "INIT_USERS",
-        payload: { users, students, admins, currentUser },
+        payload: {
+          users: users ?? [],
+          students: students ?? [],
+          admins: admins ?? [],
+          currentUser,
+        },
       });
 
       setReady(true);
