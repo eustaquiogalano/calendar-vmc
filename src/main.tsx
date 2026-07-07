@@ -7,8 +7,7 @@ import { UserProvider } from "./context/UserContext.js";
 
 import App from "./App.js";
 import { StudentUI } from "./components/PageMain/StudentUI/StudentUI.jsx";
-import Login from "./trash/Login.jsx";
-import AdminUI from "./components/PageMain/AdminUI/AdminUI.jsx";
+import AdminUI from "./components/PageMain/AdminUI/AdminUI.js";
 import ErrorPage from "./components/ErrorPage.jsx";
 import IncomingRequestTab from "./components/PageMain/AdminUI/IncomingRequestTab/IncomingRequestTab.jsx";
 import ManageRequestTab from "./components/PageMain/AdminUI/ManageRequestTab/ManageRequestTab.jsx";
@@ -17,7 +16,7 @@ import CalendarTab from "./components/PageMain/StudentUI/CalendarTab/CalendarTab
 import DocumentRequestTab from "./components/PageMain/StudentUI/DocumentRequestTab/DocumentRequestTab.jsx";
 
 import "./global.css";
-import { LoginForm } from "./components/PageMain/AuthForm/AuthForm.jsx";
+import { AuthForm } from "./components/PageMain/AuthForm/AuthForm.js";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +29,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <LoginForm />,
+            element: <AuthForm />,
           },
           {
             path: "student",
