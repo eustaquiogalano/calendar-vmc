@@ -23,13 +23,7 @@ function App() {
           style={{ minHeight: "unset" }}
           className="h-full bg-transparent"
         >
-          {currentUser && (
-            <AppSidebar
-              variant="floating"
-              collapsible="icon"
-              currentUser={currentUser}
-            />
-          )}
+          {currentUser && <AppSidebar variant="floating" collapsible="icon" />}
           <SidebarInset
             className={`flex flex-col justify-center items-center  ${currentUser ? "md:ml-[3.5rem]" : ""} lg:ml-0`}
           >
