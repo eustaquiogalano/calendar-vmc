@@ -60,7 +60,7 @@ function DocumentRequestTab() {
 
   console.log(loading);
 
-  async function submitRequest(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     // checks validity of the form
@@ -94,7 +94,7 @@ function DocumentRequestTab() {
     resetStates();
   }
 
-  async function handleDeleteRequest() {
+  async function handleDelete() {
     await deleteRequest(currentUser, deleteionID);
     setLoading(true);
     setDeletionID("");
@@ -119,7 +119,7 @@ function DocumentRequestTab() {
         <div className={`${isActive ? "hidden" : ""} flex flex-col gap-4`}>
           <h2 className="text-xl font-bold">Create Request</h2>
           <form
-            onSubmit={submitRequest}
+            onSubmit={handleSubmit}
             className={style["document-request-tab__request-form"]}
           >
             <FieldGroup>
@@ -247,7 +247,7 @@ function DocumentRequestTab() {
 
         <div className={style["document-request-tab__pending-list"]}>
           {currentUser &&
-            currentUser.requestedDocuments.map((request) => {
+            requests.map((request) => {
               return (
                 <Card key={request.id} className="border-2 h-fit shrink-0">
                   <CardHeader>
