@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import style from "./DeleteRequestDialog.module.css";
+import style from "./DeleteEventDialog.module.css";
 import {
   Card,
   CardContent,
@@ -10,10 +10,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { IoWarningOutline } from "react-icons/io5";
 
-const DeleteRequestDialog = forwardRef(function DeleteRequestDialog(
-  { onDeletion },
-  ref,
-) {
+interface DeleteRequestDialogProps {
+  onDeletion: () => void;
+}
+
+const DeleteRequestDialog = forwardRef<
+  HTMLDialogElement,
+  DeleteRequestDialogProps
+>(function DeleteRequestDialog({ onDeletion }, ref) {
   return (
     <dialog className={style["confirmation-dialog"]} ref={ref}>
       <Card className="border-2 border-destructive">
@@ -32,7 +36,7 @@ const DeleteRequestDialog = forwardRef(function DeleteRequestDialog(
             className=" w-[50%] h-fit p-2"
             onClick={() => {
               onDeletion();
-              ref.current.close();
+              (ref as React.RefObject<HTMLDialogElement>).current?.close();
             }}
           >
             Delete
@@ -40,7 +44,9 @@ const DeleteRequestDialog = forwardRef(function DeleteRequestDialog(
           <Button
             variant="outline"
             className="w-[50%] h-fit p-2"
-            onClick={() => ref.current.close()}
+            onClick={() =>
+              (ref as React.RefObject<HTMLDialogElement>).current?.close()
+            }
           >
             Cancel
           </Button>
