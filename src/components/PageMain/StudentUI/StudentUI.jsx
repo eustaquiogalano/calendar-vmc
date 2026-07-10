@@ -5,7 +5,6 @@ import { useUser } from "../../../context/UserContext";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 function StudentUI() {
-  const { loaderObject } = useOutletContext();
   const { currentUser } = useUser();
 
   return (
@@ -16,7 +15,7 @@ function StudentUI() {
           <h2
             className={`${style["studentUI__h2--shadow"]} ${style["studentUI__h2"]} text-xl font-bold`}
           >
-            Hello {currentUser?.firstName || loaderObject?.name}
+            Hello {currentUser?.firstName || currentUser?.name}
           </h2>
         </div>
         <div className={style["studentUI__panel"]}>
