@@ -26,14 +26,6 @@ interface UserContextType {
   currentUser: Student | Admin | null;
   loginCurrentUser: (currentUser: Student | Admin | null) => void;
   logoutCurrentUser: () => void;
-  updateRequestStatus: (
-    student: Student,
-    requestID: string,
-    status: "PENDING" | "APPROVED" | "REJECTED",
-    request: DocumentRequest,
-  ) => Promise<void>;
-  addRequest: (newRequest: DocumentRequest) => Promise<void>;
-  deleteRequest: (student: Student, requestID: string) => Promise<void>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -96,38 +88,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
     initUsers();
   }, [loading]);
 
-  async function updateRequestStatus(
-    student: Student,
-    requestID: string,
-    status: "PENDING" | "APPROVED" | "REJECTED",
-    request: DocumentRequest,
-  ) {
-    setLoading(true);
-
-    await supabase
-      .from("document_requests")
-      .update({ ...request, status })
-      .eq("id", requestID);
-
-    setLoading(false);
-  }
-
-  async function addRequest(newRequest: DocumentRequest) {
-    setLoading(true);
-
-    await supabase.from("document_requests").insert(newRequest);
-
-    setLoading(false);
-  }
-
-  async function deleteRequest(student: Student, requestID: string) {
-    setLoading(true);
-
-    await supabase.from("document_requests").delete().eq("id", requestID);
-
-    setLoading(false);
-  }
-
   const loginCurrentUser = (currentUser: Student | Admin | null) => {
     dispatch({ type: "LOGIN", payload: currentUser });
   };
@@ -147,9 +107,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
         currentUser: state.currentUser,
         loginCurrentUser,
         logoutCurrentUser,
-        updateRequestStatus,
-        addRequest,
-        deleteRequest,
         loading,
         setLoading,
       }}
