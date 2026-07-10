@@ -69,7 +69,17 @@ export function UserProvider({ children }: { children: ReactNode }) {
           .eq("id", authData.user.id)
           .single();
 
-        currentUser = profile;
+        if (profile?.user_type === "student") {
+          const { data: studentProfile } = await supabase
+            .from("students")
+            .select("*")
+            .eq("user_id", authData.user.id)
+            .single();
+
+          currentUser = { ...profile, ...studentProfile };
+        } else {
+          currentUser = profile;
+        }
       }
 
       dispatch({
