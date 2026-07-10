@@ -1,6 +1,4 @@
 import { useRef, useState } from "react";
-import { useOutletContext } from "react-router-dom";
-
 import { useUser } from "../../../../context/UserContext";
 
 import style from "./DocumentRequestTab.module.css";
@@ -46,10 +44,12 @@ import {
 } from "@/components/ui/card";
 import { validateRequest } from "@/utils/validateRequest/validateRequest.ts";
 import RequestBlockedCard from "@/components/RequestBlockedCard/RequestBlockedCard";
+import { useDocumentRequest } from "@/context/DocumentRequestContext";
 
 function DocumentRequestTab() {
-  const { addRequest, deleteRequest, setLoading, loading } = useUser();
-  const { currentUser } = useOutletContext();
+  const { requests, addRequest, deleteRequest, setLoading, loading } =
+    useDocumentRequest();
+  const { currentUser } = useUser();
   const dialogRef = useRef();
 
   const [deleteionID, setDeletionID] = useState();
@@ -72,20 +72,16 @@ function DocumentRequestTab() {
     // creates a request object with the form data
     // and a random id
     const request = {
-      status: "PENDING",
-      id: crypto.randomUUID(),
+      studentId: currentUser.id,
       document,
       purpose,
       date: format(date, "yyyy-MM-dd"),
-      type: "request",
+      status: "PENDING",
     };
 
     // validate the request if it can be added or not
     // this returns a boolean
-    const isRequestValid = validateRequest(
-      request,
-      currentUser.requestedDocuments,
-    );
+    const isRequestValid = validateRequest(request, requests);
 
     // if the request is valid, add it to the list of requests
     isRequestValid ? await addRequest(request) : setIsActive(true);
@@ -293,7 +289,7 @@ function DocumentRequestTab() {
             })}
         </div>
 
-        <ConfirmationDialog ref={dialogRef} onConfirm={handleDeleteRequest} />
+        <ConfirmationDialog ref={dialogRef} onConfirm={handleDelete} />
       </section>
     </>
   );
