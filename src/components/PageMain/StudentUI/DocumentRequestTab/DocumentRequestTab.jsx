@@ -47,8 +47,7 @@ import RequestBlockedCard from "@/components/RequestBlockedCard/RequestBlockedCa
 import { useDocumentRequest } from "@/context/DocumentRequestContext";
 
 function DocumentRequestTab() {
-  const { requests, addRequest, deleteRequest, setLoading, loading } =
-    useDocumentRequest();
+  const { requests, addRequest, deleteRequest, loading } = useDocumentRequest();
   const { currentUser } = useUser();
   const dialogRef = useRef();
 
@@ -91,10 +90,8 @@ function DocumentRequestTab() {
   }
 
   async function handleDelete() {
-    await deleteRequest(currentUser, deleteionID);
-    setLoading(true);
+    deleteRequest(deleteionID);
     setDeletionID("");
-    setLoading(false);
   }
 
   function resetStates() {
