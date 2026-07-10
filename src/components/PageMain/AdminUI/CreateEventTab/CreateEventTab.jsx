@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { useEvent } from "../../../../context/EventsContext";
 import style from "./CreateEventTab.module.css";
-import { addEvent, deleteEvent } from "../../../../utils/storage/storage.js";
 
 import {
   Field,
@@ -27,12 +26,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import DeleteRequestDialog from "@/components/DeleteRequestDialog/DeleteRequestDialog";
-import { useUser } from "@/context/UserContext";
+import DeleteRequestDialog from "@/components/DeleteEventDialog/DeleteEventDialog";
 
 function CreateEvent() {
-  const { events, setEvents } = useEvent();
-  const { loading, setLoading } = useUser();
+  const { events, addEvent, deleteEvent, loading } = useEvent();
 
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
@@ -42,29 +39,21 @@ function CreateEvent() {
   const deleteDialogRef = useRef();
 
   async function handleSubmit(e) {
-    setLoading(true);
-
     e.preventDefault();
 
-    const updatedEvents = await addEvent({
-      id: crypto.randomUUID(),
+    addEvent({
       name,
+      date,
       startTime,
       endTime,
-      date: format(date, "yyyy-MM-dd"),
-      type: "event",
+      type: "Other", // add event type input
     });
-    setEvents(updatedEvents);
+
     resetState();
-    setLoading(false);
   }
 
   async function handleDelete() {
-    setLoading(true);
-    const updatedEvents = await deleteEvent(eventID);
-
-    setEvents(updatedEvents);
-    setLoading(false);
+    deleteEvent(eventID);
   }
 
   function resetState() {
