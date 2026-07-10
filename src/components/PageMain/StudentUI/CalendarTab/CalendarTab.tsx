@@ -1,10 +1,9 @@
 import style from "./CalendarTab.module.css";
-import HourCard from "./Calender/HourCard/HourCard";
 import Calendar from "./Calender/Calendar";
 import { useUser } from "../../../../context/UserContext";
 import { useState } from "react";
 import { useEvent } from "../../../../context/EventsContext";
-
+import { useDocumentRequest } from "@/context/DocumentRequestContext";
 import {
   Card,
   CardContent,
@@ -18,9 +17,10 @@ function CalendarTab() {
   const [selectedDate, setSelectedDate] = useState();
   const { currentUser } = useUser();
   const { events } = useEvent();
-  const requests = currentUser.requestedDocuments;
+  const { requests } = useDocumentRequest();
   const announcements = [...requests, ...events];
 
+  console.log(announcements);
   return (
     <>
       <section
@@ -50,12 +50,12 @@ function CalendarTab() {
                   >
                     <CardHeader>
                       <CardTitle>
-                        {announcement.type === "request"
+                        {announcement.announcementType === "request"
                           ? announcement.document
                           : announcement.name}
                       </CardTitle>
                       <CardDescription>
-                        {announcement.type === "request"
+                        {announcement.announcementType === "request"
                           ? "Document Request"
                           : "Event"}
                       </CardDescription>
@@ -65,11 +65,19 @@ function CalendarTab() {
                         <span className="text-muted-foreground">
                           Start Time:
                         </span>
-                        <span>{announcement.startTime || "08:00"}</span>
+                        <span>
+                          {announcement.announcementType === "event"
+                            ? announcement.startTime || "08:00"
+                            : "-"}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">End Time:</span>
-                        <span>{announcement.endTime || "17:00"}</span>
+                        <span>
+                          {announcement.announcementType === "event"
+                            ? announcement.endTime || "17:00"
+                            : "-"}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Date:</span>
