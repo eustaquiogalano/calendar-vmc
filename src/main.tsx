@@ -17,6 +17,7 @@ import DocumentRequestTab from "./components/PageMain/StudentUI/DocumentRequestT
 
 import "./global.css";
 import { AuthForm } from "./components/PageMain/AuthForm/AuthForm.js";
+import { DocumentRequestProvider } from "./context/DocumentRequestContext.js";
 
 const router = createBrowserRouter([
   {
@@ -73,9 +74,11 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <UserProvider>
-      <EventsProvider>
-        <RouterProvider router={router} />
-      </EventsProvider>
+      <DocumentRequestProvider>
+        <EventsProvider>
+          <RouterProvider router={router} />
+        </EventsProvider>
+      </DocumentRequestProvider>
     </UserProvider>
   </StrictMode>,
 );
