@@ -65,7 +65,7 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
     const { data, error } = await supabase
       .from("document_requests")
       .insert({
-        student_id: currentUser?.id, // snake_case for Supabase
+        student_id: (currentUser as Student).studentRowId,
         document: newRequest.document,
         purpose: newRequest.purpose,
         date: newRequest.date,
