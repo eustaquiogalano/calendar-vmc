@@ -39,7 +39,7 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
       // Admin sees all requests, student sees only their own
       const query = supabase
         .from("document_requests")
-        .select("*")
+        .select("*, students(first_name, last_name)")
         .order("date", { ascending: false });
 
       if (user.userType === "student") {
@@ -71,7 +71,7 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
         date: newRequest.date,
         status: newRequest.status,
       })
-      .select()
+      .select("*, students(first_name, last_name)")
       .single();
 
     if (error) {
