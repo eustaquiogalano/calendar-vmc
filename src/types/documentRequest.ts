@@ -16,6 +16,7 @@ export interface NewDocumentRequest {
 // shape after it's been saved (has id from Supabase)
 export interface DocumentRequest extends NewDocumentRequest {
   id: string;
+  studentName?: string;
 }
 
 export const documentStatusLabel: Record<DocumentRequest["status"], string> = {
@@ -26,16 +27,17 @@ export const documentStatusLabel: Record<DocumentRequest["status"], string> = {
   REJECTED: "Rejected",
 };
 
-export const toDocumentRequest = (
-  row: Record<string, unknown>,
-): DocumentRequest => {
+export function toDocumentRequest(data: Record<string, any>): DocumentRequest {
   return {
+    id: data.id,
     announcementType: "request",
-    id: row.id as string,
-    studentId: row.student_id as string,
-    document: row.document as string,
-    purpose: row.purpose as string,
-    date: row.date as string,
-    status: row.status as DocumentRequest["status"],
+    studentId: data.student_id,
+    document: data.document,
+    purpose: data.purpose,
+    date: data.date,
+    status: data.status,
+    studentName: data.students
+      ? `${data.students.first_name} ${data.students.last_name}`
+      : undefined,
   };
-};
+}
