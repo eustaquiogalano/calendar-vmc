@@ -15,18 +15,18 @@ import RejectRequestDialog from "@/components/RejectRequestDialog/RejectRequestD
 import { useRef, useState } from "react";
 import { set } from "date-fns";
 import { LoaderCircle } from "lucide-react";
+import { useDocumentRequest } from "@/context/DocumentRequestContext";
 
 function IncomingRequestTab() {
-  const { students, updateRequestStatus, loading, setLoading } = useUser();
+  const { loading, setLoading } = useUser();
+  const { requests, updateRequestStatus } = useDocumentRequest();
   const rejectionDialogRef = useRef();
   const [student, setStudent] = useState();
   const [requestID, setRequestID] = useState();
   const [request, setRequest] = useState();
 
   const handleRequestRejection = async () => {
-    setLoading(true);
-    await updateRequestStatus(student, requestID, "REJECTED", request);
-    setLoading(false);
+    await updateRequestStatus(requestID, "REJECTED");
   };
 
   const handleRequestAcceptance = async (student, requestID, request) => {
@@ -42,73 +42,63 @@ function IncomingRequestTab() {
       <h2>Incoming Requests</h2>
 
       <div className={style["incoming-request__request-list"]}>
-        {students.map((student) => {
-          return student.requestedDocuments
-            .filter((request) => {
-              if (request.status === "PENDING") {
-                return request;
-              }
-            })
-            .map((request) => {
-              return (
-                <Card
-                  key={request.id}
-                  className="border-2 shrink-0 flex flex-col justify-between"
+        {requests.map((request) => {
+          return (
+            <Card
+              key={request.id}
+              className="border-2 shrink-0 flex flex-col justify-between"
+            >
+              <CardHeader className="p3">
+                <CardTitle>{request.studentName}</CardTitle>
+              </CardHeader>
+              <CardContent className="p-3">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Document:</span>
+                  <span>{request.document}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Purpose:</span>
+                  <span>{request.purpose}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Date:</span>
+                  <span>{request.date}</span>
+                </div>
+              </CardContent>
+              <CardFooter className="flex justify-between gap-2">
+                <Button
+                  disabled={loading}
+                  variant="default"
+                  className="w-[50%] h-fit p-2"
+                  onClick={() => {
+                    handleRequestAcceptance(student, request.id, request);
+                  }}
                 >
-                  <CardHeader className="p3">
-                    <CardTitle>
-                      {`${student.firstName} ${student.lastName}`}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="p-3">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Document:</span>
-                      <span>{request.document}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Purpose:</span>
-                      <span>{request.purpose}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Date:</span>
-                      <span>{request.date}</span>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-between gap-2">
-                    <Button
-                      disabled={loading}
-                      variant="default"
-                      className="w-[50%] h-fit p-2"
-                      onClick={() => {
-                        handleRequestAcceptance(student, request.id, request);
-                      }}
-                    >
-                      {loading ? (
-                        <LoaderCircle className="animate-spin" />
-                      ) : (
-                        "Accept"
-                      )}
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="w-[50%] h-fit p-2"
-                      onClick={() => {
-                        setStudent(student);
-                        setRequestID(request.id);
-                        setRequest(request);
-                        rejectionDialogRef.current.showModal();
-                      }}
-                    >
-                      {loading ? (
-                        <LoaderCircle className="animate-spin" />
-                      ) : (
-                        "Reject"
-                      )}
-                    </Button>
-                  </CardFooter>
-                </Card>
-              );
-            });
+                  {loading ? (
+                    <LoaderCircle className="animate-spin" />
+                  ) : (
+                    "Accept"
+                  )}
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-[50%] h-fit p-2"
+                  onClick={() => {
+                    setStudent(student);
+                    setRequestID(request.id);
+                    setRequest(request);
+                    rejectionDialogRef.current.showModal();
+                  }}
+                >
+                  {loading ? (
+                    <LoaderCircle className="animate-spin" />
+                  ) : (
+                    "Reject"
+                  )}
+                </Button>
+              </CardFooter>
+            </Card>
+          );
         })}
       </div>
 
