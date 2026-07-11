@@ -32,18 +32,19 @@ function CreateEvent() {
   const { events, addEvent, deleteEvent, loading } = useEvent();
 
   const [name, setName] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<Date | undefined>(undefined);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [eventID, setEventID] = useState("");
-  const deleteDialogRef = useRef();
+  const deleteDialogRef = useRef<HTMLDialogElement>(null);
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     addEvent({
+      announcementType: "event",
       name,
-      date,
+      date: date ? format(date, "yyyy-MM-dd") : "",
       startTime,
       endTime,
       type: "Other", // add event type input
@@ -60,7 +61,7 @@ function CreateEvent() {
     setStartTime("");
     setEndTime("");
     setName("");
-    setDate("");
+    setDate(undefined);
   }
 
   return (
@@ -193,7 +194,7 @@ function CreateEvent() {
                       className="w-full h-fit p-2"
                       onClick={() => {
                         setEventID(event.id);
-                        deleteDialogRef.current.showModal();
+                        deleteDialogRef.current?.showModal();
                       }}
                     >
                       {loading ? (
