@@ -9,7 +9,7 @@ import {
 import { supabase } from "../supabase-client.ts";
 import usersReducer from "../reducers/userReducer.ts";
 import Loader from "@/components/Loader/Loader";
-import { Student, Admin } from "../types/user.js";
+import { Student, Admin, mapAdmin, mapStudent } from "../types/user.js";
 
 interface DocumentRequest {
   id: string;
@@ -72,13 +72,22 @@ export function UserProvider({ children }: { children: ReactNode }) {
         if (profile?.user_type === "student") {
           const { data: studentProfile } = await supabase
             .from("students")
+            .select("*, id as student_row_id")
+            .eq("user_id", authData.user.id)
+            .single();
+
+          currentUser = mapStudent({
+            ...profile,
+            ...(studentProfile as Record<string, any>),
+          });
+        } else {
+          const { data: adminProfile } = await supabase
+            .from("admins")
             .select("*")
             .eq("user_id", authData.user.id)
             .single();
 
-          currentUser = { ...profile, ...studentProfile };
-        } else {
-          currentUser = profile;
+          currentUser = mapAdmin({ ...profile, ...adminProfile });
         }
       }
 
