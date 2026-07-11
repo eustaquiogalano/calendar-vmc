@@ -6,6 +6,7 @@ export interface User {
 
 export interface Student extends User {
   userType: "student";
+  studentRowId: string;
   userId: string;
   firstName: string;
   middleName?: string;
@@ -26,7 +27,8 @@ export function mapStudent(data: Record<string, any>): Student {
   return {
     id: data.id,
     email: data.email,
-    userType: data.user_type,
+    userType: "student",
+    studentRowId: data.student_row_id,
     userId: data.user_id,
     firstName: data.first_name,
     middleName: data.middle_name,
@@ -41,7 +43,7 @@ export function mapAdmin(data: Record<string, any>): Admin {
   return {
     id: data.id,
     email: data.email,
-    userType: data.user_type,
+    userType: "admin",
     userId: data.user_id,
     name: data.name,
     idNumber: data.id_number,
