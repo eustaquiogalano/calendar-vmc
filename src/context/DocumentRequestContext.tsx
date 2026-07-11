@@ -37,13 +37,13 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
 
     async function initRequests(user: Student | Admin) {
       // Admin sees all requests, student sees only their own
-      const query = supabase
+      let query = supabase
         .from("document_requests")
         .select("*, students(first_name, last_name)")
         .order("date", { ascending: false });
 
       if (user.userType === "student") {
-        query.eq("student_id", user.id);
+        query = query.eq("student_id", user.studentRowId);
       }
 
       const { data, error } = await query;
