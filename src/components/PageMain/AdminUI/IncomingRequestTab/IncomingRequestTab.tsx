@@ -1,5 +1,3 @@
-import { useUser } from "../../../../context/UserContext";
-import IncomingCard from "./IncomingCard/IncomingCard";
 import style from "./IncomingRequestTab.module.css";
 
 import {
@@ -18,15 +16,15 @@ import { useDocumentRequest } from "@/context/DocumentRequestContext";
 
 function IncomingRequestTab() {
   const { requests, updateRequestStatus, loading } = useDocumentRequest();
-  const rejectionDialogRef = useRef();
+  const rejectionDialogRef = useRef<HTMLDialogElement | null>(null);
   const [student, setStudent] = useState();
-  const [requestID, setRequestID] = useState();
+  const [requestID, setRequestID] = useState("");
 
   const handleRequestRejection = async () => {
     await updateRequestStatus(requestID, "REJECTED");
   };
 
-  const handleRequestAcceptance = async (student, requestID) => {
+  const handleRequestAcceptance = async (requestID: string) => {
     await updateRequestStatus(requestID, "ACCEPTED_PROCESSING");
   };
 
@@ -76,7 +74,7 @@ function IncomingRequestTab() {
                     variant="default"
                     className="w-[50%] h-fit p-2"
                     onClick={() => {
-                      handleRequestAcceptance(student, request.id, request);
+                      handleRequestAcceptance(request.id);
                     }}
                   >
                     {loading ? (
@@ -91,7 +89,7 @@ function IncomingRequestTab() {
                     onClick={() => {
                       setStudent(student);
                       setRequestID(request.id);
-                      rejectionDialogRef.current.showModal();
+                      rejectionDialogRef.current?.showModal();
                     }}
                   >
                     {loading ? (
