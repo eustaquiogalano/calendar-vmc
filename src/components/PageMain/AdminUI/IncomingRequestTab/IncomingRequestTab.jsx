@@ -17,8 +17,7 @@ import { LoaderCircle } from "lucide-react";
 import { useDocumentRequest } from "@/context/DocumentRequestContext";
 
 function IncomingRequestTab() {
-  const { loading, setLoading } = useUser();
-  const { requests, updateRequestStatus } = useDocumentRequest();
+  const { requests, updateRequestStatus, loading } = useDocumentRequest();
   const rejectionDialogRef = useRef();
   const [student, setStudent] = useState();
   const [requestID, setRequestID] = useState();
@@ -27,10 +26,8 @@ function IncomingRequestTab() {
     await updateRequestStatus(requestID, "REJECTED");
   };
 
-  const handleRequestAcceptance = async (student, requestID, request) => {
-    setLoading(true);
-    await updateRequestStatus(student, requestID, "ACCEPTED", request);
-    setLoading(false);
+  const handleRequestAcceptance = async (student, requestID) => {
+    await updateRequestStatus(requestID, "ACCEPTED_PROCESSING");
   };
 
   return (
@@ -40,64 +37,73 @@ function IncomingRequestTab() {
       <h2>Incoming Requests</h2>
 
       <div className={style["incoming-request__request-list"]}>
-        {requests.map((request) => {
-          return (
-            <Card
-              key={request.id}
-              className="border-2 shrink-0 flex flex-col justify-between"
-            >
-              <CardHeader className="p3">
-                <CardTitle>{request.studentName}</CardTitle>
-              </CardHeader>
-              <CardContent className="p-3">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Document:</span>
-                  <span>{request.document}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Purpose:</span>
-                  <span>{request.purpose}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Date:</span>
-                  <span>{request.date}</span>
-                </div>
-              </CardContent>
-              <CardFooter className="flex justify-between gap-2">
-                <Button
-                  disabled={loading}
-                  variant="default"
-                  className="w-[50%] h-fit p-2"
-                  onClick={() => {
-                    handleRequestAcceptance(student, request.id, request);
-                  }}
-                >
-                  {loading ? (
-                    <LoaderCircle className="animate-spin" />
-                  ) : (
-                    "Accept"
-                  )}
-                </Button>
-                <Button
-                  variant="outline"
-                  className="w-[50%] h-fit p-2"
-                  onClick={() => {
-                    setStudent(student);
-                    setRequestID(request.id);
-                    setRequest(request);
-                    rejectionDialogRef.current.showModal();
-                  }}
-                >
-                  {loading ? (
-                    <LoaderCircle className="animate-spin" />
-                  ) : (
-                    "Reject"
-                  )}
-                </Button>
-              </CardFooter>
-            </Card>
-          );
-        })}
+        {requests
+          .filter((request) => {
+            if (
+              request.status !== "ACCEPTED_PROCESSING" &&
+              request.status !== "READY_FOR_PICKUP" &&
+              request.status !== "REJECTED"
+            ) {
+              return request;
+            }
+          })
+          .map((request) => {
+            return (
+              <Card
+                key={request.id}
+                className="border-2 shrink-0 flex flex-col justify-between"
+              >
+                <CardHeader className="p3">
+                  <CardTitle>{request.studentName}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-3">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Document:</span>
+                    <span>{request.document}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Purpose:</span>
+                    <span>{request.purpose}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Date:</span>
+                    <span>{request.date}</span>
+                  </div>
+                </CardContent>
+                <CardFooter className="flex justify-between gap-2">
+                  <Button
+                    disabled={loading}
+                    variant="default"
+                    className="w-[50%] h-fit p-2"
+                    onClick={() => {
+                      handleRequestAcceptance(student, request.id, request);
+                    }}
+                  >
+                    {loading ? (
+                      <LoaderCircle className="animate-spin" />
+                    ) : (
+                      "Accept"
+                    )}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-[50%] h-fit p-2"
+                    onClick={() => {
+                      setStudent(student);
+                      setRequestID(request.id);
+                      rejectionDialogRef.current.showModal();
+                    }}
+                  >
+                    {loading ? (
+                      <LoaderCircle className="animate-spin" />
+                    ) : (
+                      "Reject"
+                    )}
+                  </Button>
+                </CardFooter>
+              </Card>
+            );
+          })}
       </div>
 
       <RejectRequestDialog
