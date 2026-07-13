@@ -13,7 +13,6 @@ import {
 import { Button } from "@/components/ui/button";
 import RejectRequestDialog from "@/components/RejectRequestDialog/RejectRequestDialog";
 import { useRef, useState } from "react";
-import { set } from "date-fns";
 import { LoaderCircle } from "lucide-react";
 import { useDocumentRequest } from "@/context/DocumentRequestContext";
 
@@ -23,7 +22,6 @@ function IncomingRequestTab() {
   const rejectionDialogRef = useRef();
   const [student, setStudent] = useState();
   const [requestID, setRequestID] = useState();
-  const [request, setRequest] = useState();
 
   const handleRequestRejection = async () => {
     await updateRequestStatus(requestID, "REJECTED");
