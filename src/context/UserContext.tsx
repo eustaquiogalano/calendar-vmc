@@ -72,7 +72,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         if (profile?.user_type === "student") {
           const { data: studentProfile } = await supabase
             .from("students")
-            .select("*, id as student_row_id")
+            .select("*  ")
             .eq("user_id", authData.user.id)
             .single();
 
