@@ -2,18 +2,18 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { EventsProvider } from "./context/EventsContext.jsx";
+import { EventsProvider } from "./context/EventsContext.js";
 import { UserProvider } from "./context/UserContext.js";
 
 import App from "./App.js";
-import { StudentUI } from "./components/PageMain/StudentUI/StudentUI.jsx";
+import { StudentUI } from "./components/PageMain/StudentUI/StudentUI.js";
 import AdminUI from "./components/PageMain/AdminUI/AdminUI.js";
-import ErrorPage from "./components/ErrorPage.jsx";
-import IncomingRequestTab from "./components/PageMain/AdminUI/IncomingRequestTab/IncomingRequestTab.jsx";
-import ManageRequestTab from "./components/PageMain/AdminUI/ManageRequestTab/ManageRequestTab.jsx";
-import CreateEvent from "./components/PageMain/AdminUI/CreateEventTab/CreateEventTab.jsx";
-import CalendarTab from "./components/PageMain/StudentUI/CalendarTab/CalendarTab.jsx";
-import DocumentRequestTab from "./components/PageMain/StudentUI/DocumentRequestTab/DocumentRequestTab.jsx";
+import ErrorPage from "./components/ErrorPage.js";
+import IncomingRequestTab from "./components/PageMain/AdminUI/IncomingRequestTab/IncomingRequestTab.js";
+import ManageRequestTab from "./components/PageMain/AdminUI/ManageRequestTab/ManageRequestTab.js";
+import CreateEvent from "./components/PageMain/AdminUI/CreateEventTab/CreateEventTab.js";
+import CalendarTab from "./components/PageMain/StudentUI/CalendarTab/CalendarTab.js";
+import DocumentRequestTab from "./components/PageMain/StudentUI/DocumentRequestTab/DocumentRequestTab.js";
 
 import "./global.css";
 import { AuthForm } from "./components/PageMain/AuthForm/AuthForm.js";
@@ -71,7 +71,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <UserProvider>
       <DocumentRequestProvider>
