@@ -45,6 +45,7 @@ export async function signUp({
   if (userType === "student") {
     const { error: studentError } = await supabase.from("students").insert({
       user_id: userId,
+      email,
       ...studentData,
     });
 
