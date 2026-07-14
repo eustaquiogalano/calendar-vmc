@@ -10,10 +10,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { IoWarningOutline } from "react-icons/io5";
 
-const ConfirmationDialog = forwardRef(function ConfirmationDialog(
-  { onConfirm },
-  ref,
-) {
+interface ConfirmationDialogProps {
+  onConfirm: () => void;
+}
+
+const ConfirmationDialog = forwardRef<
+  HTMLDialogElement,
+  ConfirmationDialogProps
+>(function ConfirmationDialog({ onConfirm }, ref) {
+  const dialogRef = ref as React.RefObject<HTMLDialogElement>;
+
   return (
     <dialog className={style["confirmation-dialog"]} ref={ref}>
       <Card className="border-2 border-destructive">
@@ -32,7 +38,7 @@ const ConfirmationDialog = forwardRef(function ConfirmationDialog(
             className=" w-[50%] h-fit p-2"
             onClick={() => {
               onConfirm();
-              ref.current.close();
+              dialogRef.current.close();
             }}
           >
             Delete
@@ -40,7 +46,7 @@ const ConfirmationDialog = forwardRef(function ConfirmationDialog(
           <Button
             variant="outline"
             className="w-[50%] h-fit p-2"
-            onClick={() => ref.current.close()}
+            onClick={() => dialogRef.current.close()}
           >
             Cancel
           </Button>

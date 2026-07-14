@@ -49,9 +49,9 @@ import { useDocumentRequest } from "@/context/DocumentRequestContext";
 function DocumentRequestTab() {
   const { requests, addRequest, deleteRequest, loading } = useDocumentRequest();
   const { currentUser } = useUser();
-  const dialogRef = useRef();
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
 
-  const [deleteionID, setDeletionID] = useState();
+  const [deleteionID, setDeletionID] = useState("");
   const [document, setDocument] = useState("");
   const [purpose, setPurpose] = useState("");
   const [date, setDate] = useState("");
@@ -59,12 +59,16 @@ function DocumentRequestTab() {
 
   console.log(loading);
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    if (!currentUser) return;
+
+    const form = e.target as HTMLFormElement;
+
     // checks validity of the form
-    if (!e.target.checkValidity()) {
-      e.target.reportValidity();
+    if (!form.checkValidity()) {
+      form.reportValidity();
       return;
     }
 
@@ -75,7 +79,8 @@ function DocumentRequestTab() {
       document,
       purpose,
       date: format(date, "yyyy-MM-dd"),
-      status: "PENDING",
+      status: "PENDING" as const,
+      announcementType: "request" as const,
     };
 
     // validate the request if it can be added or not
@@ -271,7 +276,7 @@ function DocumentRequestTab() {
                       className="w-full h-fit p-2"
                       onClick={() => {
                         setDeletionID(request.id);
-                        dialogRef.current.showModal();
+                        dialogRef.current?.showModal();
                       }}
                     >
                       {loading ? (
