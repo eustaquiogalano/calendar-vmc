@@ -1,9 +1,13 @@
-import React from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
 import { IoWarningOutline } from "react-icons/io5";
 
-function RequestBlockedCard({ setIsActive, twclass }) {
+interface RequestBlockedCardProps {
+  setIsActive: (value: boolean) => void;
+  twclass?: string;
+}
+
+function RequestBlockedCard({ setIsActive, twclass }: RequestBlockedCardProps) {
   return (
     <Card className={twclass}>
       <CardHeader className="flex items-center gap-2 border-b-1 pb-4">
