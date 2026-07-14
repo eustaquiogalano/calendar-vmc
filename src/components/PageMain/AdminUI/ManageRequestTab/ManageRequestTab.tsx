@@ -18,13 +18,13 @@ import { documentStatusLabel } from "@/types/documentRequest";
 
 function ManageRequestTab() {
   const { updateRequestStatus, requests, loading } = useDocumentRequest();
-  const [selectedRequestId, setSelectedRequestId] = useState(undefined);
+  const [selectedRequestId, setSelectedRequestId] = useState("");
 
   const selectedRequest = requests.find(
     (request) => request.id === selectedRequestId,
   );
 
-  const handleUpdateStatus = async (id) => {
+  const handleUpdateStatus = async (id: string) => {
     await updateRequestStatus(id, "READY_FOR_PICKUP");
   };
 
