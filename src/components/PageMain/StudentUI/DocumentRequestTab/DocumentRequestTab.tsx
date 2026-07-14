@@ -54,7 +54,7 @@ function DocumentRequestTab() {
   const [deleteionID, setDeletionID] = useState("");
   const [document, setDocument] = useState("");
   const [purpose, setPurpose] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<Date | undefined>(undefined);
   const [isActive, setIsActive] = useState(false);
 
   console.log(loading);
@@ -78,7 +78,7 @@ function DocumentRequestTab() {
       studentId: currentUser.id,
       document,
       purpose,
-      date: format(date, "yyyy-MM-dd"),
+      date: format(date!, "yyyy-MM-dd"),
       status: "PENDING" as const,
       announcementType: "request" as const,
     };
@@ -150,7 +150,6 @@ function DocumentRequestTab() {
                       onValueChange={(value) => setDocument(value)}
                       value={document}
                       name="document"
-                      id="document"
                       required
                     >
                       <SelectTrigger className="w-[180px]">
