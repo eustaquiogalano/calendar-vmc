@@ -8,7 +8,7 @@ import {
 } from "react";
 import { supabase } from "../supabase-client.ts";
 import usersReducer from "../reducers/userReducer.ts";
-import Loader from "@/components/Loader/Loader";
+import Loader from "@/components/Loader/Loader.tsx";
 import { Student, Admin, mapAdmin, mapStudent } from "../types/user.js";
 
 interface DocumentRequest {
