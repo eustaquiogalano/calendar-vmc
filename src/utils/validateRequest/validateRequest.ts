@@ -1,13 +1,7 @@
-interface DocumentRequest {
-  id: string;
-  document: string;
-  purpose: string;
-  date: string;
-  status: "PENDING" | "APPROVED" | "REJECTED";
-}
+import { DocumentRequest, NewDocumentRequest } from "@/types/documentRequest";
 
 export function validateRequest(
-  request: DocumentRequest,
+  request: NewDocumentRequest,
   userRequests: DocumentRequest[],
 ): boolean {
   const matchingRequest = userRequests.find((requestItem) => {
