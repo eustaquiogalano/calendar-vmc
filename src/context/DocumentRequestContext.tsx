@@ -39,7 +39,9 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
       // Admin sees all requests, student sees only their own
       let query = supabase
         .from("document_requests")
-        .select("*, students(first_name, last_name)")
+        .select(
+          "*, students(first_name, last_name, id_number, year_level, email)",
+        )
         .order("date", { ascending: false });
 
       if (user.userType === "student") {
@@ -90,12 +92,14 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
   ) {
     setLoading(true);
 
-    const { data, error } = await supabase
-      .from("document_requests")
-      .update({ status })
-      .eq("id", requestID)
-      .select()
-      .single();
+      const { data, error } = await supabase
+        .from("document_requests")
+        .update({ status })
+        .eq("id", requestID)
+        .select(
+          "*, students(first_name, last_name, id_number, year_level, email)",
+        )
+        .single();
 
     if (error) {
       console.error("Failed to update request status:", error);
