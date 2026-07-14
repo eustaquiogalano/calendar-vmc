@@ -16,7 +16,13 @@ export interface NewDocumentRequest {
 // shape after it's been saved (has id from Supabase)
 export interface DocumentRequest extends NewDocumentRequest {
   id: string;
-  studentName?: string;
+  student?: {
+    firstName: string;
+    lastName: string;
+    idNumber: string;
+    yearLevel: number;
+    email: string;
+  };
 }
 
 export const documentStatusLabel: Record<DocumentRequest["status"], string> = {
@@ -36,8 +42,14 @@ export function toDocumentRequest(data: Record<string, any>): DocumentRequest {
     purpose: data.purpose,
     date: data.date,
     status: data.status,
-    studentName: data.students
-      ? `${data.students.first_name} ${data.students.last_name}`
+    student: data.students
+      ? {
+          firstName: data.students.first_name,
+          lastName: data.students.last_name,
+          idNumber: data.students.id_number,
+          yearLevel: data.students.year_level,
+          email: data.students.email,
+        }
       : undefined,
   };
 }
