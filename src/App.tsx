@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import style from "./App.module.css";
 
 import { SidebarInset, SidebarProvider } from "./components/ui/sidebar.jsx";
-import { AppSidebar } from "./components/app-sidebar.jsx";
+import { AppSidebar } from "./components/app-sidebar.js";
 import { useUser } from "./context/UserContext.js";
 
 function App() {

@@ -62,7 +62,7 @@ export function AppSidebar({ ...props }) {
   const navigate = useNavigate();
   const { currentUser, logoutCurrentUser } = useUser();
   const navData =
-    currentUser.userType === "admin" ? data.adminNav : data.studentNav;
+    currentUser?.userType === "admin" ? data.adminNav : data.studentNav;
 
   // logout
   async function handleLogout() {
