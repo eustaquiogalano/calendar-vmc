@@ -15,7 +15,10 @@ function StudentUI() {
           <h2
             className={`${style["studentUI__h2--shadow"]} ${style["studentUI__h2"]} text-xl font-bold`}
           >
-            Hello {currentUser?.firstName || currentUser?.name}
+            Hello{" "}
+            {currentUser?.userType === "student"
+              ? currentUser.firstName
+              : currentUser?.name}
           </h2>
         </div>
         <div className={style["studentUI__panel"]}>
