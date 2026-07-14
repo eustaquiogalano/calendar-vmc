@@ -52,7 +52,9 @@ function IncomingRequestTab() {
                 className="border-2 shrink-0 flex flex-col justify-between"
               >
                 <CardHeader className="p3">
-                  <CardTitle>{request.studentName}</CardTitle>
+                  <CardTitle>
+                    {`${request.student?.firstName} ${request.student?.lastName}`}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="p-3">
                   <div className="flex justify-between">
