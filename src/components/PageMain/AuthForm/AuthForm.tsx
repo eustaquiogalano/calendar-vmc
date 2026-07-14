@@ -18,6 +18,14 @@ import { Input } from "@/components/ui/input";
 
 import loginImage from "../../../assets/images/login-image.jpg";
 import { mapAdmin, mapStudent } from "@/types/user.js";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select.js";
 
 export function AuthForm({
   className,
@@ -34,7 +42,7 @@ export function AuthForm({
   const [lastName, setLastname] = useState("");
   const [idNumber, setIDnumber] = useState("");
   const [regPassword, setRegPassword] = useState("");
-  const [yearLevel, setYearLevel] = useState(1);
+  const [yearLevel, setYearLevel] = useState("");
 
   // login
   async function handleSignIn(event: React.FormEvent<HTMLFormElement>) {
@@ -244,14 +252,32 @@ export function AuthForm({
 
               <Field>
                 <FieldLabel htmlFor="yearLevel">Year Level:</FieldLabel>
-                <Input
+                {/* <Input
                   value={yearLevel}
                   onChange={(e) => setYearLevel(Number(e.target.value))}
                   id="yearLevel"
                   type="number"
                   placeholder="3"
                   required
-                />
+                /> */}
+                <Select
+                  onValueChange={(value) => setYearLevel(value)}
+                  value={yearLevel}
+                  name="yearLevel"
+                  required
+                >
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="4th" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="1">1st</SelectItem>
+                      <SelectItem value="2">2nd</SelectItem>
+                      <SelectItem value="3">3rd</SelectItem>
+                      <SelectItem value="4">4th</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </Field>
 
               <Field>
