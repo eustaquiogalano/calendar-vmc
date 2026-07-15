@@ -8,6 +8,7 @@ import {
 import { supabase } from "../supabase-client.ts"; // adjust path
 import {
   DocumentRequest,
+  documentStatusLabel,
   NewDocumentRequest,
   toDocumentRequest,
 } from "../types/documentRequest.ts";
@@ -92,20 +93,30 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
   ) {
     setLoading(true);
 
-      const { data, error } = await supabase
-        .from("document_requests")
-        .update({ status })
-        .eq("id", requestID)
-        .select(
-          "*, students(first_name, last_name, id_number, year_level, email)",
-        )
-        .single();
+    const { data, error } = await supabase
+      .from("document_requests")
+      .update({ status })
+      .eq("id", requestID)
+      .select(
+        "*, students(first_name, last_name, id_number, year_level, email)",
+      )
+      .single();
 
     if (error) {
       console.error("Failed to update request status:", error);
       setLoading(false);
       return;
     }
+
+    // trigger email notification
+    await supabase.functions.invoke("send-status-email", {
+      body: {
+        studentEmail: data.students.email,
+        studentName: `${data.students.first_name} ${data.students.last_name}`,
+        document: data.document,
+        status: documentStatusLabel[data.status as DocumentRequest["status"]],
+      },
+    });
 
     setRequests((prev) =>
       prev.map((r) => (r.id === requestID ? toDocumentRequest(data) : r)),
