@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select.js";
+import { Eye, EyeOff } from "lucide-react";
 
 export function AuthForm({
   className,
@@ -43,6 +44,10 @@ export function AuthForm({
   const [idNumber, setIDnumber] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const [yearLevel, setYearLevel] = useState("");
+
+  // states for passwords
+  const [showRegPassword, setShowRegPassword] = useState(false);
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
 
   // login
   async function handleSignIn(event: React.FormEvent<HTMLFormElement>) {
@@ -154,13 +159,22 @@ export function AuthForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input
-                  value={password}
-                  onChange={handlePassword}
-                  id="password"
-                  type="password"
-                  required
-                />
+                <div className="relative">
+                  <Input
+                    value={password}
+                    onChange={handlePassword}
+                    id="password"
+                    type={showLoginPassword ? "text" : "password"}
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                    onClick={() => setShowLoginPassword((prev) => !prev)}
+                  >
+                    {showRegPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
+                </div>
               </Field>
               <Field>
                 <Button className="h-fit p-2" type="submit">
@@ -296,13 +310,26 @@ export function AuthForm({
                 <Field className="grid grid-cols-1 gap-4">
                   <Field>
                     <FieldLabel htmlFor="password">Password</FieldLabel>
-                    <Input
-                      value={regPassword}
-                      onChange={(e) => setRegPassword(e.target.value)}
-                      id="password"
-                      type="password"
-                      required
-                    />
+                    <div className="relative">
+                      <Input
+                        value={regPassword}
+                        onChange={(e) => setRegPassword(e.target.value)}
+                        id="password"
+                        type={showRegPassword ? "text" : "password"}
+                        required
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                        onClick={() => setShowRegPassword((prev) => !prev)}
+                      >
+                        {showRegPassword ? (
+                          <EyeOff size={16} />
+                        ) : (
+                          <Eye size={16} />
+                        )}
+                      </button>
+                    </div>
                   </Field>
                   <FieldDescription>
                     Must be at least 8 characters long.
@@ -311,7 +338,13 @@ export function AuthForm({
                     <FieldLabel htmlFor="confirm-password">
                       Confirm Password
                     </FieldLabel>
-                    <Input id="confirm-password" type="password" required />
+                    <div className="relative">
+                      <Input
+                        id="confirm-password"
+                        type={showRegPassword ? "text" : "password"}
+                        required
+                      />
+                    </div>
                   </Field>
                 </Field>
               </Field>
