@@ -41,7 +41,7 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
       let query = supabase
         .from("document_requests")
         .select(
-          "*, students(first_name, last_name, id_number, year_level, email)",
+          "*, students(first_name, last_name, id_number, year_level, email,contact_number)",
         )
         .order("date", { ascending: false });
 
@@ -98,7 +98,7 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
       .update({ status })
       .eq("id", requestID)
       .select(
-        "*, students(first_name, last_name, id_number, year_level, email)",
+        "*, students(first_name, last_name, id_number, year_level, email, contact_number)",
       )
       .single();
 

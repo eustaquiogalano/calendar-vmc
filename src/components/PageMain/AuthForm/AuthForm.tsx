@@ -41,6 +41,7 @@ export function AuthForm({
   // states for register
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
   const [idNumber, setIDnumber] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const [yearLevel, setYearLevel] = useState("");
@@ -84,6 +85,7 @@ export function AuthForm({
       studentData: {
         first_name: firstName,
         last_name: lastName,
+        contact_number: contactNumber,
         id_number: idNumber,
         year_level: Number(yearLevel),
       },
@@ -248,6 +250,17 @@ export function AuthForm({
                   type="text"
                   placeholder="Mabini"
                   required
+                />
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="contactNumber">Contact Number:</FieldLabel>
+                <Input
+                  value={contactNumber}
+                  onChange={(e) => setContactNumber(e.target.value)}
+                  id="contactNumber"
+                  type="text"
+                  placeholder="09XXXXXXXXX"
                 />
               </Field>
 

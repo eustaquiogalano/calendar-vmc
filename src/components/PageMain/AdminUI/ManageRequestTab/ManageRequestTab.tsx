@@ -45,6 +45,12 @@ function ManageRequestTab() {
                 </CardTitle>
                 <CardDescription>
                   <div className="flex justify-between">
+                    <span className="text-muted-foreground">
+                      Contact Number:
+                    </span>
+                    <span>{selectedRequest.student?.contactNumber}</span>
+                  </div>
+                  <div className="flex justify-between">
                     <span className="text-muted-foreground">ID#:</span>
                     <span>{selectedRequest.student?.idNumber}</span>
                   </div>

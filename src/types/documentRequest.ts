@@ -19,6 +19,7 @@ export interface DocumentRequest extends NewDocumentRequest {
   student?: {
     firstName: string;
     lastName: string;
+    contactNumber: string;
     idNumber: string;
     yearLevel: number;
     email: string;
@@ -44,12 +45,13 @@ export function toDocumentRequest(data: Record<string, any>): DocumentRequest {
     status: data.status,
     student: data.students
       ? {
-          firstName: data.students.first_name,
-          lastName: data.students.last_name,
-          idNumber: data.students.id_number,
-          yearLevel: data.students.year_level,
-          email: data.students.email,
-        }
+        firstName: data.students.first_name,
+        lastName: data.students.last_name,
+        contactNumber: data.students.contact_number,
+        idNumber: data.students.id_number,
+        yearLevel: data.students.year_level,
+        email: data.students.email,
+      }
       : undefined,
   };
 }
