@@ -4,7 +4,7 @@ interface StudentData {
   first_name: string;
   middle_name?: string;
   last_name: string;
-  contact_number: string;
+  contact_number?: string;
   suffix?: string;
   id_number: string;
   year_level: number;

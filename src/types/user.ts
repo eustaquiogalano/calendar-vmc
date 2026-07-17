@@ -12,6 +12,7 @@ export interface Student extends User {
   middleName?: string;
   suffix?: string;
   lastName: string;
+  contactNumber: string;
   idNumber: string;
   yearLevel: number;
 }
@@ -32,6 +33,7 @@ export function mapStudent(data: Record<string, any>): Student {
     userId: data.user_id,
     firstName: data.first_name,
     middleName: data.middle_name,
+    contactNumber: data.contact_number, // add this
     suffix: data.suffix,
     lastName: data.last_name,
     idNumber: data.id_number,
