@@ -41,6 +41,7 @@ export function AuthForm({
   // states for register
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
+  const [middleName, setMiddleName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [idNumber, setIDnumber] = useState("");
   const [regPassword, setRegPassword] = useState("");
@@ -85,6 +86,7 @@ export function AuthForm({
       studentData: {
         first_name: firstName,
         last_name: lastName,
+        middle_name: middleName,
         contact_number: contactNumber,
         id_number: idNumber,
         year_level: Number(yearLevel),
@@ -250,6 +252,17 @@ export function AuthForm({
                   type="text"
                   placeholder="Mabini"
                   required
+                />
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="middleName">Middle Name:</FieldLabel>
+                <Input
+                  value={middleName}
+                  onChange={(e) => setMiddleName(e.target.value)}
+                  id="middleName"
+                  type="text"
+                  placeholder="Dimasalangan"
                 />
               </Field>
 
