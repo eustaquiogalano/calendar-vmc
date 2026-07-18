@@ -18,6 +18,7 @@ import DocumentRequestTab from "./components/PageMain/StudentUI/DocumentRequestT
 import "./global.css";
 import { AuthForm } from "./components/PageMain/AuthForm/AuthForm.js";
 import { DocumentRequestProvider } from "./context/DocumentRequestContext.js";
+import ProfileTab from "./components/Pages/ProfileTab.js";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
               {
                 path: "document-request",
                 element: <DocumentRequestTab />,
+              },
+              {
+                path: "profile",
+                element: <ProfileTab />,
               },
             ],
           },

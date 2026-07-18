@@ -70,7 +70,7 @@ export function AuthForm({
     loginCurrentUser(mappedUser);
 
     // navigate to the appropriate dashboard based on user type
-    user.userType === "student" ? navigate("/student") : navigate("/admin");
+    user.user_type === "student" ? navigate("/student") : navigate("/admin");
   }
 
   // register

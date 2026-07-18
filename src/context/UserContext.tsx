@@ -26,6 +26,11 @@ interface UserContextType {
   currentUser: Student | Admin | null;
   loginCurrentUser: (currentUser: Student | Admin | null) => void;
   logoutCurrentUser: () => void;
+  updateStudent: (
+    studentId: string,
+    authId: string,
+    update: Partial<Student>,
+  ) => Promise<void>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -115,6 +120,56 @@ export function UserProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "LOGOUT" });
   };
 
+  async function updateStudent(
+    studentId: string,
+    authId: string,
+    update: Partial<Student>,
+  ) {
+    setLoading(true);
+
+    // update students table
+    const { error: studentError } = await supabase
+      .from("students")
+      .update({
+        first_name: update.firstName,
+        last_name: update.lastName,
+        middle_name: update.middleName ?? null,
+        // suffix: update.suffix ?? null,
+        id_number: update.idNumber,
+        year_level: update.yearLevel,
+        contact_number: update.contactNumber ?? null,
+      })
+      .eq("id", studentId);
+
+    if (studentError) {
+      console.error("Failed to update student:", studentError);
+      setLoading(false);
+      return;
+    }
+
+    // update email in users table if provided
+    if (update.email) {
+      const { error: userError } = await supabase
+        .from("users")
+        .update({ email: update.email })
+        .eq("id", authId);
+
+      if (userError) {
+        console.error("Failed to update email:", userError);
+        setLoading(false);
+        return;
+      }
+    }
+
+    // update currentUser in context
+    dispatch({
+      type: "UPDATE_CURRENT_USER",
+      payload: { ...state.currentUser, ...update } as Student,
+    });
+
+    setLoading(false);
+  }
+
   if (!ready) return <Loader />;
 
   return (
@@ -126,6 +181,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         currentUser: state.currentUser,
         loginCurrentUser,
         logoutCurrentUser,
+        updateStudent,
         loading,
         setLoading,
       }}

@@ -26,7 +26,7 @@ export interface Admin extends User {
 
 export function mapStudent(data: Record<string, any>): Student {
   return {
-    id: data.users_id,
+    id: data.user_id,
     email: data.email,
     userType: "student",
     studentRowId: data.id,

@@ -1,4 +1,4 @@
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Outlet, useNavigate, useOutletContext } from "react-router-dom";
 
 import style from "./StudentUI.module.css";
 import { useUser } from "../../../context/UserContext";
@@ -6,6 +6,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 
 function StudentUI() {
   const { currentUser } = useUser();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -14,6 +15,7 @@ function StudentUI() {
           <SidebarTrigger className="md:hidden" />
           <h2
             className={`${style["studentUI__h2--shadow"]} ${style["studentUI__h2"]} text-xl font-bold`}
+            onClick={() => navigate("/student/profile")}
           >
             Hello{" "}
             {currentUser?.userType === "student"
