@@ -78,8 +78,8 @@ export function AuthForm({
   async function handleSignUp(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    // register the user
-    const user = await signUp({
+    // register the user and get the result
+    const result = await signUp({
       email,
       password: regPassword,
       userType: "student",
@@ -94,8 +94,10 @@ export function AuthForm({
     });
 
     // handle failed registraton
-    if (!user) {
+    if (result?.error) {
       alert("Registration failed");
+      alert(result.error.message);
+
       return;
     }
 
