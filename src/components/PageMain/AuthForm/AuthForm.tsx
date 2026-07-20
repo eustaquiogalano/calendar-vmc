@@ -42,6 +42,7 @@ export function AuthForm({
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [middleName, setMiddleName] = useState("");
+  const [suffix, setSuffix] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [idNumber, setIDnumber] = useState("");
   const [regPassword, setRegPassword] = useState("");
@@ -87,6 +88,7 @@ export function AuthForm({
         first_name: firstName,
         last_name: lastName,
         middle_name: middleName,
+        suffix: suffix,
         contact_number: contactNumber,
         id_number: idNumber,
         year_level: Number(yearLevel),
@@ -265,6 +267,17 @@ export function AuthForm({
                   id="middleName"
                   type="text"
                   placeholder="Dimasalangan"
+                />
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="suffix">Suffix:</FieldLabel>
+                <Input
+                  value={suffix}
+                  onChange={(e) => setSuffix(e.target.value)}
+                  id="suffix"
+                  type="text"
+                  placeholder="II, III, JR."
                 />
               </Field>
 
