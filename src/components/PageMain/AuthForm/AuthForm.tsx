@@ -104,8 +104,21 @@ export function AuthForm({
     }
 
     // if successful toggle the register form visibility
+    // and reset inputs
     toggleRegisterForm();
+    resetInputs();
   }
+
+  const resetInputs = () => {
+    setFirstname("");
+    setLastname("");
+    setMiddleName("");
+    setSuffix("");
+    setContactNumber("");
+    setIDnumber("");
+    setRegPassword("");
+    setYearLevel("");
+  };
 
   function handleEmail(event: React.ChangeEvent<HTMLInputElement>) {
     setEmail(event.target.value);
