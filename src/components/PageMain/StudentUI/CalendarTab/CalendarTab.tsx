@@ -14,7 +14,9 @@ import {
 } from "@/components/ui/card";
 
 function CalendarTab() {
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState<string | undefined>(
+    undefined,
+  );
   const { currentUser } = useUser();
   const { events } = useEvent();
   const { requests } = useDocumentRequest();
@@ -28,7 +30,7 @@ function CalendarTab() {
       >
         <h2 className="text-xl font-bold">Calendar</h2>
         <div className={`${style["calendar-tab__calendar"]} `}>
-          <Calendar requests={requests} setSelectedDate={setSelectedDate} />
+          <Calendar setSelectedDate={setSelectedDate} />
         </div>
       </section>
 
