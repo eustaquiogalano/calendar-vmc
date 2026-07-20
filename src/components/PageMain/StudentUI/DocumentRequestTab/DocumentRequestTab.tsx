@@ -105,6 +105,24 @@ function DocumentRequestTab() {
     setDate("");
   }
 
+  function getMinWorkingDate() {
+    const date = new Date();
+    let workingDaysAdded = 0;
+
+    while (workingDaysAdded < 7) {
+      date.setDate(date.getDate() + 1);
+      const day = date.getDay();
+      // skip Saturday (6) and Sunday (0)
+      if (day !== 0 && day !== 6) {
+        workingDaysAdded++;
+      }
+    }
+
+    return date;
+  }
+
+  const minWorkingDate = getMinWorkingDate();
+
   return (
     <>
       <section
@@ -210,6 +228,7 @@ function DocumentRequestTab() {
                           selected={date}
                           onSelect={setDate}
                           defaultMonth={date}
+                          disabled={(day) => day < minWorkingDate}
                         />
                       </PopoverContent>
                     </Popover>
