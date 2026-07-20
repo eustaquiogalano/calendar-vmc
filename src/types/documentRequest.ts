@@ -23,6 +23,9 @@ export interface DocumentRequest extends NewDocumentRequest {
     idNumber: string;
     yearLevel: number;
     email: string;
+    suffix?: string;
+    middleName?: string;
+    course: string;
   };
 }
 
@@ -51,6 +54,9 @@ export function toDocumentRequest(data: Record<string, any>): DocumentRequest {
         idNumber: data.students.id_number,
         yearLevel: data.students.year_level,
         email: data.students.email,
+        suffix: data.students.suffix,
+        middleName: data.students.middle_name,
+        course: data.students.course,
       }
       : undefined,
   };

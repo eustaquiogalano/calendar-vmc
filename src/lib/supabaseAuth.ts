@@ -8,6 +8,7 @@ interface StudentData {
   suffix?: string;
   id_number: string;
   year_level: number;
+  course: string;
 }
 
 interface SignUpProps {
