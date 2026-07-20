@@ -45,6 +45,7 @@ export function AuthForm({
   const [suffix, setSuffix] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [idNumber, setIDnumber] = useState("");
+  const [course, setCourse] = useState("");
   const [regPassword, setRegPassword] = useState("");
   const [yearLevel, setYearLevel] = useState("");
 
@@ -92,6 +93,7 @@ export function AuthForm({
         contact_number: contactNumber,
         id_number: idNumber,
         year_level: Number(yearLevel),
+        course: course,
       },
     });
 
@@ -306,6 +308,31 @@ export function AuthForm({
               </Field>
 
               <Field>
+                <FieldLabel htmlFor="course">Course:</FieldLabel>
+                <Select
+                  onValueChange={(value) => setCourse(value)}
+                  value={course}
+                  name="course"
+                  required
+                >
+                  <SelectTrigger id="course" className="w-[180px]">
+                    <SelectValue placeholder="BSIS" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="BSIS">BSIS</SelectItem>
+                      <SelectItem value="BSBA">BSBA</SelectItem>
+                      <SelectItem value="EDUCATION">EDUCATION</SelectItem>
+                      <SelectItem value="BSCRIM">BSCRIM</SelectItem>
+                      <SelectItem value="BPA">BPA</SelectItem>
+                      <SelectItem value="BSHM">BSHM</SelectItem>
+                      <SelectItem value="BSTM">BSTM</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </Field>
+
+              <Field>
                 <FieldLabel htmlFor="idNumber">ID Number:</FieldLabel>
                 <Input
                   value={idNumber}
@@ -320,21 +347,13 @@ export function AuthForm({
 
               <Field>
                 <FieldLabel htmlFor="yearLevel">Year Level:</FieldLabel>
-                {/* <Input
-                  value={yearLevel}
-                  onChange={(e) => setYearLevel(Number(e.target.value))}
-                  id="yearLevel"
-                  type="number"
-                  placeholder="3"
-                  required
-                /> */}
                 <Select
                   onValueChange={(value) => setYearLevel(value)}
                   value={yearLevel}
                   name="yearLevel"
                   required
                 >
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger id="yearLevel" className="w-[180px]">
                     <SelectValue placeholder="4th" />
                   </SelectTrigger>
                   <SelectContent>
