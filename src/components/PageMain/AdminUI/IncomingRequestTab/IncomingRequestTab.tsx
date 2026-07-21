@@ -30,11 +30,11 @@ function IncomingRequestTab() {
 
   return (
     <section
-      className={`${style["incoming-request__section"]} text-xl font-bold`}
+      className={`${style["incoming-request__section"]} gap-[.5rem] text:sm md:text-2xl font-bold`}
     >
       <h2>Incoming Requests</h2>
 
-      <div className={style["incoming-request__request-list"]}>
+      <div className={`${style["incoming-request__request-list"]} md:p-[1rem]`}>
         {requests
           .filter((request) => {
             if (
@@ -51,15 +51,57 @@ function IncomingRequestTab() {
                 key={request.id}
                 className="border-2 shrink-0 flex flex-col justify-between"
               >
-                <CardHeader className="p3">
-                  <CardTitle>
-                    {`${request.student?.firstName} ${request.student?.lastName}`}
+                <CardHeader className="">
+                  <CardTitle className="text-sm md:text-base">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Last Name:</span>
+                      <span className=" text-right">
+                        {`${request.student?.lastName}`}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">First Name:</span>
+                      <span className=" text-right">
+                        {`${request.student?.firstName}`}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">
+                        Middle Name:
+                      </span>
+                      <span className=" text-right">
+                        {`${request.student?.middleName}`}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Year Level:</span>
+                      <span className=" text-right">
+                        {`${request.student?.yearLevel}`}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Course:</span>
+                      <span className=" text-right">
+                        {`${request.student?.course}`}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">ID#:</span>
+                      <span className=" text-right">
+                        {`${request.student?.idNumber}`}
+                      </span>
+                    </div>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="p-3">
+                <CardContent className="p-3 text-sm md:text-base">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Document:</span>
-                    <span>{request.document}</span>
+                    <span className=" text-right">{request.document}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Purpose:</span>
