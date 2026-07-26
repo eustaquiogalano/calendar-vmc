@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { IoWarningOutline } from "react-icons/io5";
 
 interface ConfirmationDialogProps {
-  onConfirm: () => void;
+  onConfirm: () => void | Promise<void>;
 }
 
 const ConfirmationDialog = forwardRef<

@@ -45,6 +45,7 @@ import {
 import { validateRequest } from "@/utils/validateRequest/validateRequest.ts";
 import RequestBlockedCard from "@/components/RequestBlockedCard/RequestBlockedCard";
 import { useDocumentRequest } from "@/context/DocumentRequestContext";
+import StudentRequestCard from "@/components/StudentRequestCard/StudentRequestCard";
 
 function DocumentRequestTab() {
   const { requests, addRequest, deleteRequest, loading } = useDocumentRequest();
@@ -256,6 +257,7 @@ function DocumentRequestTab() {
         </div>
       </section>
 
+      {/* Request List */}
       <section
         className={`${style["document-request-tab__section"]} ${style["document-request-tab__pending-request"]}`}
       >
@@ -265,51 +267,56 @@ function DocumentRequestTab() {
           {currentUser &&
             requests.map((request) => {
               return (
-                <Card key={request.id} className="border-2 h-fit shrink-0">
-                  <CardHeader>
-                    <CardTitle>{`${request.document}`}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Document:</span>
-                      <span>{request.document}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Purpose:</span>
-                      <span>{request.purpose}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Date:</span>
-                      <span>{request.date}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Status:</span>
-                      <span>{request.status}</span>
-                    </div>
-                  </CardContent>
-                  <CardFooter>
-                    <Button
-                      disabled={loading}
-                      variant="default"
-                      className="w-full h-fit p-2"
-                      onClick={() => {
-                        setDeletionID(request.id);
-                        dialogRef.current?.showModal();
-                      }}
-                    >
-                      {loading ? (
-                        <Loader className="animate-spin" />
-                      ) : (
-                        "Delete Request"
-                      )}
-                    </Button>
-                  </CardFooter>
-                </Card>
+                // <Card key={request.id} className="border-2 h-fit shrink-0">
+                //   <CardHeader>
+                //     <CardTitle>{`${request.document}`}</CardTitle>
+                //   </CardHeader>
+                //   <CardContent>
+                //     <div className="flex justify-between">
+                //       <span className="text-muted-foreground">Document:</span>
+                //       <span>{request.document}</span>
+                //     </div>
+                //     <div className="flex justify-between">
+                //       <span className="text-muted-foreground">Purpose:</span>
+                //       <span>{request.purpose}</span>
+                //     </div>
+                //     <div className="flex justify-between">
+                //       <span className="text-muted-foreground">Date:</span>
+                //       <span>{request.date}</span>
+                //     </div>
+                //     <div className="flex justify-between">
+                //       <span className="text-muted-foreground">Status:</span>
+                //       <span>{request.status}</span>
+                //     </div>
+                //   </CardContent>
+                //   <CardFooter>
+                //     <Button
+                //       disabled={loading}
+                //       variant="default"
+                //       className="w-full h-fit p-2"
+                //       onClick={() => {
+                //         setDeletionID(request.id);
+                //         dialogRef.current?.showModal();
+                //       }}
+                //     >
+                //       {loading ? (
+                //         <Loader className="animate-spin" />
+                //       ) : (
+                //         "Delete Request"
+                //       )}
+                //     </Button>
+                //   </CardFooter>
+                // </Card>
+                <StudentRequestCard
+                  request={request}
+                  handleDelete={handleDelete}
+                  setDeletionID={setDeletionID}
+                />
               );
             })}
         </div>
 
-        <ConfirmationDialog ref={dialogRef} onConfirm={handleDelete} />
+        {/* <ConfirmationDialog ref={dialogRef} onConfirm={handleDelete} /> */}
       </section>
     </>
   );
