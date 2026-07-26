@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-react";
 import { useDocumentRequest } from "@/context/DocumentRequestContext";
 import { documentStatusLabel } from "@/types/documentRequest";
+import RequestFullView from "@/components/RequestFullViewCard/RequestFullViewCard";
 
 function ManageRequestTab() {
   const { updateRequestStatus, requests, loading } = useDocumentRequest();
@@ -36,69 +37,74 @@ function ManageRequestTab() {
         <h2>Request View</h2>
         <div className={style["manage-request__display-box"]}>
           {selectedRequest ? (
-            <Card className="w-full">
-              <CardHeader>
-                <CardTitle>
-                  {selectedRequest.student
-                    ? `${selectedRequest.student.firstName} ${selectedRequest.student.lastName}`
-                    : "Unknown Student"}
-                </CardTitle>
-                <CardDescription>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      Contact Number:
-                    </span>
-                    <span>{selectedRequest.student?.contactNumber}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">ID#:</span>
-                    <span>{selectedRequest.student?.idNumber}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Year Level:</span>
-                    <span>{selectedRequest.student?.yearLevel}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Email:</span>
-                    <span>{selectedRequest.student?.email}</span>
-                  </div>
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Document:</span>
-                  <span>{selectedRequest.document}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Purpose:</span>
-                  <span>{selectedRequest.purpose}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Date:</span>
-                  <span>{selectedRequest.date}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Status:</span>
-                  <span>{documentStatusLabel[selectedRequest.status]}</span>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button
-                  disabled={loading}
-                  variant="default"
-                  className="w-full h-fit p-2"
-                  onClick={async () => {
-                    await handleUpdateStatus(selectedRequestId);
-                  }}
-                >
-                  {loading ? (
-                    <LoaderCircle className="animate-spin" />
-                  ) : (
-                    "Mark as Document Ready"
-                  )}
-                </Button>
-              </CardFooter>
-            </Card>
+            // <Card className="w-full">
+            //   <CardHeader>
+            //     <CardTitle>
+            //       {selectedRequest.student
+            //         ? `${selectedRequest.student.firstName} ${selectedRequest.student.lastName}`
+            //         : "Unknown Student"}
+            //     </CardTitle>
+            //     <CardDescription>
+            //       <div className="flex justify-between">
+            //         <span className="text-muted-foreground">
+            //           Contact Number:
+            //         </span>
+            //         <span>{selectedRequest.student?.contactNumber}</span>
+            //       </div>
+            //       <div className="flex justify-between">
+            //         <span className="text-muted-foreground">ID#:</span>
+            //         <span>{selectedRequest.student?.idNumber}</span>
+            //       </div>
+            //       <div className="flex justify-between">
+            //         <span className="text-muted-foreground">Year Level:</span>
+            //         <span>{selectedRequest.student?.yearLevel}</span>
+            //       </div>
+            //       <div className="flex justify-between">
+            //         <span className="text-muted-foreground">Email:</span>
+            //         <span>{selectedRequest.student?.email}</span>
+            //       </div>
+            //     </CardDescription>
+            //   </CardHeader>
+            //   <CardContent>
+            //     <div className="flex justify-between">
+            //       <span className="text-muted-foreground">Document:</span>
+            //       <span>{selectedRequest.document}</span>
+            //     </div>
+            //     <div className="flex justify-between">
+            //       <span className="text-muted-foreground">Purpose:</span>
+            //       <span>{selectedRequest.purpose}</span>
+            //     </div>
+            //     <div className="flex justify-between">
+            //       <span className="text-muted-foreground">Date:</span>
+            //       <span>{selectedRequest.date}</span>
+            //     </div>
+            //     <div className="flex justify-between">
+            //       <span className="text-muted-foreground">Status:</span>
+            //       <span>{documentStatusLabel[selectedRequest.status]}</span>
+            //     </div>
+            //   </CardContent>
+            //   <CardFooter>
+            //     <Button
+            //       disabled={loading}
+            //       variant="default"
+            //       className="w-full h-fit p-2"
+            //       onClick={async () => {
+            //         await handleUpdateStatus(selectedRequestId);
+            //       }}
+            //     >
+            //       {loading ? (
+            //         <LoaderCircle className="animate-spin" />
+            //       ) : (
+            //         "Mark as Document Ready"
+            //       )}
+            //     </Button>
+            //   </CardFooter>
+            // </Card>
+            <RequestFullView
+              loading={loading}
+              request={selectedRequest}
+              handleUpdateStatus={handleUpdateStatus}
+            />
           ) : (
             <p>Select a request to view here</p>
           )}
