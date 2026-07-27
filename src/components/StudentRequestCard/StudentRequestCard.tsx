@@ -99,7 +99,7 @@ export default function StudentRequestCard({
             <Activity className="h3.5 w-3.5" />
           </div>
 
-          <div>
+          <div className="w-full">
             <p className="text-sm text-muted-foreground">Status</p>
 
             <Badge
@@ -112,6 +112,20 @@ export default function StudentRequestCard({
 
               {documentStatusLabel[request.status]}
             </Badge>
+
+            {request.status === "REJECTED" && request.remarks.length > 0 && (
+              <div className=" mt-3 rounded-md border border-destructive/20 bg-destructive/5 p-3">
+                <p className="text-sm font-medium text-destructive">
+                  Reason{request.remarks.length > 1 ? "s" : ""} for Rejection
+                </p>
+
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+                  {request.remarks.map((remark, index) => (
+                    <li key={index}>{remark}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </CardContent>
