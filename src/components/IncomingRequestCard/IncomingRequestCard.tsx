@@ -40,10 +40,11 @@ interface IncomingRequestCardProps {
   activeRejectPanel: string | null;
   setActiveRejectPanel: (id: string | null) => void;
   handleRequestAcceptance: (id: string) => void;
-  handleRequestRejection: () // id: string,
-  // reasons: string[],
-  // remarks: string,
-  => void;
+  handleRequestRejection: (
+    remarks: DocumentRequest["remarks"], // id: string,
+    // reasons: string[],
+    // remarks: string,
+  ) => void;
   setRequestID: (id: string) => void;
 }
 
@@ -57,13 +58,12 @@ function IncomingRequestCard({
   setRequestID,
 }: IncomingRequestCardProps) {
   const rejectionDialogRef = useRef<HTMLDialogElement | null>(null);
-  const [selectedReasons, setSelectedReasons] = useState<string[]>([]);
-  const [remarks, setRemarks] = useState("");
+  const [remarks, setRemarks] = useState<string[]>([]);
 
   const isRejectPanelOpen = activeRejectPanel === request.id;
 
   function handleReasonToggle(reason: string) {
-    setSelectedReasons((prev) =>
+    setRemarks((prev) =>
       prev.includes(reason)
         ? prev.filter((r) => r !== reason)
         : [...prev, reason],
@@ -71,9 +71,11 @@ function IncomingRequestCard({
   }
 
   function handleReject() {
-    handleRequestRejection();
-    setSelectedReasons([]);
-    setRemarks("");
+    // handle rejection
+    handleRequestRejection(remarks);
+
+    // reset display
+    setRemarks([]);
     setActiveRejectPanel(null);
     rejectionDialogRef.current?.close();
   }
@@ -244,7 +246,7 @@ function IncomingRequestCard({
                   <div key={reason} className="flex items-center gap-2">
                     <Checkbox
                       id={`${request.id}-${reason}`}
-                      checked={selectedReasons.includes(reason)}
+                      checked={remarks.includes(reason)}
                       onCheckedChange={() => handleReasonToggle(reason)}
                     />
                     <Label
@@ -279,8 +281,7 @@ function IncomingRequestCard({
                   className="flex-1 h-fit p-2"
                   onClick={() => {
                     setActiveRejectPanel(null);
-                    setSelectedReasons([]);
-                    setRemarks("");
+                    setRemarks([]);
                   }}
                 >
                   Cancel
@@ -288,7 +289,7 @@ function IncomingRequestCard({
                 <Button
                   variant="destructive"
                   className="flex-1 h-fit p-2"
-                  disabled={selectedReasons.length === 0}
+                  disabled={remarks.length === 0}
                   onClick={() => rejectionDialogRef.current?.showModal()}
                 >
                   Continue

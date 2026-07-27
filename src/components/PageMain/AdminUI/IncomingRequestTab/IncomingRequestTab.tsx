@@ -18,6 +18,7 @@ import { useDocumentRequest } from "@/context/DocumentRequestContext";
 // import { Checkbox } from "@/components/ui/checkbox";
 // import { Textarea } from "@/components/ui/textarea";
 import IncomingRequestCard from "@/components/IncomingRequestCard/IncomingRequestCard";
+import { DocumentRequest } from "@/types/documentRequest";
 
 // const reasons = [
 //   "Incomplete requirements",
@@ -35,12 +36,14 @@ function IncomingRequestTab() {
   const [activeRejectPanel, setActiveRejectPanel] = useState<string | null>(
     null,
   );
-  const handleRequestRejection = async () => {
-    await updateRequestStatus(requestID, "REJECTED");
+  const handleRequestRejection = async (
+    remarks: DocumentRequest["remarks"],
+  ) => {
+    await updateRequestStatus(requestID, "REJECTED", remarks);
   };
 
   const handleRequestAcceptance = async (requestID: string) => {
-    await updateRequestStatus(requestID, "ACCEPTED_PROCESSING");
+    await updateRequestStatus(requestID, "ACCEPTED_PROCESSING", []);
   };
 
   return (

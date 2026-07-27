@@ -27,6 +27,7 @@ export interface DocumentRequest extends NewDocumentRequest {
     middleName?: string;
     course: string;
   };
+  remarks: string[];
 }
 
 export const documentStatusLabel: Record<DocumentRequest["status"], string> = {
@@ -46,6 +47,7 @@ export function toDocumentRequest(data: Record<string, any>): DocumentRequest {
     purpose: data.purpose,
     date: data.date,
     status: data.status,
+    remarks: data.remarks ?? [],
     student: data.students
       ? {
         firstName: data.students.first_name,

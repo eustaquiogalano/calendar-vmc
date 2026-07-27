@@ -21,6 +21,7 @@ interface RequestContextType {
   updateRequestStatus: (
     requestID: string,
     status: DocumentRequest["status"],
+    remarks: DocumentRequest["remarks"],
   ) => Promise<void>;
   deleteRequest: (requestID: string) => Promise<void>;
   loading: boolean;
@@ -90,12 +91,13 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
   async function updateRequestStatus(
     requestID: string,
     status: DocumentRequest["status"],
+    remarks: string[],
   ) {
     setLoading(true);
 
     const { data, error } = await supabase
       .from("document_requests")
-      .update({ status })
+      .update({ status, remarks })
       .eq("id", requestID)
       .select(
         "*, students(first_name, last_name, id_number, year_level, email, contact_number)",
