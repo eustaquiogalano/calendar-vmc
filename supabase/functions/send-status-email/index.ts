@@ -11,7 +11,8 @@ Deno.serve(async (req) => {
     return new Response("ok", { headers: corsHeaders });
   }
 
-  const { studentEmail, studentName, document, status } = await req.json();
+  const { studentEmail, studentName, document, status, remarks } = await req
+    .json();
 
   const res = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
@@ -46,6 +47,18 @@ Deno.serve(async (req) => {
         <p style="font-size:18px;color:#2563eb;">
           <strong>${status}</strong>
         </p>
+
+  ${
+        remarks && remarks.length > 0
+          ? `
+    <hr>
+    <h3 style="color:#1a1a1a;">Remarks:</h3>
+    <ul>
+      ${remarks.map((r: string) => `<li>${r}</li>`).join("")}
+    </ul>
+    `
+          : ""
+      } 
 
         <hr>
 

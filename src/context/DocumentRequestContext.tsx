@@ -117,6 +117,7 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
         studentName: `${data.students.first_name} ${data.students.last_name}`,
         document: data.document,
         status: documentStatusLabel[data.status as DocumentRequest["status"]],
+        remarks: data.remarks,
       },
     });
 
