@@ -133,7 +133,8 @@ export default function StudentRequestCard({
       <CardFooter className="border-t">
         <Button
           variant="destructive"
-          className="w-full"
+          className="w-full h-10 md:h-13 hover:bg-destructive hover:text-white
+          "
           onClick={() => {
             setDeletionID(request.id);
             deletionDialogRef.current?.showModal();
