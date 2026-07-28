@@ -91,14 +91,14 @@
   border-radius: 10px;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 640px) {
   .document-request-tab__pending-request {
     height: 100%;
-    width: 40%;
+    width: 50%;
   }
 
   .document-request-tab__create-request {
-    width: 60%;
+    width: 50%;
   }
 }
 
