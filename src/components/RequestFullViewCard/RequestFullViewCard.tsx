@@ -41,7 +41,10 @@ const statusStyles: Record<DocumentRequest["status"], string> = {
 interface RequestViewProps {
   request: DocumentRequest;
   loading: boolean;
-  handleUpdateStatus(id: string): void | Promise<void>;
+  handleUpdateStatus(
+    id: string,
+    statusLabel: DocumentRequest["status"],
+  ): void | Promise<void>;
 }
 
 export default function RequestFullView({
@@ -148,16 +151,51 @@ export default function RequestFullView({
         {/* ================= Action ================= */}
       </CardContent>
       <CardFooter>
+        {/* <Button
+            disabled={request.status === "COMPLETED"}
+            className="h-12 w-full text-sm"
+            onClick={() => {
+              let label: DocumentRequest["status"] =
+                request.status === "READY_FOR_PICKUP"
+                  ? "COMPLETED"
+                  : "READY_FOR_PICKUP";
+              handleUpdateStatus(request.id, label);
+            }}
+          >
+            {loading ? (
+              <LoaderCircle className="animate-spin" />
+            ) : (
+              <>
+                <FileCheck className="mr-2 h-5 w-5" />
+
+                {request.status === "COMPLETED"
+                  ? "Claimed"
+                  : "Mark as Ready to Claim"}
+              </>
+            )}
+          </Button> */}
+
         <Button
+          disabled={request.status === "COMPLETED" || loading}
           className="h-12 w-full text-sm"
-          onClick={() => handleUpdateStatus(request.id)}
+          onClick={() => {
+            const nextStatus: DocumentRequest["status"] =
+              request.status === "ACCEPTED_PROCESSING"
+                ? "READY_FOR_PICKUP"
+                : "COMPLETED";
+            handleUpdateStatus(request.id, nextStatus);
+          }}
         >
           {loading ? (
             <LoaderCircle className="animate-spin" />
           ) : (
             <>
               <FileCheck className="mr-2 h-5 w-5" />
-              Mark as Ready to Claim
+              {request.status === "ACCEPTED_PROCESSING"
+                ? "Mark as Ready to Claim"
+                : request.status === "READY_FOR_PICKUP"
+                  ? "Mark as Claimed"
+                  : "Claimed"}
             </>
           )}
         </Button>

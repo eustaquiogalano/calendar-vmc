@@ -41,8 +41,11 @@ function ManageRequestTab() {
     (request) => request.id === selectedRequestId,
   );
 
-  const handleUpdateStatus = async (id: string) => {
-    await updateRequestStatus(id, "READY_FOR_PICKUP", []);
+  const handleUpdateStatus = async (
+    id: string,
+    statusLabel: DocumentRequest["status"],
+  ) => {
+    await updateRequestStatus(id, statusLabel, []);
   };
 
   return (
@@ -136,7 +139,8 @@ function ManageRequestTab() {
             .filter((request) => {
               if (
                 request.status === "ACCEPTED_PROCESSING" ||
-                request.status === "READY_FOR_PICKUP"
+                request.status === "READY_FOR_PICKUP" ||
+                request.status === "COMPLETED"
               ) {
                 return request;
               }
