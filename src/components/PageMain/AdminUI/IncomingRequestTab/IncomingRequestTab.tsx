@@ -58,7 +58,8 @@ function IncomingRequestTab() {
             if (
               request.status !== "ACCEPTED_PROCESSING" &&
               request.status !== "READY_FOR_PICKUP" &&
-              request.status !== "REJECTED"
+              request.status !== "REJECTED" &&
+              request.status !== "COMPLETED"
             ) {
               return request;
             }
