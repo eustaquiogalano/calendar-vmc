@@ -46,6 +46,8 @@ import { validateRequest } from "@/utils/validateRequest/validateRequest.ts";
 import RequestBlockedCard from "@/components/RequestBlockedCard/RequestBlockedCard";
 import { useDocumentRequest } from "@/context/DocumentRequestContext";
 import StudentRequestCard from "@/components/StudentRequestCard/StudentRequestCard";
+import { supabase } from "@/supabase-client.ts";
+import { Admin, Student } from "@/types/user";
 
 function DocumentRequestTab() {
   const { requests, addRequest, deleteRequest, loading } = useDocumentRequest();
@@ -90,6 +92,18 @@ function DocumentRequestTab() {
 
     // if the request is valid, add it to the list of requests
     isRequestValid ? await addRequest(request) : setIsActive(true);
+
+    // TRIGGERS EMAIL NOTIFICATOIN
+    // TO BE DELETED AFTER SURVEY
+    await supabase.functions.invoke("send-status-email", {
+      body: {
+        studentEmail: currentUser.email,
+        studentName: `Student`,
+        document: document,
+        status: "For survey purpose only.",
+        remarks: ["For Survey purpose only"],
+      },
+    });
 
     // resetthe input and states
     resetStates();
