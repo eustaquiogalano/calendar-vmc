@@ -18,15 +18,37 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { format } from "date-fns";
-import { ChevronDownIcon, LoaderPinwheel } from "lucide-react";
+import {
+  Calendar1Icon,
+  CalendarDays,
+  ChevronDownIcon,
+  Delete,
+  FileText,
+  LoaderCircle,
+  LoaderPinwheel,
+  LucideIcon,
+  Tag,
+  Timer,
+} from "lucide-react";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import DeleteRequestDialog from "@/components/DeleteEventDialog/DeleteEventDialog";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { EventType } from "@/types/schoolEvent";
+import { IoWarningOutline } from "react-icons/io5";
 
 function CreateEvent() {
   const { events, addEvent, deleteEvent, loading } = useEvent();
@@ -35,7 +57,9 @@ function CreateEvent() {
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [eventType, setEventType] = useState<EventType>("Other");
   const [eventID, setEventID] = useState("");
+
   const deleteDialogRef = useRef<HTMLDialogElement>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -45,9 +69,9 @@ function CreateEvent() {
       announcementType: "event",
       name,
       date: date ? format(date, "yyyy-MM-dd") : "",
-      startTime,
-      endTime,
-      type: "Other", // add event type input
+      startTime: startTime || null,
+      endTime: endTime || null,
+      type: eventType,
     });
 
     resetState();
@@ -98,9 +122,9 @@ function CreateEvent() {
                       type="time"
                       id="checkout-7j9-card-number-uw1"
                       placeholder="1234 5678 9012 3456"
-                      required
                     />
                   </Field>
+
                   <Field>
                     <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
                       End Time:
@@ -111,12 +135,74 @@ function CreateEvent() {
                       type="time"
                       id="checkout-7j9-card-number-uw1"
                       placeholder="1234 5678 9012 3456"
-                      required
                     />
                   </Field>
                 </FieldGroup>
 
-                <Field>
+                <FieldGroup className="flex md:flex-row">
+                  <Field>
+                    <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
+                      Date:
+                    </FieldLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          data-empty={!date}
+                          className="w-[212px] justify-between text-left font-normal data-[empty=true]:text-muted-foreground"
+                        >
+                          {date ? (
+                            format(date, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <ChevronDownIcon />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={date}
+                          onSelect={setDate}
+                          defaultMonth={date}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </Field>
+
+                  <Field>
+                    <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
+                      Type:
+                    </FieldLabel>
+                    <Select
+                      onValueChange={(value) =>
+                        setEventType(value as EventType)
+                      }
+                      value={eventType}
+                      name="eventType"
+                      required
+                    >
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Holiday" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="Academic">Academic</SelectItem>
+                          <SelectItem value="Holiday">Holiday</SelectItem>
+                          <SelectItem value="School Activity">
+                            School Activity
+                          </SelectItem>
+                          <SelectItem value="Administrative">
+                            Administrative
+                          </SelectItem>
+                          <SelectItem value="Other">Other</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </Field>
+                </FieldGroup>
+
+                {/* <Field>
                   <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
                     Date:
                   </FieldLabel>
@@ -140,7 +226,7 @@ function CreateEvent() {
                       />
                     </PopoverContent>
                   </Popover>
-                </Field>
+                </Field> */}
               </FieldGroup>
             </FieldSet>
             <FieldSeparator></FieldSeparator>
@@ -169,38 +255,67 @@ function CreateEvent() {
           {events &&
             events.map((event) => {
               return (
-                <Card key={event.id} className="border-2 h-fit shrink-0">
-                  <CardHeader>
-                    <CardTitle>{event.name}</CardTitle>
+                <Card
+                  key={event.id}
+                  className="relative shadow-sm border w-full shrink-0"
+                >
+                  <CardHeader className="space-y-1">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                        <CalendarDays className="h-5 w-5" />
+                      </div>
+
+                      <div>
+                        <CardTitle className="text-sm font-bold uppercase tracking-wide ">
+                          {event.name}
+                        </CardTitle>
+                        <CardDescription className="text-xs">
+                          Detailed information
+                        </CardDescription>
+                      </div>
+                    </div>
                   </CardHeader>
-                  <CardContent>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Start Time:</span>
-                      <span>{event.startTime}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">End Time:</span>
-                      <span>{event.endTime}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Date:</span>
-                      <span>{event.date}</span>
-                    </div>
+
+                  <CardContent className="space-y-6">
+                    <section className="rounded-xl border overflow-hidden">
+                      <div className="divide-y">
+                        {/* type */}
+                        <DetailRow icon={Tag} label="Type" value={event.type} />
+
+                        {/* date */}
+                        <DetailRow
+                          icon={Calendar1Icon}
+                          label="Date"
+                          value={event.date}
+                        />
+
+                        {/* time */}
+                        <DetailRow
+                          icon={Timer}
+                          label="Time"
+                          value={`${event.startTime === undefined ? "Tentative" : event.startTime} - ${event.endTime === undefined ? "Tentative" : event.endTime}`}
+                        />
+                      </div>
+                    </section>
+
+                    {/* ================= Action ================= */}
                   </CardContent>
                   <CardFooter>
                     <Button
-                      disabled={loading}
-                      variant="default"
-                      className="w-full h-fit p-2"
+                      // disabled={request.status === "COMPLETED" || loading}
+                      className="h-12 w-full text-sm font-semibold md:text-base"
                       onClick={() => {
                         setEventID(event.id);
                         deleteDialogRef.current?.showModal();
                       }}
                     >
                       {loading ? (
-                        <LoaderPinwheel className="animate-spin" />
+                        <LoaderCircle className="animate-spin" />
                       ) : (
-                        "Delete"
+                        <>
+                          <Delete className="mr-2 h-5 w-5" />
+                          Delete
+                        </>
                       )}
                     </Button>
                   </CardFooter>
@@ -211,6 +326,25 @@ function CreateEvent() {
         <DeleteRequestDialog ref={deleteDialogRef} onDeletion={handleDelete} />
       </section>
     </>
+  );
+}
+
+interface DetailRowProps {
+  label: string;
+  icon: LucideIcon;
+  value: string | undefined | number;
+}
+
+function DetailRow({ label, icon: Icon, value }: DetailRowProps) {
+  return (
+    <div className="flex flex-col md:flex-row items-start gap-2 justify-between px-4 py-3">
+      <div className="flex items-center gap-3 text-sm text-muted-foreground">
+        <Icon className="h-3.5 w-3.5 text-blue-500" />
+        {label}
+      </div>
+
+      <span className="text-sm font-semibold">{value}</span>
+    </div>
   );
 }
 
