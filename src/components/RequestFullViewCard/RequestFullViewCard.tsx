@@ -30,6 +30,8 @@ import {
   documentStatusLabel,
   toDocumentRequest,
 } from "@/types/documentRequest";
+import { IoWarningOutline } from "react-icons/io5";
+import { useRef } from "react";
 
 const statusStyles: Record<DocumentRequest["status"], string> = {
   PENDING: "bg-yellow-100 text-yellow-700 border-yellow-300",
@@ -52,8 +54,10 @@ export default function RequestFullView({
   request,
   handleUpdateStatus,
 }: RequestViewProps) {
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+
   return (
-    <Card className="shadow-sm border w-full">
+    <Card className="relative shadow-sm border w-full">
       <CardHeader className="space-y-1">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
@@ -177,13 +181,9 @@ export default function RequestFullView({
 
         <Button
           disabled={request.status === "COMPLETED" || loading}
-          className="h-12 w-full text-sm"
+          className="h-12 w-full text-sm font-semibold md:text-base"
           onClick={() => {
-            const nextStatus: DocumentRequest["status"] =
-              request.status === "ACCEPTED_PROCESSING"
-                ? "READY_FOR_PICKUP"
-                : "COMPLETED";
-            handleUpdateStatus(request.id, nextStatus);
+            dialogRef.current?.showModal();
           }}
         >
           {loading ? (
@@ -200,6 +200,50 @@ export default function RequestFullView({
           )}
         </Button>
       </CardFooter>
+
+      <dialog
+        className={
+          " hidden open:flex fixed inset-0 w-screen h-screen bg-transparent p-4 backdrop:bg-black/50 flex items-center justify-center"
+        }
+        ref={dialogRef}
+      >
+        <Card className="border-2 border-2 w-fit">
+          <CardHeader className="flex flex-col items-center px-5 space-y-2">
+            <IoWarningOutline size={30} className="text-primary " />
+            <CardTitle className="text-center text-lg font-semibold">
+              Confirm Status Update
+            </CardTitle>
+          </CardHeader>
+
+          <CardContent className="px-5 text-sm text-muted-foreground">
+            <p>Do you want to update the status of the request?</p>
+          </CardContent>
+
+          <CardFooter className="flex justify-between gap-2 px-5 ">
+            <Button
+              variant="default"
+              className=" w-[50%] h-fit p-2 font-semibold"
+              onClick={() => {
+                const nextStatus: DocumentRequest["status"] =
+                  request.status === "ACCEPTED_PROCESSING"
+                    ? "READY_FOR_PICKUP"
+                    : "COMPLETED";
+                handleUpdateStatus(request.id, nextStatus);
+                dialogRef.current?.close();
+              }}
+            >
+              Yes, update it
+            </Button>
+            <Button
+              variant="outline"
+              className="w-[50%] h-fit p-2"
+              onClick={() => dialogRef.current?.close()}
+            >
+              Cancel
+            </Button>
+          </CardFooter>
+        </Card>
+      </dialog>
     </Card>
   );
 }
