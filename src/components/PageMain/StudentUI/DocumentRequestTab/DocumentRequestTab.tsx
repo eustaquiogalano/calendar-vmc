@@ -243,7 +243,13 @@ function DocumentRequestTab() {
                           selected={date}
                           onSelect={setDate}
                           defaultMonth={date}
-                          disabled={(day) => day < minWorkingDate}
+                          disabled={(day) => {
+                            const dayOfWeek = day.getDay();
+                            const isWeekend =
+                              dayOfWeek === 0 || dayOfWeek === 6;
+                            const isBeforeMinDate = day < minWorkingDate;
+                            return isWeekend || isBeforeMinDate;
+                          }}
                         />
                       </PopoverContent>
                     </Popover>
