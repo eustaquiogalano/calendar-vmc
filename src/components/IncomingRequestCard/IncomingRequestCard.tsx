@@ -93,14 +93,6 @@ function IncomingRequestCard({
               Request Review
             </span>
           </div>
-          <Badge
-            variant="outline"
-            className={`text-xs ${statusStyles[request.status]}`}
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-current" />
-
-            {documentStatusLabel[request.status]}
-          </Badge>
         </CardHeader>
 
         <CardContent className="p-4 space-y-4">
@@ -165,17 +157,6 @@ function IncomingRequestCard({
                   Date Requested
                 </span>
                 <span className="font-medium">{request.date}</span>
-                <span className="text-muted-foreground pt-3 sm:pt-0">
-                  Status
-                </span>
-                <Badge
-                  variant="outline"
-                  className={`text-xs ${statusStyles[request.status]} `}
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-current" />
-
-                  {documentStatusLabel[request.status]}
-                </Badge>
               </div>
             </div>
           </div>
