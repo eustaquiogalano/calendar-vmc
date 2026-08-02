@@ -19,6 +19,7 @@ import {
 import { DocumentRequest, documentStatusLabel } from "@/types/documentRequest";
 import { useRef } from "react";
 import ConfirmationDialog from "../PageMain/StudentUI/DocumentRequestTab/ConfirmationDialog/ConfirmationDialog";
+import { StatusStepper } from "../StatusStepper/StatusStepper";
 
 const statusStyles: Record<DocumentRequest["status"], string> = {
   PENDING: "bg-yellow-100 text-yellow-700 border-yellow-300",
@@ -42,7 +43,10 @@ export default function StudentRequestCard({
   const deletionDialogRef = useRef<HTMLDialogElement | null>(null);
 
   return (
-    <Card className="border-2 h-fit shrink-0 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <Card
+      key={request.id}
+      className="border-2 h-fit shrink-0 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+    >
       <CardHeader className="flex items-center gap-4 border-b">
         <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-secondary">
           <FileText className="h-3.5 w-3.5" />
@@ -55,7 +59,7 @@ export default function StudentRequestCard({
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4 py-4">
+      <CardContent className="space-y-4 py-4 ">
         {/* <div className="flex gap-4">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50">
             <FileText className="h-5 w-5 text-blue-600" />
@@ -68,30 +72,33 @@ export default function StudentRequestCard({
           </div>
         </div> */}
 
+        {/* purpose */}
         <div className="flex gap-4">
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary">
             <Goal className="h-3.5 w-3.5" />
           </div>
 
           <div>
-            <p className="text-sm text-muted-foreground">Purpose</p>
+            <p className="text-sm text-muted-foreground mb-2">Purpose</p>
 
             <p className="font-medium">{request.purpose}</p>
           </div>
         </div>
 
+        {/* date */}
         <div className="flex gap-4">
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary ">
             <Calendar className="h-3.5 w-3.5" />
           </div>
 
           <div>
-            <p className="text-sm text-muted-foreground">Date Requested</p>
+            <p className="text-sm text-muted-foreground mb-2">Date Requested</p>
 
             <p className="font-medium">{request.date}</p>
           </div>
         </div>
 
+        {/* status */}
         <div className="flex gap-4">
           <div
             className={`flex h-7 w-7 items-center justify-center rounded-full bg-secondary`}
@@ -100,20 +107,19 @@ export default function StudentRequestCard({
           </div>
 
           <div className="w-full">
-            <p className="text-sm text-muted-foreground">Status</p>
+            <p className="text-sm text-muted-foreground mb-2">Status</p>
 
-            <Badge
+            {/* <Badge
               variant="outline"
               className={`mt-1 inline-flex items-center gap-2 ${
                 statusStyles[request.status]
               }`}
             >
               <span className="size-2 rounded-full bg-current" />
+            </Badge> */}
+            <StatusStepper request={request} />
 
-              {documentStatusLabel[request.status]}
-            </Badge>
-
-            {request.status === "REJECTED" && request.remarks.length > 0 && (
+            {/* {request.status === "REJECTED" && request.remarks.length > 0 && (
               <div className=" mt-3 rounded-md border border-destructive/20 bg-destructive/5 p-3">
                 <p className="text-sm font-medium text-destructive">
                   Reason{request.remarks.length > 1 ? "s" : ""} for Rejection
@@ -125,7 +131,7 @@ export default function StudentRequestCard({
                   ))}
                 </ul>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </CardContent>
