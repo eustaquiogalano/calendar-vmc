@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { LoaderCircle, Pencil, X, Check } from "lucide-react";
+import { yearLevelLabel } from "@/types/user";
 
 function ProfileTab() {
   const { currentUser, updateStudent, loading } = useUser();
@@ -165,12 +166,14 @@ function ProfileTab() {
                       <SelectItem value="2">2nd</SelectItem>
                       <SelectItem value="3">3rd</SelectItem>
                       <SelectItem value="4">4th</SelectItem>
+                      <SelectItem value="0">Alumni</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
               ) : (
                 <Input
-                  value={`${yearLevel}${["st", "nd", "rd", "th"][Number(yearLevel) - 1]} Year`}
+                  // value={`${yearLevel === "0" ? "Alumni" : `${yearLevel}${["st", "nd", "rd", "th"][Number(yearLevel) - 1]} Year`}`}
+                  value={yearLevelLabel(Number(yearLevel))}
                   disabled
                 />
               )}

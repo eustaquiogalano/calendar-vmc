@@ -17,6 +17,7 @@ import { Badge } from "../ui/badge";
 import { Separator } from "../ui/separator";
 import { DocumentRequest, documentStatusLabel } from "@/types/documentRequest";
 import RejectRequestDialog from "../RejectRequestDialog/RejectRequestDialog";
+import { yearLevelLabel } from "@/types/user";
 
 const rejectionReasons = [
   "Incomplete requirements",
@@ -127,7 +128,9 @@ function IncomingRequestCard({
                   Year Level
                 </span>
                 <span className="font-medium">
-                  {request.student?.yearLevel ?? "—"}
+                  {request.student?.yearLevel
+                    ? yearLevelLabel(request.student.yearLevel)
+                    : "—"}
                 </span>
               </div>
             </div>

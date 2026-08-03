@@ -362,6 +362,7 @@ export function AuthForm({
                       <SelectItem value="2">2nd</SelectItem>
                       <SelectItem value="3">3rd</SelectItem>
                       <SelectItem value="4">4th</SelectItem>
+                      <SelectItem value="0">Alumni</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>

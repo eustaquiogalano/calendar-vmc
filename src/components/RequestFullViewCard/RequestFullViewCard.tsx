@@ -32,6 +32,7 @@ import {
 } from "@/types/documentRequest";
 import { IoWarningOutline } from "react-icons/io5";
 import { useRef } from "react";
+import { yearLevelLabel } from "@/types/user";
 
 const statusStyles: Record<DocumentRequest["status"], string> = {
   PENDING: "bg-yellow-100 text-yellow-700 border-yellow-300",
@@ -99,7 +100,7 @@ export default function RequestFullView({
             <DetailRow
               icon={GraduationCap}
               label="Year Level"
-              value={request.student?.yearLevel}
+              value={yearLevelLabel(request.student!.yearLevel)}
             />
 
             {/* Contact number */}

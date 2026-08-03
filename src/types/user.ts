@@ -51,3 +51,10 @@ export function mapAdmin(data: Record<string, any>): Admin {
     idNumber: data.id_number,
   };
 }
+
+export function yearLevelLabel(level: number): string {
+  if (level === 0) return "Alumni";
+  const suffixes = ["th", "st", "nd", "rd"];
+  const suffix = suffixes[level] ?? "th";
+  return `${level}${suffix} Year`;
+}
