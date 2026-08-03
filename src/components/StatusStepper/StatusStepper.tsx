@@ -157,7 +157,11 @@ interface StatusStepperProps {
 
 const normalSteps = [
   { key: "PENDING", label: "Pending", description: "Request submitted" },
-  { key: "ACCEPTED", label: "Accepted", description: "Being processed" },
+  {
+    key: "ACCEPTED_PROCESSING",
+    label: "Accepted",
+    description: "Being processed",
+  },
   {
     key: "READY_FOR_PICKUP",
     label: "Ready for pickup",
@@ -168,11 +172,20 @@ const normalSteps = [
 
 const rejectedSteps = [
   { key: "PENDING", label: "Pending", description: "Request submitted" },
-  { key: "ACCEPTED", label: "Accepted", description: "Being processed" },
+  {
+    key: "ACCEPTED_PROCESSING",
+    label: "Accepted",
+    description: "Being processed",
+  },
   { key: "REJECTED", label: "Rejected", description: null },
 ];
 
-const statusOrder = ["PENDING", "ACCEPTED", "READY_FOR_PICKUP", "COMPLETED"];
+const statusOrder = [
+  "PENDING",
+  "ACCEPTED_PROCESSING",
+  "READY_FOR_PICKUP",
+  "COMPLETED",
+];
 
 export function StatusStepper({ request }: StatusStepperProps) {
   const isRejected = request.status === "REJECTED";
@@ -185,7 +198,7 @@ export function StatusStepper({ request }: StatusStepperProps) {
         // if this is true check
         // the cirle of the current step
         const isCompleted = isRejected
-          ? ["PENDING", "ACCEPTED"].includes(step.key)
+          ? ["PENDING", "ACCEPTED_PROCESSING"].includes(step.key)
           : statusOrder.indexOf(step.key) <= currentIndex;
 
         const isCurrent = step.key === request.status;
