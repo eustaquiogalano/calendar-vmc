@@ -24,6 +24,7 @@ import { useDocumentRequest } from "@/context/DocumentRequestContext";
 import { DocumentRequest, documentStatusLabel } from "@/types/documentRequest";
 import RequestFullView from "@/components/RequestFullViewCard/RequestFullViewCard";
 import { Badge } from "@/components/ui/badge";
+import { StatusStepper } from "@/components/StatusStepper/StatusStepper";
 
 const statusStyles: Record<DocumentRequest["status"], string> = {
   PENDING: "bg-yellow-100 text-yellow-700 border-yellow-300",
@@ -185,7 +186,10 @@ function ManageRequestTab() {
               //   </CardFooter>
               // </Card>
 
-              <Card className="border-2 h-fit shrink-0 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <Card
+                key={request.id}
+                className="border-2 h-fit shrink-0 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+              >
                 <CardHeader className="flex items-center gap-4 border-b">
                   <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-secondary">
                     <User className="h-3.5 w-3.5" />
@@ -249,7 +253,7 @@ function ManageRequestTab() {
                     <div className="w-full">
                       <p className="text-sm text-muted-foreground">Status</p>
 
-                      <Badge
+                      {/* <Badge
                         variant="outline"
                         className={`mt-1 inline-flex items-center gap-2 ${
                           statusStyles[request.status]
@@ -258,9 +262,9 @@ function ManageRequestTab() {
                         <span className="size-2 rounded-full bg-current" />
 
                         {documentStatusLabel[request.status]}
-                      </Badge>
+                      </Badge> */}
 
-                      {request.status === "REJECTED" &&
+                      {/* {request.status === "REJECTED" &&
                         request.remarks.length > 0 && (
                           <div className=" mt-3 rounded-md border border-destructive/20 bg-destructive/5 p-3">
                             <p className="text-sm font-medium text-destructive">
@@ -274,7 +278,9 @@ function ManageRequestTab() {
                               ))}
                             </ul>
                           </div>
-                        )}
+                        )} */}
+
+                      <StatusStepper request={request} />
                     </div>
                   </div>
                 </CardContent>
