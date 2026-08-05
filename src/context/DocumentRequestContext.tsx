@@ -14,6 +14,7 @@ import {
 } from "../types/documentRequest.ts";
 import { Student, Admin } from "../types/user";
 import { useUser } from "./UserContext";
+import { toast } from "sonner";
 
 interface RequestContextType {
   requests: DocumentRequest[];
@@ -111,15 +112,23 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
     }
 
     // trigger email notification
-    await supabase.functions.invoke("send-status-email", {
-      body: {
-        studentEmail: data.students.email,
-        studentName: `${data.students.first_name} ${data.students.last_name}`,
-        document: data.document,
-        status: documentStatusLabel[data.status as DocumentRequest["status"]],
-        remarks: data.remarks,
+    // then toast the result
+    toast.promise(
+      supabase.functions.invoke("send-status-email", {
+        body: {
+          studentEmail: data.students.email,
+          studentName: `${data.students.first_name} ${data.students.last_name}`,
+          document: data.document,
+          status: documentStatusLabel[data.status as DocumentRequest["status"]],
+          remarks: data.remarks,
+        },
+      }),
+      {
+        loading: "Sending email notification...",
+        success: `Email sent to ${data.students.first_name} ${data.students.last_name}`,
+        error: "Failed to send email notification",
       },
-    });
+    );
 
     setRequests((prev) =>
       prev.map((r) => (r.id === requestID ? toDocumentRequest(data) : r)),

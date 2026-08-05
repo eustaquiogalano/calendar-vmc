@@ -19,6 +19,7 @@ import "./global.css";
 import { AuthForm } from "./components/PageMain/AuthForm/AuthForm.js";
 import { DocumentRequestProvider } from "./context/DocumentRequestContext.js";
 import ProfileTab from "./components/Pages/ProfileTab.js";
+import { Toaster } from "sonner";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,7 @@ createRoot(document.getElementById("root")!).render(
       <DocumentRequestProvider>
         <EventsProvider>
           <RouterProvider router={router} />
+          <Toaster position="top-right" richColors />
         </EventsProvider>
       </DocumentRequestProvider>
     </UserProvider>
