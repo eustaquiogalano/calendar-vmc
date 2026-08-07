@@ -49,6 +49,7 @@ import {
 } from "@/components/ui/select";
 import { EventType } from "@/types/schoolEvent";
 import { IoWarningOutline } from "react-icons/io5";
+import EventCard from "@/components/EventCard/EventCard";
 
 function CreateEvent() {
   const { events, addEvent, deleteEvent, loading } = useEvent();
@@ -255,71 +256,80 @@ function CreateEvent() {
           {events &&
             events.map((event) => {
               return (
-                <Card
+                // <Card
+                //   key={event.id}
+                //   className="relative shadow-sm border w-full shrink-0"
+                // >
+                //   <CardHeader className="space-y-1">
+                //     <div className="flex items-center gap-3">
+                //       <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+                //         <CalendarDays className="h-5 w-5" />
+                //       </div>
+
+                //       <div>
+                //         <CardTitle className="text-sm font-bold uppercase tracking-wide ">
+                //           {event.name}
+                //         </CardTitle>
+                //         <CardDescription className="text-xs">
+                //           Detailed information
+                //         </CardDescription>
+                //       </div>
+                //     </div>
+                //   </CardHeader>
+
+                //   <CardContent className="space-y-6">
+                //     <section className="rounded-xl border overflow-hidden">
+                //       <div className="divide-y">
+                //         {/* type */}
+                //         <DetailRow icon={Tag} label="Type" value={event.type} />
+
+                //         {/* date */}
+                //         <DetailRow
+                //           icon={Calendar1Icon}
+                //           label="Date"
+                //           value={event.date}
+                //         />
+
+                //         {/* time */}
+                //         <DetailRow
+                //           icon={Timer}
+                //           label="Time"
+                //           value={`${event.startTime === undefined ? "Tentative" : event.startTime} - ${event.endTime === undefined ? "Tentative" : event.endTime}`}
+                //         />
+                //       </div>
+                //     </section>
+
+                //     {/* ================= Action ================= */}
+                //   </CardContent>
+                //   <CardFooter>
+                //     <Button
+                //       // disabled={request.status === "COMPLETED" || loading}
+                //       className="h-12 w-full text-sm font-semibold md:text-base"
+                //       onClick={() => {
+                //         setEventID(event.id);
+                //         deleteDialogRef.current?.showModal();
+                //       }}
+                //     >
+                //       {loading ? (
+                //         <LoaderCircle className="animate-spin" />
+                //       ) : (
+                //         <>
+                //           <Delete className="mr-2 h-5 w-5" />
+                //           Delete
+                //         </>
+                //       )}
+                //     </Button>
+                //   </CardFooter>
+                // </Card>
+                <EventCard
                   key={event.id}
-                  className="relative shadow-sm border w-full shrink-0"
-                >
-                  <CardHeader className="space-y-1">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
-                        <CalendarDays className="h-5 w-5" />
-                      </div>
-
-                      <div>
-                        <CardTitle className="text-sm font-bold uppercase tracking-wide ">
-                          {event.name}
-                        </CardTitle>
-                        <CardDescription className="text-xs">
-                          Detailed information
-                        </CardDescription>
-                      </div>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="space-y-6">
-                    <section className="rounded-xl border overflow-hidden">
-                      <div className="divide-y">
-                        {/* type */}
-                        <DetailRow icon={Tag} label="Type" value={event.type} />
-
-                        {/* date */}
-                        <DetailRow
-                          icon={Calendar1Icon}
-                          label="Date"
-                          value={event.date}
-                        />
-
-                        {/* time */}
-                        <DetailRow
-                          icon={Timer}
-                          label="Time"
-                          value={`${event.startTime === undefined ? "Tentative" : event.startTime} - ${event.endTime === undefined ? "Tentative" : event.endTime}`}
-                        />
-                      </div>
-                    </section>
-
-                    {/* ================= Action ================= */}
-                  </CardContent>
-                  <CardFooter>
-                    <Button
-                      // disabled={request.status === "COMPLETED" || loading}
-                      className="h-12 w-full text-sm font-semibold md:text-base"
-                      onClick={() => {
-                        setEventID(event.id);
-                        deleteDialogRef.current?.showModal();
-                      }}
-                    >
-                      {loading ? (
-                        <LoaderCircle className="animate-spin" />
-                      ) : (
-                        <>
-                          <Delete className="mr-2 h-5 w-5" />
-                          Delete
-                        </>
-                      )}
-                    </Button>
-                  </CardFooter>
-                </Card>
+                  event={event}
+                  onDelete={(id) => {
+                    setEventID(id);
+                    deleteDialogRef.current?.showModal();
+                  }}
+                  DetailRow={DetailRow}
+                />
               );
             })}
         </div>
