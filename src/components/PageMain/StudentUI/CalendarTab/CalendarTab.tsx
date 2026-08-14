@@ -86,7 +86,7 @@ function CalendarTab() {
                             label="Type"
                             value={
                               announcement.announcementType === "request"
-                                ? ""
+                                ? "Document Request"
                                 : announcement.type
                             }
                           />
