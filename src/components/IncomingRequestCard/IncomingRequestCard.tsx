@@ -124,9 +124,7 @@ function IncomingRequestCard({
                   Year Level
                 </span>
                 <span className="font-medium">
-                  {request.student?.yearLevel
-                    ? yearLevelLabel(request.student.yearLevel)
-                    : "—"}
+                  {yearLevelLabel(request.student!.yearLevel) ?? "—"  }
                 </span>
 
                 {/* course */}
