@@ -128,6 +128,14 @@ function IncomingRequestCard({
                     ? yearLevelLabel(request.student.yearLevel)
                     : "—"}
                 </span>
+
+                {/* course */}
+                <span className="text-muted-foreground pt-3 sm:pt-0">
+                  Course
+                </span>
+                <span className="font-medium">
+                  {request.student?.course ? request.student.course : "—"}
+                </span>
               </div>
             </div>
 

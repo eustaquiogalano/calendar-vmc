@@ -1,5 +1,6 @@
 import {
   Activity,
+  BookOpen,
   Calendar,
   Clock3,
   FileCheck,
@@ -95,6 +96,13 @@ export default function RequestFullView({
               icon={GraduationCap}
               label="Year Level"
               value={yearLevelLabel(request.student!.yearLevel)}
+            />
+
+            {/* course */}
+            <DetailRow
+              icon={BookOpen}
+              label="Course"
+              value={request.student?.course}
             />
 
             {/* Contact number */}
