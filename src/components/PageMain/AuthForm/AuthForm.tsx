@@ -27,6 +27,7 @@ import {
   SelectValue,
 } from "@/components/ui/select.js";
 import { Eye, EyeOff } from "lucide-react";
+import { toast } from "sonner";
 
 export function AuthForm({
   className,
@@ -47,6 +48,7 @@ export function AuthForm({
   const [idNumber, setIDnumber] = useState("");
   const [course, setCourse] = useState("");
   const [regPassword, setRegPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [yearLevel, setYearLevel] = useState("");
 
   // states for passwords
@@ -79,6 +81,18 @@ export function AuthForm({
   // register
   async function handleSignUp(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // validate course manually
+    if (!course) {
+      toast.error("Please select a course.");
+      return;
+    }
+
+    // validate that the password and confirm password fields match
+    if (regPassword !== confirmPassword) {
+      toast.error("Passwords do not match.");
+      return;
+    }
 
     // register the user and get the result
     const result = await signUp({
@@ -317,7 +331,7 @@ export function AuthForm({
                   required
                 >
                   <SelectTrigger id="course" className="w-[180px]">
-                    <SelectValue placeholder="BSIS" />
+                    <SelectValue placeholder="Select a course" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
@@ -409,6 +423,8 @@ export function AuthForm({
                   <FieldDescription>
                     Must be at least 8 characters long.
                   </FieldDescription>
+
+                  {/* confirm password field */}
                   <Field>
                     <FieldLabel htmlFor="confirm-password">
                       Confirm Password
@@ -417,9 +433,37 @@ export function AuthForm({
                       <Input
                         id="confirm-password"
                         type={showRegPassword ? "text" : "password"}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                       />
+                      <button
+                        type="button"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                        onClick={() => setShowRegPassword((prev) => !prev)}
+                      >
+                        {showRegPassword ? (
+                          <EyeOff size={16} />
+                        ) : (
+                          <Eye size={16} />
+                        )}
+                      </button>
                     </div>
+
+                    {/* matching indicator — only shows when confirm password has value */}
+                    {confirmPassword && (
+                      <p
+                        className={`text-xs mt-1 ${
+                          regPassword === confirmPassword
+                            ? "text-green-600"
+                            : "text-destructive"
+                        }`}
+                      >
+                        {regPassword === confirmPassword
+                          ? "✓ Passwords match"
+                          : "✗ Passwords do not match"}
+                      </p>
+                    )}
                   </Field>
                 </Field>
               </Field>
