@@ -304,6 +304,7 @@ export function AuthForm({
                   id="contactNumber"
                   type="text"
                   placeholder="09XXXXXXXXX"
+                  required
                 />
               </Field>
 

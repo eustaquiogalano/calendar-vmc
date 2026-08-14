@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/select";
 import { EventType } from "@/types/schoolEvent";
 import EventCard from "@/components/EventCard/EventCard";
+import { toast } from "sonner";
 
 function CreateEvent() {
   const { events, addEvent, deleteEvent, loading } = useEvent();
@@ -46,6 +47,11 @@ function CreateEvent() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (!date) {
+      toast.error("Please select a date for the event.");
+      return;
+    }
 
     addEvent({
       announcementType: "event",
@@ -88,7 +94,7 @@ function CreateEvent() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     id="checkout-7j9-card-name-43j"
-                    placeholder="Basketball"
+                    placeholder="Enter event name"
                     required
                   />
                 </Field>

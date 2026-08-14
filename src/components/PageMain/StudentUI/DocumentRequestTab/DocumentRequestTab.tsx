@@ -35,6 +35,7 @@ import RequestBlockedCard from "@/components/RequestBlockedCard/RequestBlockedCa
 import { useDocumentRequest } from "@/context/DocumentRequestContext";
 import StudentRequestCard from "@/components/StudentRequestCard/StudentRequestCard";
 import { supabase } from "@/supabase-client.ts";
+import { toast } from "sonner";
 
 function DocumentRequestTab() {
   const { requests, addRequest, deleteRequest, loading } = useDocumentRequest();
@@ -54,6 +55,17 @@ function DocumentRequestTab() {
     if (!currentUser) return;
 
     const form = e.target as HTMLFormElement;
+
+    // manual validation for document
+    if (!document) {
+      toast.error("Please select a document.");
+      return;
+    }
+    // manual validation for date
+    if (!date) {
+      toast.error("Please select a pickup date.");
+      return;
+    }
 
     // checks validity of the form
     if (!form.checkValidity()) {
@@ -144,7 +156,7 @@ function DocumentRequestTab() {
                 <FieldGroup>
                   <Field>
                     <FieldLabel htmlFor="checkout-7j9-card-name-43j">
-                      Select Document:
+                      Document:
                     </FieldLabel>
                     <Select
                       onValueChange={(value) => setDocument(value)}
@@ -153,7 +165,7 @@ function DocumentRequestTab() {
                       required
                     >
                       <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Diploma" />
+                        <SelectValue placeholder="Select a document" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
