@@ -14,9 +14,7 @@ import {
   User,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import {
   Card,
   CardContent,
@@ -25,11 +23,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  DocumentRequest,
-  documentStatusLabel,
-  toDocumentRequest,
-} from "@/types/documentRequest";
+import { DocumentRequest, documentStatusLabel } from "@/types/documentRequest";
 import { IoWarningOutline } from "react-icons/io5";
 import { useRef } from "react";
 import { yearLevelLabel } from "@/types/user";
@@ -152,34 +146,8 @@ export default function RequestFullView({
             />
           </div>
         </section>
-
-        {/* ================= Action ================= */}
       </CardContent>
       <CardFooter>
-        {/* <Button
-            disabled={request.status === "COMPLETED"}
-            className="h-12 w-full text-sm"
-            onClick={() => {
-              let label: DocumentRequest["status"] =
-                request.status === "READY_FOR_PICKUP"
-                  ? "COMPLETED"
-                  : "READY_FOR_PICKUP";
-              handleUpdateStatus(request.id, label);
-            }}
-          >
-            {loading ? (
-              <LoaderCircle className="animate-spin" />
-            ) : (
-              <>
-                <FileCheck className="mr-2 h-5 w-5" />
-
-                {request.status === "COMPLETED"
-                  ? "Claimed"
-                  : "Mark as Ready to Claim"}
-              </>
-            )}
-          </Button> */}
-
         <Button
           disabled={request.status === "COMPLETED" || loading}
           className="h-12 w-full text-sm font-semibold md:text-base"

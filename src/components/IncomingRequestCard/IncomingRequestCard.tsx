@@ -41,11 +41,7 @@ interface IncomingRequestCardProps {
   activeRejectPanel: string | null;
   setActiveRejectPanel: (id: string | null) => void;
   handleRequestAcceptance: (id: string) => void;
-  handleRequestRejection: (
-    remarks: DocumentRequest["remarks"], // id: string,
-    // reasons: string[],
-    // remarks: string,
-  ) => void;
+  handleRequestRejection: (remarks: DocumentRequest["remarks"]) => void;
   setRequestID: (id: string) => void;
 }
 
@@ -242,21 +238,6 @@ function IncomingRequestCard({
                   </div>
                 ))}
               </div>
-
-              {/* Additional Remarks */}
-              {/* <div className="space-y-1.5">
-                <Label className="text-xs text-muted-foreground">
-                  Additional Remarks{" "}
-                  <span className="font-normal">(Optional)</span>
-                </Label>
-                <Textarea
-                  id={`${request.id}-remarks`}
-                  placeholder="Enter additional remarks..."
-                  value={remarks}
-                  onChange={(e) => setRemarks(e.target.value)}
-                  className="resize-none text-sm min-h-[80px]"
-                />
-              </div> */}
 
               {/* Panel Actions */}
               <div className="flex gap-2">

@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useOutletContext } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import style from "./StudentUI.module.css";
 import { useUser } from "../../../context/UserContext";

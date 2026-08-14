@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "@/lib/supabaseAuth.js";
 import { useUser } from "@/context/UserContext.js";
@@ -13,7 +12,6 @@ import {
   SidebarMenuItem,
   SidebarRail,
   SidebarTrigger,
-  useSidebar,
 } from "@/components/ui/sidebar";
 import {
   CalendarDays,

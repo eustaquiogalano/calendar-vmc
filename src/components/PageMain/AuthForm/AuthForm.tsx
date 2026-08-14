@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { signIn, signUp } from "../../../lib/supabaseAuth.js";
 import { useUser } from "../../../context/UserContext.js";

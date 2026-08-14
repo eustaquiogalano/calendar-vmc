@@ -1,9 +1,7 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useUser } from "../../../../context/UserContext";
 
 import style from "./DocumentRequestTab.module.css";
-
-import ConfirmationDialog from "./ConfirmationDialog/ConfirmationDialog";
 
 import {
   Select,
@@ -16,10 +14,8 @@ import {
 
 import {
   Field,
-  FieldDescription,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
   FieldSeparator,
   FieldSet,
 } from "@/components/ui/field";
@@ -32,27 +28,17 @@ import {
   Popover,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { format, set } from "date-fns";
+import { format } from "date-fns";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { validateRequest } from "@/utils/validateRequest/validateRequest.ts";
 import RequestBlockedCard from "@/components/RequestBlockedCard/RequestBlockedCard";
 import { useDocumentRequest } from "@/context/DocumentRequestContext";
 import StudentRequestCard from "@/components/StudentRequestCard/StudentRequestCard";
 import { supabase } from "@/supabase-client.ts";
-import { Admin, Student } from "@/types/user";
 
 function DocumentRequestTab() {
   const { requests, addRequest, deleteRequest, loading } = useDocumentRequest();
   const { currentUser } = useUser();
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const [deleteionID, setDeletionID] = useState("");
   const [document, setDocument] = useState("");
@@ -160,25 +146,6 @@ function DocumentRequestTab() {
                     <FieldLabel htmlFor="checkout-7j9-card-name-43j">
                       Select Document:
                     </FieldLabel>
-                    {/* <select
-                      className="border-2 rounded-md"
-                      required
-                      onChange={(e) => {
-                        setDocument(e.target.value);
-                      }}
-                      value={document}
-                      name="document"
-                      id="document"
-                    >
-                      <option value="" disabled></option>
-                      <option value="Diploma">Diploma</option>
-                      <option value="Registration Form (CTC)">
-                        Registration Form (CTC)
-                      </option>
-                      <option value="Transcript of Records">
-                        Transcript of Records
-                      </option>
-                    </select> */}
                     <Select
                       onValueChange={(value) => setDocument(value)}
                       value={document}
@@ -287,46 +254,6 @@ function DocumentRequestTab() {
           {currentUser &&
             requests.map((request) => {
               return (
-                // <Card key={request.id} className="border-2 h-fit shrink-0">
-                //   <CardHeader>
-                //     <CardTitle>{`${request.document}`}</CardTitle>
-                //   </CardHeader>
-                //   <CardContent>
-                //     <div className="flex justify-between">
-                //       <span className="text-muted-foreground">Document:</span>
-                //       <span>{request.document}</span>
-                //     </div>
-                //     <div className="flex justify-between">
-                //       <span className="text-muted-foreground">Purpose:</span>
-                //       <span>{request.purpose}</span>
-                //     </div>
-                //     <div className="flex justify-between">
-                //       <span className="text-muted-foreground">Date:</span>
-                //       <span>{request.date}</span>
-                //     </div>
-                //     <div className="flex justify-between">
-                //       <span className="text-muted-foreground">Status:</span>
-                //       <span>{request.status}</span>
-                //     </div>
-                //   </CardContent>
-                //   <CardFooter>
-                //     <Button
-                //       disabled={loading}
-                //       variant="default"
-                //       className="w-full h-fit p-2"
-                //       onClick={() => {
-                //         setDeletionID(request.id);
-                //         dialogRef.current?.showModal();
-                //       }}
-                //     >
-                //       {loading ? (
-                //         <Loader className="animate-spin" />
-                //       ) : (
-                //         "Delete Request"
-                //       )}
-                //     </Button>
-                //   </CardFooter>
-                // </Card>
                 <StudentRequestCard
                   request={request}
                   handleDelete={handleDelete}
@@ -335,8 +262,6 @@ function DocumentRequestTab() {
               );
             })}
         </div>
-
-        {/* <ConfirmationDialog ref={dialogRef} onConfirm={handleDelete} /> */}
       </section>
     </>
   );

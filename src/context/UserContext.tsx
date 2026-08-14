@@ -11,14 +11,6 @@ import usersReducer from "../reducers/userReducer.ts";
 import Loader from "@/components/Loader/Loader.tsx";
 import { Student, Admin, mapAdmin, mapStudent } from "../types/user.js";
 
-interface DocumentRequest {
-  id: string;
-  document: string;
-  purpose: string;
-  date: string;
-  status: "PENDING" | "APPROVED" | "REJECTED";
-}
-
 interface UserContextType {
   users: Student[] | Admin[];
   students: Student[];

@@ -1,14 +1,5 @@
-import {
-  Activity,
-  Calendar,
-  CircleDot,
-  FileText,
-  Goal,
-  Target,
-  Trash2,
-} from "lucide-react";
+import { Activity, Calendar, FileText, Goal, Trash2 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,18 +7,18 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { DocumentRequest, documentStatusLabel } from "@/types/documentRequest";
+import { DocumentRequest } from "@/types/documentRequest";
 import { useRef } from "react";
 import ConfirmationDialog from "../PageMain/StudentUI/DocumentRequestTab/ConfirmationDialog/ConfirmationDialog";
 import { StatusStepper } from "../StatusStepper/StatusStepper";
 
-const statusStyles: Record<DocumentRequest["status"], string> = {
-  PENDING: "bg-yellow-100 text-yellow-700 border-yellow-300",
-  ACCEPTED_PROCESSING: "bg-blue-100 text-blue-700 border-blue-300",
-  READY_FOR_PICKUP: "bg-green-100 text-green-700 border-green-300",
-  COMPLETED: "bg-green-50 text-green-600 border-green-200",
-  REJECTED: "bg-red-100 text-red-700 border-red-300",
-};
+// const statusStyles: Record<DocumentRequest["status"], string> = {
+//   PENDING: "bg-yellow-100 text-yellow-700 border-yellow-300",
+//   ACCEPTED_PROCESSING: "bg-blue-100 text-blue-700 border-blue-300",
+//   READY_FOR_PICKUP: "bg-green-100 text-green-700 border-green-300",
+//   COMPLETED: "bg-green-50 text-green-600 border-green-200",
+//   REJECTED: "bg-red-100 text-red-700 border-red-300",
+// };
 
 interface RequestCardProps {
   request: DocumentRequest;
@@ -60,18 +51,6 @@ export default function StudentRequestCard({
       </CardHeader>
 
       <CardContent className="space-y-4 py-4 ">
-        {/* <div className="flex gap-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50">
-            <FileText className="h-5 w-5 text-blue-600" />
-          </div>
-
-          <div>
-            <p className="text-sm text-muted-foreground">Document</p>
-
-            <p className="font-medium">{request.document}</p>
-          </div>
-        </div> */}
-
         {/* purpose */}
         <div className="flex gap-4">
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary">
@@ -109,29 +88,7 @@ export default function StudentRequestCard({
           <div className="w-full">
             <p className="text-sm text-muted-foreground mb-2">Status</p>
 
-            {/* <Badge
-              variant="outline"
-              className={`mt-1 inline-flex items-center gap-2 ${
-                statusStyles[request.status]
-              }`}
-            >
-              <span className="size-2 rounded-full bg-current" />
-            </Badge> */}
             <StatusStepper request={request} />
-
-            {/* {request.status === "REJECTED" && request.remarks.length > 0 && (
-              <div className=" mt-3 rounded-md border border-destructive/20 bg-destructive/5 p-3">
-                <p className="text-sm font-medium text-destructive">
-                  Reason{request.remarks.length > 1 ? "s" : ""} for Rejection
-                </p>
-
-                <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
-                  {request.remarks.map((remark, index) => (
-                    <li key={index}>{remark}</li>
-                  ))}
-                </ul>
-              </div>
-            )} */}
           </div>
         </div>
       </CardContent>

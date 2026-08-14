@@ -5,25 +5,15 @@ import style from "./ManageRequestTab.module.css";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
-import {
-  Activity,
-  Calendar,
-  FileText,
-  Goal,
-  LoaderCircle,
-  User,
-} from "lucide-react";
+import { Activity, Calendar, FileText, Goal, User } from "lucide-react";
 import { useDocumentRequest } from "@/context/DocumentRequestContext";
-import { DocumentRequest, documentStatusLabel } from "@/types/documentRequest";
+import { DocumentRequest } from "@/types/documentRequest";
 import RequestFullView from "@/components/RequestFullViewCard/RequestFullViewCard";
-import { Badge } from "@/components/ui/badge";
 import { StatusStepper } from "@/components/StatusStepper/StatusStepper";
 
 const statusStyles: Record<DocumentRequest["status"], string> = {
@@ -57,69 +47,6 @@ function ManageRequestTab() {
         <h2>Request View</h2>
         <div className={style["manage-request__display-box"]}>
           {selectedRequest ? (
-            // <Card className="w-full">
-            //   <CardHeader>
-            //     <CardTitle>
-            //       {selectedRequest.student
-            //         ? `${selectedRequest.student.firstName} ${selectedRequest.student.lastName}`
-            //         : "Unknown Student"}
-            //     </CardTitle>
-            //     <CardDescription>
-            //       <div className="flex justify-between">
-            //         <span className="text-muted-foreground">
-            //           Contact Number:
-            //         </span>
-            //         <span>{selectedRequest.student?.contactNumber}</span>
-            //       </div>
-            //       <div className="flex justify-between">
-            //         <span className="text-muted-foreground">ID#:</span>
-            //         <span>{selectedRequest.student?.idNumber}</span>
-            //       </div>
-            //       <div className="flex justify-between">
-            //         <span className="text-muted-foreground">Year Level:</span>
-            //         <span>{selectedRequest.student?.yearLevel}</span>
-            //       </div>
-            //       <div className="flex justify-between">
-            //         <span className="text-muted-foreground">Email:</span>
-            //         <span>{selectedRequest.student?.email}</span>
-            //       </div>
-            //     </CardDescription>
-            //   </CardHeader>
-            //   <CardContent>
-            //     <div className="flex justify-between">
-            //       <span className="text-muted-foreground">Document:</span>
-            //       <span>{selectedRequest.document}</span>
-            //     </div>
-            //     <div className="flex justify-between">
-            //       <span className="text-muted-foreground">Purpose:</span>
-            //       <span>{selectedRequest.purpose}</span>
-            //     </div>
-            //     <div className="flex justify-between">
-            //       <span className="text-muted-foreground">Date:</span>
-            //       <span>{selectedRequest.date}</span>
-            //     </div>
-            //     <div className="flex justify-between">
-            //       <span className="text-muted-foreground">Status:</span>
-            //       <span>{documentStatusLabel[selectedRequest.status]}</span>
-            //     </div>
-            //   </CardContent>
-            //   <CardFooter>
-            //     <Button
-            //       disabled={loading}
-            //       variant="default"
-            //       className="w-full h-fit p-2"
-            //       onClick={async () => {
-            //         await handleUpdateStatus(selectedRequestId);
-            //       }}
-            //     >
-            //       {loading ? (
-            //         <LoaderCircle className="animate-spin" />
-            //       ) : (
-            //         "Mark as Document Ready"
-            //       )}
-            //     </Button>
-            //   </CardFooter>
-            // </Card>
             <RequestFullView
               loading={loading}
               request={selectedRequest}
@@ -147,45 +74,6 @@ function ManageRequestTab() {
               }
             })
             .map((request) => (
-              // <Card key={request.id} className="border-2 h-fit shrink-0">
-              //   <CardHeader>
-              //     <CardTitle>
-              //       {request.student
-              //         ? `${request.student.firstName} ${request.student.lastName}`
-              //         : "Unknown Student"}
-              //     </CardTitle>
-              //   </CardHeader>
-              //   <CardContent>
-              //     <div className="flex justify-between">
-              //       <span className="text-muted-foreground">Document:</span>
-              //       <span>{request.document}</span>
-              //     </div>
-              //     <div className="flex justify-between">
-              //       <span className="text-muted-foreground">Purpose:</span>
-              //       <span>{request.purpose}</span>
-              //     </div>
-              //     <div className="flex justify-between">
-              //       <span className="text-muted-foreground">Date:</span>
-              //       <span>{request.date}</span>
-              //     </div>
-              //     <div className="flex justify-between">
-              //       <span className="text-muted-foreground">Status:</span>
-              //       <span>{documentStatusLabel[request.status]}</span>
-              //     </div>
-              //   </CardContent>
-              //   <CardFooter>
-              //     <Button
-              //       variant="default"
-              //       className="w-full h-fit p-2"
-              //       onClick={() => {
-              //         setSelectedRequestId(request.id);
-              //       }}
-              //     >
-              //       View Full Details
-              //     </Button>
-              //   </CardFooter>
-              // </Card>
-
               <Card
                 key={request.id}
                 className="border-2 h-fit shrink-0 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
@@ -253,52 +141,12 @@ function ManageRequestTab() {
                     <div className="w-full">
                       <p className="text-sm text-muted-foreground">Status</p>
 
-                      {/* <Badge
-                        variant="outline"
-                        className={`mt-1 inline-flex items-center gap-2 ${
-                          statusStyles[request.status]
-                        }`}
-                      >
-                        <span className="size-2 rounded-full bg-current" />
-
-                        {documentStatusLabel[request.status]}
-                      </Badge> */}
-
-                      {/* {request.status === "REJECTED" &&
-                        request.remarks.length > 0 && (
-                          <div className=" mt-3 rounded-md border border-destructive/20 bg-destructive/5 p-3">
-                            <p className="text-sm font-medium text-destructive">
-                              Reason{request.remarks.length > 1 ? "s" : ""} for
-                              Rejection
-                            </p>
-
-                            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
-                              {request.remarks.map((remark, index) => (
-                                <li key={index}>{remark}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )} */}
-
                       <StatusStepper request={request} />
                     </div>
                   </div>
                 </CardContent>
 
                 <CardFooter className="border-t">
-                  {/* <Button
-                    variant="destructive"
-                    className="w-full h-10 md:h-13 hover:bg-destructive hover:text-white
-          "
-                    onClick={() => {
-                      setDeletionID(request.id);
-                      deletionDialogRef.current?.showModal();
-                    }}
-                  >
-                    <Trash2 className="mr-2 h-4 w-4" />
-                    Delete Request
-                  </Button> */}
-
                   <Button
                     variant="default"
                     className="w-full h-fit p-2"
@@ -309,11 +157,6 @@ function ManageRequestTab() {
                     View Full Details
                   </Button>
                 </CardFooter>
-
-                {/* <ConfirmationDialog
-                  ref={deletionDialogRef}
-                  onConfirm={handleDelete}
-                /> */}
               </Card>
             ))}
         </div>

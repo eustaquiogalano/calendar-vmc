@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useUser } from "@/context/UserContext";
 import { Student } from "@/types/user";
-import { supabase } from "@/supabase-client";
 import {
   Card,
   CardContent,
@@ -171,11 +170,7 @@ function ProfileTab() {
                   </SelectContent>
                 </Select>
               ) : (
-                <Input
-                  // value={`${yearLevel === "0" ? "Alumni" : `${yearLevel}${["st", "nd", "rd", "th"][Number(yearLevel) - 1]} Year`}`}
-                  value={yearLevelLabel(Number(yearLevel))}
-                  disabled
-                />
+                <Input value={yearLevelLabel(Number(yearLevel))} disabled />
               )}
             </Field>
 
