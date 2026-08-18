@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { useEvent } from "../../../../context/EventsContext";
 import style from "./CreateEventTab.module.css";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
 
 import {
   Field,
@@ -11,7 +13,8 @@ import {
 } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Calendar } from "@/components/ui/calendar";
+import Calendar from "./../../StudentUI/CalendarTab/Calender/Calendar";
+import { Calendar as FormCalendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
@@ -32,6 +35,7 @@ import {
 import { EventType } from "@/types/schoolEvent";
 import EventCard from "@/components/EventCard/EventCard";
 import { toast } from "sonner";
+import FullCalendar from "@fullcalendar/react";
 
 function CreateEvent() {
   const { events, addEvent, deleteEvent, loading } = useEvent();
@@ -42,6 +46,8 @@ function CreateEvent() {
   const [endTime, setEndTime] = useState("");
   const [eventType, setEventType] = useState<EventType>("Other");
   const [eventID, setEventID] = useState("");
+
+  const [showCalendar, setShowCalendar] = useState(false);
 
   const deleteDialogRef = useRef<HTMLDialogElement>(null);
 
@@ -148,7 +154,7 @@ function CreateEvent() {
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
+                        <FormCalendar
                           mode="single"
                           selected={date}
                           onSelect={setDate}
@@ -207,6 +213,36 @@ function CreateEvent() {
             </Field>
           </FieldGroup>
         </form>
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full h-fit p-2 mt-2"
+          onClick={() => setShowCalendar((prev) => !prev)}
+        >
+          {showCalendar ? "Hide Calendar" : "Show Calendar"}
+        </Button>{" "}
+        {showCalendar && (
+          <div className="mt-4 text-sm font-normal">
+            <FullCalendar
+              events={events.map((event) => ({
+                title: event.name,
+                start: event.date,
+                allDay: true,
+              }))}
+              plugins={[dayGridPlugin, interactionPlugin]}
+              initialView="dayGridMonth"
+              contentHeight="auto"
+              eventDidMount={(info) => {
+                info.el.setAttribute("title", info.event.title);
+              }}
+              eventClick={(info) => {
+                toast.info(info.event.title, {
+                  description: info.event.startStr,
+                });
+              }}
+            />
+          </div>
+        )}
       </section>
 
       <section
