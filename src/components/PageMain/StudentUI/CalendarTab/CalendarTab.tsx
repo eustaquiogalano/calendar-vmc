@@ -35,7 +35,7 @@ function CalendarTab() {
         className={`${style["calendar-tab__section"]} ${style["calendar-tab__section--calendar"]}`}
       >
         <h2 className="text-xl font-bold">Calendar</h2>
-        <div className={`${style["calendar-tab__calendar"]} `}>
+        <div className={`${style["calendar-tab__calendar"]}w-full `}>
           <Calendar setSelectedDate={setSelectedDate} />
         </div>
       </section>

@@ -51,6 +51,8 @@ function Calendar({
       plugins={[dayGridPlugin, interactionPlugin]}
       initialView="dayGridMonth"
       dateClick={handleDateClick}
+      contentHeight="auto"
+      height="auto"
     />
   );
 }
