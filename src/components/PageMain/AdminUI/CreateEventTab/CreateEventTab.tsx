@@ -85,164 +85,169 @@ function CreateEvent() {
   return (
     <>
       <section
-        className={`${style["create-event__section"]} ${style["create-event__section--event-form"]} text-xl font-bold`}
+        className={`${style["create-event__section"]} ${style["create-event__section--event-form"]} text-xl font-bold ${showCalendar ? "sm:max-h-full" : "sm:max-h-fit"}`}
       >
         <h2>Create Event</h2>
-        <form onSubmit={handleSubmit}>
-          <FieldGroup>
-            <FieldSet>
-              <FieldGroup>
-                <Field>
-                  <FieldLabel htmlFor="checkout-7j9-card-name-43j">
-                    Event Name:
-                  </FieldLabel>
-                  <Input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    id="checkout-7j9-card-name-43j"
-                    placeholder="Enter event name"
-                    required
-                  />
-                </Field>
-
-                <FieldGroup className="flex flex-row">
-                  <Field>
-                    <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
-                      Start Time:
-                    </FieldLabel>
-                    <Input
-                      value={startTime}
-                      onChange={(e) => setStartTime(e.target.value)}
-                      type="time"
-                      id="checkout-7j9-card-number-uw1"
-                      placeholder="1234 5678 9012 3456"
-                    />
-                  </Field>
-
-                  <Field>
-                    <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
-                      End Time:
-                    </FieldLabel>
-                    <Input
-                      value={endTime}
-                      onChange={(e) => setEndTime(e.target.value)}
-                      type="time"
-                      id="checkout-7j9-card-number-uw1"
-                      placeholder="1234 5678 9012 3456"
-                    />
-                  </Field>
-                </FieldGroup>
-
-                <FieldGroup className="flex md:flex-row">
-                  <Field>
-                    <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
-                      Date:
-                    </FieldLabel>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          data-empty={!date}
-                          className="w-[212px] justify-between text-left font-normal data-[empty=true]:text-muted-foreground"
-                        >
-                          {date ? (
-                            format(date, "PPP")
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                          <ChevronDownIcon />
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <FormCalendar
-                          mode="single"
-                          selected={date}
-                          onSelect={setDate}
-                          defaultMonth={date}
-                        />
-                      </PopoverContent>
-                    </Popover>
-                  </Field>
-
-                  <Field>
-                    <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
-                      Type:
-                    </FieldLabel>
-                    <Select
-                      onValueChange={(value) =>
-                        setEventType(value as EventType)
-                      }
-                      value={eventType}
-                      name="eventType"
-                      required
-                    >
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Holiday" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="Academic">Academic</SelectItem>
-                          <SelectItem value="Holiday">Holiday</SelectItem>
-                          <SelectItem value="School Activity">
-                            School Activity
-                          </SelectItem>
-                          <SelectItem value="Administrative">
-                            Administrative
-                          </SelectItem>
-                          <SelectItem value="Other">Other</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </Field>
-                </FieldGroup>
-              </FieldGroup>
-            </FieldSet>
-            <FieldSeparator></FieldSeparator>
-            <Field>
-              <Button
-                disabled={loading}
-                className="w-full h-fit p-2"
-                type="submit"
-              >
-                {loading ? (
-                  <LoaderPinwheel className="animate-spin" />
-                ) : (
-                  "Create Event"
-                )}
-              </Button>
-            </Field>
-          </FieldGroup>
-        </form>
-        <Button
-          type="button"
-          variant="outline"
-          className="w-full h-fit p-2 mt-2"
-          onClick={() => setShowCalendar((prev) => !prev)}
+        <div
+          className={`overflow-y-auto 
+            `}
         >
-          {showCalendar ? "Hide Calendar" : "Show Calendar"}
-        </Button>{" "}
-        {showCalendar && (
-          <div className="mt-4 text-sm font-normal">
-            <FullCalendar
-              events={events.map((event) => ({
-                title: event.name,
-                start: event.date,
-                allDay: true,
-              }))}
-              plugins={[dayGridPlugin, interactionPlugin]}
-              initialView="dayGridMonth"
-              contentHeight="auto"
-              eventDidMount={(info) => {
-                info.el.setAttribute("title", info.event.title);
-              }}
-              eventClick={(info) => {
-                toast.info(info.event.title, {
-                  description: info.event.startStr,
-                });
-              }}
-            />
-          </div>
-        )}
+          <form onSubmit={handleSubmit}>
+            <FieldGroup>
+              <FieldSet>
+                <FieldGroup>
+                  <Field>
+                    <FieldLabel htmlFor="checkout-7j9-card-name-43j">
+                      Event Name:
+                    </FieldLabel>
+                    <Input
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      id="checkout-7j9-card-name-43j"
+                      placeholder="Enter event name"
+                      required
+                    />
+                  </Field>
+
+                  <FieldGroup className="flex flex-row">
+                    <Field>
+                      <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
+                        Start Time:
+                      </FieldLabel>
+                      <Input
+                        value={startTime}
+                        onChange={(e) => setStartTime(e.target.value)}
+                        type="time"
+                        id="checkout-7j9-card-number-uw1"
+                        placeholder="1234 5678 9012 3456"
+                      />
+                    </Field>
+
+                    <Field>
+                      <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
+                        End Time:
+                      </FieldLabel>
+                      <Input
+                        value={endTime}
+                        onChange={(e) => setEndTime(e.target.value)}
+                        type="time"
+                        id="checkout-7j9-card-number-uw1"
+                        placeholder="1234 5678 9012 3456"
+                      />
+                    </Field>
+                  </FieldGroup>
+
+                  <FieldGroup className="flex md:flex-row">
+                    <Field>
+                      <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
+                        Date:
+                      </FieldLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="outline"
+                            data-empty={!date}
+                            className="w-[212px] justify-between text-left font-normal data-[empty=true]:text-muted-foreground"
+                          >
+                            {date ? (
+                              format(date, "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <ChevronDownIcon />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <FormCalendar
+                            mode="single"
+                            selected={date}
+                            onSelect={setDate}
+                            defaultMonth={date}
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </Field>
+
+                    <Field>
+                      <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
+                        Type:
+                      </FieldLabel>
+                      <Select
+                        onValueChange={(value) =>
+                          setEventType(value as EventType)
+                        }
+                        value={eventType}
+                        name="eventType"
+                        required
+                      >
+                        <SelectTrigger className="w-[180px]">
+                          <SelectValue placeholder="Holiday" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="Academic">Academic</SelectItem>
+                            <SelectItem value="Holiday">Holiday</SelectItem>
+                            <SelectItem value="School Activity">
+                              School Activity
+                            </SelectItem>
+                            <SelectItem value="Administrative">
+                              Administrative
+                            </SelectItem>
+                            <SelectItem value="Other">Other</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </Field>
+                  </FieldGroup>
+                </FieldGroup>
+              </FieldSet>
+              <FieldSeparator></FieldSeparator>
+              <Field>
+                <Button
+                  disabled={loading}
+                  className="w-full h-fit p-2"
+                  type="submit"
+                >
+                  {loading ? (
+                    <LoaderPinwheel className="animate-spin" />
+                  ) : (
+                    "Create Event"
+                  )}
+                </Button>
+              </Field>
+            </FieldGroup>
+          </form>
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full h-fit p-2 mt-2"
+            onClick={() => setShowCalendar((prev) => !prev)}
+          >
+            {showCalendar ? "Hide Calendar" : "Show Calendar"}
+          </Button>{" "}
+          {showCalendar && (
+            <div className="mt-4 text-sm font-normal">
+              <FullCalendar
+                events={events.map((event) => ({
+                  title: event.name,
+                  start: event.date,
+                  allDay: true,
+                }))}
+                plugins={[dayGridPlugin, interactionPlugin]}
+                initialView="dayGridMonth"
+                contentHeight="auto"
+                eventDidMount={(info) => {
+                  info.el.setAttribute("title", info.event.title);
+                }}
+                eventClick={(info) => {
+                  toast.info(info.event.title, {
+                    description: info.event.startStr,
+                  });
+                }}
+              />
+            </div>
+          )}
+        </div>
       </section>
 
       <section
