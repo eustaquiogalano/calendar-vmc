@@ -39,7 +39,7 @@
   overflow-y: auto;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 640px) {
   .adminUI__dashboard {
     padding: 0rem;
   }
