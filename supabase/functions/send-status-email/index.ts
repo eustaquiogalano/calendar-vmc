@@ -48,6 +48,25 @@ Deno.serve(async (req) => {
           <strong>${status}</strong>
         </p>
 
+${
+        status === "Ready for Pickup"
+          ? `
+  <hr>
+  <div style="background:#fffbeb;border:1px solid #f59e0b;border-radius:6px;padding:12px 16px;margin-top:16px;">
+    <p style="color:#92400e;font-size:14px;margin:0 0 8px 0;">
+      <strong>📋 Pickup Information</strong>
+    </p>
+    <p style="color:#92400e;font-size:13px;margin:0;">
+      Your document is now ready for pickup at the Registrar's Office. 
+      If you wish to authorize someone to claim the document on your behalf, 
+      please provide them with a signed <strong>Authorization Letter</strong> 
+      along with a valid ID of both parties upon claiming.
+    </p>
+  </div>
+  `
+          : ""
+      }
+
   ${
         remarks && remarks.length > 0
           ? `
