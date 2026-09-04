@@ -82,8 +82,14 @@ export function AuthForm({
   async function handleSignUp(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const philippineNumberRegex = /^09\d{9}$/;
+    const idNumberRegex = /^0COL-\d{6}$/;
+    // validate id number manually
+    if (!idNumberRegex.test(idNumber)) {
+      toast.error("Please enter a valid ID number (e.g. 0COL-000000)");
+      return;
+    }
 
+    const philippineNumberRegex = /^09\d{9}$/;
     // validate contact number manually
     if (!philippineNumberRegex.test(contactNumber)) {
       toast.error("Please enter a valid contact number (e.g. 09XXXXXXXXX)");
@@ -365,13 +371,21 @@ export function AuthForm({
                 <FieldLabel htmlFor="idNumber">ID Number:</FieldLabel>
                 <Input
                   value={idNumber}
-                  onChange={(e) => setIDnumber(e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value.toUpperCase();
+                    if (/^[0-9COL-]*$/.test(value)) {
+                      setIDnumber(value);
+                    }
+                  }}
                   id="idNumber"
                   type="text"
-                  placeholder="26-0COL-XXXXXX"
+                  placeholder="0COL-000000"
+                  maxLength={11}
                   required
                 />
-                <FieldDescription>Look at your ID.</FieldDescription>
+                <FieldDescription>
+                  Format: 0COL-000000. Look at your ID.
+                </FieldDescription>
               </Field>
 
               <Field>
