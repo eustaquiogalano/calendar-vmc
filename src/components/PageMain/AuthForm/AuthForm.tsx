@@ -82,6 +82,14 @@ export function AuthForm({
   async function handleSignUp(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const philippineNumberRegex = /^09\d{9}$/;
+
+    // validate contact number manually
+    if (!philippineNumberRegex.test(contactNumber)) {
+      toast.error("Please enter a valid contact number (e.g. 09XXXXXXXXX)");
+      return;
+    }
+
     // validate course manually
     if (!course) {
       toast.error("Please select a course.");
@@ -314,10 +322,16 @@ export function AuthForm({
                 <FieldLabel htmlFor="contactNumber">Contact Number:</FieldLabel>
                 <Input
                   value={contactNumber}
-                  onChange={(e) => setContactNumber(e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (/^[0-9]*$/.test(value)) {
+                      setContactNumber(value);
+                    }
+                  }}
                   id="contactNumber"
                   type="text"
                   placeholder="09XXXXXXXXX"
+                  maxLength={11}
                   required
                 />
               </Field>
