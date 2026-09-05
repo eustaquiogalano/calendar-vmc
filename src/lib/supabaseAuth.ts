@@ -116,3 +116,16 @@ export async function signOut() {
 
   return { success: true };
 }
+
+export async function forgotPassword(email: string) {
+  const redirectTo = import.meta.env.DEV
+    ? "http://localhost:5173/reset-password"
+    : "https://calendar-vmc.pages.dev/reset-password";
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo,
+  });
+
+  if (error) return { error };
+  return { success: true };
+}

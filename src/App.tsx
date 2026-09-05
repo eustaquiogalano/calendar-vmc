@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import style from "./App.module.css";
 
@@ -8,6 +8,9 @@ import { useUser } from "./context/UserContext.js";
 
 function App() {
   const { currentUser } = useUser();
+  const location = useLocation();
+
+  const showSidebar = currentUser && location.pathname !== "/reset-password";
 
   return (
     <>
@@ -23,9 +26,9 @@ function App() {
           style={{ minHeight: "unset" }}
           className="h-full bg-transparent"
         >
-          {currentUser && <AppSidebar variant="floating" collapsible="icon" />}
+          {showSidebar && <AppSidebar variant="floating" collapsible="icon" />}
           <SidebarInset
-            className={`flex flex-col justify-center items-center  ${currentUser ? "md:ml-[3.5rem]" : ""} lg:ml-0`}
+            className={`flex flex-col justify-center items-center  ${showSidebar ? "md:ml-[3.5rem]" : ""} lg:ml-0`}
           >
             <Outlet />
           </SidebarInset>

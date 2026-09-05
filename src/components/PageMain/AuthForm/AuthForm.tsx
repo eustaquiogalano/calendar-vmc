@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { signIn, signUp } from "../../../lib/supabaseAuth.js";
+import { forgotPassword, signIn, signUp } from "../../../lib/supabaseAuth.js";
 import { useUser } from "../../../context/UserContext.js";
 
 import { cn } from "@/lib/utils.js";
@@ -54,6 +54,22 @@ export function AuthForm({
   // states for passwords
   const [showRegPassword, setShowRegPassword] = useState(false);
   const [showLoginPassword, setShowLoginPassword] = useState(false);
+
+  // states for forgot password
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+
+  // forgot password
+  async function handleForgotPassword(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const result = await forgotPassword(resetEmail);
+    if (result.error) {
+      toast.error("Failed to send reset email.");
+      return;
+    }
+    toast.success("Password reset link sent to your email.");
+    setShowForgotPassword(false);
+  }
 
   // login
   async function handleSignIn(event: React.FormEvent<HTMLFormElement>) {
@@ -181,72 +197,118 @@ export function AuthForm({
     absolute inset-0 transition-opacity duration-300 ease-in-out overflow-hidden p-0 bg-transparent flex justify-center border-none border-0 ring-0`}
       >
         <CardContent className="grid p-0 md:grid-cols-2 overflow-hidden bg-card rounded-xl ring-1 ring-foreground/10">
-          <form className="p-6 md:p-8" onSubmit={handleSignIn}>
-            <FieldGroup>
-              <div className="flex flex-col items-center gap-2 text-center">
-                <h1 className="text-2xl font-bold">Welcome back</h1>
-                <p className="text-balance text-muted-foreground">
-                  Login to your VMC account
-                </p>
-              </div>
-              <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
-                <Input
-                  value={email}
-                  onChange={handleEmail}
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
-              </Field>
-              <Field>
-                <div className="flex items-center">
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <a
-                    href="#"
-                    className="ml-auto text-sm underline-offset-2 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
+          {!showForgotPassword && (
+            <form className="p-6 md:p-8" onSubmit={handleSignIn}>
+              <FieldGroup>
+                <div className="flex flex-col items-center gap-2 text-center">
+                  <h1 className="text-2xl font-bold">Welcome back</h1>
+                  <p className="text-balance text-muted-foreground">
+                    Login to your VMC account
+                  </p>
                 </div>
-                <div className="relative">
+                <Field>
+                  <FieldLabel htmlFor="email">Email</FieldLabel>
                   <Input
-                    value={password}
-                    onChange={handlePassword}
-                    id="password"
-                    type={showLoginPassword ? "text" : "password"}
+                    value={email}
+                    onChange={handleEmail}
+                    id="email"
+                    type="email"
+                    placeholder="m@example.com"
                     required
                   />
-                  <button
+                </Field>
+                <Field>
+                  <div className="flex items-center">
+                    <FieldLabel htmlFor="password">Password</FieldLabel>
+                    <a
+                      href="#"
+                      className="ml-auto text-sm underline-offset-2 hover:underline"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowForgotPassword(true);
+                      }}
+                    >
+                      Forgot your password?
+                    </a>
+                  </div>
+                  <div className="relative">
+                    <Input
+                      value={password}
+                      onChange={handlePassword}
+                      id="password"
+                      type={showLoginPassword ? "text" : "password"}
+                      required
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                      onClick={() => setShowLoginPassword((prev) => !prev)}
+                    >
+                      {showRegPassword ? (
+                        <EyeOff size={16} />
+                      ) : (
+                        <Eye size={16} />
+                      )}
+                    </button>
+                  </div>
+                </Field>
+                <Field>
+                  <Button className="h-fit p-2" type="submit">
+                    Login
+                  </Button>
+                </Field>
+                <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
+                  Or
+                </FieldSeparator>
+                <Field className="flex">
+                  <Button
+                    className="h-fit p-2"
+                    variant="outline"
                     type="button"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                    onClick={() => setShowLoginPassword((prev) => !prev)}
+                    onClick={toggleRegisterForm}
                   >
-                    {showRegPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                </div>
-              </Field>
-              <Field>
-                <Button className="h-fit p-2" type="submit">
-                  Login
+                    Sign up
+                  </Button>
+                </Field>
+              </FieldGroup>
+            </form>
+          )}
+
+          {/* Forgot Password Form */}
+          {showForgotPassword && (
+            <form
+              onSubmit={handleForgotPassword}
+              className="flex flex-col gap-2 p-6 md:p-8"
+            >
+              <div className="flex flex-col items-center gap-2 text-center mb-3">
+                <h1 className="text-2xl font-bold">Forgot Password</h1>
+                <p className="text-balance text-muted-foreground">
+                  Enter your email to reset your password
+                </p>
+              </div>
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
+                required
+              />
+              <div className="flex gap-2">
+                <Button type="submit" className="flex-1 h-fit p-2">
+                  Send Reset Link
                 </Button>
-              </Field>
-              <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
-                Or
-              </FieldSeparator>
-              <Field className="flex">
                 <Button
-                  className="h-fit p-2"
-                  variant="outline"
                   type="button"
-                  onClick={toggleRegisterForm}
+                  variant="outline"
+                  className="flex-1 h-fit p-2"
+                  onClick={() => setShowForgotPassword(false)}
                 >
-                  Sign up
+                  Cancel
                 </Button>
-              </Field>
-            </FieldGroup>
-          </form>
+              </div>
+            </form>
+          )}
+
           <div className="relative hidden bg-muted md:block">
             <img
               src={loginImage}

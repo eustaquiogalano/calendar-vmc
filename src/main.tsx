@@ -20,6 +20,7 @@ import { AuthForm } from "./components/PageMain/AuthForm/AuthForm.js";
 import { DocumentRequestProvider } from "./context/DocumentRequestContext.js";
 import ProfileTab from "./components/Pages/ProfileTab.js";
 import { Toaster } from "sonner";
+import ResetPasswordTab from "./components/Pages/ResetPasswordTab.js";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
                 element: <CreateEvent />,
               },
             ],
+          },
+          {
+            path: "reset-password",
+            element: <ResetPasswordTab />,
           },
         ],
       },
