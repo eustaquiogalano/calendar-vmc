@@ -21,6 +21,7 @@ import { DocumentRequestProvider } from "./context/DocumentRequestContext.js";
 import ProfileTab from "./components/Pages/ProfileTab.js";
 import { Toaster } from "sonner";
 import ResetPasswordTab from "./components/Pages/ResetPasswordTab.js";
+import { toast } from "sonner";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,43 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
+// window.addEventListener("offline", () => {
+//   toast.error("You are offline", {
+//     description: "Please check your internet connection.",
+//     duration: Infinity, // stays until dismissed or connection restored
+//   });
+// });
+
+// window.addEventListener("online", () => {
+//   toast.success("Back online", {
+//     description: "Your connection has been restored.",
+//     duration: 5000,
+//   });
+// });
+
+let offlineToastId: string | number | undefined;
+
+window.addEventListener("offline", () => {
+  if (offlineToastId) return;
+
+  offlineToastId = toast.error("You are offline", {
+    description: "Please check your internet connection.",
+    duration: Infinity,
+  });
+});
+
+window.addEventListener("online", () => {
+  if (offlineToastId) {
+    toast.dismiss(offlineToastId);
+    offlineToastId = undefined;
+  }
+
+  toast.success("Back online", {
+    description: "Your connection has been restored.",
+    duration: 10000,
+  });
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
