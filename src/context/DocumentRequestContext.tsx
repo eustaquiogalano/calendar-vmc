@@ -148,7 +148,7 @@ export function DocumentRequestProvider({ children }: { children: ReactNode }) {
     if (error) {
       console.error("Failed to delete request:", error);
       setLoading(false);
-      return;
+      throw error;
     }
 
     setRequests((prev) => prev.filter((r) => r.id !== requestID));

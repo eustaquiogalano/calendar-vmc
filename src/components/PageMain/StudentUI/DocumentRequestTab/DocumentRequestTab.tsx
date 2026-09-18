@@ -89,7 +89,23 @@ function DocumentRequestTab() {
     const isRequestValid = validateRequest(request, requests);
 
     // if the request is valid, add it to the list of requests
-    isRequestValid ? await addRequest(request) : setIsActive(true);
+    // isRequestValid ? await addRequest(request) : setIsActive(true);
+
+    // show a toast notification if the request is valid or not
+    try {
+      isRequestValid ? await addRequest(request) : setIsActive(true);
+
+      toast.success("Request Submitted", {
+        description: "Your request has been submitted successfully.",
+        duration: 10000,
+      });
+    } catch (error) {
+      toast.error("Failed to submit  request", {
+        description:
+          "There was an error submitting your request. Please try again.",
+        duration: 10000,
+      });
+    }
 
     // TRIGGERS EMAIL NOTIFICATOIN
     // TO BE DELETED AFTER SURVEY
@@ -108,7 +124,21 @@ function DocumentRequestTab() {
   }
 
   async function handleDelete() {
-    deleteRequest(deleteionID);
+    try {
+      await deleteRequest(deleteionID);
+
+      toast.success("Request Deleted", {
+        description: "Your request has been deleted successfully.",
+        duration: 10000,
+      });
+    } catch (error) {
+      toast.error("Failed to delete request", {
+        description:
+          "There was an error deleting your request. Please try again.",
+        duration: 10000,
+      });
+    }
+    // deleteRequest(deleteionID);
     setDeletionID("");
   }
 
