@@ -93,7 +93,14 @@ function DocumentRequestTab() {
 
     // show a toast notification if the request is valid or not
     try {
-      isRequestValid ? await addRequest(request) : setIsActive(true);
+      // isRequestValid ? await addRequest(request) : setIsActive(true);
+
+      if (!isRequestValid) {
+        setIsActive(true);
+        throw new Error("Invalid request");
+      }
+
+      await addRequest(request);  
 
       toast.success("Request Submitted", {
         description: "Your request has been submitted successfully.",

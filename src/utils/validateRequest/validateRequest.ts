@@ -14,9 +14,13 @@ export function validateRequest(
     return true;
   }
 
-  // request is already in the list but was rejected, so it can be added again
-  if (matchingRequest && matchingRequest.status === "REJECTED") {
-    console.log("found rejected document, adding to list");
+  // request is already in the list but was rejected or completed, so it can be added again
+  if (
+    matchingRequest &&
+    (matchingRequest.status === "REJECTED" ||
+      matchingRequest.status === "COMPLETED")
+  ) {
+    console.log("found rejected or completed document, adding to list");
     return true;
   }
 
