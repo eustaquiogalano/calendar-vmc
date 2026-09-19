@@ -102,6 +102,7 @@ export default function StudentRequestCard({
             setDeletionID(request.id);
             deletionDialogRef.current?.showModal();
           }}
+          disabled={request.status !== "PENDING"}
         >
           <Trash2 className="mr-2 h-4 w-4" />
           Delete Request
