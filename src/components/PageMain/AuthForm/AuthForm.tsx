@@ -98,7 +98,7 @@ export function AuthForm({
   async function handleSignUp(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const idNumberRegex = /^0COL-\d{6}$/;
+    const idNumberRegex = /^\d{2}-0COL-\d{6}$/;
     // validate id number manually
     if (!idNumberRegex.test(idNumber)) {
       toast.error("Please enter a valid ID number (e.g. 0COL-000000)");
@@ -441,12 +441,12 @@ export function AuthForm({
                   }}
                   id="idNumber"
                   type="text"
-                  placeholder="0COL-000000"
-                  maxLength={11}
+                  placeholder="00-0COL-000000"
+                  maxLength={14}
                   required
                 />
                 <FieldDescription>
-                  Format: 0COL-000000. Look at your ID.
+                  Format: 00-0COL-000000. Look at your ID.
                 </FieldDescription>
               </Field>
 
