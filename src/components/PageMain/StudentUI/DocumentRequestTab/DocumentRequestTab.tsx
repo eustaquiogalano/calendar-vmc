@@ -100,7 +100,7 @@ function DocumentRequestTab() {
         throw new Error("Invalid request");
       }
 
-      await addRequest(request);  
+      await addRequest(request);
 
       toast.success("Request Submitted", {
         description: "Your request has been submitted successfully.",
@@ -206,12 +206,67 @@ function DocumentRequestTab() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="Diploma">Diploma</SelectItem>
-                          <SelectItem value="Registration Form (CTC)">
-                            Registration Form (CTC)
-                          </SelectItem>
                           <SelectItem value="Transcript of Records">
                             Transcript of Records
+                            <span className="text-muted-foreground">
+                              w/ UV anti-counterfeiting seal
+                            </span>
+                          </SelectItem>
+
+                          <SelectItem value="Diploma">
+                            Diploma
+                            <span className="text-muted-foreground">
+                              w/ UV anti-counterfeiting seal
+                            </span>
+                          </SelectItem>
+
+                          <SelectItem value="Certificate of Good Moral">
+                            Certificate of Good Moral
+                            <span className="text-muted-foreground">
+                              w/ UV anti-counterfeiting seal
+                            </span>
+                          </SelectItem>
+
+                          <SelectItem value="Honorable Dismissal">
+                            Honorable Dismissal
+                            <span className="text-muted-foreground">
+                              w/ UV anti-counterfeiting seal
+                            </span>
+                          </SelectItem>
+
+                          <SelectItem value="Certificate of Graduation">
+                            Certificate of Graduation
+                            <span className="text-muted-foreground">
+                              w/ UV anti-counterfeiting seal
+                            </span>
+                          </SelectItem>
+
+                          <SelectItem value="Certificate of Grades">
+                            Certificate of Grades
+                            <span className="text-muted-foreground">
+                              w/ UV anti-counterfeiting seal
+                            </span>
+                          </SelectItem>
+
+                          <SelectItem value="Certificate of Enrollment">
+                            Certificate of Enrollment
+                            <span className="text-muted-foreground">
+                              w/ UV anti-counterfeiting seal
+                            </span>
+                          </SelectItem>
+
+                          <SelectItem value="Endorsement Letter">
+                            Endorsement Letter
+                            <span className="text-muted-foreground ">
+                              w/ UV anti-counterfeiting seal
+                            </span>
+                          </SelectItem>
+
+                          <SelectItem value="Certificate of GWA">
+                            Certificate of GWA
+                            <span className="text-muted-foreground ">
+                              w/ UV anti-counterfeiting seal
+                            </span>
                           </SelectItem>
                         </SelectGroup>
                       </SelectContent>
